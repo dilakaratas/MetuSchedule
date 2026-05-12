@@ -30,6 +30,4 @@ The course data is collected from METU course catalog pages and converted into J
 
 The project uses METU course catalog data. The raw course data is processed and cleaned before being displayed in the schedule interface.
 
-## Contribution
 
-If you are a METU student and would like to contribute, feel free to improve the project. If you are not, and you would like to create a similar schedule building website with your own university data, feel free to do so.
