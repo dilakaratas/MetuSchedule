@@ -1,8 +1,23 @@
 import React from "react";
 
-export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN }) {
+export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN, sidebarOpen, onToggleSidebar, onOpenAI }) {
   return (
     <header className="header">
+      <button
+        className="sidebar-toggle-btn"
+        onClick={onToggleSidebar}
+        title={sidebarOpen ? "Sidebar'ı gizle" : "Sidebar'ı göster"}
+        aria-label="Toggle sidebar"
+      >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          {sidebarOpen ? (
+            <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          ) : (
+            <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+          )}
+        </svg>
+      </button>
+
       <div className="brand">
         <div className="logo">
           <img src="/metu-logo.svg" alt="ODTÜ" width="44" height="40" />
@@ -25,6 +40,10 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
       </div>
 
       <div className="header-actions">
+        <button className="btn ai-btn" onClick={onOpenAI}>
+          <span>✦</span>
+          {lang === "tr" ? "Otomatik Program" : "Auto Schedule"}
+        </button>
         <div className="lang-switch" role="tablist">
           <button className={lang === "tr" ? "active" : ""} onClick={() => setLang("tr")} role="tab">TR</button>
           <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")} role="tab">EN</button>

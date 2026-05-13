@@ -1,5 +1,3 @@
-# metu_catalog_scrape.py
-
 import re
 import json
 import time
@@ -10,28 +8,18 @@ import requests
 from bs4 import BeautifulSoup
 
 
-# ------------------------------------------------------------
-# AYARLAR
-# ------------------------------------------------------------
 
 OIBS_URL = "https://oibs2.metu.edu.tr/View_Program_Course_Details_64/main.php"
 
-# False: sadece TEST_DEPARTMENT_CODE çekilir
-# True : bütün department'lar çekilir
 SCRAPE_ALL_DEPARTMENTS = True
 
-# Test için bölüm kodu
-# 887 = Artificial Intelligence Engineering/Yapay Zeka Mühendisliği
 TEST_DEPARTMENT_CODE = "887"
 
-# Aynı department içindeki ders detaylarını kaç thread ile çekeceğiz?
-# İlk full scrape için 3 veya 4 güvenli.
+
 MAX_WORKERS = 4
 
-# Her isteğin ardından kısa bekleme.
 REQUEST_DELAY_SECONDS = 0.3
 
-# Hatalı request için tekrar deneme sayısı
 REQUEST_RETRIES = 3
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -58,10 +46,6 @@ HEADERS = {
     "Pragma": "no-cache",
 }
 
-
-# ------------------------------------------------------------
-# GENEL YARDIMCI FONKSİYONLAR
-# ------------------------------------------------------------
 
 def clean_text(value: str) -> str:
     return re.sub(r"\s+", " ", value or "").strip()
@@ -106,9 +90,6 @@ def post_html_with_retry(session: requests.Session, url: str, payload: dict, ret
     raise last_error
 
 
-# ------------------------------------------------------------
-# ANA SAYFA PARSE
-# ------------------------------------------------------------
 
 def extract_options(html: str):
     soup = BeautifulSoup(html, "lxml")
@@ -129,10 +110,7 @@ def extract_options(html: str):
 
 
 def detect_current_term(options):
-    """
-    ODTÜ dönem kodunu bulur.
-    Örnek: 20251, 20252
-    """
+   
     for option in options:
         value = option["value"]
 
@@ -143,10 +121,7 @@ def detect_current_term(options):
 
 
 def extract_departments(options, current_term):
-    """
-    Department optionları current_term optionından önce geliyor.
-    current_term görülünce department listesi bitiyor.
-    """
+   
     departments = []
 
     for option in options:
@@ -178,9 +153,6 @@ def find_department_by_text(departments, keyword: str):
     return None
 
 
-# ------------------------------------------------------------
-# DEPARTMENT COURSE LIST
-# ------------------------------------------------------------
 
 def fetch_department_courses(session: requests.Session, department_code: str, term: str) -> str:
     payload = {
@@ -212,10 +184,6 @@ def extract_course_codes_from_department(html: str):
 
     return list(dict.fromkeys(course_codes))
 
-
-# ------------------------------------------------------------
-# COURSE DETAIL
-# ------------------------------------------------------------
 
 def fetch_course_detail(session: requests.Session, course_code: str) -> str:
     payload = {
@@ -273,12 +241,7 @@ def parse_header_info(text: str):
 
 
 def parse_course_detail(course_detail_html: str):
-    """
-    ODTÜ ders detay sayfasını parse eder.
-
-    Section numarası HTML içinde şöyle gelir:
-        <input type="submit" value="1" name="submit_section">
-    """
+   
 
     soup = BeautifulSoup(course_detail_html, "lxml")
     text = soup.get_text("\n", strip=True)
@@ -371,7 +334,7 @@ def parse_course_detail(course_detail_html: str):
 
         cells = get_cells(section_row)
 
-        # Aynı satırdan hocaları al
+       
         for item in cells:
             if item in ignore_values:
                 continue
@@ -486,14 +449,7 @@ def is_valid_parsed_course(parsed_course):
 
 
 def scrape_single_course(course_code: str, base_cookies: dict):
-    """
-    Tek course detail sayfasını çeker ve parse eder.
-
-    ÖNEMLİ:
-    Thread içinde yeni session açıyoruz ama ana session cookie'lerini kopyalıyoruz.
-    Çünkü ODTÜ sayfası Course_List context'ini session/cookie üzerinden bekleyebiliyor.
-    """
-
+   
     try:
         local_session = requests.Session()
         local_session.cookies.update(base_cookies)
@@ -506,7 +462,7 @@ def scrape_single_course(course_code: str, base_cookies: dict):
         parsed = parse_course_detail(course_detail_html)
 
         if not is_valid_parsed_course(parsed):
-            # Debug için gelen sayfanın ilk kısmını kaydediyoruz.
+        
             preview = BeautifulSoup(course_detail_html, "lxml").get_text("\n", strip=True)[:500]
             raise ValueError(
                 "Ders detayı parse edilemedi. "
@@ -582,8 +538,6 @@ def scrape_department(session, department, term):
             }
         }
 
-    # Department course list çekildikten sonra session cookie'lerini alıyoruz.
-    # Thread içindeki local session'lara bunları vereceğiz.
     base_cookies = requests.utils.dict_from_cookiejar(session.cookies)
 
     print(f"Ders detayları paralel çekiliyor... Worker sayısı: {MAX_WORKERS}")
@@ -651,10 +605,6 @@ def scrape_department(session, department, term):
         }
     }
 
-
-# ------------------------------------------------------------
-# MAIN
-# ------------------------------------------------------------
 
 def main():
     start_time = time.time()

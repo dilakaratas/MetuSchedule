@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Calendar from "./components/Calendar.jsx";
+import AIPanel from "./components/AIPanel.jsx";
 import { METU_COURSES } from "./data.js";
 import { I18N } from "./i18n.js";
 import { findConflicts } from "./utils.js";
@@ -18,6 +19,8 @@ export default function App() {
   const [conflictFlash, setConflictFlash] = useState(null);
   const [toastMsg, setToastMsg] = useState(null);
   const [, setDraggingSection] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [aiPanelOpen, setAiPanelOpen] = useState(false);
 
   const calendarRef = useRef(null);
 
@@ -84,6 +87,7 @@ export default function App() {
     const newSelected = [...cleaned, { code, sectionId }];
 
     setSelected(newSelected);
+    setSidebarOpen(false);
 
     const newConflicts = findConflicts(newSelected, METU_COURSES);
 
@@ -137,10 +141,26 @@ export default function App() {
     return null;
   };
 
+  const applyAISuggestion = (suggestions) => {
+    // suggestions: [{code, sectionId}]
+    const newSelected = suggestions
+      .map(({ code, sectionId }) => {
+        const course = METU_COURSES.find((c) => c.code === code);
+        const section = course?.sections.find((s) => s.id === sectionId);
+        if (!course || !section) return null;
+        return { code, sectionId };
+      })
+      .filter(Boolean);
+    setSelected(newSelected);
+    setSidebarOpen(false);
+    toast(tr.aiApplied || "Program oluşturuldu!");
+  };
+
   const focusCourseFromCalendar = (code) => {
     setQuery(code);
     setDayFilter(new Set());
     setExpandedCourse(code);
+    setSidebarOpen(true);
   };
 
   return (
@@ -153,9 +173,12 @@ export default function App() {
         totalCredits={totalCredits}
         onClear={clearAll}
         onCopyCRN={copyCRNs}
+        sidebarOpen={sidebarOpen}
+        onToggleSidebar={() => setSidebarOpen((v) => !v)}
+        onOpenAI={() => setAiPanelOpen(true)}
       />
 
-      <div className="main">
+      <div className={`main${sidebarOpen ? "" : " sidebar-collapsed"}`}>
         <Sidebar
           tr={tr}
           lang={lang}
@@ -173,6 +196,7 @@ export default function App() {
           setDraggingSection={setDraggingSection}
           conflictFlash={conflictFlash}
           suggestAlternative={suggestAlternative}
+          sidebarOpen={sidebarOpen}
         />
 
         <Calendar
@@ -192,6 +216,15 @@ export default function App() {
       </div>
 
       {toastMsg && <div className="toast">{toastMsg}</div>}
+
+      {aiPanelOpen && (
+        <AIPanel
+          lang={lang}
+          courses={METU_COURSES}
+          onApply={applyAISuggestion}
+          onClose={() => setAiPanelOpen(false)}
+        />
+      )}
     </div>
   );
 }
