@@ -22,14 +22,15 @@ export default function App() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
 
+  // Mobil tab: "courses" | "calendar"
+  const [mobileTab, setMobileTab] = useState("courses");
+
   const calendarRef = useRef(null);
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem("metu-schedule");
-      if (saved) {
-        setSelected(JSON.parse(saved));
-      }
+      if (saved) setSelected(JSON.parse(saved));
     } catch (e) {}
   }, []);
 
@@ -39,22 +40,17 @@ export default function App() {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-
     return METU_COURSES.filter((c) => {
       if (dayFilter.size > 0) {
         const meetsOnDay = c.sections.some((s) =>
           s.meetings.some((m) => dayFilter.has(m.d))
         );
-
         if (!meetsOnDay) return false;
       }
-
       if (!q) return true;
-
       const hay = `${c.code} ${c.name} ${c.nameTr} ${c.sections
         .map((s) => s.instructor)
         .join(" ")}`.toLowerCase();
-
       return hay.includes(q);
     });
   }, [query, dayFilter]);
@@ -75,22 +71,21 @@ export default function App() {
     );
 
     if (exists) {
-      setSelected(
-        selected.filter(
-          (s) => !(s.code === code && s.sectionId === sectionId)
-        )
-      );
+      setSelected(selected.filter(
+        (s) => !(s.code === code && s.sectionId === sectionId)
+      ));
       return;
     }
 
     const cleaned = selected.filter((s) => s.code !== code);
     const newSelected = [...cleaned, { code, sectionId }];
-
     setSelected(newSelected);
     setSidebarOpen(false);
 
-    const newConflicts = findConflicts(newSelected, METU_COURSES);
+    // Ders ekleyince mobilde takvime geç
+    setMobileTab("calendar");
 
+    const newConflicts = findConflicts(newSelected, METU_COURSES);
     if (newConflicts[`${code}-${sectionId}`]) {
       setConflictFlash(`${code}-${sectionId}`);
       setTimeout(() => setConflictFlash(null), 800);
@@ -101,9 +96,7 @@ export default function App() {
     setSelected(selected.filter((s) => s.code !== code));
   };
 
-  const clearAll = () => {
-    setSelected([]);
-  };
+  const clearAll = () => setSelected([]);
 
   const copyCRNs = () => {
     const crns = selected
@@ -114,7 +107,6 @@ export default function App() {
       })
       .filter(Boolean)
       .join("\n");
-
     navigator.clipboard.writeText(crns);
     toast(tr.copied);
   };
@@ -126,23 +118,17 @@ export default function App() {
 
   const suggestAlternative = (code) => {
     const c = METU_COURSES.find((c) => c.code === code);
-
     if (!c || c.sections.length < 2) return null;
-
     const otherSelected = selected.filter((s) => s.code !== code);
-
     for (const sec of c.sections) {
       const trial = [...otherSelected, { code, sectionId: sec.id }];
       const cf = findConflicts(trial, METU_COURSES);
-
       if (!cf[`${code}-${sec.id}`]) return sec;
     }
-
     return null;
   };
 
   const applyAISuggestion = (suggestions) => {
-    // suggestions: [{code, sectionId}]
     const newSelected = suggestions
       .map(({ code, sectionId }) => {
         const course = METU_COURSES.find((c) => c.code === code);
@@ -153,6 +139,7 @@ export default function App() {
       .filter(Boolean);
     setSelected(newSelected);
     setSidebarOpen(false);
+    setMobileTab("calendar");
     toast(tr.aiApplied || "Program oluşturuldu!");
   };
 
@@ -161,7 +148,10 @@ export default function App() {
     setDayFilter(new Set());
     setExpandedCourse(code);
     setSidebarOpen(true);
+    setMobileTab("courses");
   };
+
+  const conflictCount = Object.keys(conflicts).length / 2;
 
   return (
     <div className="app">
@@ -178,7 +168,8 @@ export default function App() {
         onOpenAI={() => setAiPanelOpen(true)}
       />
 
-      <div className={`main${sidebarOpen ? "" : " sidebar-collapsed"}`}>
+      {/* Desktop layout */}
+      <div className={`desktop-main${sidebarOpen ? "" : " sidebar-collapsed"}`}>
         <Sidebar
           tr={tr}
           lang={lang}
@@ -198,7 +189,6 @@ export default function App() {
           suggestAlternative={suggestAlternative}
           sidebarOpen={sidebarOpen}
         />
-
         <Calendar
           tr={tr}
           lang={lang}
@@ -213,6 +203,91 @@ export default function App() {
           toggleSelect={toggleSelect}
           onCourseClick={focusCourseFromCalendar}
         />
+      </div>
+
+      {/* Mobil tab layout */}
+      <div className="mobile-main">
+        <div className={`mobile-panel${mobileTab === "courses" ? " active" : ""}`}>
+          <Sidebar
+            tr={tr}
+            lang={lang}
+            query={query}
+            setQuery={setQuery}
+            dayFilter={dayFilter}
+            setDayFilter={setDayFilter}
+            courses={filtered}
+            expandedCourse={expandedCourse}
+            setExpandedCourse={setExpandedCourse}
+            selected={selected}
+            conflicts={conflicts}
+            toggleSelect={toggleSelect}
+            setHoveredSection={setHoveredSection}
+            setDraggingSection={setDraggingSection}
+            conflictFlash={conflictFlash}
+            suggestAlternative={suggestAlternative}
+            sidebarOpen={true}
+          />
+        </div>
+        <div className={`mobile-panel${mobileTab === "calendar" ? " active" : ""}`}>
+          <Calendar
+            tr={tr}
+            lang={lang}
+            courses={METU_COURSES}
+            selected={selected}
+            conflicts={conflicts}
+            hoveredSection={hoveredSection}
+            conflictFlash={conflictFlash}
+            removeSelected={removeSelected}
+            calendarRef={calendarRef}
+            setDraggingSection={setDraggingSection}
+            toggleSelect={toggleSelect}
+            onCourseClick={focusCourseFromCalendar}
+          />
+        </div>
+
+        {/* Alt tab bar */}
+        <nav className="mobile-tab-bar">
+          {/* Stats şeridi — tab bar'ın üstünde */}
+          {selected.length > 0 && (
+            <div className="mobile-tab-stats">
+              <span>{selected.length} {lang === "tr" ? "ders" : "courses"}</span>
+              <span className="mobile-tab-stats-dot">·</span>
+              <span>{totalCredits} {lang === "tr" ? "kredi" : "credits"}</span>
+              {conflictCount > 0 && (
+                <>
+                  <span className="mobile-tab-stats-dot">·</span>
+                  <span className="mobile-tab-stats-conflict">⚠ {conflictCount} {lang === "tr" ? "çakışma" : "conflict"}</span>
+                </>
+              )}
+            </div>
+          )}
+
+          <div className="mobile-tab-buttons">
+            <button
+              className={`mobile-tab${mobileTab === "courses" ? " active" : ""}`}
+              onClick={() => setMobileTab("courses")}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="3" y="4" width="14" height="2.5" rx="1.25" fill="currentColor" />
+                <rect x="3" y="8.75" width="14" height="2.5" rx="1.25" fill="currentColor" />
+                <rect x="3" y="13.5" width="10" height="2.5" rx="1.25" fill="currentColor" />
+              </svg>
+              <span>{lang === "tr" ? "Dersler" : "Courses"}</span>
+            </button>
+
+            <button
+              className={`mobile-tab${mobileTab === "calendar" ? " active" : ""}`}
+              onClick={() => setMobileTab("calendar")}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M3 8h14" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M7 2v3M13 2v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+              <span>{lang === "tr" ? "Program" : "Schedule"}</span>
+            </button>
+          </div>
+        </nav>
       </div>
 
       {toastMsg && <div className="toast">{toastMsg}</div>}

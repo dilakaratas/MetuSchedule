@@ -10,9 +10,30 @@ export const TIME_SLOTS = [
   "14:40",
   "15:40",
   "16:40",
+  "17:40",
 ];
 
-export const SLOT_HEIGHT = 78;
+// Takvimin toplam saat sayısı (08:40 → 18:40 = 10 slot)
+const TOTAL_SLOTS = TIME_SLOTS.length;
+
+// Viewport yüksekliğine göre slot yüksekliği hesapla
+// Header ~72px, padding ~40px → kalan alanı 9'a böl
+// Min 60px, max 90px arasında sınırla
+function calcSlotHeight() {
+  if (typeof window === "undefined") return 78;
+  const available = window.innerHeight - 72 - 40 - 48; // header + padding + dayhead
+  const h = Math.floor(available / TOTAL_SLOTS);
+  return Math.min(90, Math.max(60, h));
+}
+
+export let SLOT_HEIGHT = calcSlotHeight();
+
+// Pencere boyutu değişince güncelle
+if (typeof window !== "undefined") {
+  window.addEventListener("resize", () => {
+    SLOT_HEIGHT = calcSlotHeight();
+  });
+}
 
 export const toMin = (t) => {
   const [h, m] = t.split(":").map(Number);
@@ -61,19 +82,14 @@ const FALLBACK_COLORS = [
 function hashText(value) {
   const text = String(value || "GEN");
   let hash = 0;
-
   for (let i = 0; i < text.length; i++) {
     hash = text.charCodeAt(i) + ((hash << 5) - hash);
   }
-
   return Math.abs(hash);
 }
 
 export const colorFor = (deptOrKey) => {
-  if (DEPT_COLORS[deptOrKey]) {
-    return DEPT_COLORS[deptOrKey];
-  }
-
+  if (DEPT_COLORS[deptOrKey]) return DEPT_COLORS[deptOrKey];
   const index = hashText(deptOrKey) % FALLBACK_COLORS.length;
   return FALLBACK_COLORS[index];
 };
@@ -94,7 +110,6 @@ export const sectionsConflict = (sA, sB) => {
 
 export const findConflicts = (selected, courses) => {
   const conflicts = {};
-
   const list = selected.map((sel) => {
     const course = courses.find((c) => c.code === sel.code);
     const section = course?.sections.find((s) => s.id === sel.sectionId);
@@ -105,9 +120,7 @@ export const findConflicts = (selected, courses) => {
     for (let j = i + 1; j < list.length; j++) {
       const a = list[i];
       const b = list[j];
-
       if (!a.section || !b.section) continue;
-
       if (sectionsConflict(a.section, b.section)) {
         const ka = `${a.sel.code}-${a.sel.sectionId}`;
         const kb = `${b.sel.code}-${b.sel.sectionId}`;
@@ -116,6 +129,5 @@ export const findConflicts = (selected, courses) => {
       }
     }
   }
-
   return conflicts;
 };
