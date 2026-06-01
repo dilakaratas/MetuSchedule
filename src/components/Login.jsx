@@ -1,20 +1,15 @@
 import React, { useState } from "react";
 import { saveToken } from "../api/auth.js";
 
-
-const TEST_USERS = [
-
-  { username: "admin",    password: "admin123", name: "Admin" },
-];
-
+const CAS_URL = "https://login.metu.edu.tr/cas/login";
 
 export default function Login({ onLogin }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [showPwd, setShowPwd] = useState(false);
+  const [showPwd, setShowPwd]   = useState(false);
   const [remember, setRemember] = useState(false);
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [error, setError]       = useState("");
+  const [loading, setLoading]   = useState(false);
 
   const handleSubmit = async () => {
     setError("");
@@ -24,31 +19,25 @@ export default function Login({ onLogin }) {
 
     setLoading(true);
     try {
-
-      // ══ TEST MODU — CAS izni gelince bu bloğu sil ══════════
-      await new Promise((r) => setTimeout(r, 600));
-      const found = TEST_USERS.find(
-        (u) => u.username === username.trim() && u.password === password
-      );
-      if (!found) throw new Error("Kullanıcı adı veya şifre hatalı.");
-      saveToken("test-token-" + found.username, remember);
-      onLogin({ username: found.username, name: found.name });
-      // ═══════════════════════════════════════════════════════
-
-      // ══ WEB SERVİS MODU — CAS izni gelince aç ══════════════
-      // const goToCAS = () => {
-      //   const service = encodeURIComponent(window.location.origin);
-      //   window.location.href =
-      //     `https://login.metu.edu.tr/cas/login?service=${service}`;
-      // };
-      // goToCAS();
-      // ═══════════════════════════════════════════════════════
-
+        const res = await fetch("/api/auth/login", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ username: username.trim(), password }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || "Giriş başarısız.");
+      saveToken(data.token, remember);
+      onLogin(data.user);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleCAS = () => {
+    const service = encodeURIComponent(window.location.origin);
+    window.location.href = `${CAS_URL}?service=${service}`;
   };
 
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSubmit(); };
@@ -57,20 +46,32 @@ export default function Login({ onLogin }) {
     <div className="login-wrap">
       <div className="login-card">
 
+        {/* Logo */}
         <div className="login-logo-row">
           <div className="login-logo-sq" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-              <path d="M3 5h16M3 9h16M3 13h10M3 17h6" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/>
-            </svg>
+            <img src="/metu-logo.svg" width="32" height="32" alt="ODTÜ" />
           </div>
           <div>
-            <div className="login-brand-main">ODTÜ <span>Schedule</span></div>
-            <div className="login-brand-sub">Ders Programı Planlayıcı</div>
+            <div className="login-brand-main">METU <span>Schedule</span></div>
+            <div className="login-brand-sub">Dijital Ders Programı Asistanı</div>
           </div>
         </div>
 
         <h1 className="login-heading">Giriş Yap</h1>
-        <p className="login-sub">METU hesabınızla devam edin</p>
+        <p className="login-sub">ODTÜ hesabınızla devam edin</p>
+
+        {/* ODTÜ CAS butonu */}
+        <button className="login-cas-big-btn" type="button" onClick={handleCAS}>
+          <img src="/metu-logo.svg" width="26" height="26" alt="" aria-hidden="true" />
+          ODTÜ Kimliğinizle Giriş Yapın
+        </button>
+
+        <div className="login-divider">
+          <span />
+          <p>ya da test girişi</p>
+          <span />
+        </div>
+
 
         {error && (
           <div className="login-error" role="alert">
@@ -82,6 +83,7 @@ export default function Login({ onLogin }) {
           </div>
         )}
 
+ 
         <div className="login-field-group">
           <label className="login-label" htmlFor="login-username">Kullanıcı Adı</label>
           <div className="login-input-wrap">
@@ -96,13 +98,13 @@ export default function Login({ onLogin }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="örn. e1234567"
+              placeholder="örn. admin"
               autoComplete="username"
-              autoFocus
             />
           </div>
         </div>
 
+        {/* Şifre */}
         <div className="login-field-group">
           <label className="login-label" htmlFor="login-password">Şifre</label>
           <div className="login-input-wrap">
@@ -120,12 +122,7 @@ export default function Login({ onLogin }) {
               placeholder="••••••••"
               autoComplete="current-password"
             />
-            <button
-              className="login-eye-btn"
-              type="button"
-              onClick={() => setShowPwd((v) => !v)}
-              aria-label={showPwd ? "Şifreyi gizle" : "Şifreyi göster"}
-            >
+            <button className="login-eye-btn" type="button" onClick={() => setShowPwd((v) => !v)} aria-label={showPwd ? "Şifreyi gizle" : "Şifreyi göster"}>
               {showPwd ? (
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                   <path d="M2 2l12 12M6.5 6.56A2 2 0 0010 9.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
@@ -141,6 +138,7 @@ export default function Login({ onLogin }) {
           </div>
         </div>
 
+        {/* Beni hatırla */}
         <div className="login-options-row">
           <label className="login-remember">
             <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)}/>
@@ -149,6 +147,7 @@ export default function Login({ onLogin }) {
           <button className="login-forgot" type="button">Şifremi unuttum</button>
         </div>
 
+        {/* Giriş butonu */}
         <button
           className={`login-btn${loading ? " login-btn-loading" : ""}`}
           type="button"
