@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="shortcut icon" href="favicon.ico">
+        <style type="text/css" title="currentStyle" media="screen">
+            @import "css/bootstrap.css";
+            @import "css/metu.css";
+            @import "css/bootstrap-tour.css";
+            @import "css/slider.css";
+            @import "css/dataTables.bootstrap.css";
+        </style>
+        <style type="text/css">
+            
+            div.DTTT { margin-bottom: 0.5em; float: right; }
+            div.dataTables_wrapper { clear: both; }
+            .dataTables_filter { float : left; }
+            td { border-color: #cccccc !important; padding: 4px; }
+            
+            
+</style>
+        <link href="css/datepicker.css" rel="stylesheet">
+        <!-- JavaScript -->
+        <script src="js/jquery-1.11.0.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+                    <script src="js/localization/messages_en.js"></script>
+                <script src="js/jquery.bootstrap.wizard.js"></script>
+        <script src="js/validator.js"></script>
+        <script src="js/bootstrap-datepicker.js"></script>
+        <script src="js/locales/bootstrap-datepicker.tr.js"></script>
+        <script src="js/bootstrap-tour.js"></script>
+        <script src="js/jquery.maskedinput.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap-slider.js"></script>
+	<script language="JavaScript" type="text/javascript" src="js/readmore.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/script.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/dataTables/js/jquery.dataTables.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/dataTables/js/dataTables.tableTools.js"></script>
+        <script language="JavaScript" type="text/javascript" src="js/dataTables/js/dataTables.bootstrap.js"></script>
+        <script>document.domain = 'metu.edu.tr';</script>
+        <title> </title>
+            </head>
+    <body>
+        <nav class="navbar navbar-default" role="navigation" id="top-navbar">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="."><img src="img/logo.png" alt=""/></a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <h3></h3>
+			                </div>
+            </div>
+		
+        </nav>
+        <script>if (window.self !== window.top) document.getElementById('top-navbar').style.display = "none";</script>
+            <div class="container-fluid container-top noscriptClass">
+            <div class="row-fluid clearfix">
+
+<div id="single_content">
+
+
+
+    <div id="formmessage">
+    <font size=3 color="red"><b>Information about the department could not be found.</b></font>
+</div>
+
+<br />
+            <form method="POST" action="main.php">
+            <TABLE ALIGN=CENTER>
+                <TR>
+                    <TD>
+                        This program lists the offered courses on department and semester
+                        basis. Also you can see section,
+                        prerequisite and equal course information for the selected courses
+                        from the offered courses list.
+                        To use the program
+                        please select department and semester information from below
+                        comboboxes respectively and press the Submit button.
+                    </TD>
+                </TR>
+            </TABLE>
+            <BR>
+            <BR>
+            <TABLE ALIGN="Center" >
+                <TR>
+                    <TD><B>Department </B></TD><TD><B>:</B></TD>
+                    <TD>
+                        <input type=hidden NAME="textWithoutThesis" value='1'>
+                        <SELECT NAME="select_dept">
+                                                            <option value="976">Actuarial Science/Aktüerya Bilimleri </option>
+                                                            <option value="572">Aerospace Engineering/Havacılık ve Uzay Mühendisliği </option>
+                                                            <option value="384">Aerospace Engineering/Havacılık ve Uzay Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="836">Applied Ethics/Uygulamalı Etik </option>
+                                                            <option value="863">Archaeometry/Arkeometri </option>
+                                                            <option value="120">Architecture/Mimarlık </option>
+                                                            <option value="379">Architecture/Mimarlık(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="815">Area Studies/Bölge Çalışmaları </option>
+                                                            <option value="375">Art/Sanat(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="887">Artificial Intelligence Engineering/Yapay Zeka Mühendisliği </option>
+                                                            <option value="393">Artificial Intelligence Engineering/Yapay Zeka Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="842">Asian Studies/Asya Çalışmaları </option>
+                                                            <option value="864">Astrophysics/Astrofizik </option>
+                                                            <option value="860">Biochemistry/Biyokimya </option>
+                                                            <option value="908">Bioinformatics/Biyoenformatik </option>
+                                                            <option value="459">Biology Education/Biyoloji Öğretmenliği </option>
+                                                            <option value="238">Biology/Biyoloji </option>
+                                                            <option value="373">Biology/Biyoloji(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="872">Biomedical Engineering/Biyomedikal Mühendisliği </option>
+                                                            <option value="861">Biotechnology/Biyoteknoloji </option>
+                                                            <option value="854">Building Science/Yapı Bilimleri </option>
+                                                            <option value="316">Business Administration (International Joint Program)/İşletme (Uluslararası Ortak Program) </option>
+                                                            <option value="351">Business Administration (International Joint Program)/İşletme (Uluslararası Ortak Program)(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="312">Business Administration/İşletme </option>
+                                                            <option value="353">Business Administration/İşletme(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="870">Cement Engineering/Çimento Mühendisliği </option>
+                                                            <option value="563">Chemical Engineering/Kimya Mühendisliği </option>
+                                                            <option value="367">Chemical Engineering/Kimya Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="952">Chemical Oceanography/Kimyasal Oşinografi </option>
+                                                            <option value="422">Chemistry Education/Kimya Öğretmenliği </option>
+                                                            <option value="234">Chemistry/Kimya </option>
+                                                            <option value="360">Chemistry/Kimya(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="121">City and Regional Planning/Şehir ve Bölge Planlama </option>
+                                                            <option value="853">City Planning/Şehir Planlama </option>
+                                                            <option value="562">Civil Engineering/İnşaat Mühendisliği </option>
+                                                            <option value="364">Civil Engineering/İnşaat Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="844">Clinical Psychology/Klinik Psikoloji </option>
+                                                            <option value="394">Clinical Psychology/Klinik Psikoloji(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="902">Cognitive Sciences/Bilişsel Bilimler </option>
+                                                            <option value="858">Computational Design and Fabrication Technologies in Architecture (International Joint Program)/Mimarlıkta Sayısal Tasarım ve Üretim Teknolojileri (Uluslararası Ortak Program) </option>
+                                                            <option value="430">Computer Education and Instructional Technology/Bilgisayar ve Öğretim Teknolojileri Eğitimi </option>
+                                                            <option value="376">Computer Education and Instructional Technology/Bilgisayar ve Öğretim Teknolojileri Öğretmenliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="575">Computer Engineering (Türkiye-Azerbaijan University TAU)/Bilgisayar Mühendisliği (Türkiye-Azerbaycan Üniversitesi TAU) </option>
+                                                            <option value="571">Computer Engineering/Bilgisayar Mühendisliği </option>
+                                                            <option value="355">Computer Engineering/Bilgisayar Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="971">Cryptography/Kriptografi </option>
+                                                            <option value="825">Curriculum and Instruction/Eğitim Programları ve Öğretim </option>
+                                                            <option value="910">Cyber Security/Siber Güvenlik </option>
+                                                            <option value="392">Cybersecurity Engineering/Siber Güvenlik Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="886">Data and Decision Sciences/Veri ve Karar Bilimleri </option>
+                                                            <option value="911">Data Informatics/Veri Bilişimi </option>
+                                                            <option value="857">Design Research for Interaction (International Joint Program)/Etkileşim için Tasarım (Uluslararası Ortak Program) </option>
+                                                            <option value="411">Early Childhood Education/Okul Öncesi Öğretmenliği </option>
+                                                            <option value="874">Earth System Science/Yer Sistem Bilimleri </option>
+                                                            <option value="875">Earthquake Engineering and Engineering Seismology (International Joint Program)/Deprem Mühendisliği ve Mühendislik Sismolojisi (Uluslararası Ortak Program) </option>
+                                                            <option value="873">Earthquake Studies/Deprem Çalışmaları </option>
+                                                            <option value="311">Economics/İktisat </option>
+                                                            <option value="352">Economics/İktisat(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="824">Educational Administration and Planning/Eğitim Yönetimi ve Planlaması </option>
+                                                            <option value="454">Educational Sciences/Eğitim Bilimleri </option>
+                                                            <option value="368">Educational Sciences/Eğitim Bilimleri(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="567">Electrical and Electronics Engineering/Elektrik ve Elektronik Mühendisliği </option>
+                                                            <option value="356">Electrical and Electronics Engineering/Elektrik ve Elektronik Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="797">Elektrik/Elektrik </option>
+                                                            <option value="798">Elektronik Teknolojisi/Elektronik Teknolojisi </option>
+                                                            <option value="401">Elementary and Early Childhood Education/Temel Eğitim </option>
+                                                            <option value="410">Elementary Education/İlköğretim </option>
+                                                            <option value="413">Elementary Mathematics Educ./İlköğretim Matematik Öğretmenliği </option>
+                                                            <option value="822">Elementary Science and Math. E./İlköğretim Fen ve Matematik Eğitimi </option>
+                                                            <option value="412">Elementary Science Education/Fen Bilgisi Öğretmenliği </option>
+                                                            <option value="799">Endüstriyel Otomasyon/Endüstriyel Otomasyon </option>
+                                                            <option value="866">Engineering Management/Mühendislik Yönetimi </option>
+                                                            <option value="561">Engineering Sciences/Mühendislik Bilimleri </option>
+                                                            <option value="383">Engineering Sciences/Mühendislik Bilimleri(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="451">English Language Teaching (International Joint Program)/İngilizce Öğretmenliği (Uluslararası Ortak Program) </option>
+                                                            <option value="820">English Language Teaching/İngiliz Dili Öğretimi </option>
+                                                            <option value="391">English Language Teaching/İngiliz Dili Öğretimi(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="821">English Literature/İngiliz Edebiyatı </option>
+                                                            <option value="560">Environmental Engineering/Çevre Mühendisliği </option>
+                                                            <option value="382">Environmental Engineering/Çevre Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="884">Environmental Management/Çevre Yönetimi </option>
+                                                            <option value="835">Eurasian Studies/Avrasya Çalışmaları </option>
+                                                            <option value="838">European Integration/Avrupa Bütünleşmesi </option>
+                                                            <option value="833">European Studies/Avrupa Çalışmaları </option>
+                                                            <option value="837">Executive Master of Business  Administration/Yöneticiler için İşletme </option>
+                                                            <option value="817">Family Psychology/Aile Psikolojisi </option>
+                                                            <option value="974">Financial Mathematics: Life Insurance Option/Finansal Matematik: Hayat Sigortası Opsiyonu </option>
+                                                            <option value="973">Financial Mathematics/Finansal Matematik </option>
+                                                            <option value="381">Fine Arts/Güzel Sanatlar(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="573">Food Engineering/Gıda Mühendisliği </option>
+                                                            <option value="796">Food Technology/Gıda Teknolojisi </option>
+                                                            <option value="450">Foreign Language Education/İngilizce Öğretmenliği </option>
+                                                            <option value="810">Gender&Women Studies/Toplumsal Cinsiyet ve Kadın Çalışmaları </option>
+                                                            <option value="865">Geodetic and Geographical Information Technologies/Jeodezi ve Coğrafi Bilgi Teknolojileri </option>
+                                                            <option value="564">Geological Engineering/Jeoloji Mühendisliği </option>
+                                                            <option value="315">Global and International Affairs (International Joint Program)/Küresel Siyaset ve Uluslararası İlişkiler (Uluslararası Ortak Program) </option>
+                                                            <option value="800">Grad.Institute Social Sciences/Sosyal Bilimler Enstitüsü </option>
+                                                            <option value="856">Graduate Program in Conservation of Cultural Heritage/Kültürel Mirası Koruma Programı </option>
+                                                            <option value="950">Graduate School of Marine Sciences/Deniz Bilimleri Enstitüsü </option>
+                                                            <option value="823">Guidance and Psychological Counseling/Rehberlik ve Psikolojik Danışmanlık </option>
+                                                            <option value="378">Guidance and Psychological Counseling/Rehberlik ve Psikolojik Danışmanlık(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="801">History of Architecture/Mimarlık Tarihi </option>
+                                                            <option value="240">History/Tarih </option>
+                                                            <option value="362">History/Tarih(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="834">Human Resources Development In Education/Eğtimde İnsan Kaynaklarını Geliştirme </option>
+                                                            <option value="869">Hydrosystems Engineering/Hidrosistem Mühendisliği </option>
+                                                            <option value="830">Industrial and Organizational Psychology/Endüstri ve Örgüt Psikolojisi </option>
+                                                            <option value="791">Industrial Automation/Endüstriyel Otomasyon </option>
+                                                            <option value="386">Industrial Design/Endüstri Ürünleri Tasarımı(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="125">Industrial Design/Endüstriyel Tasarım </option>
+                                                            <option value="568">Industrial Engineering/Endüstri Mühendisliği </option>
+                                                            <option value="388">Industrial Engineering/Endüstri Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="904">Informatics Online/Internet Üzerinden Bilişim </option>
+                                                            <option value="901">Information Systems/Bilişim Sistemleri </option>
+                                                            <option value="970">Institute Of Applied Mathematics/Uygulamalı Matematik Enstitüsü </option>
+                                                            <option value="314">International Relations/Uluslararası İlişkiler </option>
+                                                            <option value="843">Latin and North American Studies/Latin ve Kuzey Amerika Çalışmaları </option>
+                                                            <option value="954">Marine Biology and Fisheries/Deniz Biyolojisi ve Balıkçılığı </option>
+                                                            <option value="953">Marine Geology and Geophysics/Deniz Jeolojisi ve Jeofiziği </option>
+                                                            <option value="460">Mathematics and Science Education/Matematik ve Fen Bilimleri Eğitimi </option>
+                                                            <option value="826">Mathematics Education/Matematik Eğitimi </option>
+                                                            <option value="423">Mathematics Education/Matematik Öğretmenliği </option>
+                                                            <option value="236">Mathematics/Matematik </option>
+                                                            <option value="357">Mathematics/Matematik(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="876">Mechanical Design and Manufacturing/Mekanik Tasarım ve İmalat </option>
+                                                            <option value="569">Mechanical Engineering/Makina Mühendisliği </option>
+                                                            <option value="365">Mechanical Engineering/Makina Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="816">Media and Cultural Studies/Medya ve Kültürel Çalışmaları </option>
+                                                            <option value="906">Medical Informatics/Tıp Bilişimi </option>
+                                                            <option value="795">Meslek Yüksekokulu/Meslek Yüksekokulu </option>
+                                                            <option value="570">Metallurgical and Materials Engineering/Metalurji ve Malzeme Mühendisliği </option>
+                                                            <option value="871">Micro and Nanotechnology/Mikro ve Nanoteknoloji </option>
+                                                            <option value="832">Middle East Studies/Orta Doğu Araştırmaları </option>
+                                                            <option value="565">Mining Engineering/Maden Mühendisliği </option>
+                                                            <option value="903">Modelling And Simulation/Modelleme Ve Simulasyon </option>
+                                                            <option value="610">Modern Language (Greek)/Modern Diller (Yunanca) </option>
+                                                            <option value="602">Modern Languages (Arabic)/Modern Diller (Arapça) </option>
+                                                            <option value="611">Modern Languages (Chinese)/Modern Diller (Çince) </option>
+                                                            <option value="380">Modern Languages (Chinese)/Modern Diller (Çince)(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="639">Modern Languages (English)/Modern Diller (İngilizce) </option>
+                                                            <option value="359">Modern Languages (English)/Modern Diller (İngilizce)(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="603">Modern Languages (French)/Modern Diller (Fransızca) </option>
+                                                            <option value="370">Modern Languages (French)/Modern Diller (Fransızca)(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="604">Modern Languages (German)/Modern Diller (Almanca) </option>
+                                                            <option value="369">Modern Languages (German)/Modern Diller (Almanca)(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="609">Modern Languages (Hebrew)/Modern Diller (İbranice) </option>
+                                                            <option value="606">Modern Languages (Italian)/Modern Diller (İtalyanca) </option>
+                                                            <option value="605">Modern Languages (Japanese)/Modern Diller (Japonca) </option>
+                                                            <option value="613">Modern Languages (Korean)/Modern Diller (Korece) </option>
+                                                            <option value="612">Modern Languages (Persian)/Modern Diller (Farsça) </option>
+                                                            <option value="607">Modern Languages (Russian)/Modern Diller (Rusça) </option>
+                                                            <option value="608">Modern Languages (Spanish)/Modern Diller (İspanyolca) </option>
+                                                            <option value="385">Modern Languages (Spanish)/Modern Diller (İspanyolca)(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="629">Modern Languages (Turkish as a Foreign Languages)/Modern Diller (Yabancılar için Türk Dili) </option>
+                                                            <option value="219">Molecular Biology and Genetics/Moleküler Biyoloji ve Genetik </option>
+                                                            <option value="909">Multimedia Informatics/Çokluortam Bilişimi </option>
+                                                            <option value="682">Music and Fine Arts/Müzik ve Güzel Sanatlar </option>
+                                                            <option value="651">Music and Fine Arts/Müzik ve Güzel Sanatlar </option>
+                                                            <option value="643">Music and Fine Arts/Müzik ve Güzel Sanatlar </option>
+                                                            <option value="644">Music and Fine Arts/Müzik ve Güzel Sanatlar </option>
+                                                            <option value="878">Neuroscience and Neurotechnology/Nörobilim ve Nöroteknoloji </option>
+                                                            <option value="877">Occupational Health and Safety/İş Sağlığı ve Güvenliği </option>
+                                                            <option value="387">Occupational Health and Safety/İş Sağlığı ve Güvenliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="956">Oceanography/Deniz Bilim (Oşinografi) </option>
+                                                            <option value="880">Operational Research/Yöneylem  Araştırması </option>
+                                                            <option value="566">Petroleum and Natural Gas Engineering/Petrol ve Doğal Gaz Mühendisliği </option>
+                                                            <option value="374">Petroleum and Natural Gas Engineering/Petrol ve Doğal Gaz Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="241">Philosophy/Felsefe </option>
+                                                            <option value="377">Philosophy/Felsefe(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="951">Phys. Oceanography/Fiziksel Oşinografi </option>
+                                                            <option value="453">Physical Education and Sports/Beden Eğitimi ve Spor </option>
+                                                            <option value="421">Physics Education/Fizik Öğretmenliği </option>
+                                                            <option value="230">Physics/Fizik </option>
+                                                            <option value="358">Physics/Fizik(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="354">Political Science and International Relations/Siyaset Bilimi ve Uluslararası İlişkiler(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="310">Political Science and Public Adm./Siyaset Bilimi ve Kamu Yönetimi </option>
+                                                            <option value="862">Polymer Science and Technology/Polimer Bilim ve Teknolojisi </option>
+                                                            <option value="233">Psychology/Psikoloji </option>
+                                                            <option value="371">Psychology/Psikoloji(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="852">Regional Planning/Bölge Planlama </option>
+                                                            <option value="885">Robotics/Robotik </option>
+                                                            <option value="831">Science and Technology Policy Studies/Bilim ve Teknoloji Politikası Çalışmaları </option>
+                                                            <option value="827">Science Education/Fen Bilimleri Eğitimi </option>
+                                                            <option value="972">Scientific Computing Program/Bilimsel Hesaplama </option>
+                                                            <option value="420">Secondary Science and Mathematics Educ./Ortaöğretim Fen ve Matematik Alan.Eğitimi </option>
+                                                            <option value="814">Settlement Archaeology/Yerleşim Arkeolojisi </option>
+                                                            <option value="840">Social Anthropology/Sosyal Antropoloji </option>
+                                                            <option value="839">Social Policy/Sosyal Politika </option>
+                                                            <option value="841">Social Sciences (Turkish- German) (International Joint Program)/Sosyal Bilimler (Türk-Alman) (Uluslararası Ortak Program) </option>
+                                                            <option value="232">Sociology/Sosyoloji </option>
+                                                            <option value="372">Sociology/Sosyoloji(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="867">Software Engineering/Yazılım Mühendisliği </option>
+                                                            <option value="389">Software Engineering/Yazılım Mühendisliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="905">Software Management/Yazılım Yönetimi </option>
+                                                            <option value="246">Statistics/İstatistik </option>
+                                                            <option value="363">Statistics/İstatistik(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="868">Structural Mechanics/Yapı Mekaniği </option>
+                                                            <option value="390">Sustainable Environment and Energy Systems/Sürdürülebilir Çevre ve Enerji Sistemleri(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="366">Teaching English as a Foreign Language/İngilizce Öğretmenliği(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="790">Tech. Voc.School/Meslek Yüksekokulu </option>
+                                                            <option value="642">Turkish Language/Türk Dili </option>
+                                                            <option value="361">Turkish Language/Türk Dili(Kuzey K&#305;br&#305;s Kamp&#252;s&#252;) </option>
+                                                            <option value="855">Urban Design/Kentsel Tasarım </option>
+                                                            <option value="811">Urban Policy Planning and Local Governments/Kentsel Politika Planlaması ve Yerel Yönetimler </option>
+                                                            <option value="792">Welding Technology/Kaynak Teknolojisi </option>
+                                                            <option value="907">Work Based Learning Studies (International Joint Program)/İş Yaşamı Temelli Öğrenme (Uluslararası Ortak Program) </option>
+                                                    </SELECT>
+                    </td>
+                </tr>
+                <TR>
+                    <TD><B>Semester</B></TD><TD><B>:</B></TD>
+                    <TD>
+                        <SELECT NAME="select_semester">
+                                                            <option value="20252">2025-2026 Spring </option>
+                                                            <option value="20251">2025-2026 Fall </option>
+                                                            <option value="20243">2024-2025 Summer School </option>
+                                                            <option value="20242">2024-2025 Spring </option>
+                                                            <option value="20241">2024-2025 Fall </option>
+                                                            <option value="20233">2023-2024 Summer School </option>
+                                                            <option value="20232">2023-2024 Spring </option>
+                                                            <option value="20231">2023-2024 Fall </option>
+                                                            <option value="20223">2022-2023 Summer School </option>
+                                                            <option value="20222">2022-2023 Spring </option>
+                                                            <option value="20221">2022-2023 Fall </option>
+                                                            <option value="20213">2021-2022 Summer School </option>
+                                                            <option value="20212">2021-2022 Spring </option>
+                                                            <option value="20211">2021-2022 Fall </option>
+                                                            <option value="20203">2020-2021 Summer School </option>
+                                                    </SELECT>
+                    </TD>
+
+                </TR>
+            </TABLE>
+            <br>
+            <TABLE ALIGN="Center">
+                <TR align='center'>
+                    <TD><INPUT TYPE="submit" NAME="submit_CourseList" VALUE="Submit"></TD>
+                    <!-- <TD><INPUT TYPE="submit" NAME="SubmitName" VALUE="Tamam"></TD> -->
+                </TR>
+                                </tr>
+            </TABLE>
+            <!--<HR>
+               <table align=center  WIDTH="800" border="5" cellspacing="5" cellpadding="0">
+               <tr><td width="65%" style="border-left:2px solid #0066CC;border-top:2px solid #0066CC;border-bottom:2px solid #0066CC; border-right:2px solid #0066CC;">
+               <table WIDTH="750" align=center>
+                <tr><td>
+                <br>
+               <font size=4 color=red>
+               <div align=center> Etkileimli Kayt Duyurusu / The Announcement on Interactive Registrations   
+              </div> <br>
+               </font><font size=4 color=blue>
+               <div align=justify> <b>     Kayt srecinizin tamamlanabilmesi iin ders ekleme-brakma srecinde 
+                   ders kaytlarnzda deiiklik yaptysanz danman onay almanz gerekmektedir.
+              </div> <br>
+              <div align=justify>       You must obtain your advisor's approval if you have made any changes in your course 
+                   program during the add-drop period in order to complete your registration.
+              </div> <br>
+                </font>
+                <br>
+               </td></tr></table>
+             </td></tr>
+            </table>
+            -->
+            <br><br><br><br><br>
+            <!--fieldset>
+                <legend style="font-size:15; font:arial;font-weight:bold;">Announcements :</legend>
+            
+            <<Table align=center width=%100 style="font:arial;font-size=15">
+            <TR>
+             <TD><font size=4 color=black>*&nbsp;</font>
+            <font color=red>On the first day of add-drops October 4<sup>th</sup>,  2010 students shall start their registration applications in a  sequential order. The registration program shall be available to  students with different academic years at the following hours; </strong></font><font color="blue"><table border="1"><tbody color=red><tr><td><strong>Starting Time </strong></td><td><strong>Academic Year </strong></td></tr><tr><td>09:00</td><td><font color="blue">Seniors (</font>except wireless users<font color="blue">)<br></font></td></tr><tr><td>10:00</td><td>Seniors &amp; Juniors <font color="blue"><font color="blue">(</font>except wireless users<font color="blue">)</font></font></td></tr><tr><td>11:00</td><td>All students and wireless users
+            </FONT>
+            
+            </TD>
+            </TR>
+            </TABLE>>
+            <<font color="red">On the first day of registrations, the registration program
+            will be accessible outside the campus at 11:00 a.m. and afterwards.
+            </font>
+            
+            <Table align=center width=%100 style="font:arial;font-size=15">
+            <TR>
+             <TD><font size=4 color=black>*&nbsp;</font><font  color=red><font size=4>To View Course Capacity ,Please Visit <a href="http://oibs2.metu.edu.tr/View_Course_Capacity_158/" >http://oibs2.metu.edu.tr/View_Course_Capacity_158/</font></a>
+            </FONT></TD>
+            </TR>
+            </TABLE>
+            >
+            <Table align=center width=%100 style="font:arial;font-size=12">
+            <TR>
+             <TD><font size=4 color=black>*&nbsp;</font><font  color=red>Users who use Explorer 7.xx for web browsing must introduce METU-CA
+            root certificate to the browser so as not to get warning messages that
+            the server certificate is not recognized and in order to get the
+            visual data smoothly in 'add' process during registration. Please
+            click on the link to proceed.
+            <a style="color:BLUE" href='http://www.cc.metu.edu.tr/ccmscontent/articleRead/articleId/336' TARGET='_blank'>http://www.cc.metu.edu.tr/ccmscontent/articleRead/articleId/336</a>
+            </FONT></TD>
+            </TR>
+            </TABLE>
+            
+            <Table align=center width=%100 style="font:arial;font-size=12">
+            <TR>
+                <TD><font size=4 color=black>*&nbsp;</font><font  color=red>The use of some programs in the Student Affairs Information System through
+            "bot" software is against article 7 of METU InformationTechnology
+            Resources Usage Policy Document (METU IT Resources are not to be used so as
+            to perform applications and activities intending to hinder the rights of
+            others to use these resources)
+            <a  style="color:BLUE" href='http://www.metu.edu.tr/services/compethics.php' TARGET='_blank'>(http://www.metu.edu.tr/services/compethics.php)</a>Users who breach
+            this article will be subject to article 9 of the Policy Document.
+            
+            <br>
+            </FONT></TD>
+            </TR>
+            </TABLE>
+            
+            </fieldset-->
+
+
+            <input type="hidden" name="hidden_redir" value="Login">                    </form>
+    </div>
+
+			</div>
+		</div>
+		<div class="container-fluid hidden-print">
+
+			<hr>
+
+			<footer style="margin: 0px 0;">
+				<div class="bottomfeq" id="tourFaqId"></div>
+				<div class="row">
+					<div class="col-lg-10">
+						<p style=""> </p>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+		<!-- /.container -->
+
+	</body>
+
+</html>
+
+<script>
+
+		
+	$(document).ready(function() {
+	
+	
+		
+	});
+</script>
+
