@@ -243,7 +243,18 @@ export default function AIPanel({ lang, courses, onApply, onClose }) {
     const courseList = [...selectedCourses].map(code=>courses.find(c=>c.code===code)).filter(Boolean);
     const options = { freeDays, maxDailyHours, earliestStart: earliestStart||null, latestEnd: latestEnd||null, compactMode, preferredTeachers: allPreferredTeachers };
     const schedule = findBestSchedule(courseList, options);
-    if (!schedule) { setError(lang==="tr"?"Kısıtlara uyan program bulunamadı. Bazı kısıtları gevşet.":"No valid schedule found."); return; }
+    if (!schedule) {
+      const hints = [];
+      if (freeDays.size > 0) hints.push((lang==="tr" ? freeDays.size + " gün boş seçili" : freeDays.size + " free days"));
+      if (earliestStart) hints.push(lang==="tr" ? "en erken " + earliestStart : "earliest " + earliestStart);
+      if (latestEnd) hints.push(lang==="tr" ? "en geç " + latestEnd : "latest end " + latestEnd);
+      if (maxDailyHours < 6) hints.push(lang==="tr" ? "günlük max " + maxDailyHours + " saat" : "daily max " + maxDailyHours + "h");
+      const hintStr = hints.length > 0 ? " — " + hints.join(", ") : "";
+      setError(lang==="tr"
+        ? "Kısıtlara uyan program bulunamadı" + hintStr + ". Bu kısıtlardan birini gevşet."
+        : "No valid schedule found" + hintStr + ". Try relaxing a constraint.");
+      return;
+    }
     const found = getConstraintViolations(courseList, freeDays, earliestStart||null, latestEnd||null, lang);
     if (found.length>0) { setViolations(found); setGeneratedSchedule(schedule); setStage("conflict"); return; }
     // Önizleme aşamasına geç
@@ -426,19 +437,7 @@ export default function AIPanel({ lang, courses, onApply, onClose }) {
               </div>
             )}
 
-            {/* Program stili */}
-            <div className="ai-field">
-              <label className="ai-label">{lang==="tr"?"Program stili":"Schedule style"}</label>
-              <div className="ai-style-chips">
-                {[
-                  { val:"compact", label: lang==="tr"?"Boşluksuz":"Compact" },
-                  { val:"any",     label: lang==="tr"?"En iyi uyum":"Best fit" },
-                  { val:"spaced",  label: lang==="tr"?"Molalı":"With breaks" },
-                ].map(opt => (
-                  <button key={opt.val} className={`ai-style-chip${compactMode===opt.val?" active":""}`} onClick={() => setCompactMode(opt.val)}>{opt.label}</button>
-                ))}
-              </div>
-            </div>
+
 
             {/* Çakışma uyarısı */}
             {stage==="conflict" && violations.length>0 && (
