@@ -3542,7 +3542,7 @@
               "sectionNo": "1",
               "instructors": [
                 "BİLSEL FATMA CÂNÂ",
-                "STAFF"
+                "BAŞ BÜTÜNER FUNDA"
               ],
               "times": [
                 {
@@ -3557,7 +3557,7 @@
               "sectionNo": "2",
               "instructors": [
                 "BAŞ BÜTÜNER FUNDA",
-                "STAFF"
+                "BİLSEL FATMA CÂNÂ"
               ],
               "times": [
                 {
@@ -3764,7 +3764,7 @@
               "sectionNo": "4",
               "instructors": [
                 "BİLSEL FATMA CÂNÂ",
-                "STAFF"
+                "KARAKUL TÜRK ÖZLEM"
               ],
               "times": [
                 {
@@ -3926,7 +3926,7 @@
               "sectionNo": "10",
               "instructors": [
                 "KARAKUL TÜRK ÖZLEM",
-                "STAFF"
+                "BİLSEL FATMA CÂNÂ"
               ],
               "times": [
                 {
@@ -25206,7 +25206,7 @@
             {
               "sectionNo": "1",
               "instructors": [
-                "STAFF",
+                "TOPÇU OKAN",
                 "COŞAR AHMET"
               ],
               "times": []
@@ -30547,7 +30547,7 @@
             {
               "sectionNo": "2",
               "instructors": [
-                "DOĞAN MUSA",
+                "DERİN GÜRE PINAR",
                 "STAFF"
               ],
               "times": []
@@ -31040,7 +31040,7 @@
             {
               "sectionNo": "2",
               "instructors": [
-                "DOĞAN MUSA",
+                "DERİN GÜRE PINAR",
                 "STAFF"
               ],
               "times": []
@@ -37015,7 +37015,7 @@
             {
               "sectionNo": "1",
               "instructors": [
-                "KARAAĞAÇ ULAŞ",
+                "ŞAHİN İLKER",
                 "STAFF"
               ],
               "times": [
@@ -59825,8 +59825,8 @@
     {
       "departmentCode": "460",
       "departmentName": "Mathematics and Science Education/Matematik ve Fen Bilimleri Eğitimi",
-      "courseCount": 49,
-      "coursesWithSectionsCount": 49,
+      "courseCount": 48,
+      "coursesWithSectionsCount": 48,
       "courses": [
         {
           "courseCode": "4600210",
@@ -60718,21 +60718,6 @@
                   "place": "EFD-103"
                 }
               ]
-            },
-            {
-              "sectionNo": "2",
-              "instructors": [
-                "UBUZ BEHİYE",
-                "STAFF"
-              ],
-              "times": [
-                {
-                  "day": "Tuesday",
-                  "start": "14:40",
-                  "end": "17:30",
-                  "place": "EFA-27"
-                }
-              ]
             }
           ]
         },
@@ -60741,51 +60726,6 @@
           "courseName": "PROJECTS IN MATHEMATICS AND SCIENCE EDUCATION (MATEMATİK VE FEN EĞİTİMİNDE PROJE )",
           "credit": "3.00(2.00,2.00,0.00)",
           "sections": [
-            {
-              "sectionNo": "1",
-              "instructors": [
-                "YILMAZ TÜZÜN ÖZGÜL",
-                "STAFF"
-              ],
-              "times": [
-                {
-                  "day": "Wednesday",
-                  "start": "14:40",
-                  "end": "17:30",
-                  "place": "EFA-25"
-                }
-              ]
-            },
-            {
-              "sectionNo": "2",
-              "instructors": [
-                "BOZ YEZDAN",
-                "STAFF"
-              ],
-              "times": [
-                {
-                  "day": "Monday",
-                  "start": "09:40",
-                  "end": "13:30",
-                  "place": ""
-                }
-              ]
-            },
-            {
-              "sectionNo": "4",
-              "instructors": [
-                "UBUZ BEHİYE",
-                "STAFF"
-              ],
-              "times": [
-                {
-                  "day": "Wednesday",
-                  "start": "09:40",
-                  "end": "12:30",
-                  "place": "EFA-28"
-                }
-              ]
-            },
             {
               "sectionNo": "5",
               "instructors": [
@@ -61640,28 +61580,6 @@
                   "start": "13:40",
                   "end": "16:30",
                   "place": "EFD-205"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "courseCode": "4600704",
-          "courseName": "ADVANCED FIELDWORK METHODS (GELİŞMİŞ SAHA ÇALIŞMA YÖNTEMLERİ )",
-          "credit": "3.00(3.00,0.00,0.00)",
-          "sections": [
-            {
-              "sectionNo": "1",
-              "instructors": [
-                "ÖZTÜRK GÖKHAN",
-                "STAFF"
-              ],
-              "times": [
-                {
-                  "day": "Wednesday",
-                  "start": "09:40",
-                  "end": "12:30",
-                  "place": "EFA-25"
                 }
               ]
             }
@@ -66100,8 +66018,7 @@
             {
               "sectionNo": "2",
               "instructors": [
-                "STAFF",
-                "ULUER MUHTAR URAL"
+                "STAFF"
               ],
               "times": [
                 {
@@ -66130,8 +66047,7 @@
             {
               "sectionNo": "4",
               "instructors": [
-                "STAFF",
-                "ULUER MUHTAR URAL"
+                "STAFF"
               ],
               "times": [
                 {
@@ -66145,8 +66061,7 @@
             {
               "sectionNo": "5",
               "instructors": [
-                "STAFF",
-                "ULUER MUHTAR URAL"
+                "STAFF"
               ],
               "times": [
                 {
@@ -66160,8 +66075,7 @@
             {
               "sectionNo": "6",
               "instructors": [
-                "STAFF",
-                "ULUER MUHTAR URAL"
+                "STAFF"
               ],
               "times": [
                 {
@@ -66175,8 +66089,7 @@
             {
               "sectionNo": "7",
               "instructors": [
-                "STAFF",
-                "ULUER MUHTAR URAL"
+                "STAFF"
               ],
               "times": [
                 {
@@ -66190,8 +66103,7 @@
             {
               "sectionNo": "8",
               "instructors": [
-                "STAFF",
-                "ULUER MUHTAR URAL"
+                "STAFF"
               ],
               "times": [
                 {
@@ -86231,10 +86143,17 @@
             {
               "sectionNo": "15",
               "instructors": [
-                "KARADEMİR ARET",
+                "GÜREMEN REFİK",
                 "STAFF"
               ],
-              "times": []
+              "times": [
+                {
+                  "day": "Monday",
+                  "start": "12:40",
+                  "end": "17:30",
+                  "place": "B08"
+                }
+              ]
             },
             {
               "sectionNo": "16",
@@ -103391,5 +103310,5 @@
       "courses": []
     }
   ],
-  "elapsedSeconds": 515.59
+  "elapsedSeconds": 878.3
 }
