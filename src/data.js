@@ -1,5 +1,3 @@
-import rawMetuData from "./metu_courses_clean.json";
-
 const DAY_MAP = {
   Monday: 0,
   Tuesday: 1,
@@ -29,19 +27,13 @@ function parseCredits(credit) {
 
   if (!text) return 0;
 
-  // Örnek:
-  // "Credit : 3.00(3.00,0.00,0.00)"
-  // "3.00(3.00,0.00,0.00)"
-  // Burada gerçek kredi parantezden önceki 3.00
   const beforeParen = text.split("(")[0];
-
   const beforeParenMatch = beforeParen.match(/\d+(?:[.,]\d+)?/);
 
   if (beforeParenMatch) {
     return Number(beforeParenMatch[0].replace(",", ".")) || 0;
   }
 
-  // Eğer parantez yoksa veya yukarıda yakalayamazsa genel fallback
   const allNumbers = text.match(/\d+(?:[.,]\d+)?/g);
 
   if (!allNumbers || allNumbers.length === 0) return 0;
@@ -51,11 +43,7 @@ function parseCredits(credit) {
 
 function getDeptCode(departmentName, courseCode) {
   const deptText = cleanText(departmentName);
-
-  // Örnek:
-  // "Computer Engineering/Bilgisayar Mühendisliği"
   const firstPart = deptText.split("/")[0].trim();
-
   const words = firstPart.split(/\s+/).filter(Boolean);
 
   if (words.length >= 2) {
@@ -91,22 +79,15 @@ function convertSection(section, courseCode) {
 
   return {
     id: sectionNo.padStart(2, "0"),
-
-    // Gerçek CRN scrape edilmediği için geçici değer veriyoruz
     crn: `${courseCode}-${sectionNo}`,
-
     instructor: Array.isArray(section.instructors)
       ? section.instructors
           .map(cleanInstructorName)
           .filter(Boolean)
           .join(", ")
       : "",
-
-    // OİBS scrape çıktısında kontenjan bilgisi yok.
-    // 999 veriyoruz ki frontend "dolu" sanıp Ekle butonunu kapatmasın.
     quota: 999,
     enrolled: 0,
-
     meetings: Array.isArray(section.times)
       ? section.times
           .map(convertTimeToMeeting)
@@ -132,8 +113,22 @@ function convertCourse(course, department) {
   };
 }
 
-export const METU_COURSES = rawMetuData.departments
-  .flatMap((department) =>
-    (department.courses || []).map((course) => convertCourse(course, department))
-  )
-  .filter((course) => course.code && course.name && course.sections.length > 0);
+export async function loadMetuCourses() {
+  const res = await fetch("/metu_courses_clean.json");
+
+  if (!res.ok) {
+    throw new Error(`Veri yüklenemedi: ${res.status}`);
+  }
+
+  const rawMetuData = await res.json();
+
+  return rawMetuData.departments
+    .flatMap((department) =>
+      (department.courses || []).map((course) =>
+        convertCourse(course, department)
+      )
+    )
+    .filter(
+      (course) => course.code && course.name && course.sections.length > 0
+    );
+}

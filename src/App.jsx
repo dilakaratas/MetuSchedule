@@ -5,14 +5,12 @@ import Calendar from "./components/Calendar.jsx";
 import AIPanel from "./components/AIPanel.jsx";
 import ChatBot from "./components/ChatBot.jsx";
 import Login from "./components/Login.jsx";
-import { METU_COURSES } from "./data.js";
+import { loadMetuCourses } from "./data.js";
 import { I18N } from "./i18n.js";
 import { findConflicts } from "./utils.js";
 
 export default function App() {
-
   const [user, setUser] = useState(() => {
-
     const token =
       localStorage.getItem("token") || sessionStorage.getItem("token");
     const savedUser = localStorage.getItem("metu-user");
@@ -34,18 +32,34 @@ export default function App() {
     sessionStorage.removeItem("token");
   };
 
-  // Login ekranı göster
   if (!user) {
     return <Login onLogin={handleLogin} />;
   }
 
-  // ---- Ana uygulama ----
   return <MainApp user={user} onLogout={handleLogout} />;
 }
 
 function MainApp({ user, onLogout }) {
   const [lang, setLang] = useState("tr");
   const tr = I18N[lang];
+
+  // --- Veri yükleme ---
+  const [courses, setCourses] = useState([]);
+  const [dataLoading, setDataLoading] = useState(true);
+  const [dataError, setDataError] = useState(null);
+
+  useEffect(() => {
+    loadMetuCourses()
+      .then((data) => {
+        setCourses(data);
+        setDataLoading(false);
+      })
+      .catch((err) => {
+        console.error("Veri yüklenemedi:", err);
+        setDataError("Ders verisi yüklenemedi. Lütfen sayfayı yenileyin.");
+        setDataLoading(false);
+      });
+  }, []);
 
   const [query, setQuery] = useState("");
   const [dayFilter, setDayFilter] = useState(new Set());
@@ -75,7 +89,7 @@ function MainApp({ user, onLogout }) {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return METU_COURSES.filter((c) => {
+    return courses.filter((c) => {
       if (dayFilter.size > 0) {
         const meetsOnDay = c.sections.some((s) =>
           s.meetings.some((m) => dayFilter.has(m.d))
@@ -88,11 +102,11 @@ function MainApp({ user, onLogout }) {
         .join(" ")}`.toLowerCase();
       return hay.includes(q);
     });
-  }, [query, dayFilter]);
+  }, [query, dayFilter, courses]);
 
   const conflicts = useMemo(
-    () => findConflicts(selected, METU_COURSES),
-    [selected]
+    () => findConflicts(selected, courses),
+    [selected, courses]
   );
 
   const toast = (msg) => {
@@ -115,7 +129,7 @@ function MainApp({ user, onLogout }) {
     setSelected(newSelected);
     setSidebarOpen(false);
     setMobileTab("calendar");
-    const newConflicts = findConflicts(newSelected, METU_COURSES);
+    const newConflicts = findConflicts(newSelected, courses);
     if (newConflicts[`${code}-${sectionId}`]) {
       setConflictFlash(`${code}-${sectionId}`);
       setTimeout(() => setConflictFlash(null), 800);
@@ -130,7 +144,7 @@ function MainApp({ user, onLogout }) {
   const copyCRNs = () => {
     const crns = selected
       .map((sel) => {
-        const c = METU_COURSES.find((c) => c.code === sel.code);
+        const c = courses.find((c) => c.code === sel.code);
         const s = c?.sections.find((s) => s.id === sel.sectionId);
         return s?.crn;
       })
@@ -141,17 +155,17 @@ function MainApp({ user, onLogout }) {
   };
 
   const totalCredits = selected.reduce((sum, sel) => {
-    const c = METU_COURSES.find((c) => c.code === sel.code);
+    const c = courses.find((c) => c.code === sel.code);
     return sum + (c?.credits || 0);
   }, 0);
 
   const suggestAlternative = (code) => {
-    const c = METU_COURSES.find((c) => c.code === code);
+    const c = courses.find((c) => c.code === code);
     if (!c || c.sections.length < 2) return null;
     const otherSelected = selected.filter((s) => s.code !== code);
     for (const sec of c.sections) {
       const trial = [...otherSelected, { code, sectionId: sec.id }];
-      const cf = findConflicts(trial, METU_COURSES);
+      const cf = findConflicts(trial, courses);
       if (!cf[`${code}-${sec.id}`]) return sec;
     }
     return null;
@@ -160,7 +174,7 @@ function MainApp({ user, onLogout }) {
   const applyAISuggestion = (suggestions) => {
     const newSelected = suggestions
       .map(({ code, sectionId }) => {
-        const course = METU_COURSES.find((c) => c.code === code);
+        const course = courses.find((c) => c.code === code);
         const section = course?.sections.find((s) => s.id === sectionId);
         if (!course || !section) return null;
         return { code, sectionId };
@@ -182,6 +196,37 @@ function MainApp({ user, onLogout }) {
 
   const conflictCount = Object.keys(conflicts).length / 2;
 
+  // --- Yükleme / hata ekranları ---
+  if (dataLoading) {
+    return (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        fontSize: "1.1rem",
+        color: "#666"
+      }}>
+        Ders verisi yükleniyor...
+      </div>
+    );
+  }
+
+  if (dataError) {
+    return (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        fontSize: "1.1rem",
+        color: "#e53e3e"
+      }}>
+        {dataError}
+      </div>
+    );
+  }
+
   const sidebarProps = {
     tr, lang, query, setQuery, dayFilter, setDayFilter,
     courses: filtered, expandedCourse, setExpandedCourse,
@@ -190,7 +235,7 @@ function MainApp({ user, onLogout }) {
   };
 
   const calendarProps = {
-    tr, lang, courses: METU_COURSES, selected, conflicts,
+    tr, lang, courses, selected, conflicts,
     hoveredSection, conflictFlash, removeSelected, calendarRef,
     setDraggingSection, toggleSelect, onCourseClick: focusCourseFromCalendar,
   };
@@ -213,13 +258,11 @@ function MainApp({ user, onLogout }) {
         onLogout={onLogout}
       />
 
-      {/* Desktop layout */}
       <div className={`desktop-main${sidebarOpen ? "" : " sidebar-collapsed"}`}>
         <Sidebar {...sidebarProps} />
         <Calendar {...calendarProps} />
       </div>
 
-      {/* Mobil tab layout */}
       <div className="mobile-main">
         <div className={`mobile-panel${mobileTab === "courses" ? " active" : ""}`}>
           <Sidebar {...sidebarProps} sidebarOpen={true} />
@@ -291,7 +334,7 @@ function MainApp({ user, onLogout }) {
       {aiPanelOpen && (
         <AIPanel
           lang={lang}
-          courses={METU_COURSES}
+          courses={courses}
           onApply={applyAISuggestion}
           onClose={() => setAiPanelOpen(false)}
         />
@@ -300,7 +343,7 @@ function MainApp({ user, onLogout }) {
       {chatBotOpen && (
         <ChatBot
           lang={lang}
-          courses={METU_COURSES}
+          courses={courses}
           onApply={applyAISuggestion}
           onClose={() => setChatBotOpen(false)}
         />

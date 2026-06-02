@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
-OUTPUT_FILE = DATA_DIR / "metu_courses_clean.json"
+OUTPUT_FILE = BASE_DIR / "public" / "metu_courses_clean.json"
 RAW_OUTPUT_FILE = DATA_DIR / "metu_courses_raw_debug.json"
 
 DEBUG_DIR = BASE_DIR / "debug"
