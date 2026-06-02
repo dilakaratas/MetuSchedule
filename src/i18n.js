@@ -1,7 +1,7 @@
 export const I18N = {
   tr: {
     appName: "MetuSchedule",
-    tagline: "ODTÜ Ders Programı Hazırlayıcı",
+    tagline: "Dijital Ders Programı Hazırlayıcı",
     searchPlaceholder: "Ders kodu, isim ya da hoca ara…",
     filterByDay: "Güne göre filtrele",
     days: ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma"],
