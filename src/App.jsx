@@ -3,11 +3,47 @@ import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Calendar from "./components/Calendar.jsx";
 import AIPanel from "./components/AIPanel.jsx";
+import ChatBot from "./components/ChatBot.jsx";
+import Login from "./components/Login.jsx";
 import { METU_COURSES } from "./data.js";
 import { I18N } from "./i18n.js";
 import { findConflicts } from "./utils.js";
 
 export default function App() {
+
+  const [user, setUser] = useState(() => {
+
+    const token =
+      localStorage.getItem("token") || sessionStorage.getItem("token");
+    const savedUser = localStorage.getItem("metu-user");
+    if (token && savedUser) {
+      try { return JSON.parse(savedUser); } catch { return null; }
+    }
+    return null;
+  });
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    localStorage.setItem("metu-user", JSON.stringify(userData));
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("metu-user");
+    localStorage.removeItem("token");
+    sessionStorage.removeItem("token");
+  };
+
+  // Login ekranı göster
+  if (!user) {
+    return <Login onLogin={handleLogin} />;
+  }
+
+  // ---- Ana uygulama ----
+  return <MainApp user={user} onLogout={handleLogout} />;
+}
+
+function MainApp({ user, onLogout }) {
   const [lang, setLang] = useState("tr");
   const tr = I18N[lang];
 
@@ -21,8 +57,7 @@ export default function App() {
   const [, setDraggingSection] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
-
-  // Mobil tab: "courses" | "calendar"
+  const [chatBotOpen, setChatBotOpen] = useState(false);
   const [mobileTab, setMobileTab] = useState("courses");
 
   const calendarRef = useRef(null);
@@ -69,22 +104,17 @@ export default function App() {
     const exists = selected.find(
       (s) => s.code === code && s.sectionId === sectionId
     );
-
     if (exists) {
       setSelected(selected.filter(
         (s) => !(s.code === code && s.sectionId === sectionId)
       ));
       return;
     }
-
     const cleaned = selected.filter((s) => s.code !== code);
     const newSelected = [...cleaned, { code, sectionId }];
     setSelected(newSelected);
     setSidebarOpen(false);
-
-    // Ders ekleyince mobilde takvime geç
     setMobileTab("calendar");
-
     const newConflicts = findConflicts(newSelected, METU_COURSES);
     if (newConflicts[`${code}-${sectionId}`]) {
       setConflictFlash(`${code}-${sectionId}`);
@@ -92,9 +122,8 @@ export default function App() {
     }
   };
 
-  const removeSelected = (code) => {
+  const removeSelected = (code) =>
     setSelected(selected.filter((s) => s.code !== code));
-  };
 
   const clearAll = () => setSelected([]);
 
@@ -153,6 +182,19 @@ export default function App() {
 
   const conflictCount = Object.keys(conflicts).length / 2;
 
+  const sidebarProps = {
+    tr, lang, query, setQuery, dayFilter, setDayFilter,
+    courses: filtered, expandedCourse, setExpandedCourse,
+    selected, conflicts, toggleSelect, setHoveredSection,
+    setDraggingSection, conflictFlash, suggestAlternative, sidebarOpen,
+  };
+
+  const calendarProps = {
+    tr, lang, courses: METU_COURSES, selected, conflicts,
+    hoveredSection, conflictFlash, removeSelected, calendarRef,
+    setDraggingSection, toggleSelect, onCourseClick: focusCourseFromCalendar,
+  };
+
   return (
     <div className="app">
       <Header
@@ -165,89 +207,28 @@ export default function App() {
         onCopyCRN={copyCRNs}
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
-        onOpenAI={() => setAiPanelOpen(true)}
+        onOpenAI={() => setChatBotOpen(true)}
+        onOpenAutoSchedule={() => setAiPanelOpen(true)}
+        user={user}
+        onLogout={onLogout}
       />
 
       {/* Desktop layout */}
       <div className={`desktop-main${sidebarOpen ? "" : " sidebar-collapsed"}`}>
-        <Sidebar
-          tr={tr}
-          lang={lang}
-          query={query}
-          setQuery={setQuery}
-          dayFilter={dayFilter}
-          setDayFilter={setDayFilter}
-          courses={filtered}
-          expandedCourse={expandedCourse}
-          setExpandedCourse={setExpandedCourse}
-          selected={selected}
-          conflicts={conflicts}
-          toggleSelect={toggleSelect}
-          setHoveredSection={setHoveredSection}
-          setDraggingSection={setDraggingSection}
-          conflictFlash={conflictFlash}
-          suggestAlternative={suggestAlternative}
-          sidebarOpen={sidebarOpen}
-        />
-        <Calendar
-          tr={tr}
-          lang={lang}
-          courses={METU_COURSES}
-          selected={selected}
-          conflicts={conflicts}
-          hoveredSection={hoveredSection}
-          conflictFlash={conflictFlash}
-          removeSelected={removeSelected}
-          calendarRef={calendarRef}
-          setDraggingSection={setDraggingSection}
-          toggleSelect={toggleSelect}
-          onCourseClick={focusCourseFromCalendar}
-        />
+        <Sidebar {...sidebarProps} />
+        <Calendar {...calendarProps} />
       </div>
 
       {/* Mobil tab layout */}
       <div className="mobile-main">
         <div className={`mobile-panel${mobileTab === "courses" ? " active" : ""}`}>
-          <Sidebar
-            tr={tr}
-            lang={lang}
-            query={query}
-            setQuery={setQuery}
-            dayFilter={dayFilter}
-            setDayFilter={setDayFilter}
-            courses={filtered}
-            expandedCourse={expandedCourse}
-            setExpandedCourse={setExpandedCourse}
-            selected={selected}
-            conflicts={conflicts}
-            toggleSelect={toggleSelect}
-            setHoveredSection={setHoveredSection}
-            setDraggingSection={setDraggingSection}
-            conflictFlash={conflictFlash}
-            suggestAlternative={suggestAlternative}
-            sidebarOpen={true}
-          />
+          <Sidebar {...sidebarProps} sidebarOpen={true} />
         </div>
         <div className={`mobile-panel${mobileTab === "calendar" ? " active" : ""}`}>
-          <Calendar
-            tr={tr}
-            lang={lang}
-            courses={METU_COURSES}
-            selected={selected}
-            conflicts={conflicts}
-            hoveredSection={hoveredSection}
-            conflictFlash={conflictFlash}
-            removeSelected={removeSelected}
-            calendarRef={calendarRef}
-            setDraggingSection={setDraggingSection}
-            toggleSelect={toggleSelect}
-            onCourseClick={focusCourseFromCalendar}
-          />
+          <Calendar {...calendarProps} />
         </div>
 
-        {/* Alt tab bar */}
         <nav className="mobile-tab-bar">
-          {/* Stats şeridi — tab bar'ın üstünde */}
           {selected.length > 0 && (
             <div className="mobile-tab-stats">
               <span>{selected.length} {lang === "tr" ? "ders" : "courses"}</span>
@@ -256,12 +237,13 @@ export default function App() {
               {conflictCount > 0 && (
                 <>
                   <span className="mobile-tab-stats-dot">·</span>
-                  <span className="mobile-tab-stats-conflict">⚠ {conflictCount} {lang === "tr" ? "çakışma" : "conflict"}</span>
+                  <span className="mobile-tab-stats-conflict">
+                    ⚠ {conflictCount} {lang === "tr" ? "çakışma" : "conflict"}
+                  </span>
                 </>
               )}
             </div>
           )}
-
           <div className="mobile-tab-buttons">
             <button
               className={`mobile-tab${mobileTab === "courses" ? " active" : ""}`}
@@ -274,7 +256,6 @@ export default function App() {
               </svg>
               <span>{lang === "tr" ? "Dersler" : "Courses"}</span>
             </button>
-
             <button
               className={`mobile-tab${mobileTab === "calendar" ? " active" : ""}`}
               onClick={() => setMobileTab("calendar")}
@@ -290,6 +271,21 @@ export default function App() {
         </nav>
       </div>
 
+      {!chatBotOpen && (
+        <button
+          type="button"
+          className="ask-me-floating"
+          onClick={() => setChatBotOpen(true)}
+          aria-label={lang === "tr" ? "Ask Me asistanını aç" : "Open Ask Me assistant"}
+        >
+          <span className="ask-me-floating-face" aria-hidden="true">
+            <span className="ask-me-floating-eye left" />
+            <span className="ask-me-floating-eye right" />
+            <span className="ask-me-floating-smile" />
+          </span>
+        </button>
+      )}
+
       {toastMsg && <div className="toast">{toastMsg}</div>}
 
       {aiPanelOpen && (
@@ -298,6 +294,15 @@ export default function App() {
           courses={METU_COURSES}
           onApply={applyAISuggestion}
           onClose={() => setAiPanelOpen(false)}
+        />
+      )}
+
+      {chatBotOpen && (
+        <ChatBot
+          lang={lang}
+          courses={METU_COURSES}
+          onApply={applyAISuggestion}
+          onClose={() => setChatBotOpen(false)}
         />
       )}
     </div>

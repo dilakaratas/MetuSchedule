@@ -1,4 +1,4 @@
-/* MetuSchedule — vibrant playful theme */
+/* MetuSchedule Ã¢â‚¬â€ vibrant playful theme */
 
 :root {
   --metu-bordo: #7a1f2b;
@@ -53,7 +53,7 @@ input { font-family: inherit; }
   background: var(--paper);
 }
 
-/* ─── Hard-reset font sizes ────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Hard-reset font sizes Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .app { font-size: 14px; line-height: 1.4; }
 .app .course-header,
 .app .course-name,
@@ -64,7 +64,7 @@ input { font-family: inherit; }
 .app .course-name { font-size: 13px !important; line-height: 1.3 !important; }
 .app .course-code { font-size: 12px !important; line-height: 1.2 !important; }
 
-/* ─── Header ───────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Header Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .header {
   height: var(--header-h);
   display: flex;
@@ -201,7 +201,7 @@ input { font-family: inherit; }
   border-color: #fee;
 }
 
-/* ─── Sidebar toggle ───────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar toggle Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .sidebar-toggle-btn {
   display: flex;
   align-items: center;
@@ -222,7 +222,7 @@ input { font-family: inherit; }
   box-shadow: var(--shadow-sm);
 }
 
-/* ─── Sidebar collapsed ────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar collapsed Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .main.sidebar-collapsed,
 .desktop-main.sidebar-collapsed {
   grid-template-columns: 0 1fr;
@@ -237,7 +237,7 @@ input { font-family: inherit; }
   pointer-events: none;
 }
 
-/* ─── Main layout ──────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Main layout Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .main {
   flex: 1;
   display: grid;
@@ -259,7 +259,7 @@ input { font-family: inherit; }
   }
 }
 
-/* ─── Sidebar ──────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .sidebar {
   background: var(--paper-deep);
   border-right: 1.5px solid var(--line);
@@ -383,7 +383,7 @@ input { font-family: inherit; }
 }
 .empty-emoji { font-size: 32px; margin-bottom: 8px; }
 
-/* ─── Course Card ──────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Course Card Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .course-card {
   background: #fff;
   border: 1.5px solid var(--line);
@@ -480,7 +480,7 @@ input { font-family: inherit; }
   padding-top: 12px;
 }
 
-/* ─── Section Row ──────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Section Row Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .section-row {
   background: var(--paper);
   border: 1.5px solid var(--line);
@@ -642,7 +642,7 @@ input { font-family: inherit; }
   white-space: nowrap;
 }
 
-/* ─── Calendar ─────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Calendar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .calendar-wrap {
   position: relative;
   flex: 1;
@@ -666,12 +666,12 @@ input { font-family: inherit; }
   overflow: hidden;
   box-shadow: var(--shadow-md);
   min-width: 600px;
-  /* Takvim tam ekrana sığsın — scroll gerekmez */
-  flex: 1;
+  /* Dersler 17:40 sonrasÄ±na taÅŸarsa takvim dikey scroll ile devam etsin */
+  flex: none;
   min-height: 500px;
 }
 
-/* Saat ve gün sütunları flex — yüksekliği eşit böler */
+/* Saat ve gÃƒÂ¼n sÃƒÂ¼tunlarÃ„Â± flex Ã¢â‚¬â€ yÃƒÂ¼ksekliÃ„Å¸i eÃ…Å¸it bÃƒÂ¶ler */
 .cal-timecol { display: flex; flex-direction: column; }
 .cal-daycol { display: flex; flex-direction: column; }
 .cal-timelabel { flex: 1; min-height: 0; }
@@ -744,7 +744,7 @@ input { font-family: inherit; }
 .cal-slot.even { background: rgba(244, 240, 232, 0.3); }
 .cal-slot:last-child { border-bottom: 0; }
 
-/* ─── Calendar Block ───────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Calendar Block Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .cal-block {
   position: absolute;
   left: 4px;
@@ -879,7 +879,7 @@ input { font-family: inherit; }
   align-self: flex-start;
 }
 
-/* ─── Calendar empty state ─────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Calendar empty state Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .cal-empty {
   position: absolute;
   inset: 70px 20px 24px 90px;
@@ -909,7 +909,7 @@ input { font-family: inherit; }
   color: var(--ink-soft);
 }
 
-/* ─── Toast ────────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Toast Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .toast {
   position: fixed;
   bottom: 24px;
@@ -930,7 +930,7 @@ input { font-family: inherit; }
   to { transform: translate(-50%, 0); opacity: 1; }
 }
 
-/* ─── Density variants ─────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Density variants Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 [data-density="compact"] .course-header { padding: 8px 12px; }
 [data-density="compact"] .section-row { padding: 8px 10px; }
 [data-density="compact"] .course-name { font-size: 12px; }
@@ -938,7 +938,7 @@ input { font-family: inherit; }
 [data-density="comfy"] .section-row { padding: 14px; }
 [data-density="comfy"] .course-name { font-size: 14px; }
 
-/* ─── Header responsive ────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Header responsive Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 @media (max-width: 900px) {
   .header { padding: 0 16px; gap: 10px; }
   .brand-tag { display: none; }
@@ -955,7 +955,7 @@ input { font-family: inherit; }
   .btn span, .btn-ghost .btn-label { display: none; }
 }
 
-/* ─── Print ────────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Print Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 @media print {
   .header, .sidebar, .twk-panel, .toast { display: none !important; }
   .main { grid-template-columns: 1fr; }
@@ -963,11 +963,11 @@ input { font-family: inherit; }
   body { overflow: visible; }
 }
 
-/* ══════════════════════════════════════════════════════════
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
    AI PANEL
-   ══════════════════════════════════════════════════════════ */
+   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
-/* ─── AI Button ────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ AI Button Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-btn {
   background: linear-gradient(135deg, var(--metu-bordo) 0%, #b03a4a 100%);
   color: #fff !important;
@@ -981,7 +981,7 @@ input { font-family: inherit; }
   box-shadow: 0 4px 12px rgba(122, 31, 43, 0.4);
 }
 
-/* ─── Overlay ──────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Overlay Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-panel-overlay {
   position: fixed;
   inset: 0;
@@ -993,20 +993,20 @@ input { font-family: inherit; }
   padding: 24px;
 }
 
-/* ─── Panel shell ──────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Panel shell Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-panel {
   background: var(--paper);
   border: 1.5px solid var(--line);
   border-radius: var(--r-xl);
   box-shadow: var(--shadow-lg);
-  width: min(820px, 95vw);  /* geniş ama ekrana sığar */
+  width: min(820px, 95vw);  /* geniÃ…Å¸ ama ekrana sÃ„Â±Ã„Å¸ar */
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* ─── Header ───────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Header Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-panel-header {
   display: flex;
   align-items: center;
@@ -1038,7 +1038,7 @@ input { font-family: inherit; }
 }
 .ai-panel-close:hover { background: var(--line); color: var(--ink); }
 
-/* ─── Body — 2 sütunlu grid ────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Body Ã¢â‚¬â€ 2 sÃƒÂ¼tunlu grid Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-panel-body {
   display: flex;
   flex-direction: column;
@@ -1052,7 +1052,7 @@ input { font-family: inherit; }
   padding: 0;
   gap: 0;
   display: grid;
-  grid-template-columns: 1.4fr 1fr;  /* sol sütun daha geniş — ders isimleri tam görünsün */
+  grid-template-columns: 1.4fr 1fr;  /* sol sÃƒÂ¼tun daha geniÃ…Å¸ Ã¢â‚¬â€ ders isimleri tam gÃƒÂ¶rÃƒÂ¼nsÃƒÂ¼n */
   flex: 1;
   overflow: hidden;
 }
@@ -1070,7 +1070,7 @@ input { font-family: inherit; }
   border-right: 1.5px solid var(--line);
 }
 
-/* ─── Field & label ────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Field & label Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-field { display: flex; flex-direction: column; gap: 8px; }
 .ai-label {
   display: flex;
@@ -1083,7 +1083,7 @@ input { font-family: inherit; }
   color: var(--ink-faint);
 }
 
-/* Badge yanında label */
+/* Badge yanÃ„Â±nda label */
 .ai-label-badge {
   margin-left: 8px;
   background: var(--metu-bordo);
@@ -1096,7 +1096,7 @@ input { font-family: inherit; }
   text-transform: none;
 }
 
-/* ─── Course search & list ─────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Course search & list Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-course-search {
   width: 100%;
   border: 1.5px solid var(--line);
@@ -1118,7 +1118,7 @@ input { font-family: inherit; }
   background: #fff;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
-  /* Sol sütun yüksekliğine göre scroll — panel yüksekliğini aşmaz */
+  /* Sol sÃƒÂ¼tun yÃƒÂ¼ksekliÃ„Å¸ine gÃƒÂ¶re scroll Ã¢â‚¬â€ panel yÃƒÂ¼ksekliÃ„Å¸ini aÃ…Å¸maz */
   max-height: 340px;
 }
 
@@ -1154,7 +1154,7 @@ input { font-family: inherit; }
   flex: 1;
   font-size: 12px;
   color: var(--ink);
-  /* Normal wrap — isim kesilmez, gerekirse 2 satır olur */
+  /* Normal wrap Ã¢â‚¬â€ isim kesilmez, gerekirse 2 satÃ„Â±r olur */
   white-space: normal;
   line-height: 1.35;
 }
@@ -1166,7 +1166,7 @@ input { font-family: inherit; }
   flex-shrink: 0;
 }
 
-/* ─── Day pills ────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Day pills Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-day-pills { display: flex; gap: 5px; flex-wrap: wrap; }
 .ai-day-pill {
   border: 1.5px solid var(--line);
@@ -1186,7 +1186,7 @@ input { font-family: inherit; }
   border-color: var(--metu-bordo);
 }
 
-/* ─── Slider ───────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Slider Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-range-row { display: flex; align-items: center; gap: 10px; }
 .ai-slider {
   flex: 1;
@@ -1202,7 +1202,7 @@ input { font-family: inherit; }
   text-align: right;
 }
 
-/* ─── Checkboxes ───────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Checkboxes Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-checks { display: flex; flex-direction: column; gap: 10px; }
 .ai-check {
   display: flex;
@@ -1218,7 +1218,86 @@ input { font-family: inherit; }
   cursor: pointer;
 }
 
-/* ─── Warning box ──────────────────────────────────────── */
+
+.ai-course-prereq {
+  flex-shrink: 0;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #854d0e;
+  background: #fef3c7;
+  border: 1px solid #facc15;
+  border-radius: 999px;
+  padding: 3px 7px;
+}
+
+.ai-prereq-warning {
+  background: #fff7ed;
+  color: #7c2d12;
+  border: 1.5px solid #fed7aa;
+  border-radius: var(--r-md);
+  padding: 12px 14px;
+  font-size: 12.5px;
+}
+
+.ai-prereq-title {
+  font-weight: 800;
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.ai-prereq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ai-prereq-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #fed7aa99;
+  padding-top: 9px;
+}
+
+.ai-prereq-item:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.ai-prereq-text {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.ai-prereq-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ai-prereq-actions button {
+  border: 0;
+  border-radius: 10px;
+  padding: 7px 10px;
+  font-weight: 800;
+  font-size: 11.5px;
+  cursor: pointer;
+}
+
+.ai-prereq-yes {
+  background: var(--metu-bordo);
+  color: white;
+}
+
+.ai-prereq-remove {
+  background: white;
+  color: #7c2d12;
+  border: 1px solid #fed7aa !important;
+}
+
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Warning box Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-warning {
   background: #fef9c3;
   color: #854d0e;
@@ -1254,7 +1333,7 @@ input { font-family: inherit; }
   margin-top: 2px;
 }
 
-/* ─── Error ────────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Error Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-error {
   background: #fff0f0;
   border: 1.5px solid #fcc;
@@ -1264,7 +1343,7 @@ input { font-family: inherit; }
   color: var(--danger);
 }
 
-/* ─── Footer ───────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Footer Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-panel-footer {
   display: flex;
   gap: 10px;
@@ -1306,7 +1385,7 @@ input { font-family: inherit; }
 }
 .ai-generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* ─── Spinner ──────────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Spinner Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .ai-spinner {
   display: inline-block;
   width: 14px; height: 14px;
@@ -1317,17 +1396,17 @@ input { font-family: inherit; }
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* ══════════════════════════════════════════════════════════
-   MOBİL TAB SİSTEMİ
-   desktop-main → masaüstünde görünür
-   mobile-main  → mobilde görünür (tab bar + panel)
-   ══════════════════════════════════════════════════════════ */
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   MOBÃ„Â°L TAB SÃ„Â°STEMÃ„Â°
+   desktop-main Ã¢â€ â€™ masaÃƒÂ¼stÃƒÂ¼nde gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r
+   mobile-main  Ã¢â€ â€™ mobilde gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r (tab bar + panel)
+   Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
-/* Masaüstünde kısa label gizli, uzun görünür */
+/* MasaÃƒÂ¼stÃƒÂ¼nde kÃ„Â±sa label gizli, uzun gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r */
 .ai-btn-label-short { display: none; }
 .ai-btn-label-full { display: inline; }
 
-/* Desktop: desktop-main görünür, mobile-main gizli */
+/* Desktop: desktop-main gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r, mobile-main gizli */
 .desktop-main {
   display: grid;
   grid-template-columns: 380px 1fr;
@@ -1339,14 +1418,14 @@ input { font-family: inherit; }
 }
 .mobile-main { display: none; }
 
-/* ─── Mobil tab bar ────────────────────────────────────── */
+/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Mobil tab bar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
 .mobile-tab-bar {
   display: none;
 }
 
 @media (max-width: 768px) {
 
-  /* Desktop layout gizle, mobil layout göster */
+  /* Desktop layout gizle, mobil layout gÃƒÂ¶ster */
   .desktop-main { display: none !important; }
   .mobile-main {
     display: flex;
@@ -1356,7 +1435,7 @@ input { font-family: inherit; }
     position: relative;
   }
 
-  /* ─ App / body ─ */
+  /* Ã¢â€â‚¬ App / body Ã¢â€â‚¬ */
   body { overflow: hidden; }
   .app {
     height: 100dvh;
@@ -1365,7 +1444,7 @@ input { font-family: inherit; }
     overflow: hidden;
   }
 
-  /* ─ Header — tek satır, minimalist ─ */
+  /* Ã¢â€â‚¬ Header Ã¢â‚¬â€ tek satÃ„Â±r, minimalist Ã¢â€â‚¬ */
   :root { --header-h: auto; }
   .header {
     height: auto;
@@ -1383,17 +1462,17 @@ input { font-family: inherit; }
   .logo img { width: 28px; height: 26px; }
   .brand { gap: 8px; flex-shrink: 0; }
 
-  /* Stats mobilde tamamen gizle — tab bar'da gösteriyoruz */
+  /* Stats mobilde tamamen gizle Ã¢â‚¬â€ tab bar'da gÃƒÂ¶steriyoruz */
   .header-stats { display: none; }
 
-  /* Actions sağa — sıkıştır */
+  /* Actions saÃ„Å¸a Ã¢â‚¬â€ sÃ„Â±kÃ„Â±Ã…Å¸tÃ„Â±r */
   .header-actions { margin-left: auto; gap: 5px; align-items: center; flex-shrink: 0; }
 
   /* Mobilde gizlenecekler */
   .hide-mobile { display: none !important; }
   .hide-mobile-inline { display: none !important; }
 
-  /* AI butonu — kısa yazı */
+  /* AI butonu Ã¢â‚¬â€ kÃ„Â±sa yazÃ„Â± */
   .ai-btn {
     padding: 7px 11px;
     font-size: 12px;
@@ -1403,11 +1482,11 @@ input { font-family: inherit; }
   .ai-btn-label-full { display: none !important; }
   .ai-btn-label-short { display: inline !important; }
 
-  /* Dil seçici küçük */
+  /* Dil seÃƒÂ§ici kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k */
   .lang-switch { padding: 2px; }
   .lang-switch button { padding: 5px 7px; font-size: 11px; }
 
-  /* Temizle — sadece ikon */
+  /* Temizle Ã¢â‚¬â€ sadece ikon */
   .btn-danger {
     padding: 7px 8px;
     border-color: transparent;
@@ -1416,7 +1495,7 @@ input { font-family: inherit; }
   }
   .btn-danger svg { width: 15px; height: 15px; }
 
-  /* ─ Panel sistemi ─ */
+  /* Ã¢â€â‚¬ Panel sistemi Ã¢â€â‚¬ */
   .mobile-panel {
     display: none;
     flex: 1;
@@ -1428,7 +1507,7 @@ input { font-family: inherit; }
     flex-direction: column;
   }
 
-  /* ─ Sidebar tam yükseklikte, scroll ─ */
+  /* Ã¢â€â‚¬ Sidebar tam yÃƒÂ¼kseklikte, scroll Ã¢â€â‚¬ */
   .sidebar {
     border-right: 0;
     border-bottom: 0;
@@ -1437,14 +1516,14 @@ input { font-family: inherit; }
     overflow: hidden;
   }
   .course-list {
-    padding: 6px 10px 90px; /* tab bar boşluğu */
+    padding: 6px 10px 90px; /* tab bar boÃ…Å¸luÃ„Å¸u */
     gap: 5px;
   }
   .course-header { padding: 10px 12px; min-height: 52px; }
   .course-name { font-size: 12px !important; }
   .course-code { font-size: 11px !important; }
 
-  /* ─ Calendar tam yükseklikte — ekrana sığsın ─ */
+  /* Ã¢â€â‚¬ Calendar tam yÃƒÂ¼kseklikte Ã¢â‚¬â€ ekrana sÃ„Â±Ã„Å¸sÃ„Â±n Ã¢â€â‚¬ */
   .calendar-wrap {
     flex: 1;
     padding: 8px 6px 90px;
@@ -1458,7 +1537,7 @@ input { font-family: inherit; }
     border-radius: var(--r-md);
   }
 
-  /* Gün başlıkları küçük */
+  /* GÃƒÂ¼n baÃ…Å¸lÃ„Â±klarÃ„Â± kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k */
   .cal-corner { min-width: unset; }
   .cal-dayhead { padding: 4px 2px; }
   .dayhead-name { font-size: 11px; }
@@ -1467,7 +1546,7 @@ input { font-family: inherit; }
   /* Saat etiketi dar */
   .cal-timelabel { font-size: 9px; padding-top: 3px; justify-content: center; }
 
-  /* Bloklar küçük */
+  /* Bloklar kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k */
   .cal-block {
     left: 2px;
     right: 2px;
@@ -1484,7 +1563,7 @@ input { font-family: inherit; }
   .cal-block-sec { font-size: 8px; }
   .cal-block-time-inline { font-size: 8px; }
 
-  /* ─ Alt tab bar ─ */
+  /* Ã¢â€â‚¬ Alt tab bar Ã¢â€â‚¬ */
   .mobile-tab-bar {
     display: flex;
     flex-direction: column;
@@ -1498,7 +1577,7 @@ input { font-family: inherit; }
     box-shadow: 0 -4px 16px rgba(26, 20, 16, 0.08);
   }
 
-  /* Stats şeridi */
+  /* Stats Ã…Å¸eridi */
   .mobile-tab-stats {
     display: flex;
     align-items: center;
@@ -1512,7 +1591,7 @@ input { font-family: inherit; }
   .mobile-tab-stats-dot { color: var(--line); }
   .mobile-tab-stats-conflict { color: var(--danger); }
 
-  /* Tab butonları */
+  /* Tab butonlarÃ„Â± */
   .mobile-tab-buttons {
     display: flex;
     height: 56px;
@@ -1544,9 +1623,9 @@ input { font-family: inherit; }
     border-radius: 0 0 3px 3px;
   }
 
-  /* Eski .mobile-tab-badge ve .mobile-tab-count artık kullanılmıyor */
+  /* Eski .mobile-tab-badge ve .mobile-tab-count artÃ„Â±k kullanÃ„Â±lmÃ„Â±yor */
 
-  /* ─ AI Panel — bottom sheet ─ */
+  /* Ã¢â€â‚¬ AI Panel Ã¢â‚¬â€ bottom sheet Ã¢â€â‚¬ */
   .ai-panel-overlay {
     padding: 0;
     align-items: flex-end;
@@ -1574,4 +1653,1100 @@ input { font-family: inherit; }
   .ai-panel-footer { padding: 12px 18px 20px; gap: 8px; }
   .ai-cancel-btn { padding: 13px; font-size: 14px; }
   .ai-generate-btn { padding: 13px; font-size: 14px; }
+}
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   CURRICULUM BUTTON Ã¢â‚¬â€ Header
+Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+
+.btn-curriculum {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  height: 36px;
+  border-radius: var(--r-md);
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  white-space: nowrap;
+}
+.btn-curriculum:hover {
+  border-color: var(--metu-bordo);
+  color: var(--metu-bordo);
+  background: var(--metu-bordo-soft);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   CURRICULUM FILTER BANNER Ã¢â‚¬â€ Sidebar
+Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+
+.curriculum-filter-banner {
+  margin: 0 12px 8px;
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+
+.curriculum-filter-banner--empty {
+  padding: 0;
+}
+
+.curriculum-load-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: var(--r-sm);
+  border: 1.5px dashed var(--line);
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.curriculum-load-btn:hover {
+  border-color: var(--metu-bordo);
+  color: var(--metu-bordo);
+  background: var(--metu-bordo-soft);
+}
+
+.curriculum-filter-banner:not(.curriculum-filter-banner--empty) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  background: var(--metu-bordo-soft);
+  border: 1.5px solid #f0c9c9;
+}
+
+.curriculum-filter-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+.curriculum-filter-icon { font-size: 14px; flex-shrink: 0; }
+.curriculum-filter-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--metu-bordo);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.curriculum-filter-count {
+  font-size: 11px;
+  color: var(--ink-faint);
+  flex-shrink: 0;
+}
+.curriculum-filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.curriculum-filter-change {
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--metu-bordo);
+  background: transparent;
+  color: var(--metu-bordo);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.curriculum-filter-change:hover { background: var(--metu-bordo); color: #fff; }
+.curriculum-filter-clear {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: #f0c9c9;
+  color: var(--metu-bordo);
+  font-size: 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.curriculum-filter-clear:hover { background: var(--metu-bordo); color: #fff; }
+
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   CURRICULUM MODAL
+Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+
+.curriculum-modal .ai-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 24px;
+  overflow-y: auto;
+  max-height: 65vh;
+}
+
+.curriculum-dept-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.curriculum-dept-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+.curriculum-dept-btn:hover {
+  border-color: var(--metu-bordo);
+  background: var(--metu-bordo-soft);
+}
+.curriculum-dept-btn.active {
+  border-color: var(--metu-bordo);
+  background: var(--metu-bordo-soft);
+}
+.curriculum-dept-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.curriculum-dept-badge {
+  font-size: 11px;
+  color: var(--ink-faint);
+  background: var(--paper-deep);
+  padding: 2px 7px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.curriculum-dept-btn.active .curriculum-dept-badge {
+  background: #f0c9c9;
+  color: var(--metu-bordo);
+}
+
+.curriculum-grid { display: grid; gap: 8px; }
+.curriculum-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.curriculum-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+.curriculum-chip {
+  padding: 10px 8px;
+  border-radius: var(--r-sm);
+  border: 1.5px solid var(--line);
+  background: #fff;
+  color: var(--ink-soft);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s, color 0.15s;
+}
+.curriculum-chip:hover:not(.disabled) {
+  border-color: var(--metu-bordo);
+  background: var(--metu-bordo-soft);
+  color: var(--metu-bordo);
+}
+.curriculum-chip.active {
+  border-color: var(--metu-bordo);
+  background: var(--metu-bordo);
+  color: #fff;
+}
+.curriculum-chip.disabled { opacity: 0.4; cursor: not-allowed; }
+
+.curriculum-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  padding: 6px;
+  background: var(--paper);
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+.curriculum-preview-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 6px;
+  border-radius: 4px;
+  background: #fff;
+}
+.curriculum-preview-row.curriculum-preview-missing {
+  opacity: 0.5;
+  background: #fff8f8;
+}
+.curriculum-preview-code {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--metu-bordo);
+  min-width: 72px;
+  flex-shrink: 0;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+.curriculum-preview-name {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.curriculum-preview-warn { font-size: 12px; color: #f59e0b; flex-shrink: 0; }
+.curriculum-missing-note {
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: #854d0e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--r-sm);
+  padding: 6px 10px;
+}
+
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   AI PANEL Ã¢â‚¬â€ MÃƒÂ¼fredat filtresi eklentisi
+Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+
+.ai-filter-mode-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 10px;
+  background: var(--paper-deep);
+  border-radius: var(--r-sm);
+  padding: 3px;
+}
+.ai-filter-mode-tab {
+  flex: 1;
+  padding: 6px 8px;
+  border: none;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--ink-faint);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.ai-filter-mode-tab.active {
+  background: #fff;
+  color: var(--metu-bordo);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+.ai-curriculum-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: var(--metu-bordo-soft);
+  border: 1.5px solid #f0c9c9;
+  border-radius: var(--r-sm);
+  margin-bottom: 8px;
+}
+.ai-curriculum-select {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-sm);
+  background: #fff;
+  color: var(--ink);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  font-family: inherit;
+}
+.ai-curriculum-select:focus { border-color: var(--metu-bordo); }
+.ai-curriculum-row { display: flex; gap: 6px; }
+.ai-curriculum-select-half { width: 50%; }
+.ai-curriculum-load-btn {
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  border: none;
+  background: var(--metu-bordo);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+.ai-curriculum-load-btn:hover { opacity: 0.88; }
+
+/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
+   MOBÃ„Â°L Ã¢â‚¬â€ Curriculum uyumlarÃ„Â±
+Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+@media (max-width: 768px) {
+  .btn-curriculum { padding: 7px 10px; font-size: 12px; }
+  .btn-curriculum .btn-label { display: none; }
+  .curriculum-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .curriculum-modal .ai-panel-body { max-height: 75vh; }
+  .ai-curriculum-filter { padding: 8px; }
+}
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   CHATBOT â€” Ask Me Paneli
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
+/* Ask Me butonu â€” bordo'dan biraz farklÄ± ton */
+.ask-me-btn {
+  background: linear-gradient(135deg, var(--metu-bordo-deep) 0%, #9b2c3c 100%) !important;
+  border-color: transparent !important;
+}
+.ask-me-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #9b2c3c 0%, #b83347 100%) !important;
+}
+
+/* Chatbot paneli â€” ai-panel'den miras, sadece override'lar */
+.chatbot-panel {
+  display: flex;
+  flex-direction: column;
+  max-width: 520px !important;
+  height: min(620px, 88vh) !important;
+}
+
+/* Ä°lerleme gÃ¶stergesi */
+.chatbot-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 10px 18px 8px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--paper-deep);
+}
+
+.chatbot-progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  position: relative;
+  flex: 1;
+}
+
+.chatbot-progress-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: calc(50% + 12px);
+  right: calc(-50% + 12px);
+  height: 2px;
+  background: var(--line);
+  z-index: 0;
+}
+
+.chatbot-progress-step.done:not(:last-child)::after {
+  background: var(--metu-bordo);
+}
+
+.chatbot-progress-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--ink-faint);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: background 0.2s, color 0.2s;
+}
+
+.chatbot-progress-step.done .chatbot-progress-dot {
+  background: var(--metu-bordo);
+  color: #fff;
+}
+
+.chatbot-progress-step.active .chatbot-progress-dot {
+  background: var(--metu-bordo);
+  color: #fff;
+  box-shadow: 0 0 0 3px var(--metu-bordo-soft);
+}
+
+.chatbot-progress-step span {
+  font-size: 10px;
+  color: var(--ink-faint);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.chatbot-progress-step.done span,
+.chatbot-progress-step.active span {
+  color: var(--metu-bordo);
+  font-weight: 600;
+}
+
+/* HÄ±zlÄ± yanÄ±t butonlarÄ± */
+.chatbot-quick-replies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 2px 0 4px 38px;
+  animation: chatBubbleIn 0.2s ease;
+}
+
+.chatbot-quick-btn {
+  background: #fff;
+  border: 1.5px solid var(--metu-bordo);
+  color: var(--metu-bordo);
+  border-radius: 20px;
+  padding: 5px 13px;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.chatbot-quick-btn:hover {
+  background: var(--metu-bordo);
+  color: #fff;
+}
+
+/* Saat bilgisi schedule satÄ±rÄ±nda */
+.chatbot-schedule-time {
+  font-size: 11px;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+/* Mesaj akÄ±ÅŸÄ± */
+.chatbot-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+/* Baloncuklar */
+.chatbot-bubble {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  animation: chatBubbleIn 0.2s ease;
+}
+
+@keyframes chatBubbleIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.chatbot-bubble-user {
+  flex-direction: row-reverse;
+}
+
+.chatbot-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--metu-bordo);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.chatbot-text {
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  border-radius: 14px 14px 14px 4px;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: calc(100% - 44px);
+}
+
+.chatbot-bubble-user .chatbot-text {
+  background: var(--metu-bordo);
+  border-color: var(--metu-bordo);
+  color: #fff;
+  border-radius: 14px 14px 4px 14px;
+  text-align: right;
+}
+
+/* Typing indicator */
+.chatbot-typing {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 12px 14px;
+  background: var(--paper-deep);
+  border: 1px solid var(--line);
+  border-radius: 14px 14px 14px 4px;
+}
+
+.chatbot-typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ink-faint);
+  animation: typingDot 1.2s infinite;
+}
+.chatbot-typing span:nth-child(2) { animation-delay: 0.2s; }
+.chatbot-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Program sonuÃ§ kartÄ± */
+.chatbot-schedule-card {
+  background: var(--metu-bordo-soft);
+  border: 1.5px solid var(--metu-bordo);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+  animation: chatBubbleIn 0.25s ease;
+}
+
+.chatbot-schedule-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--metu-bordo-deep);
+  margin-bottom: 10px;
+}
+
+.chatbot-schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.chatbot-schedule-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.chatbot-schedule-code {
+  font-weight: 700;
+  color: var(--metu-bordo-deep);
+  min-width: 80px;
+}
+
+.chatbot-schedule-sec {
+  font-size: 12px;
+  background: var(--metu-bordo);
+  color: #fff;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.chatbot-schedule-instructor {
+  font-size: 12px;
+  color: var(--ink-soft);
+  flex: 1;
+}
+
+.chatbot-schedule-warn {
+  font-size: 12px;
+  color: #b8540a;
+  margin-top: 8px;
+  padding: 6px 8px;
+  background: #fff8ed;
+  border-radius: var(--r-sm);
+}
+
+/* Input satÄ±rÄ± */
+.chatbot-input-row {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--line-soft);
+  background: var(--paper);
+}
+
+.chatbot-input {
+  flex: 1;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-md);
+  padding: 10px 14px;
+  font-size: 14px;
+  background: var(--paper-deep);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.chatbot-input:focus {
+  border-color: var(--metu-bordo);
+  background: #fff;
+}
+
+.chatbot-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  background: var(--metu-bordo);
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.1s;
+  flex-shrink: 0;
+}
+.chatbot-send-btn:hover:not(:disabled) {
+  background: var(--metu-bordo-deep);
+  transform: scale(1.05);
+}
+.chatbot-send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Mobil uyumu */
+@media (max-width: 768px) {
+  .chatbot-panel {
+    height: 90vh !important;
+    max-width: 100% !important;
+  }
+}
+
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   ASK ME FLOATING BUBBLE
+   SaÄŸ alt kÃ¶ÅŸede chatbot yÃ¼z ikonu
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+.ask-me-floating {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 120;
+  width: 66px;
+  height: 66px;
+  padding: 0;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  background: var(--metu-bordo);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 28px rgba(122, 31, 43, 0.28);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, background 0.16s ease;
+}
+
+.ask-me-floating:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 16px 34px rgba(122, 31, 43, 0.38);
+  background: var(--metu-bordo-deep);
+}
+
+.ask-me-floating:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.ask-me-floating-face {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.ask-me-floating-eye {
+  position: absolute;
+  top: 12px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.ask-me-floating-eye.left {
+  left: 8px;
+}
+
+.ask-me-floating-eye.right {
+  right: 8px;
+}
+
+.ask-me-floating-smile {
+  position: absolute;
+  left: 50%;
+  top: 20px;
+  width: 21px;
+  height: 11px;
+  border-bottom: 4px solid #fff;
+  border-radius: 0 0 999px 999px;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 768px) {
+  .ask-me-floating {
+    right: 18px;
+    bottom: 82px;
+    width: 60px;
+    height: 60px;
+    border-width: 5px;
+  }
+
+  .ask-me-floating-face {
+    width: 34px;
+    height: 34px;
+  }
+
+  .ask-me-floating-eye {
+    top: 11px;
+    width: 6px;
+    height: 6px;
+  }
+
+  .ask-me-floating-eye.left {
+    left: 7px;
+  }
+
+  .ask-me-floating-eye.right {
+    right: 7px;
+  }
+
+  .ask-me-floating-smile {
+    top: 19px;
+    width: 19px;
+    height: 10px;
+    border-bottom-width: 3px;
+  }
+}
+
+/* ============================================================
+   Kullanıcı avatar + çıkış menüsü
+   Bu bloğu src/styles.css dosyasının EN SONUNA ekleyin
+   ============================================================ */
+
+   .user-menu-wrap {
+    position: relative;
+  }
+  
+  .user-avatar-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--metu-bordo);
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.02em;
+    flex-shrink: 0;
+    transition: background 0.15s, transform 0.1s;
+  }
+  
+  .user-avatar-btn:hover {
+    background: var(--metu-bordo-deep);
+    transform: scale(1.05);
+  }
+  
+  .user-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--shadow-lg);
+    min-width: 180px;
+    z-index: 100;
+    overflow: hidden;
+    animation: dropdown-in 0.12s ease;
+  }
+  
+  @keyframes dropdown-in {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  
+  .user-dropdown-info {
+    padding: 12px 14px 10px;
+  }
+  
+  .user-dropdown-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .user-dropdown-username {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-top: 2px;
+  }
+  
+  .user-dropdown-divider {
+    height: 1px;
+    background: var(--line);
+    margin: 0;
+  }
+  
+  .user-dropdown-logout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--danger);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.12s;
+  }
+  
+  .user-dropdown-logout:hover {
+    background: #fdf0f0;
+  }
+
+  /* ============================================================
+   AIPanel UX — styles.css SONUNA ekle
+   ============================================================ */
+
+/* ── Kampüs satırı — sadece kutucuklar + X/5 ─────────────── */
+.ai-campus-row {
+  display: flex; align-items: center; gap: 4px; margin-top: 6px;
+}
+.ai-campus-pip {
+  flex: 1; text-align: center; padding: 5px 0; border-radius: 6px;
+  font-size: 10.5px; font-weight: 700;
+  background: var(--metu-bordo-soft); border: 1.5px solid var(--metu-bordo);
+  color: var(--metu-bordo); transition: all 0.12s;
+}
+.ai-campus-pip.off {
+  background: var(--paper-deep); border-color: var(--line);
+  color: var(--ink-faint); text-decoration: line-through; opacity: 0.4;
+}
+.ai-campus-count {
+  margin-left: 8px; font-size: 12px; color: var(--ink-soft);
+  font-weight: 700; white-space: nowrap;
+}
+
+/* ── Saat butonları ────────────────────────────────────────── */
+.ai-hours-track { display: flex; gap: 3px; }
+.ai-hours-step {
+  flex: 1; border: 1.5px solid var(--line); background: #fff;
+  border-radius: 6px; padding: 7px 0; font-size: 12px; font-weight: 600;
+  color: var(--ink-soft); cursor: pointer; text-align: center;
+  transition: all 0.1s; font-family: inherit;
+}
+.ai-hours-step:hover { border-color: var(--metu-bordo); color: var(--metu-bordo); }
+.ai-hours-step.past { background: var(--metu-bordo-soft); border-color: var(--metu-bordo); color: var(--metu-bordo); opacity: 0.45; }
+.ai-hours-step.active { background: var(--metu-bordo); border-color: var(--metu-bordo); color: #fff; opacity: 1; }
+
+/* ── Saat aralığı ──────────────────────────────────────────── */
+.ai-time-range-box {
+  display: grid; grid-template-columns: 1fr 1px 1fr; align-items: center;
+  gap: 14px; background: #fff; border: 1.5px solid var(--line);
+  border-radius: var(--r-md); padding: 12px 14px;
+}
+.ai-time-range-sep { width: 1px; height: 36px; background: var(--line); }
+.ai-time-slot { display: flex; flex-direction: column; gap: 5px; }
+.ai-time-slot-label {
+  font-size: 10.5px; font-weight: 700; color: var(--ink-faint);
+  text-transform: uppercase; letter-spacing: 0.05em;
+}
+.ai-select {
+  border: 1.5px solid var(--line); border-radius: 8px; padding: 6px 8px;
+  font-size: 13px; font-family: inherit; color: var(--ink);
+  background: var(--paper); outline: none; cursor: pointer; width: 100%;
+  transition: border-color 0.15s;
+}
+.ai-select:focus { border-color: var(--metu-bordo); }
+
+/* ── Kredi ─────────────────────────────────────────────────── */
+.ai-credit-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.ai-credit-chip {
+  border: 1.5px solid var(--line); background: #fff; border-radius: 999px;
+  padding: 4px 13px; font-size: 12px; font-weight: 700; color: var(--ink-soft);
+  cursor: pointer; transition: all 0.12s; font-family: inherit;
+}
+.ai-credit-chip:hover { border-color: var(--metu-bordo); color: var(--metu-bordo); }
+.ai-credit-chip.active { background: var(--metu-bordo); border-color: var(--metu-bordo); color: #fff; }
+.ai-credit-input {
+  width: 62px; border: 1.5px solid var(--line); border-radius: var(--r-md);
+  padding: 5px 8px; font-size: 12px; font-family: inherit;
+  color: var(--ink); outline: none; text-align: center;
+}
+.ai-credit-input:focus { border-color: var(--metu-bordo); }
+.ai-credit-warn {
+  font-size: 12px; color: var(--danger); background: #fff0f0;
+  border: 1px solid #fcc; border-radius: var(--r-sm); padding: 6px 10px;
+}
+.ai-badge-warn { background: var(--danger) !important; }
+
+
+.ai-instructor-groups { display: flex; flex-direction: column; gap: 5px; }
+.ai-instructor-accordion {
+  border: 1.5px solid var(--line); border-radius: var(--r-md);
+  background: #fff; overflow: hidden; transition: border-color 0.12s;
+}
+.ai-instructor-accordion[open] { border-color: var(--metu-bordo); }
+
+.ai-instructor-summary {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 12px; cursor: pointer; list-style: none; user-select: none;
+  gap: 8px; transition: background 0.12s;
+}
+.ai-instructor-summary::-webkit-details-marker { display: none; }
+.ai-instructor-summary:hover { background: var(--paper-deep); }
+.ai-instructor-accordion[open] .ai-instructor-summary {
+  background: var(--metu-bordo-soft); border-bottom: 1px solid var(--line);
+}
+
+.ai-instructor-summary-left {
+  display: flex; align-items: center; gap: 8px; overflow: hidden; flex: 1;
+}
+.ai-instructor-course-code {
+  font-size: 11px; font-weight: 700; color: var(--metu-bordo);
+  font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+}
+.ai-instructor-course-name {
+  font-size: 12.5px; font-weight: 600; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.ai-instructor-summary-right {
+  display: flex; align-items: center; gap: 6px; flex-shrink: 0;
+}
+.ai-accordion-arrow {
+  color: var(--ink-faint); transition: transform 0.2s;
+}
+.ai-instructor-accordion[open] .ai-accordion-arrow { transform: rotate(180deg); }
+.ai-instructor-badge {
+  font-size: 10.5px; font-weight: 700; color: #fff;
+  background: var(--metu-bordo); border-radius: 999px; padding: 2px 8px;
+}
+.ai-instructor-hint { font-size: 11.5px; color: var(--ink-faint); }
+
+.ai-instructor-list { display: flex; flex-direction: column; }
+.ai-instructor-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 12px; cursor: pointer; font-size: 13px; font-weight: 500;
+  color: var(--ink); transition: background 0.1s;
+  border-bottom: 1px solid var(--line-soft);
+}
+.ai-instructor-item:last-child { border-bottom: none; }
+.ai-instructor-item:hover { background: var(--paper-deep); }
+.ai-instructor-item.selected { background: var(--metu-bordo-soft); font-weight: 600; }
+.ai-instructor-item input[type="checkbox"] {
+  accent-color: var(--metu-bordo); width: 14px; height: 14px; flex-shrink: 0; cursor: pointer;
+}
+
+
+.ai-style-chips { display: flex; gap: 6px; }
+.ai-style-chip {
+  flex: 1; border: 1.5px solid var(--line); background: #fff;
+  border-radius: var(--r-md); padding: 9px 6px; cursor: pointer;
+  font-family: inherit; font-size: 13px; font-weight: 600; color: var(--ink-soft);
+  text-align: center; transition: all 0.12s;
+}
+.ai-style-chip:hover { border-color: var(--metu-bordo); color: var(--metu-bordo); }
+.ai-style-chip.active { background: var(--metu-bordo-soft); border-color: var(--metu-bordo); color: var(--metu-bordo); font-weight: 700; }
+
+.ai-preview {
+  display: flex; flex-direction: column; flex: 1; overflow: hidden;
+}
+.ai-preview-header {
+  padding: 14px 24px; border-bottom: 1.5px solid var(--line); flex-shrink: 0;
+}
+.ai-preview-stats {
+  display: flex; align-items: center; gap: 0;
+  background: var(--paper-deep); border-radius: var(--r-md);
+  padding: 10px 20px; width: fit-content; gap: 20px;
+}
+.ai-preview-stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ai-preview-stat-num { font-size: 20px; font-weight: 800; color: var(--metu-bordo); line-height: 1; }
+.ai-preview-stat-lbl { font-size: 11px; color: var(--ink-faint); font-weight: 500; }
+.ai-preview-stat-sep { width: 1px; height: 32px; background: var(--line); }
+
+.ai-preview-body {
+  flex: 1; overflow-y: auto; padding: 16px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  scrollbar-width: thin; scrollbar-color: var(--line) transparent;
+}
+.ai-preview-day {}
+.ai-preview-day-label {
+  font-size: 11.5px; font-weight: 700; color: var(--ink-faint);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.ai-preview-day-items { display: flex; flex-direction: column; gap: 5px; }
+.ai-preview-card {
+  display: grid; grid-template-columns: 80px 1fr;
+  grid-template-rows: auto auto;
+  gap: 0 12px;
+  background: #fff; border: 1.5px solid var(--line);
+  border-radius: var(--r-md); padding: 10px 14px;
+  transition: border-color 0.12s;
+}
+.ai-preview-card:hover { border-color: var(--metu-bordo); }
+.ai-preview-card-time {
+  grid-row: 1 / 3; align-self: center;
+  font-size: 12px; font-weight: 700; color: var(--metu-bordo);
+  font-family: 'JetBrains Mono', monospace;
+  white-space: nowrap;
+}
+.ai-preview-card-info {
+  display: flex; align-items: baseline; gap: 8px;
+}
+.ai-preview-card-code {
+  font-size: 11px; font-weight: 700; color: var(--ink-faint);
+  font-family: 'JetBrains Mono', monospace; flex-shrink: 0;
+}
+.ai-preview-card-name {
+  font-size: 13px; font-weight: 600; color: var(--ink);
+}
+.ai-preview-card-instructor {
+  font-size: 12px; color: var(--ink-soft);
+}
+
+.ai-inline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ai-mini-label { display: flex; flex-direction: column; gap: 4px; font-size: 11px; font-weight: 600; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+.ai-muted-note { font-size: 12px; color: var(--ink-faint); font-style: italic; }
+.ai-col-right { background: var(--paper); }
+
+.ai-campus-indicator { display: none !important; }
+.ai-campus-day { display: none !important; }
+
+.ai-instructor-selects { display: flex; flex-direction: column; gap: 8px; }
+.ai-instructor-select-row { display: flex; flex-direction: column; gap: 5px; }
+.ai-instructor-select-label {
+  display: flex; align-items: center; gap: 7px;
+}
+.ai-instructor-select-name {
+  font-size: 12px; font-weight: 600; color: var(--ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }

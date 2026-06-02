@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN, sidebarOpen, onToggleSidebar, onOpenAI }) {
+export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN, sidebarOpen, onToggleSidebar, onOpenAI, onOpenAutoSchedule, user, onLogout }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  // Menü dışına tıklanınca kapat
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handler = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [menuOpen]);
+
+  // Kullanıcı baş harfleri (avatar için)
+  const initials = user?.name
+    ? user.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()
+    : (user?.username?.[0] || "?").toUpperCase();
+
   return (
     <header className="header">
 
@@ -30,7 +50,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
         </div>
       </div>
 
-      {/* Stats — masaüstünde ortada, mobilde sağda küçük */}
+      {/* Stats */}
       <div className="header-stats">
         <div className="stat">
           <div className="stat-num">{selected.length}</div>
@@ -46,14 +66,14 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
       {/* Aksiyonlar */}
       <div className="header-actions">
 
-        {/* Otomatik Program — her zaman görünür */}
-        <button className="btn ai-btn" onClick={onOpenAI}>
+        {/* Otomatik Program */}
+        <button className="btn ai-btn" onClick={onOpenAutoSchedule || onOpenAI}>
           <span>✦</span>
           <span className="btn-label ai-btn-label-full">{lang === "tr" ? "Otomatik Program" : "Auto Schedule"}</span>
           <span className="btn-label ai-btn-label-short">{lang === "tr" ? "Program" : "Schedule"}</span>
         </button>
 
-        {/* Dil seçici — her zaman görünür */}
+        {/* Dil seçici */}
         <div className="lang-switch" role="tablist">
           <button className={lang === "tr" ? "active" : ""} onClick={() => setLang("tr")} role="tab">TR</button>
           <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")} role="tab">EN</button>
@@ -77,13 +97,48 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <span className="btn-label">{tr.exportPNG}</span>
         </button>
 
-        {/* Temizle — mobilde sadece ikon */}
+        {/* Temizle */}
         <button className="btn btn-danger" onClick={onClear} disabled={selected.length === 0}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
             <path d="M3 4h10M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
           <span className="btn-label hide-mobile-inline">{tr.clearAll}</span>
         </button>
+
+        {/* Kullanıcı avatar + çıkış menüsü */}
+        {user && (
+          <div className="user-menu-wrap" ref={menuRef}>
+            <button
+              className="user-avatar-btn"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label="Kullanıcı menüsü"
+              aria-expanded={menuOpen}
+            >
+              {initials}
+            </button>
+
+            {menuOpen && (
+              <div className="user-dropdown" role="menu">
+                <div className="user-dropdown-info">
+                  <div className="user-dropdown-name">{user.name || user.username}</div>
+                  <div className="user-dropdown-username">@{user.username}</div>
+                </div>
+                <div className="user-dropdown-divider" />
+                <button
+                  className="user-dropdown-logout"
+                  role="menuitem"
+                  onClick={() => { setMenuOpen(false); onLogout(); }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M6 3H3a1 1 0 00-1 1v8a1 1 0 001 1h3M10 11l3-3-3-3M13 8H6"
+                      stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  {lang === "tr" ? "Çıkış Yap" : "Log Out"}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
 
       </div>
     </header>
