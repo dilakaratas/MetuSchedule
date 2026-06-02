@@ -1,0 +1,40 @@
+name: Auto Update METU Data
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # Her gece 01:00 UTC (Türkiye 04:00)
+  workflow_dispatch:       # Manuel tetikleme
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Python kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Bağımlılıkları yükle
+        run: pip install requests beautifulsoup4 lxml
+
+      - name: Scraper'ı çalıştır
+        run: python scraper/metu_catalog_scrape.py
+
+      - name: Değişiklik var mı kontrol et
+        id: check
+        run: |
+          git diff --quiet public/metu_courses_clean.json && echo "changes=false" >> $GITHUB_OUTPUT || echo "changes=true" >> $GITHUB_OUTPUT
+
+      - name: Commit ve push
+        if: steps.check.outputs.changes == 'true'
+        run: |
+          git config user.email "bot@github.com"
+          git config user.name "GitHub Bot"
+          git add public/metu_courses_clean.json
+          git commit -m "chore: ODTÜ ders verisi güncellendi"
+          git push
