@@ -314,21 +314,6 @@ function MainApp({ user, onLogout }) {
         </nav>
       </div>
 
-      {!chatBotOpen && (
-        <button
-          type="button"
-          className="ask-me-floating"
-          onClick={() => setChatBotOpen(true)}
-          aria-label={lang === "tr" ? "Ask Me asistanını aç" : "Open Ask Me assistant"}
-        >
-          <span className="ask-me-floating-face" aria-hidden="true">
-            <span className="ask-me-floating-eye left" />
-            <span className="ask-me-floating-eye right" />
-            <span className="ask-me-floating-smile" />
-          </span>
-        </button>
-      )}
-
       {toastMsg && <div className="toast">{toastMsg}</div>}
 
       {aiPanelOpen && (
