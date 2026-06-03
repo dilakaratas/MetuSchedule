@@ -8,17 +8,43 @@ import Login from "./components/Login.jsx";
 import { loadMetuCourses } from "./data.js";
 import { I18N } from "./i18n.js";
 import { findConflicts } from "./utils.js";
+import { saveToken, validateCasTicket } from "./api/auth.js";
 
 export default function App() {
   const [user, setUser] = useState(() => {
     const token =
-      localStorage.getItem("token") || sessionStorage.getItem("token");
+      localStorage.getItem("metu-token") || sessionStorage.getItem("metu-token");
     const savedUser = localStorage.getItem("metu-user");
     if (token && savedUser) {
       try { return JSON.parse(savedUser); } catch { return null; }
     }
     return null;
   });
+  const [casLoading, setCasLoading] = useState(false);
+  const [casError, setCasError] = useState("");
+
+  // CAS geri dönüşünde URL'deki ticket'ı yakala
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ticket = params.get("ticket");
+    if (!ticket) return;
+
+    // Ticket'ı URL'den temizle (geri tuşuyla tekrar tetiklenmesin)
+    const cleanUrl = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, document.title, cleanUrl);
+
+    setCasLoading(true);
+    setCasError("");
+
+    validateCasTicket(ticket, window.location.origin)
+      .then(({ token, user: userData }) => {
+        saveToken(token);
+        localStorage.setItem("metu-user", JSON.stringify(userData));
+        setUser(userData);
+      })
+      .catch((err) => setCasError(err.message || "CAS girişi başarısız."))
+      .finally(() => setCasLoading(false));
+  }, []);
 
   const handleLogin = (userData) => {
     setUser(userData);
@@ -28,12 +54,27 @@ export default function App() {
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("metu-user");
-    localStorage.removeItem("token");
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("metu-token");
+    sessionStorage.removeItem("metu-token");
   };
 
+  if (casLoading) {
+    return (
+      <div style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh",
+        fontSize: "1.1rem",
+        color: "#7a1e2e"
+      }}>
+        ODTÜ kimliği doğrulanıyor...
+      </div>
+    );
+  }
+
   if (!user) {
-    return <Login onLogin={handleLogin} />;
+    return <Login onLogin={handleLogin} casError={casError} />;
   }
 
   return <MainApp user={user} onLogout={handleLogout} />;
