@@ -38,7 +38,7 @@ export default function Login({ onLogin, casError = "" }) {
 
   const handleCAS = () => {
     const service = encodeURIComponent(SERVICE_URL);
-    window.location.href = `${CAS_URL}?service=${service}`;
+    window.location.href = `${CAS_URL}?service=${encodeURIComponent(SERVICE_URL)}`;
   };
 
   const handleKeyDown = (e) => { if (e.key === "Enter") handleSubmit(); };
