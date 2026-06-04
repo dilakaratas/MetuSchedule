@@ -1,0 +1,676 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "Endüstri Mühendisliği",
+  "kaynak": "https://ie.metu.edu.tr/tr/endustri-muhendisligi-lisans-ogretim-programi",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "Birinci Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Birinci Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "PHYS105",
+              "ad": "GENEL FİZİK I",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "akts": 6.5,
+              "catalog_kodu": "2300105"
+            },
+            {
+              "kod": "CHEM107",
+              "ad": "GENEL KİMYA",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "akts": 6.0,
+              "catalog_kodu": "2340107"
+            },
+            {
+              "kod": "MATH119",
+              "ad": "MATEMATİK I (ANALİTİK GEOMETRİ)",
+              "odtu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "akts": 7.5,
+              "catalog_kodu": "2360119"
+            },
+            {
+              "kod": "CENG240",
+              "ad": "MÜHENDİSLER İÇİN PYTHON İLE PROGRAMLAMA",
+              "odtu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "akts": 4.0,
+              "catalog_kodu": "5710240"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "AKADEMİK AMAÇLI İNGİLİZCE I",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "akts": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "OHS101",
+              "ad": "İŞ SAĞLIĞI VE GÜVENLİĞİ I",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 2.0,
+              "catalog_kodu": "8770101"
+            },
+            {
+              "kod": "IS100",
+              "ad": "ENFORMASYON TEKNOLOJİLERİ VE UYGULAMALARINA GİRİŞ",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "akts": 1.0,
+              "catalog_kodu": "9010100"
+            }
+          ]
+        },
+        {
+          "yariyil": 2,
+          "yariyil_adi": "İkinci Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "PHYS106",
+              "ad": "GENEL FİZİK II",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "akts": 6.5,
+              "catalog_kodu": "2300106"
+            },
+            {
+              "kod": "MATH120",
+              "ad": "MATEMATİK II (ÇOK DEĞİŞKENLİ FONKSİYONLAR)",
+              "odtu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "akts": 7.5,
+              "catalog_kodu": "2360120"
+            },
+            {
+              "kod": "MATH260",
+              "ad": "TEMEL DOĞRUSAL CEBİR",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "2360260"
+            },
+            {
+              "kod": "IE102",
+              "ad": "ENDÜSTRİ MÜHENDİSLİĞİNE GİRİŞ",
+              "odtu_kredi": 2,
+              "ders_saat": 2,
+              "lab_saat": 0,
+              "akts": 3.0,
+              "catalog_kodu": "5680102"
+            },
+            {
+              "kod": "ME105",
+              "ad": "BİLGİSAYAR DESTEKLİ TEKNİK RESİM",
+              "odtu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "akts": 5.0,
+              "catalog_kodu": "5690105"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "AKADEMİK AMAÇLI İNGİLİZCE II",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "akts": 6.0,
+              "catalog_kodu": "6390102"
+            },
+            {
+              "kod": "BA100",
+              "ad": "KARİYER PLANLAMA",
+              "odtu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "akts": 2.0,
+              "catalog_kodu": "3120100"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "İkinci Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Üçüncü Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "MATH219",
+              "ad": "TÜREVSEL DENKLEMLERE GİRİŞ",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "akts": 7.0,
+              "catalog_kodu": "2360219"
+            },
+            {
+              "kod": "ECON211",
+              "ad": "EKONOMİ I (MİKRO)",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 6.0,
+              "catalog_kodu": "3110211"
+            },
+            {
+              "kod": "IE241",
+              "ad": "MÜHENDİSLER İÇİN FİNANS VE İŞLETME MUHASEBESİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680241"
+            },
+            {
+              "kod": "IE251",
+              "ad": "DOĞRUSAL PROGRAMLAMA",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680251"
+            },
+            {
+              "kod": "IE265",
+              "ad": "OLASILIĞA GİRİŞ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680265"
+            },
+            {
+              "kod": "ME212",
+              "ad": "ÜRETİM MÜHENDİSLİĞİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5690212"
+            },
+            {
+              "secmeli_grup": "Aşağıdaki derslerden biri",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "KEMAL ATATÜRK'ÜN İLKELERİ I",
+                  "catalog_kodu": "2402201",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "TÜRK DEVRİM TARİHİ I",
+                  "catalog_kodu": "2402205",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "yariyil": 4,
+          "yariyil_adi": "Dördüncü Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "ECON212",
+              "ad": "EKONOMİ II (MAKRO)",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 6.0,
+              "catalog_kodu": "3110212"
+            },
+            {
+              "kod": "IE252",
+              "ad": "AĞ AKIŞLARI VE TAMSAYI PROGRAMLAMA",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680252"
+            },
+            {
+              "kod": "IE266",
+              "ad": "MÜHENDİSLİK İSTATİSTİĞİ",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680266"
+            },
+            {
+              "kod": "METE230",
+              "ad": "MALZEME BİLİMİ VE MÜHENDİSLİĞİNİN TEMELLERİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5700230"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "AKADEMİK SÖZLÜ SUNUM BECERİSİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "akts": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "kod": "OHS301",
+              "ad": "İŞ SAĞLIĞI VE GÜVENLİĞİ II",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 2.0,
+              "catalog_kodu": "8770301"
+            },
+            {
+              "tur": "KISITLI SEÇMELİ",
+              "aciklama": "Kisitli Seçmeli̇ ders slotu"
+            },
+            {
+              "secmeli_grup": "Aşağıdaki derslerden biri",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "KEMAL ATATÜRK'ÜN İLKELERİ II",
+                  "catalog_kodu": "2402202",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "TÜRK DEVRİM TARİHİ II",
+                  "catalog_kodu": "2402206",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "Üçüncü Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Beşinci Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "EE381",
+              "ad": "SİSTEMLER VE KONTROL",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5670381"
+            },
+            {
+              "kod": "IE300",
+              "ad": "YAZ STAJI I",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 1.0,
+              "catalog_kodu": "5680300"
+            },
+            {
+              "kod": "IE323",
+              "ad": "ÜRETİM VE HİZMET OPERASYON PLANLAMASI I",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680323"
+            },
+            {
+              "kod": "IE333",
+              "ad": "İŞ SİSTEMLERİ ANALİZ VE TASARIMI",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680333"
+            },
+            {
+              "kod": "IE347",
+              "ad": "MÜHENDİSLİK EKONOMİSİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680347"
+            },
+            {
+              "kod": "IE361",
+              "ad": "STOKASTİK YÖNEYLEM ARAŞTIRMASI MODELLERİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680361"
+            },
+            {
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            },
+            {
+              "secmeli_grup": "Aşağıdaki derslerden biri",
+              "secenekler": [
+                {
+                  "kod": "TURK105",
+                  "ad": "TÜRKÇE I",
+                  "catalog_kodu": "6420105",
+                  "odtu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "BAŞLANGIÇ DÜZEYİNDE TÜRKÇE",
+                  "catalog_kodu": "6420201",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                },
+                {
+                  "kod": "TURK303",
+                  "ad": "TÜRKÇE I",
+                  "catalog_kodu": "6420303",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "yariyil": 6,
+          "yariyil_adi": "Altıncı Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "IE304",
+              "ad": "ÜRETİM VE HİZMET BİLİŞİM SİSTEMLERİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680304"
+            },
+            {
+              "kod": "IE324",
+              "ad": "ÜRETİM VE HİZMET OPERASYON PLANLAMASI II",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680324"
+            },
+            {
+              "kod": "IE368",
+              "ad": "KALİTE PLANLAMASI VE KONTROLÜ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680368"
+            },
+            {
+              "kod": "IE372",
+              "ad": "SİMÜLASYON",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680372"
+            },
+            {
+              "kod": "ME351",
+              "ad": "TERMODİNAMİK",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5690351"
+            },
+            {
+              "secmeli_grup": "Aşağıdaki derslerden biri",
+              "secenekler": [
+                {
+                  "kod": "TURK106",
+                  "ad": "TÜRKÇE II",
+                  "catalog_kodu": "6420106",
+                  "odtu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "ORTA DÜZEYDE TÜRKÇE",
+                  "catalog_kodu": "6420202",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                },
+                {
+                  "kod": "TURK304",
+                  "ad": "TÜRKÇE II",
+                  "catalog_kodu": "6420304",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "akts": 2.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "Dördüncü Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Yedinci Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "IE400",
+              "ad": "YAZ STAJI II",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 1.0,
+              "catalog_kodu": "5680400"
+            },
+            {
+              "kod": "IE404",
+              "ad": "MÜHENDİSLER İÇİN İŞLETME",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680404"
+            },
+            {
+              "kod": "IE422",
+              "ad": "ENDÜSTRİ MÜHENDİSLİĞİ UYGULAMALARI SEMİNERİ",
+              "odtu_kredi": 0,
+              "ders_saat": 2,
+              "lab_saat": 0,
+              "akts": 1.0,
+              "catalog_kodu": "5680422"
+            },
+            {
+              "kod": "IE489",
+              "ad": "SİSTEM DÜŞÜNCESİ",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "akts": 5.0,
+              "catalog_kodu": "5680489"
+            },
+            {
+              "kod": "IE497",
+              "ad": "SİSTEM TASARIMI I",
+              "odtu_kredi": 3,
+              "ders_saat": 1,
+              "lab_saat": 4,
+              "akts": 5.0,
+              "catalog_kodu": "5680497"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            }
+          ]
+        },
+        {
+          "yariyil": 8,
+          "yariyil_adi": "Sekizinci Dönem",
+          "dersler": [
+            {
+              "kod": "Ders Kodu",
+              "ad": "Ders Adı",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "akts": 0.0
+            },
+            {
+              "kod": "IE498",
+              "ad": "SİSTEM TASARIMI II",
+              "odtu_kredi": 3,
+              "ders_saat": 1,
+              "lab_saat": 4,
+              "akts": 5.0,
+              "catalog_kodu": "5680498"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "SERBEST SEÇMELİ",
+              "aciklama": "Serbest Seçmeli̇ ders slotu"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
