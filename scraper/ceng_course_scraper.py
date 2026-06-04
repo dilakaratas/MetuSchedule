@@ -9,12 +9,16 @@ Kurulum:
 
 Çıktı:
     ceng_courses.json
+    
+courseCode formatı : "CENG100"  (boşuksuz)
+metuCourseCode     : "5710100"  (catalog.metu.edu.tr'deki course_code parametresi)
 """
 
 import json
 import re
 import time
 from pathlib import Path
+from urllib.parse import urlparse, parse_qs
 
 import requests
 from bs4 import BeautifulSoup
@@ -42,16 +46,28 @@ def fetch(url: str) -> BeautifulSoup:
     return BeautifulSoup(r.content.decode("utf-8", errors="ignore"), "lxml")
 
 
-def split_code_name(text: str):
-    """'ceng100 Computer Engineering' → ('CENG 100', 'Computer Engineering')"""
-    m = re.match(r"^([a-zA-Z]+\s*\d+)\s+(.*)", text.strip())
+def extract_metu_course_code(href: str) -> str | None:
+    """
+    'https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710100'
+    → '5710100'
+    """
+    if not href:
+        return None
+    qs = parse_qs(urlparse(href).query)
+    codes = qs.get("course_code", [])
+    return codes[0] if codes else None
+
+
+def parse_code_name(text: str) -> tuple[str, str]:
+    """
+    'ceng100 Computer Engineering' → ('CENG100', 'Computer Engineering')
+    Boşuksuz, büyük harf format.
+    """
+    m = re.match(r"^([a-zA-Z]+)\s*(\d+)\s+(.*)", text.strip())
     if m:
-        raw_code = m.group(1).strip()
-        name = m.group(2).strip()
-        m2 = re.match(r"([a-zA-Z]+)\s*(\d+)", raw_code)
-        if m2:
-            return f"{m2.group(1).upper()} {m2.group(2)}", name
-        return raw_code.upper(), name
+        code = f"{m.group(1).upper()}{m.group(2)}"  # CENG100
+        name = m.group(3).strip()
+        return code, name
     return None, text.strip()
 
 
@@ -59,10 +75,6 @@ def split_code_name(text: str):
 
 def parse_course_list(soup: BeautifulSoup) -> dict:
     result = {"zorunlu_dersler": [], "servis_dersleri": []}
-
-    # Yapı: <div class="accordion-item">
-    #           <div class="accordion-header"><h3>Zorunlu Dersler</h3>...</div>
-    #           <div class="accordion-content">...<ul><li><a>...</a></li></ul>...</div>
 
     for item in soup.find_all("div", class_="accordion-item"):
         header = item.find("div", class_="accordion-header")
@@ -85,17 +97,23 @@ def parse_course_list(soup: BeautifulSoup) -> dict:
             link = li.find("a")
             if not link:
                 continue
-            href = link.get("href", "").strip()
-            text = clean(link.get_text())
+            href  = link.get("href", "").strip()
+            text  = clean(link.get_text())
 
             if "teknik-secmeli" in href.lower() or "teknik seçmeli" in text.lower():
                 continue
 
-            code, name = split_code_name(text)
+            code, name = parse_code_name(text)
+            if not code:
+                continue
+
+            metu_code = extract_metu_course_code(href)
+
             result[key].append({
-                "courseCode": code,
-                "courseName": name,
-                "catalogUrl": href if href.startswith("http") else None,
+                "courseCode":     code,       # "CENG100"
+                "metuCourseCode": metu_code,  # "5710100"
+                "courseName":     name,
+                "catalogUrl":     href if href.startswith("http") else None,
             })
 
     return result
@@ -108,6 +126,7 @@ def parse_table(content_div) -> list:
     table = content_div.find("table")
     if not table:
         return courses
+
     for row in table.find_all("tr"):
         cells = row.find_all(["td", "th"])
         if len(cells) < 2:
@@ -115,12 +134,22 @@ def parse_table(content_div) -> list:
         texts = [clean(c.get_text()) for c in cells]
         if "DERS KODU" in texts[0].upper():
             continue
-        code = re.sub(r"\s+", " ", texts[0].strip()).upper()
-        name = texts[1]
+
+        # Kod: boşuk sil, büyük harf → "CENG316"
+        raw = re.sub(r"\s+", "", texts[0]).upper()
+        name   = texts[1]
         credit = texts[2] if len(texts) > 2 else None
-        if not code or not name:
+
+        if not raw or not name:
             continue
-        courses.append({"courseCode": code, "courseName": name, "credit": credit})
+
+        # Teknik seçmeli sayfasında catalog linki yok, metuCourseCode = None
+        courses.append({
+            "courseCode":     raw,    # "CENG316"
+            "metuCourseCode": None,
+            "courseName":     name,
+            "credit":         credit,
+        })
     return courses
 
 
@@ -140,10 +169,6 @@ def parse_technical_electives(soup: BeautifulSoup) -> dict:
         },
     }
 
-    # Yapı: <div class="accordion-item">
-    #           <div class="accordion-header"><h3>1inci Kategori...</h3></div>
-    #           <div class="accordion-content"><table>...</table></div>
-
     for item in soup.find_all("div", class_="accordion-item"):
         header = item.find("div", class_="accordion-header")
         if not header:
@@ -155,7 +180,7 @@ def parse_technical_electives(soup: BeautifulSoup) -> dict:
         elif "2nci" in heading_text:
             key = "kategori_2"
         elif "3ncü" in heading_text:
-            continue  # Liste yok
+            continue
         else:
             continue
 
@@ -178,13 +203,15 @@ def scrape():
     course_data = parse_course_list(soup1)
     print(f"   Zorunlu Dersler : {len(course_data['zorunlu_dersler'])} ders")
     print(f"   Servis Dersleri : {len(course_data['servis_dersleri'])} ders")
+    if course_data["zorunlu_dersler"]:
+        sample = course_data["zorunlu_dersler"][0]
+        print(f"   Örnek: {sample}")
 
     print("\n2) teknik-secmeli-dersler sayfası çekiliyor...")
     soup2 = fetch(TECHNICAL_ELECTIVES_URL)
     tech_data = parse_technical_electives(soup2)
     print(f"   Kat. 1 : {len(tech_data['kategori_1']['dersler'])} ders")
     print(f"   Kat. 2 : {len(tech_data['kategori_2']['dersler'])} ders")
-    print(f"   Kat. 3 : Kural tanımlı (liste yok)")
 
     total = (
         len(course_data["zorunlu_dersler"])
@@ -197,16 +224,17 @@ def scrape():
         "source": {
             "courseListUrl": COURSE_LIST_URL,
             "technicalElectivesUrl": TECHNICAL_ELECTIVES_URL,
+            "note": "courseCode: boşuksuz (CENG100) | metuCourseCode: katalog kodu (5710100)",
         },
-        "zorunlu_dersler": course_data["zorunlu_dersler"],
-        "servis_dersleri": course_data["servis_dersleri"],
-        "teknik_secmeli_dersler": tech_data,
+        "zorunlu_dersler":         course_data["zorunlu_dersler"],
+        "servis_dersleri":         course_data["servis_dersleri"],
+        "teknik_secmeli_dersler":  tech_data,
         "summary": {
-            "zorunluDersCount": len(course_data["zorunlu_dersler"]),
-            "servisDersCount": len(course_data["servis_dersleri"]),
-            "teknikSecmeli1Count": len(tech_data["kategori_1"]["dersler"]),
-            "teknikSecmeli2Count": len(tech_data["kategori_2"]["dersler"]),
-            "totalCount": total,
+            "zorunluDersCount":      len(course_data["zorunlu_dersler"]),
+            "servisDersCount":       len(course_data["servis_dersleri"]),
+            "teknikSecmeli1Count":   len(tech_data["kategori_1"]["dersler"]),
+            "teknikSecmeli2Count":   len(tech_data["kategori_2"]["dersler"]),
+            "totalCount":            total,
         },
     }
 

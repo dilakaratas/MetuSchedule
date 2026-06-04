@@ -5,6 +5,7 @@ import Calendar from "./components/Calendar.jsx";
 import AIPanel from "./components/AIPanel.jsx";
 import ChatBot from "./components/ChatBot.jsx";
 import Login from "./components/Login.jsx";
+import CurriculumModal from "./components/CurriculumModal.jsx";
 import { loadMetuCourses } from "./data.js";
 import { I18N } from "./i18n.js";
 import { findConflicts } from "./utils.js";
@@ -23,20 +24,18 @@ export default function App() {
   const [casLoading, setCasLoading] = useState(false);
   const [casError, setCasError] = useState("");
 
-  // CAS geri dönüşünde URL'deki ticket'ı yakala
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const ticket = params.get("ticket");
     if (!ticket) return;
 
-    // Ticket'ı URL'den temizle (geri tuşuyla tekrar tetiklenmesin)
     const cleanUrl = window.location.origin + window.location.pathname;
     window.history.replaceState({}, document.title, cleanUrl);
 
     setCasLoading(true);
     setCasError("");
 
-    validateCasTicket(ticket, window.location.origin)
+    validateCasTicket(ticket, "http://144.122.198.33")
       .then(({ token, user: userData }) => {
         saveToken(token);
         localStorage.setItem("metu-user", JSON.stringify(userData));
@@ -61,12 +60,8 @@ export default function App() {
   if (casLoading) {
     return (
       <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        fontSize: "1.1rem",
-        color: "#7a1e2e"
+        display: "flex", alignItems: "center", justifyContent: "center",
+        height: "100vh", fontSize: "1.1rem", color: "#7a1e2e"
       }}>
         ODTÜ kimliği doğrulanıyor...
       </div>
@@ -84,17 +79,13 @@ function MainApp({ user, onLogout }) {
   const [lang, setLang] = useState("tr");
   const tr = I18N[lang];
 
-  // --- Veri yükleme ---
   const [courses, setCourses] = useState([]);
   const [dataLoading, setDataLoading] = useState(true);
   const [dataError, setDataError] = useState(null);
 
   useEffect(() => {
     loadMetuCourses()
-      .then((data) => {
-        setCourses(data);
-        setDataLoading(false);
-      })
+      .then((data) => { setCourses(data); setDataLoading(false); })
       .catch((err) => {
         console.error("Veri yüklenemedi:", err);
         setDataError("Ders verisi yüklenemedi. Lütfen sayfayı yenileyin.");
@@ -113,6 +104,8 @@ function MainApp({ user, onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
   const [chatBotOpen, setChatBotOpen] = useState(false);
+  const [curriculumOpen, setCurriculumOpen] = useState(false);
+  const [curriculumCodes, setCurriculumCodes] = useState(null);
   const [mobileTab, setMobileTab] = useState("courses");
 
   const calendarRef = useRef(null);
@@ -139,8 +132,7 @@ function MainApp({ user, onLogout }) {
       }
       if (!q) return true;
       const hay = `${c.code} ${c.name} ${c.nameTr} ${c.sections
-        .map((s) => s.instructor)
-        .join(" ")}`.toLowerCase();
+        .map((s) => s.instructor).join(" ")}`.toLowerCase();
       return hay.includes(q);
     });
   }, [query, dayFilter, courses]);
@@ -189,8 +181,7 @@ function MainApp({ user, onLogout }) {
         const s = c?.sections.find((s) => s.id === sel.sectionId);
         return s?.crn;
       })
-      .filter(Boolean)
-      .join("\n");
+      .filter(Boolean).join("\n");
     navigator.clipboard.writeText(crns);
     toast(tr.copied);
   };
@@ -235,18 +226,19 @@ function MainApp({ user, onLogout }) {
     setMobileTab("courses");
   };
 
+  const handleCurriculumApply = (codes) => {
+    setCurriculumCodes(codes);
+    setCurriculumOpen(false);
+    setAiPanelOpen(true);
+  };
+
   const conflictCount = Object.keys(conflicts).length / 2;
 
-  // --- Yükleme / hata ekranları ---
   if (dataLoading) {
     return (
       <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        fontSize: "1.1rem",
-        color: "#666"
+        display: "flex", alignItems: "center", justifyContent: "center",
+        height: "100vh", fontSize: "1.1rem", color: "#666"
       }}>
         Ders verisi yükleniyor...
       </div>
@@ -256,12 +248,8 @@ function MainApp({ user, onLogout }) {
   if (dataError) {
     return (
       <div style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "100vh",
-        fontSize: "1.1rem",
-        color: "#e53e3e"
+        display: "flex", alignItems: "center", justifyContent: "center",
+        height: "100vh", fontSize: "1.1rem", color: "#e53e3e"
       }}>
         {dataError}
       </div>
@@ -294,7 +282,8 @@ function MainApp({ user, onLogout }) {
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
         onOpenAI={() => setChatBotOpen(true)}
-        onOpenAutoSchedule={() => setAiPanelOpen(true)}
+        onOpenAutoSchedule={() => { setCurriculumCodes(null); setAiPanelOpen(true); }}
+        onOpenCurriculum={() => setCurriculumOpen(true)}
         user={user}
         onLogout={onLogout}
       />
@@ -357,12 +346,22 @@ function MainApp({ user, onLogout }) {
 
       {toastMsg && <div className="toast">{toastMsg}</div>}
 
+      {curriculumOpen && (
+        <CurriculumModal
+          lang={lang}
+          courses={courses}
+          onApplyToScheduler={handleCurriculumApply}
+          onClose={() => setCurriculumOpen(false)}
+        />
+      )}
+
       {aiPanelOpen && (
         <AIPanel
           lang={lang}
           courses={courses}
+          initialCourses={curriculumCodes}
           onApply={applyAISuggestion}
-          onClose={() => setAiPanelOpen(false)}
+          onClose={() => { setAiPanelOpen(false); setCurriculumCodes(null); }}
         />
       )}
 

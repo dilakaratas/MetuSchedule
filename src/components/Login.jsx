@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { saveToken } from "../api/auth.js";
 
-const CAS_URL = "https://login.metu.edu.tr/cas/login";
+const CAS_URL    = "https://login.metu.edu.tr/cas/login";
+const SERVICE_URL = "http://144.122.198.33";
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, casError = "" }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd, setShowPwd]   = useState(false);
   const [remember, setRemember] = useState(false);
-  const [error, setError]       = useState("");
+  const [error, setError]       = useState(casError);
   const [loading, setLoading]   = useState(false);
 
   const handleSubmit = async () => {
@@ -19,14 +20,14 @@ export default function Login({ onLogin }) {
 
     setLoading(true);
     try {
-        const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify({ username: username.trim(), password }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || "Giriş başarısız.");
-      saveToken(data.token, remember);
+      saveToken(data.token);
       onLogin(data.user);
     } catch (err) {
       setError(err.message);
@@ -36,7 +37,7 @@ export default function Login({ onLogin }) {
   };
 
   const handleCAS = () => {
-    const service = encodeURIComponent(window.location.origin);
+    const service = encodeURIComponent(SERVICE_URL);
     window.location.href = `${CAS_URL}?service=${service}`;
   };
 
@@ -46,7 +47,6 @@ export default function Login({ onLogin }) {
     <div className="login-wrap">
       <div className="login-card">
 
-        {/* Logo */}
         <div className="login-logo-row">
           <div className="login-logo-sq" aria-hidden="true">
             <img src="/metu-logo.svg" width="32" height="32" alt="ODTÜ" />
@@ -60,7 +60,6 @@ export default function Login({ onLogin }) {
         <h1 className="login-heading">Giriş Yap</h1>
         <p className="login-sub">ODTÜ hesabınızla devam edin</p>
 
-        {/* ODTÜ CAS butonu */}
         <button className="login-cas-big-btn" type="button" onClick={handleCAS}>
           <img src="/metu-logo.svg" width="26" height="26" alt="" aria-hidden="true" />
           ODTÜ Kimliğinizle Giriş Yapın
@@ -72,7 +71,6 @@ export default function Login({ onLogin }) {
           <span />
         </div>
 
-
         {error && (
           <div className="login-error" role="alert">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -83,7 +81,6 @@ export default function Login({ onLogin }) {
           </div>
         )}
 
- 
         <div className="login-field-group">
           <label className="login-label" htmlFor="login-username">Kullanıcı Adı</label>
           <div className="login-input-wrap">
@@ -104,7 +101,6 @@ export default function Login({ onLogin }) {
           </div>
         </div>
 
-        {/* Şifre */}
         <div className="login-field-group">
           <label className="login-label" htmlFor="login-password">Şifre</label>
           <div className="login-input-wrap">
@@ -138,7 +134,6 @@ export default function Login({ onLogin }) {
           </div>
         </div>
 
-        {/* Beni hatırla */}
         <div className="login-options-row">
           <label className="login-remember">
             <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)}/>
@@ -147,7 +142,6 @@ export default function Login({ onLogin }) {
           <button className="login-forgot" type="button">Şifremi unuttum</button>
         </div>
 
-        {/* Giriş butonu */}
         <button
           className={`login-btn${loading ? " login-btn-loading" : ""}`}
           type="button"

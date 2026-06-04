@@ -9,8 +9,9 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
-const PORT       = process.env.PORT       || 3001;
-const JWT_SECRET = process.env.JWT_SECRET || "degistir-beni-gizli-key";
+const PORT        = process.env.PORT        || 3001;
+const JWT_SECRET  = process.env.JWT_SECRET  || "degistir-beni-gizli-key";
+const SERVICE_URL = "http://144.122.198.33";
 
 const TEST_USERS = [
   { username: "admin", password: "admin123", name: "Admin", role: "admin" },
@@ -19,14 +20,12 @@ const TEST_USERS = [
 // ── Test login ──────────────────────────────────────────────────────────────
 app.post("/api/auth/login", (req, res) => {
   const { username, password } = req.body;
-
   if (!username || !password)
     return res.status(400).json({ message: "Kullanıcı adı ve şifre gerekli." });
 
   const user = TEST_USERS.find(
     (u) => u.username === username.trim() && u.password === password
   );
-
   if (!user)
     return res.status(401).json({ message: "Kullanıcı adı veya şifre hatalı." });
 
@@ -37,15 +36,15 @@ app.post("/api/auth/login", (req, res) => {
 
 // ── CAS ticket doğrulama ────────────────────────────────────────────────────
 app.post("/api/auth/cas/validate", async (req, res) => {
-  const { ticket, service } = req.body;
+  const { ticket } = req.body;
 
-  if (!ticket || !service)
-    return res.status(400).json({ message: "ticket ve service gerekli." });
+  if (!ticket)
+    return res.status(400).json({ message: "ticket gerekli." });
 
   const validateUrl =
-    `https://login.metu.edu.tr/cas/serviceValidate` +
+    `https://login.metu.edu.tr/cas/p3/serviceValidate` +
     `?ticket=${encodeURIComponent(ticket)}` +
-    `&service=${encodeURIComponent(service)}`;
+    `&service=${encodeURIComponent(SERVICE_URL)}`;
 
   try {
     const xmlText = await new Promise((resolve, reject) => {
@@ -70,9 +69,9 @@ app.post("/api/auth/cas/validate", async (req, res) => {
     if (!success)
       return res.status(401).json({ message: "CAS yanıtı beklenmedik formatta." });
 
-    const netid  = success["cas:user"] || "";
-    const attrs  = success["cas:attributes"] || {};
-    const name   =
+    const netid = success["cas:user"] || "";
+    const attrs = success["cas:attributes"] || {};
+    const name  =
       attrs["cas:cn"] ||
       attrs["cas:displayName"] ||
       attrs["cas:givenName"] ||
@@ -98,9 +97,7 @@ app.post("/api/auth/cas/validate", async (req, res) => {
 app.get("/api/auth/me", (req, res) => {
   const authHeader = req.headers.authorization || "";
   const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : null;
-
   if (!token) return res.status(401).json({ message: "Token bulunamadı." });
-
   try {
     const { iat, exp, ...user } = jwt.verify(token, JWT_SECRET);
     return res.json({ user });

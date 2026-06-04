@@ -87,15 +87,9 @@ function findBestSchedule(courseList, options) {
 }
 
 // ─── KAPSAMLI HATA ANALİZİ ──────────────────────────────────────────────────
-// Her ders için:
-//   reasons  : neden uygun section yok (kısıt ihlali)
-//   timeConflicts : hangi derslerle time conflict var
-//   alternatives  : mevcut tüm sectionlar + ihlaller + conflict bilgisi
 function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
-  const ds       = lang==="tr" ? DAYS_SHORT_TR : DAY_NAMES_EN;
   const dayNames = lang==="tr" ? DAY_NAMES_TR  : DAY_NAMES_EN;
 
-  // Her dersin her sectionını değerlendir
   const evaluated = courseList.map(course => {
     const sections = course.sections.map(sec => {
       const constraintViolations = [];
@@ -113,7 +107,6 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
             ? `⏰ ${m.e} bitişi, maksimum ${latestEnd}'den geç`
             : `⏰ ends at ${m.e}, after latest ${latestEnd}`);
       }
-      // Deduplicate
       const uniq = [...new Set(constraintViolations)];
       const meetingStr = sec.meetings.map(m =>
         `${lang==="tr" ? DAYS_SHORT_TR[m.d] : DAYS_SHORT_EN[m.d]} ${m.s}–${m.e}`
@@ -124,16 +117,13 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
     return { course, sections, hasAnyPassing };
   });
 
-  // Time conflict analizi — kısıtlara uyan sectionlar arasında
-  // Her ders çifti için çakışma var mı?
-  const conflictMatrix = {}; // "codeA-codeB" -> [{secA, secB, day, time}]
+  const conflictMatrix = {};
   for (let i=0; i<evaluated.length; i++) {
     for (let j=i+1; j<evaluated.length; j++) {
       const a = evaluated[i];
       const b = evaluated[j];
       const passA = a.sections.filter(s => s.passesConstraints);
       const passB = b.sections.filter(s => s.passesConstraints);
-      // Hiç çakışmasız kombinasyon var mı?
       let allConflict = false;
       if (passA.length > 0 && passB.length > 0) {
         const hasNonConflicting = passA.some(sa =>
@@ -142,7 +132,6 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
         allConflict = !hasNonConflicting;
       }
       if (allConflict) {
-        // En az çakışma olan örneği bul
         const examples = [];
         for (const sa of passA.slice(0,3)) {
           for (const sb of passB.slice(0,3)) {
@@ -164,22 +153,17 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
     }
   }
 
-  // Sonuç: her ders için özet
   return evaluated.map(({ course, sections, hasAnyPassing }) => {
-    // Kısıt ihlalleri özeti
     const constraintReasons = [];
     if (!hasAnyPassing) {
-      // Hangi kısıt tüm sectionları bloklüyor?
       const allViolations = sections.flatMap(s => s.constraintViolations);
       const freq = {};
       allViolations.forEach(v => freq[v] = (freq[v]||0)+1);
-      // En sık görüleni ekle
       Object.entries(freq)
         .sort((a,b) => b[1]-a[1])
         .forEach(([v]) => constraintReasons.push(v));
     }
 
-    // Time conflict bilgisi
     const timeConflictWith = [];
     for (const key of Object.keys(conflictMatrix)) {
       const [cA, cB] = key.split("|||");
@@ -189,13 +173,45 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
       }
     }
 
-    // Alternatif sectionlar — kısıtları geçenler önce, sonra ihlal edenler
     const alternatives = [...sections]
       .sort((a, b) => a.constraintViolations.length - b.constraintViolations.length)
       .slice(0, 4);
 
-    return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing };
-  }).filter(d => d.constraintReasons.length > 0 || d.timeConflictWith.length > 0);
+    // Kombinatöryel tıkanma: dersin kendi section'ları kısıtları geçiyor ama
+    // diğer derslerle kombine edilemiyor — bunu da göster
+    const hasCombinatorialBlock = hasAnyPassing && timeConflictWith.length === 0 &&
+      constraintReasons.length === 0;
+
+    return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing, hasCombinatorialBlock };
+  // Hiçbir sorun yoksa gösterme; ama sorun varsa (kısıt, conflict, veya hiç geçen yok) göster
+  }).filter(d =>
+    d.constraintReasons.length > 0 ||
+    d.timeConflictWith.length > 0 ||
+    !d.hasAnyPassing
+  );
+}
+
+// ─── Loading ekranı ─────────────────────────────────────────────────────────
+function LoadingScreen({ lang }) {
+  return (
+    <div style={{
+      display:"flex", flexDirection:"column",
+      alignItems:"center", justifyContent:"center",
+      flex:1, gap:16, padding:40,
+    }}>
+      <div style={{
+        width:40, height:40,
+        border:"3px solid #e5e7eb",
+        borderTop:"3px solid #7a1f2b",
+        borderRadius:"50%",
+        animation:"ai-spin 0.8s linear infinite",
+      }} />
+      <div style={{ fontSize:"0.9rem", color:"#6b7280" }}>
+        {lang==="tr" ? "Program hesaplanıyor…" : "Finding best schedule…"}
+      </div>
+      <style>{`@keyframes ai-spin { to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
 }
 
 // ─── Önizleme ekranı ────────────────────────────────────────────────────────
@@ -280,14 +296,13 @@ function FailureCard({ diagnosis, lang }) {
   const tr = lang === "tr";
   const { course, constraintReasons, timeConflictWith, alternatives } = diagnosis;
   const hasIssue = constraintReasons.length > 0 || timeConflictWith.length > 0;
-  if (!hasIssue) return null;
 
   return (
     <div style={{
-      background:"#fff8f0", border:"1px solid #f5c6a0",
+      background: hasIssue ? "#fff8f0" : "#f0fdf4",
+      border: hasIssue ? "1px solid #f5c6a0" : "1px solid #86efac",
       borderRadius:10, padding:"10px 12px", marginBottom:8,
     }}>
-      {/* Başlık satırı */}
       <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:8 }}>
         <div style={{ flex:1 }}>
           <span style={{ fontWeight:700, fontSize:"0.83rem", color:"#7a1f2b" }}>
@@ -297,7 +312,6 @@ function FailureCard({ diagnosis, lang }) {
             {tr ? (course.nameTr||course.name) : course.name}
           </span>
 
-          {/* Kısıt ihlalleri */}
           {constraintReasons.length > 0 && (
             <div style={{ marginTop:4 }}>
               {[...new Set(constraintReasons)].map((r,i) => (
@@ -306,7 +320,6 @@ function FailureCard({ diagnosis, lang }) {
             </div>
           )}
 
-          {/* Time conflict */}
           {timeConflictWith.length > 0 && (
             <div style={{ marginTop:4 }}>
               {timeConflictWith.map(({ other, examples }, i) => (
@@ -321,7 +334,6 @@ function FailureCard({ diagnosis, lang }) {
           )}
         </div>
 
-        {/* Şubeleri göster butonu */}
         <button
           onClick={() => setOpen(v => !v)}
           style={{
@@ -338,7 +350,6 @@ function FailureCard({ diagnosis, lang }) {
         </button>
       </div>
 
-      {/* Şube listesi */}
       {open && (
         <div style={{ marginTop:8, borderTop:"1px solid #f5c6a0", paddingTop:8 }}>
           <div style={{ fontSize:"0.72rem", fontWeight:600, color:"#7a5c1f", marginBottom:5 }}>
@@ -373,7 +384,7 @@ function FailureCard({ diagnosis, lang }) {
 }
 
 // ─── Ana bileşen ────────────────────────────────────────────────────────────
-export default function AIPanel({ lang, courses, onApply, onClose }) {
+export default function AIPanel({ lang, courses, initialCourses, onApply, onClose }) {
   const [freeDays,        setFreeDays]        = useState(new Set());
   const [maxDailyHours,   setMaxDailyHours]   = useState(8);
   const [earliestStart,   setEarliestStart]   = useState("");
@@ -381,12 +392,12 @@ export default function AIPanel({ lang, courses, onApply, onClose }) {
   const [compactMode,     setCompactMode]     = useState("any");
   const [creditLimit,     setCreditLimit]     = useState("");
   const [preferredByCode, setPreferredByCode] = useState({});
-  const [selectedCourses, setSelectedCourses] = useState(new Set());
+  const [selectedCourses, setSelectedCourses] = useState(initialCourses instanceof Set ? initialCourses : new Set());
   const [courseSearch,    setCourseSearch]    = useState("");
   const [error,           setError]           = useState(null);
   const [diagnoses,       setDiagnoses]       = useState([]);
-  const [violations,      setViolations]      = useState([]); // conflict aşaması için
-  const [stage,           setStage]           = useState("form");
+  const [violations,      setViolations]      = useState([]);
+  const [stage,           setStage]           = useState("form"); // form | loading | conflict | preview
   const [generatedSchedule, setGeneratedSchedule] = useState(null);
 
   const daysShort = lang==="tr" ? DAYS_SHORT_TR : DAYS_SHORT_EN;
@@ -443,50 +454,71 @@ export default function AIPanel({ lang, courses, onApply, onClose }) {
       preferredTeachers: allPreferredTeachers,
     };
 
-    const schedule = findBestSchedule(courseList, options);
+    // Hesaplamayı async yap — tarayıcı donmasın
+    setStage("loading");
+    setTimeout(() => {
+      const schedule = findBestSchedule(courseList, options);
 
-    if (!schedule) {
-      // Detaylı analiz yap
-      const diag = analyzeFailure(
-        courseList, freeDays,
-        earliestStart||null, latestEnd||null, lang
+      if (!schedule) {
+        let diag = analyzeFailure(
+          courseList, freeDays,
+          earliestStart||null, latestEnd||null, lang
+        );
+        // Eğer analiz boş dönerse (kombinatöryel tıkanma) — tüm dersleri section bilgisiyle göster
+        if (diag.length === 0) {
+          diag = courseList.map(course => {
+            const sections = course.sections.map(sec => {
+              const violations = [];
+              for (const m of sec.meetings) {
+                if (freeDays.has(m.d)) violations.push(lang==="tr" ? `📅 ${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş` : `📅 ${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
+                if (earliestStart && toMin(m.s) < toMin(earliestStart)) violations.push(lang==="tr" ? `⏰ ${m.s} başlangıcı çok erken (min ${earliestStart})` : `⏰ ${m.s} starts before ${earliestStart}`);
+                if (latestEnd && toMin(m.e) > toMin(latestEnd)) violations.push(lang==="tr" ? `⏰ ${m.e} bitişi çok geç (max ${latestEnd})` : `⏰ ${m.e} ends after ${latestEnd}`);
+              }
+              const uniq = [...new Set(violations)];
+              const meetingStr = sec.meetings.map(m => `${["Pzt","Sal","Çar","Per","Cum"][m.d]} ${m.s}–${m.e}`).join(", ");
+              return { sec, constraintViolations: uniq, meetingStr, passesConstraints: uniq.length===0 };
+            });
+            const hasAnyPassing = sections.some(s => s.passesConstraints);
+            const alternatives = [...sections].sort((a,b) => a.constraintViolations.length - b.constraintViolations.length).slice(0,4);
+            const constraintReasons = hasAnyPassing ? [] : [...new Set(sections.flatMap(s => s.constraintViolations))];
+            return { course, constraintReasons, timeConflictWith: [], alternatives, hasAnyPassing };
+          });
+        }
+        setDiagnoses(diag);
+
+        const hints = [];
+        if (freeDays.size > 0)  hints.push(lang==="tr" ? `${freeDays.size} boş gün` : `${freeDays.size} free days`);
+        if (earliestStart)      hints.push(lang==="tr" ? `en erken ${earliestStart}` : `earliest ${earliestStart}`);
+        if (latestEnd)          hints.push(lang==="tr" ? `en geç ${latestEnd}` : `latest ${latestEnd}`);
+        if (maxDailyHours < 6)  hints.push(lang==="tr" ? `günlük max ${maxDailyHours}s` : `max ${maxDailyHours}h/day`);
+        const hintStr = hints.length ? " (" + hints.join(", ") + ")" : "";
+
+        setError(lang==="tr"
+          ? `Kısıtlara uyan program bulunamadı${hintStr}. Aşağıda sorunlu dersler ve mevcut şubeler gösteriliyor:`
+          : `No valid schedule found${hintStr}. Problematic courses and available sections are shown below:`);
+        setStage("form");
+        return;
+      }
+
+      const forcedCourses = courseList.filter(course =>
+        !course.sections.some(s =>
+          sectionPassesConstraints(s, freeDays, earliestStart||null, latestEnd||null)
+        )
       );
-      setDiagnoses(diag);
+      if (forcedCourses.length > 0) {
+        const diag = analyzeFailure(
+          forcedCourses, freeDays, earliestStart||null, latestEnd||null, lang
+        );
+        setViolations(forcedCourses.map(c => ({ code: c.code })));
+        setDiagnoses(diag);
+        setGeneratedSchedule(schedule);
+        setStage("conflict");
+        return;
+      }
 
-      // Genel hata mesajı
-      const hints = [];
-      if (freeDays.size > 0)  hints.push(lang==="tr" ? `${freeDays.size} boş gün` : `${freeDays.size} free days`);
-      if (earliestStart)      hints.push(lang==="tr" ? `en erken ${earliestStart}` : `earliest ${earliestStart}`);
-      if (latestEnd)          hints.push(lang==="tr" ? `en geç ${latestEnd}` : `latest ${latestEnd}`);
-      if (maxDailyHours < 6)  hints.push(lang==="tr" ? `günlük max ${maxDailyHours}s` : `max ${maxDailyHours}h/day`);
-      const hintStr = hints.length ? " (" + hints.join(", ") + ")" : "";
-
-      setError(lang==="tr"
-        ? `Kısıtlara uyan program bulunamadı${hintStr}. Aşağıda sorunlu dersler ve mevcut şubeler gösteriliyor:`
-        : `No valid schedule found${hintStr}. Problematic courses and available sections are shown below:`);
-      return;
-    }
-
-    // Program bulundu — kısıt geçemeyen var mı? (conflict aşaması)
-    const forcedCourses = courseList.filter(course =>
-      !course.sections.some(s =>
-        sectionPassesConstraints(s, freeDays, earliestStart||null, latestEnd||null)
-      )
-    );
-    if (forcedCourses.length > 0) {
-      // Conflict aşamasında da diagnoses göster
-      const diag = analyzeFailure(
-        forcedCourses, freeDays, earliestStart||null, latestEnd||null, lang
-      );
-      setViolations(forcedCourses.map(c => ({ code: c.code })));
-      setDiagnoses(diag);
       setGeneratedSchedule(schedule);
-      setStage("conflict");
-      return;
-    }
-
-    setGeneratedSchedule(schedule);
-    setStage("preview");
+      setStage("preview");
+    }, 30);
   };
 
   const handleApply = () => {
@@ -494,7 +526,25 @@ export default function AIPanel({ lang, courses, onApply, onClose }) {
     onClose();
   };
 
-  // Önizleme ekranı
+  // ─── Loading ekranı ───────────────────────────────────────────────────────
+  if (stage==="loading") {
+    return (
+      <div className="ai-panel-overlay" onClick={onClose}>
+        <div className="ai-panel" onClick={e=>e.stopPropagation()}>
+          <div className="ai-panel-header">
+            <div className="ai-panel-title">
+              <span className="ai-sparkle">✦</span>
+              {lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}
+            </div>
+            <button className="ai-panel-close" onClick={onClose}>✕</button>
+          </div>
+          <LoadingScreen lang={lang} />
+        </div>
+      </div>
+    );
+  }
+
+  // ─── Önizleme ekranı ──────────────────────────────────────────────────────
   if (stage==="preview") {
     return (
       <div className="ai-panel-overlay" onClick={onClose}>
@@ -519,6 +569,7 @@ export default function AIPanel({ lang, courses, onApply, onClose }) {
     );
   }
 
+  // ─── Form ekranı ──────────────────────────────────────────────────────────
   return (
     <div className="ai-panel-overlay" onClick={onClose}>
       <div className="ai-panel" onClick={e=>e.stopPropagation()}>

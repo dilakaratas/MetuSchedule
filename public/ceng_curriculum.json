@@ -1,1114 +1,549 @@
 {
-  "source": "https://ceng.metu.edu.tr/index.php/tr/lisans-mufredati",
-  "totalCourses": 89,
-  "curriculum": [
+  "universite": "ODTÜ",
+  "bolum": "Bilgisayar Mühendisliği",
+  "kaynak": "https://ceng.metu.edu.tr/index.php/tr/lisans-mufredati",
+  "mufredat": [
     {
-      "year": "Birinci Yıl",
-      "semesters": [
+      "yil": 1,
+      "yil_adi": "Birinci Yıl",
+      "yariyillar": [
         {
-          "semester": null,
-          "courseCount": 14,
-          "courses": [
+          "yariyil": 1,
+          "yariyil_adi": "Birinci Yarıyıl",
+          "dersler": [
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "PHYS105",
-              "courseCode": "2300105",
-              "courseName": "GENERAL PHYSICS I",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2300105"
+              "kod": "PHYS105",
+              "ad": "GENERAL PHYSICS I",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300105"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "BIOL109",
-              "courseCode": "2380109",
-              "courseName": "INTRODUCTION TO MOLECULAR BIOLOGY",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2380109"
+              "kod": "BIOL109",
+              "ad": "INTRODUCTION TO MOLECULAR BIOLOGY",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "2380109"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "MATH119",
-              "courseCode": "2360119",
-              "courseName": "CALCULUS WITH ANALYTIC GEOMETRY",
-              "metuCredit": "5",
-              "lectureHW": "4",
-              "labHW": "2",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360119"
+              "kod": "MATH119",
+              "ad": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "odtu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "2360119"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "CENG100",
-              "courseCode": "5710100",
-              "courseName": "COMPUTER ENGINEERING ORIENTATION",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "1.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710100"
+              "kod": "CENG100",
+              "ad": "COMPUTER ENGINEERING ORIENTATION",
+              "odtu_kredi": 0,
+              "ders_saat": 2,
+              "lab_saat": 0,
+              "ects": 1.0,
+              "catalog_kodu": "5710100"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "CENG111",
-              "courseCode": "5710111",
-              "courseName": "INTRODUCTION TO COMPUTER ENG. CONCEPTS",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "4.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710111"
+              "kod": "CENG111",
+              "ad": "INTRODUCTION TO COMPUTER ENG. CONCEPTS",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "5710111"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "ENG101",
-              "courseCode": "6390101",
-              "courseName": "ENGLISH FOR ACADEMIC PURPOSES I",
-              "metuCredit": "4",
-              "lectureHW": "4",
-              "labHW": "1",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6390101"
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "OHS101",
-              "courseCode": "8770101",
-              "courseName": "OCCUPATIONAL HEALTH AND SAFETY-I",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=567&course_code=8770101"
+              "kod": "OHS101",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770101"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "IS100",
-              "courseCode": "9010100",
-              "courseName": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "2",
-              "ects": "1.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=9010100"
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            }
+          ]
+        },
+        {
+          "yariyil": 2,
+          "yariyil_adi": "İkinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "PHYS106",
+              "ad": "GENERAL PHYSICS II",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300106"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "PHYS106",
-              "courseCode": "2300106",
-              "courseName": "GENERAL PHYSICS II",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2300106"
+              "kod": "MATH120",
+              "ad": "CALCULUS OF FUNCTIONS OF SEVERAL VARIABLES",
+              "odtu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360120"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "MATH120",
-              "courseCode": "2360120",
-              "courseName": "CALCULUS OF FUNCTIONS OF SEVERAL VARIABLES",
-              "metuCredit": "5",
-              "lectureHW": "4",
-              "labHW": "2",
-              "ects": "7.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360120"
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "odtu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "BA100",
-              "courseCode": "3120100",
-              "courseName": "CAREER PLANNING",
-              "metuCredit": "0",
-              "lectureHW": "1",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=3120100"
+              "kod": "MATH260",
+              "ad": "BASIC LINEAR ALGEBRA",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "2360260"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "MATH260",
-              "courseCode": "2360260",
-              "courseName": "BASIC LINEAR ALGEBRA",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360260"
+              "kod": "CENG140",
+              "ad": "C PROGRAMMING",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "5710140"
             },
             {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "CENG140",
-              "courseCode": "5710140",
-              "courseName": "C PROGRAMMING",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "4.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710140"
-            },
-            {
-              "year": "Birinci Yıl",
-              "semester": null,
-              "displayCode": "ENG102",
-              "courseCode": "6390102",
-              "courseName": "ENGLISH FOR ACADEMIC PURPOSES II",
-              "metuCredit": "4",
-              "lectureHW": "4",
-              "labHW": "1",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6390102"
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
             }
           ]
         }
       ]
     },
     {
-      "year": "İkinci Yıl",
-      "semesters": [
+      "yil": 2,
+      "yil_adi": "İkinci Yıl",
+      "yariyillar": [
         {
-          "semester": null,
-          "courseCount": 11,
-          "courses": [
+          "yariyil": 3,
+          "yariyil_adi": "Üçüncü Yarıyıl",
+          "dersler": [
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "MATH219",
-              "courseCode": "2360219",
-              "courseName": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
-              "metuCredit": "4",
-              "lectureHW": "4",
-              "labHW": "0",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360219"
+              "kod": "MATH219",
+              "ad": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 7.0,
+              "catalog_kodu": "2360219"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "EE281",
-              "courseCode": "5670281",
-              "courseName": "ELECTRICAL CIRCUITS",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5670281"
+              "kod": "EE281",
+              "ad": "ELECTRICAL CIRCUITS",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "5670281"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "CENG213",
-              "courseCode": "5710213",
-              "courseName": "DATA STRUCTURES",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710213"
+              "kod": "CENG213",
+              "ad": "DATA STRUCTURES",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "5710213"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "CENG223",
-              "courseCode": "5710223",
-              "courseName": "DISCRETE COMPUTATIONAL STRUCTURES",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710223"
+              "kod": "CENG223",
+              "ad": "DISCRETE COMPUTATIONAL STRUCTURES",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710223"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "ENG211",
-              "courseCode": "6390211",
-              "courseName": "ACADEMIC ORAL PRESENTATION SKILLS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "1",
-              "ects": "4.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6390211"
+              "kod": "ENG211",
+              "ad": "ACADEMIC ORAL PRESENTATION SKILLS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "HIST2205",
-              "courseCode": "2402205",
-              "courseName": "HISTORY OF THE TURKISH REVOLUTION I",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2402205"
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "yariyil": 4,
+          "yariyil_adi": "Dördüncü Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG222",
+              "ad": "STATISTICAL METHODS OF COMPUTER ENGINEERING",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710222"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "CENG222",
-              "courseCode": "5710222",
-              "courseName": "STATISTICAL METHODS OF COMPUTER ENGINEERING",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710222"
+              "kod": "CENG232",
+              "ad": "LOGIC DESIGN",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "5710232"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "CENG232",
-              "courseCode": "5710232",
-              "courseName": "LOGIC DESIGN",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710232"
+              "kod": "CENG242",
+              "ad": "PROGRAMMING LANGUAGE CONCEPTS",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "5710242"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "CENG242",
-              "courseCode": "5710242",
-              "courseName": "PROGRAMMING LANGUAGE CONCEPTS",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710242"
+              "kod": "CENG280",
+              "ad": "FORMAL LANGU.AND ABSTRACT MACHINES",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710280"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "CENG280",
-              "courseCode": "5710280",
-              "courseName": "FORMAL LANGU.AND ABSTRACT MACHINES",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710280"
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
             },
             {
-              "year": "İkinci Yıl",
-              "semester": null,
-              "displayCode": "HIST2206",
-              "courseCode": "2402206",
-              "courseName": "HISTORY OF THE TURKISH REVOLUTION II",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2402206"
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
             }
           ]
         }
       ]
     },
     {
-      "year": "Üçüncü Yıl",
-      "semesters": [
+      "yil": 3,
+      "yil_adi": "Üçüncü Yıl",
+      "yariyillar": [
         {
-          "semester": null,
-          "courseCount": 15,
-          "courses": [
+          "yariyil": 5,
+          "yariyil_adi": "Beşinci Yarıyıl",
+          "dersler": [
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG300",
-              "courseCode": "5710300",
-              "courseName": "SUMMER PRACTICE I",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710300"
+              "kod": "CENG300",
+              "ad": "SUMMER PRACTICE I",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710300"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG315",
-              "courseCode": "5710315",
-              "courseName": "ALGORITHMS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710315"
+              "kod": "CENG315",
+              "ad": "ALGORITHMS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710315"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG331",
-              "courseCode": "5710331",
-              "courseName": "COMPUTER ORGANIZATION",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710331"
+              "kod": "CENG331",
+              "ad": "COMPUTER ORGANIZATION",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710331"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG351",
-              "courseCode": "5710351",
-              "courseName": "DATA MANAGEMENT AND FILE STRUCTURES",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710351"
+              "kod": "CENG351",
+              "ad": "DATA MANAGEMENT AND FILE STRUCTURES",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710351"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "OHS301",
-              "courseCode": "8770301",
-              "courseName": "OCCUPATIONAL HEALTH AND SAFETY-II",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=877&course_code=8770301"
+              "kod": "OHS301",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-II",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770301"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK105",
-              "courseCode": "6420105",
-              "courseName": "TURKISH I",
-              "metuCredit": "0",
-              "lectureHW": "4",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420105"
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "odtu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH",
+                  "catalog_kodu": "6420201",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK303",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420303",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK201",
-              "courseCode": "6420201",
-              "courseName": "ELEMENTARY TURKISH",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "3.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420201"
+              "tur": "KISITLI SEÇMELİ",
+              "aciklama": "Kisitli Seçmeli̇ ders slotu"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK303",
-              "courseCode": "6420303",
-              "courseName": "TURKISH I",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420303"
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            }
+          ]
+        },
+        {
+          "yariyil": 6,
+          "yariyil_adi": "Altıncı Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG334",
+              "ad": "INTRODUCTION TO OPERATING SYSTEMS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.5,
+              "catalog_kodu": "5710334"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG334",
-              "courseCode": "5710334",
-              "courseName": "INTRODUCTION TO OPERATING SYSTEMS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710334"
+              "kod": "CENG336",
+              "ad": "INTRO.TO EMBEDDED SYSTEMS DEVELOPMENT",
+              "odtu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.5,
+              "catalog_kodu": "5710336"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG336",
-              "courseCode": "5710336",
-              "courseName": "INTRO.TO EMBEDDED SYSTEMS DEVELOPMENT",
-              "metuCredit": "3",
-              "lectureHW": "2",
-              "labHW": "2",
-              "ects": "5.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710336"
+              "kod": "CENG350",
+              "ad": "SOFTWARE ENGINEERING",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.5,
+              "catalog_kodu": "5710350"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG350",
-              "courseCode": "5710350",
-              "courseName": "SOFTWARE ENGINEERING",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710350"
+              "kod": "CENG384",
+              "ad": "SIGNALS AND SYSTEMS FOR COMPUTER ENGINEERS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710384"
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG384",
-              "courseCode": "5710384",
-              "courseName": "SIGNALS AND SYSTEMS FOR COMPUTER ENGINEERS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710384"
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "odtu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH",
+                  "catalog_kodu": "6420202",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK304",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420304",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
             },
             {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK106",
-              "courseCode": "6420106",
-              "courseName": "TURKISH II",
-              "metuCredit": "0",
-              "lectureHW": "4",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420106"
-            },
-            {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK202",
-              "courseCode": "6420202",
-              "courseName": "INTERMEDIATE TURKISH",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "3.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420202"
-            },
-            {
-              "year": "Üçüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK304",
-              "courseCode": "6420304",
-              "courseName": "TURKISH II",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420304"
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
             }
           ]
         }
       ]
     },
     {
-      "year": "Dördüncü Yıl",
-      "semesters": [
+      "yil": 4,
+      "yil_adi": "Dördüncü Yıl",
+      "yariyillar": [
         {
-          "semester": null,
-          "courseCount": 49,
-          "courses": [
+          "yariyil": 7,
+          "yariyil_adi": "Yedinci Yarıyıl",
+          "dersler": [
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG400",
-              "courseCode": "5710400",
-              "courseName": "SUMMER PRACTICE II",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710400"
+              "kod": "CENG400",
+              "ad": "SUMMER PRACTICE II",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710400"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG477",
-              "courseCode": "5710477",
-              "courseName": "INTRODUCTION TO COMPUTER GRAPHICS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710477"
+              "kod": "CENG477",
+              "ad": "INTRODUCTION TO COMPUTER GRAPHICS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710477"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG491",
-              "courseCode": "5710491",
-              "courseName": "COMPUTER ENGINEERING DESIGN I",
-              "metuCredit": "4",
-              "lectureHW": "2",
-              "labHW": "4",
-              "ects": "8.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710491"
+              "kod": "CENG491",
+              "ad": "COMPUTER ENGINEERING DESIGN I",
+              "odtu_kredi": 4,
+              "ders_saat": 2,
+              "lab_saat": 4,
+              "ects": 8.0,
+              "catalog_kodu": "5710491"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG492",
-              "courseCode": "5710492",
-              "courseName": "COMPUTER ENGINEERING DESIGN II",
-              "metuCredit": "4",
-              "lectureHW": "2",
-              "labHW": "4",
-              "ects": "8.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710492"
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "PHYS105",
-              "courseCode": "2300105",
-              "courseName": "GENERAL PHYSICS I",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2300105"
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            }
+          ]
+        },
+        {
+          "yariyil": 8,
+          "yariyil_adi": "Sekizinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG492",
+              "ad": "COMPUTER ENGINEERING DESIGN II",
+              "odtu_kredi": 4,
+              "ders_saat": 2,
+              "lab_saat": 4,
+              "ects": 8.0,
+              "catalog_kodu": "5710492"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "PHYS106",
-              "courseCode": "2300106",
-              "courseName": "GENERAL PHYSICS II",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2300106"
+              "tur": "SERBEST SEÇMELİ",
+              "aciklama": "Serbest Seçmeli̇ ders slotu"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "MATH119",
-              "courseCode": "2360119",
-              "courseName": "CALCULUS WITH ANALYTIC GEOMETRY",
-              "metuCredit": "5",
-              "lectureHW": "4",
-              "labHW": "2",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360119"
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "MATH120",
-              "courseCode": "2360120",
-              "courseName": "CALCULUS OF FUNCTIONS OF SEVERAL VARIABLES",
-              "metuCredit": "5",
-              "lectureHW": "4",
-              "labHW": "2",
-              "ects": "7.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360120"
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
             },
             {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "MATH219",
-              "courseCode": "2360219",
-              "courseName": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
-              "metuCredit": "4",
-              "lectureHW": "4",
-              "labHW": "0",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360219"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "MATH260",
-              "courseCode": "2360260",
-              "courseName": "BASIC LINEAR ALGEBRA",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2360260"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "BIOL109",
-              "courseCode": "2380109",
-              "courseName": "INTRODUCTION TO MOLECULAR BIOLOGY",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2380109"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "BA100",
-              "courseCode": "3120100",
-              "courseName": "CAREER PLANNING",
-              "metuCredit": "0",
-              "lectureHW": "1",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=3120100"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "EE281",
-              "courseCode": "5670281",
-              "courseName": "ELECTRICAL CIRCUITS",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5670281"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "EE282",
-              "courseCode": "5670282",
-              "courseName": "INTRODUCTION TO DIGITAL ELECTRONICS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5670282"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG100",
-              "courseCode": "5710100",
-              "courseName": "COMPUTER ENGINEERING ORIENTATION",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "1.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710100"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG111",
-              "courseCode": "5710111",
-              "courseName": "INTRODUCTION TO COMPUTER ENG. CONCEPTS",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "4.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710111"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG140",
-              "courseCode": "5710140",
-              "courseName": "C PROGRAMMING",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "4.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710140"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG213",
-              "courseCode": "5710213",
-              "courseName": "DATA STRUCTURES",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710213"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG222",
-              "courseCode": "5710222",
-              "courseName": "STATISTICAL METHODS FOR COMPUTER ENGINEERING",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710222"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG223",
-              "courseCode": "5710223",
-              "courseName": "DISCRETE COMPUTATIONAL STRUCTURES",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710223"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG232",
-              "courseCode": "5710232",
-              "courseName": "LOGIC DESIGN",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710232"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG242",
-              "courseCode": "5710242",
-              "courseName": "PROGRAMMING LANGUAGE CONCEPTS",
-              "metuCredit": "4",
-              "lectureHW": "3",
-              "labHW": "2",
-              "ects": "7.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710242"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG280",
-              "courseCode": "5710280",
-              "courseName": "FORMAL LANGU.AND ABSTRACT MACHINES",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710280"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG300",
-              "courseCode": "5710300",
-              "courseName": "SUMMER PRACTICE I",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710300"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG315",
-              "courseCode": "5710315",
-              "courseName": "ALGORITHMS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710315"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG331",
-              "courseCode": "5710331",
-              "courseName": "COMPUTER ORGANIZATION",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710331"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG334",
-              "courseCode": "5710334",
-              "courseName": "INTRODUCTION TO OPERATING SYSTEMS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710334"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG336",
-              "courseCode": "5710336",
-              "courseName": "INTRO.TO EMBEDDED SYSTEMS DEVELOPMENT",
-              "metuCredit": "3",
-              "lectureHW": "2",
-              "labHW": "2",
-              "ects": "5.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710336"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG350",
-              "courseCode": "5710350",
-              "courseName": "SOFTWARE ENGINEERING",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.5",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710350"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG351",
-              "courseCode": "5710351",
-              "courseName": "DATA MANAGEMENT AND FILE STRUCTURES",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710351"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG384",
-              "courseCode": "5710384",
-              "courseName": "SIGNALS AND SYSTEMS FOR COMPUTER ENGINEERS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710384"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG400",
-              "courseCode": "5710400",
-              "courseName": "SUMMER PRACTICE II",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710400"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG477",
-              "courseCode": "5710477",
-              "courseName": "INTRODUCTION TO COMPUTER GRAPHICS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "0",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710477"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG491",
-              "courseCode": "5710491",
-              "courseName": "COMPUTER ENGINEERING DESIGN I",
-              "metuCredit": "4",
-              "lectureHW": "2",
-              "labHW": "4",
-              "ects": "8.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710491"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "CENG492",
-              "courseCode": "5710492",
-              "courseName": "COMPUTER ENGINEERING DESIGN II",
-              "metuCredit": "4",
-              "lectureHW": "2",
-              "labHW": "4",
-              "ects": "8.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710492"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "ENG101",
-              "courseCode": "6390101",
-              "courseName": "ENGLISH FOR ACADEMIC PURPOSES I",
-              "metuCredit": "4",
-              "lectureHW": "4",
-              "labHW": "1",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6390101"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "ENG102",
-              "courseCode": "6390102",
-              "courseName": "ENGLISH FOR ACADEMIC PURPOSES II",
-              "metuCredit": "4",
-              "lectureHW": "4",
-              "labHW": "1",
-              "ects": "6.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6390102"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "ENG211",
-              "courseCode": "6390211",
-              "courseName": "ACADEMIC ORAL PRESENTATION SKILLS",
-              "metuCredit": "3",
-              "lectureHW": "3",
-              "labHW": "1",
-              "ects": "4.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6390211"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "OHS101",
-              "courseCode": "8770101",
-              "courseName": "OCCUPATIONAL HEALTH AND SAFETY-I",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=8770101"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "OHS301",
-              "courseCode": "8770301",
-              "courseName": "OCCUPATIONAL HEALTH AND SAFETY - II",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=8770301"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "IS100",
-              "courseCode": "9010100",
-              "courseName": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
-              "metuCredit": "0",
-              "lectureHW": "0",
-              "labHW": "2",
-              "ects": "1.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=9010100"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "HIST2205",
-              "courseCode": "2402205",
-              "courseName": "HISTORY OF THE TURKISH REVOLUTION I",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2402205"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "HIST2206",
-              "courseCode": "2402206",
-              "courseName": "HISTORY OF THE TURKISH REVOLUTION II",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=2402206"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK105",
-              "courseCode": "6420105",
-              "courseName": "TURKISH I",
-              "metuCredit": "0",
-              "lectureHW": "4",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420105"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK106",
-              "courseCode": "6420106",
-              "courseName": "TURKISH II",
-              "metuCredit": "0",
-              "lectureHW": "4",
-              "labHW": "0",
-              "ects": "5.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420106"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK201",
-              "courseCode": "6420201",
-              "courseName": "ELEMENTARY TURKISH",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "3.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420201"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK202",
-              "courseCode": "6420202",
-              "courseName": "INTERMEDIATE TURKISH",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "3.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420202"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK303",
-              "courseCode": "6420303",
-              "courseName": "TURKISH I",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420303"
-            },
-            {
-              "year": "Dördüncü Yıl",
-              "semester": null,
-              "displayCode": "TURK304",
-              "courseCode": "6420304",
-              "courseName": "TURKISH II",
-              "metuCredit": "0",
-              "lectureHW": "2",
-              "labHW": "0",
-              "ects": "2.0",
-              "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=6420304"
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
             }
           ]
         }

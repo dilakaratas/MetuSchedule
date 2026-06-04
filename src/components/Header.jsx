@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 
-export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN, sidebarOpen, onToggleSidebar, onOpenAI, onOpenAutoSchedule, user, onLogout }) {
+export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN, sidebarOpen, onToggleSidebar, onOpenAI, onOpenAutoSchedule, onOpenCurriculum, user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
-  // Menü dışına tıklanınca kapat
   useEffect(() => {
     if (!menuOpen) return;
     const handler = (e) => {
@@ -16,7 +15,6 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
     return () => document.removeEventListener("mousedown", handler);
   }, [menuOpen]);
 
-  // Kullanıcı baş harfleri (avatar için)
   const initials = user?.name
     ? user.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()
     : (user?.username?.[0] || "?").toUpperCase();
@@ -24,7 +22,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
   return (
     <header className="header">
 
-      {/* Sidebar toggle — masaüstünde görünür, mobilde gizli */}
+      {/* Sidebar toggle */}
       <button
         className="sidebar-toggle-btn hide-mobile"
         onClick={onToggleSidebar}
@@ -39,7 +37,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
         </svg>
       </button>
 
-      {/* Logo + isim */}
+      {/* Logo */}
       <div className="brand">
         <div className="logo">
           <img src="/metu-logo.svg" alt="ODTÜ" width="44" height="40" />
@@ -66,6 +64,15 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
       {/* Aksiyonlar */}
       <div className="header-actions">
 
+        {/* Müfredattan Oluştur */}
+        <button className="btn btn-ghost hide-mobile" onClick={onOpenCurriculum} style={{ gap: 5 }}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.4"/>
+            <path d="M5 6h6M5 9h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+          </svg>
+          <span className="btn-label">{lang === "tr" ? "Müfredat" : "Curriculum"}</span>
+        </button>
+
         {/* Otomatik Program */}
         <button className="btn ai-btn" onClick={onOpenAutoSchedule || onOpenAI}>
           <span>✦</span>
@@ -79,7 +86,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <button className={lang === "en" ? "active" : ""} onClick={() => setLang("en")} role="tab">EN</button>
         </div>
 
-        {/* CRN Kopyala — mobilde gizli */}
+        {/* CRN Kopyala */}
         <button className="btn btn-ghost hide-mobile" onClick={onCopyCRN} disabled={selected.length === 0}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
             <rect x="4" y="4" width="9" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
@@ -88,7 +95,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <span className="btn-label">{tr.copyCRN}</span>
         </button>
 
-        {/* PNG İndir — mobilde gizli */}
+        {/* PNG İndir */}
         <button className="btn btn-ghost hide-mobile" onClick={() => window.print()} disabled={selected.length === 0}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
             <path d="M3 8 L3 2 L13 2 L13 8 M3 12 L1 12 L1 8 L15 8 L15 12 L13 12 M4 12 L12 12 L12 15 L4 15 Z"
@@ -105,7 +112,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <span className="btn-label hide-mobile-inline">{tr.clearAll}</span>
         </button>
 
-        {/* Kullanıcı avatar + çıkış menüsü */}
+        {/* Kullanıcı menüsü */}
         {user && (
           <div className="user-menu-wrap" ref={menuRef}>
             <button
@@ -116,7 +123,6 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
             >
               {initials}
             </button>
-
             {menuOpen && (
               <div className="user-dropdown" role="menu">
                 <div className="user-dropdown-info">
