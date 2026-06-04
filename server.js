@@ -11,7 +11,7 @@ app.use(express.json());
 
 const PORT        = process.env.PORT        || 3001;
 const JWT_SECRET  = process.env.JWT_SECRET  || "degistir-beni-gizli-key";
-const SERVICE_URL = "http://144.122.198.33";
+const SERVICE_URL = "http://planify.metu.edu.tr/";
 
 const TEST_USERS = [
   { username: "admin", password: "admin123", name: "Admin", role: "admin" },
