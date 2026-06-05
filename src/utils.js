@@ -20,10 +20,10 @@ const TOTAL_SLOTS = TIME_SLOTS.length;
 // Header ~72px, padding ~40px → kalan alanı 9'a böl
 // Min 60px, max 90px arasında sınırla
 function calcSlotHeight() {
-  if (typeof window === "undefined") return 78;
+  if (typeof window === "undefined") return 82;
   const available = window.innerHeight - 72 - 40 - 48; // header + padding + dayhead
   const h = Math.floor(available / TOTAL_SLOTS);
-  return Math.min(90, Math.max(60, h));
+  return Math.min(100, Math.max(70, h));
 }
 
 export let SLOT_HEIGHT = calcSlotHeight();

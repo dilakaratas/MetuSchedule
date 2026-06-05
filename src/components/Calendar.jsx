@@ -163,6 +163,12 @@ export default function Calendar({
               .map((b) => {
                 const hasConflict = !!conflicts[b.courseKey];
                 const isFlash = conflictFlash === b.courseKey;
+                const conflictWithKey = conflicts[b.courseKey];
+                const conflictWithCode = conflictWithKey ? conflictWithKey.split("-")[0] : null;
+                const conflictWithCourse = conflictWithCode ? courses.find(c => c.code === conflictWithCode) : null;
+                const conflictWithName = conflictWithCourse
+                  ? (lang === "tr" ? conflictWithCourse.nameTr : conflictWithCourse.name)
+                  : conflictWithCode;
 
                 return (
                   <CalendarBlock
@@ -170,6 +176,7 @@ export default function Calendar({
                     block={b}
                     tr={tr}
                     hasConflict={hasConflict}
+                    conflictWithName={conflictWithName}
                     isFlash={isFlash}
                     onRemove={() => removeSelected(b.code)}
                     onCourseClick={onCourseClick}
@@ -187,6 +194,7 @@ function CalendarBlock({
   block,
   tr,
   hasConflict,
+  conflictWithName,
   isFlash,
   onRemove,
   onCourseClick,
@@ -261,7 +269,9 @@ function CalendarBlock({
       )}
 
       {hasConflict && tier !== "xs" && (
-        <div className="cal-block-warn">⚠ {tr.conflict}</div>
+        <div className="cal-block-warn">
+          ⚠ {conflictWithName ? `${conflictWithName} ile çakışıyor` : tr.conflict}
+        </div>
       )}
     </div>
   );

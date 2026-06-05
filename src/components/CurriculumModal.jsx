@@ -321,6 +321,7 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
   const [loading,       setLoading]       = useState(false);
   const [error,         setError]         = useState(null);
   const [selectedYil,   setSelectedYil]   = useState(null);
+  const [selectedYariyil, setSelectedYariyil] = useState(null); // null = tümü
   const [activeTab,     setActiveTab]     = useState("zorunlu");
   const [viewFilter,    setViewFilter]    = useState("all");
   const [done,          setDone]          = useState(() => loadDone(CURRICULA[0].file));
@@ -410,19 +411,25 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
   const yilDersleri = useMemo(() => {
     if (!yilData) return [];
     const list = [];
-    yilData.yariyillar.forEach(y =>
+    const yariyillar = selectedYariyil
+      ? yilData.yariyillar.filter(y => y.yariyil === selectedYariyil)
+      : yilData.yariyillar;
+    yariyillar.forEach(y =>
       y.dersler.forEach(d => {
         if (d.kod) list.push(d);
         else if (d.secenekler) d.secenekler.forEach(s => list.push(s));
       })
     );
     return list;
-  }, [yilData]);
+  }, [yilData, selectedYariyil]);
 
-  const matchedYilDersleri = useMemo(
-    () => yilDersleri.filter(d => findInCatalog(d, courses)),
-    [yilDersleri, courses]
-  );
+  const matchedYilDersleri = useMemo(() => {
+    let list = yilDersleri.filter(d => findInCatalog(d, courses));
+    // viewFilter: "all"=tümü, "done"=alınanlar, "todo"=kalanlar
+    if (viewFilter === "todo") list = list.filter(d => !done.has(normCode(d.kod)));
+    if (viewFilter === "done") list = list.filter(d => done.has(normCode(d.kod)));
+    return list;
+  }, [yilDersleri, courses, viewFilter, done]);
 
   const zorunluList = useMemo(() => cengCourses?.zorunlu_dersler || [], [cengCourses]);
   const servisList  = useMemo(() => cengCourses?.servis_dersleri  || [], [cengCourses]);
@@ -446,7 +453,11 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
 
   const handleApply = () => {
     if (!matchedYilDersleri.length) return;
-    onApplyToScheduler(new Set(matchedYilDersleri.map(d => normCode(d.kod))));
+    // catalog_kodu varsa onu kullan (metu_courses_clean'deki c.code ile eşleşir)
+    // yoksa normCode(d.kod) fallback
+    onApplyToScheduler(new Set(matchedYilDersleri.map(d =>
+      d.catalog_kodu ? String(d.catalog_kodu) : normCode(d.kod)
+    )));
     onClose();
   };
 
@@ -619,6 +630,37 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
                   })}
                 </div>
               </div>
+
+              {/* ── Yarıyıl seç ── */}
+              {selectedYil && yilData && (
+                <div style={{ marginBottom: 12 }}>
+                  <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                    {tr ? "Dönem" : "Semester"}
+                  </div>
+                  <div style={{ display: "flex", gap: 7 }}>
+                    <button onClick={() => setSelectedYariyil(null)} style={{
+                      padding: "5px 12px", borderRadius: 8, fontSize: "0.8rem",
+                      cursor: "pointer", fontWeight: 600, transition: "all .12s",
+                      border: selectedYariyil === null ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+                      background: selectedYariyil === null ? "#7a1f2b" : "#fff",
+                      color: selectedYariyil === null ? "#fff" : "#333",
+                    }}>
+                      {tr ? "Tümü" : "All"}
+                    </button>
+                    {yilData.yariyillar.map(yy => (
+                      <button key={yy.yariyil} onClick={() => setSelectedYariyil(selectedYariyil === yy.yariyil ? null : yy.yariyil)} style={{
+                        padding: "5px 12px", borderRadius: 8, fontSize: "0.8rem",
+                        cursor: "pointer", fontWeight: 600, transition: "all .12s",
+                        border: selectedYariyil === yy.yariyil ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+                        background: selectedYariyil === yy.yariyil ? "#7a1f2b" : "#fff",
+                        color: selectedYariyil === yy.yariyil ? "#fff" : "#333",
+                      }}>
+                        {yy.yariyil_adi || `${yy.yariyil}. Dönem`}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
 
               {/* ── Filtre toggle + Temizle ── */}
               {selectedYil && yilData && (
@@ -831,9 +873,8 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
             color: matchedYilDersleri.length ? "#fff" : "#aaa",
             fontSize: "0.85rem",
             cursor: matchedYilDersleri.length ? "pointer" : "not-allowed",
-            fontWeight: 700, display: "flex", alignItems: "center", gap: 6,
+            fontWeight: 700,
           }}>
-            <span>✦</span>
             {selectedYil
               ? (tr
                   ? `${matchedYilDersleri.length} dersi Planlarıcıya Yükle`

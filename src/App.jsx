@@ -11,6 +11,8 @@ import { I18N } from "./i18n.js";
 import { findConflicts } from "./utils.js";
 import { saveToken, validateCasTicket } from "./api/auth.js";
 
+const normCode = (s) => (s || "").replace(/\s+/g, "").toUpperCase();
+
 export default function App() {
   const [user, setUser] = useState(() => {
     const token =
@@ -35,7 +37,7 @@ export default function App() {
     setCasLoading(true);
     setCasError("");
 
-    validateCasTicket(ticket, "http://144.122.198.33")
+    validateCasTicket(ticket, "http://planify.metu.edu.tr/")
       .then(({ token, user: userData }) => {
         saveToken(token);
         localStorage.setItem("metu-user", JSON.stringify(userData));
@@ -51,10 +53,15 @@ export default function App() {
   };
 
   const handleLogout = () => {
+    // Önce tüm local state'i temizle
     setUser(null);
     localStorage.removeItem("metu-user");
     localStorage.removeItem("metu-token");
     sessionStorage.removeItem("metu-token");
+    sessionStorage.removeItem("metu-user");
+    // Sonra CAS oturumunu kapat — service parametresi login sayfasına yönlendirir
+    const service = encodeURIComponent("http://planify.metu.edu.tr/");
+    window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
   };
 
   if (casLoading) {
@@ -158,15 +165,48 @@ function MainApp({ user, onLogout }) {
       return;
     }
     const cleaned = selected.filter((s) => s.code !== code);
-    const newSelected = [...cleaned, { code, sectionId }];
-    setSelected(newSelected);
+    const trial = [...cleaned, { code, sectionId }];
+    const newConflicts = findConflicts(trial, courses);
+    const conflictKey = `${code}-${sectionId}`;
+
+    if (newConflicts[conflictKey]) {
+      // Çakışan dersin kodunu bul
+      const conflictingKey = newConflicts[conflictKey]; // "OTHERCODE-01"
+      const conflictingCode = conflictingKey.split("-")[0];
+      const conflictingCourse = courses.find(c => c.code === conflictingCode);
+      const conflictName = conflictingCourse?.name || conflictingCode;
+
+      // Alternatif section var mı?
+      const course = courses.find(c => c.code === code);
+      const alt = course?.sections.find(sec => {
+        if (sec.id === sectionId) return false;
+        const t2 = [...cleaned, { code, sectionId: sec.id }];
+        return !findConflicts(t2, courses)[`${code}-${sec.id}`];
+      });
+
+      if (alt) {
+        // Alternatif section öner
+        setConflictFlash(conflictKey);
+        setTimeout(() => setConflictFlash(null), 800);
+        const msg = `⚠ §${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`;
+        toast(msg);
+        // Alternatifi otomatik ekle
+        const newSelected = [...cleaned, { code, sectionId: alt.id }];
+        setSelected(newSelected);
+      } else {
+        toast(`⚠ ${code} için uygun section yok — tüm sectionlar ${conflictName} ile çakışıyor.`);
+        setConflictFlash(conflictKey);
+        setTimeout(() => setConflictFlash(null), 800);
+      }
+      setSidebarOpen(false);
+      setMobileTab("calendar");
+      return;
+    }
+
+    // Çakışma yok, normal ekle
+    setSelected(trial);
     setSidebarOpen(false);
     setMobileTab("calendar");
-    const newConflicts = findConflicts(newSelected, courses);
-    if (newConflicts[`${code}-${sectionId}`]) {
-      setConflictFlash(`${code}-${sectionId}`);
-      setTimeout(() => setConflictFlash(null), 800);
-    }
   };
 
   const removeSelected = (code) =>
@@ -227,9 +267,34 @@ function MainApp({ user, onLogout }) {
   };
 
   const handleCurriculumApply = (codes) => {
-    setCurriculumCodes(codes);
+    // Her ders kodu için katalogdan ilk section'ı bul ve takvime ekle
+    const newEntries = [];
+    codes.forEach((normCd) => {
+      const course = courses.find((c) => c.code === normCd || normCode(c.code) === normCd);
+      if (!course || !course.sections?.length) return;
+      // Çakışmayan ilk section'ı bul, yoksa ilkini al
+      const existing = [...selected, ...newEntries];
+      let picked = course.sections.find((sec) => {
+        const trial = [...existing, { code: course.code, sectionId: sec.id }];
+        return !findConflicts(trial, courses)[`${course.code}-${sec.id}`];
+      }) || course.sections[0];
+      newEntries.push({ code: course.code, sectionId: picked.id });
+    });
+
+    if (!newEntries.length) return;
+
+    // Mevcut seçimde olmayan dersleri ekle (aynı ders zaten varsa geçme)
+    const merged = [...selected];
+    newEntries.forEach((entry) => {
+      if (!merged.find((s) => s.code === entry.code)) {
+        merged.push(entry);
+      }
+    });
+    setSelected(merged);
     setCurriculumOpen(false);
-    setAiPanelOpen(true);
+    setSidebarOpen(false);
+    setMobileTab("calendar");
+    toast(`${newEntries.length} ders takvime eklendi`);
   };
 
   const conflictCount = Object.keys(conflicts).length / 2;
@@ -282,7 +347,13 @@ function MainApp({ user, onLogout }) {
         sidebarOpen={sidebarOpen}
         onToggleSidebar={() => setSidebarOpen((v) => !v)}
         onOpenAI={() => setChatBotOpen(true)}
-        onOpenAutoSchedule={() => { setCurriculumCodes(null); setAiPanelOpen(true); }}
+        onOpenAutoSchedule={() => {
+          const preselected = selected.length > 0
+            ? new Set(selected.map(s => s.code))
+            : null;
+          setCurriculumCodes(preselected);
+          setAiPanelOpen(true);
+        }}
         onOpenCurriculum={() => setCurriculumOpen(true)}
         user={user}
         onLogout={onLogout}

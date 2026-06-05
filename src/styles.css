@@ -649,7 +649,7 @@ input { font-family: inherit; }
   min-height: 0;
   overflow: auto;
   background: var(--paper);
-  padding: 16px 20px 24px;
+  padding: 16px 20px 32px;
   -webkit-overflow-scrolling: touch;
   display: flex;
   flex-direction: column;
@@ -666,9 +666,8 @@ input { font-family: inherit; }
   overflow: hidden;
   box-shadow: var(--shadow-md);
   min-width: 600px;
-  /* Dersler 17:40 sonrasÄ±na taÅŸarsa takvim dikey scroll ile devam etsin */
   flex: none;
-  min-height: 500px;
+  min-height: 700px;
 }
 
 /* Saat ve gÃƒÂ¼n sÃƒÂ¼tunlarÃ„Â± flex Ã¢â‚¬â€ yÃƒÂ¼ksekliÃ„Å¸i eÃ…Å¸it bÃƒÂ¶ler */

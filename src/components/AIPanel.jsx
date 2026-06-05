@@ -392,7 +392,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
   const [compactMode,     setCompactMode]     = useState("any");
   const [creditLimit,     setCreditLimit]     = useState("");
   const [preferredByCode, setPreferredByCode] = useState({});
-  const [selectedCourses, setSelectedCourses] = useState(initialCourses instanceof Set ? initialCourses : new Set());
+  const [selectedCourses, setSelectedCourses] = useState(() => { if (!initialCourses) return new Set(); if (initialCourses instanceof Set) return initialCourses; if (typeof initialCourses[Symbol.iterator] === "function") return new Set(initialCourses); return new Set(); });
   const [courseSearch,    setCourseSearch]    = useState("");
   const [error,           setError]           = useState(null);
   const [diagnoses,       setDiagnoses]       = useState([]);
