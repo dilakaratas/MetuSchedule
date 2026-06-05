@@ -1,0 +1,632 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "Çevre Mühendisliği",
+  "kod": "ENVE",
+  "fac_prog": 560,
+  "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=560",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "FIRST YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Semester 1",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "PHYS105",
+              "ad": "GENERAL PHYSICS I",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300105"
+            },
+            {
+              "kod": "CHEM107",
+              "ad": "GENERAL CHEMISTRY",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2340107"
+            },
+            {
+              "kod": "MATH119",
+              "ad": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "2360119"
+            },
+            {
+              "kod": "ENVE101",
+              "ad": "INTRODUCTION TO ENVIRONMENTAL ENG.",
+              "metu_kredi": 2,
+              "ders_saat": 2,
+              "lab_saat": 0,
+              "ects": 3.0,
+              "catalog_kodu": "5600101"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "OHS101",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770101"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "PHYS106",
+              "ad": "GENERAL PHYSICS II",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300106"
+            },
+            {
+              "kod": "MATH120",
+              "ad": "CALCULUS OF FUNCTIONS OF SEVERAL VARIABLES",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360120"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "metu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "ENVE102",
+              "ad": "ENVIRONMENTAL CHEMISTRY I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600102"
+            },
+            {
+              "kod": "CE101",
+              "ad": "CIVIL ENGINEERING DRAWING",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "5620101"
+            },
+            {
+              "kod": "CENG240",
+              "ad": "PROGRAMMING WITH PYTHON FOR ENGINEERS",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "5710240"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "SECOND YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Semester 3",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "CHEM229",
+              "ad": "ORGANIC CHEMISTRY FOR ENGINEERS",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2340229"
+            },
+            {
+              "kod": "MATH219",
+              "ad": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 7.0,
+              "catalog_kodu": "2360219"
+            },
+            {
+              "kod": "ENVE201",
+              "ad": "FUNDAMENTALS OF ENVIRONMENTAL ENG.PRO.",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600201"
+            },
+            {
+              "kod": "ENVE208",
+              "ad": "ENVIRONMENTAL CHEMISTRY LABORATORY",
+              "metu_kredi": 3,
+              "ders_saat": 1,
+              "lab_saat": 4,
+              "ects": 3.0,
+              "catalog_kodu": "5600208"
+            },
+            {
+              "kod": "ES223",
+              "ad": "STATICS AND STRENGTH OF MATERIALS",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5610223"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC  SPEAKING SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "32"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ENVE202",
+              "ad": "ENVIRONMENTAL MICROBIOLOGY",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "5600202"
+            },
+            {
+              "kod": "ENVE206",
+              "ad": "PHYSICO-CHEMICAL PRIN.OF ENVIRON.ENG.",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600206"
+            },
+            {
+              "kod": "ENVE307",
+              "ad": "AIR POLLUTION",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600307"
+            },
+            {
+              "kod": "ES303",
+              "ad": "STATISTICAL METHODS FOR ENGINEERS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5610303"
+            },
+            {
+              "kod": "CHE204",
+              "ad": "THERMODYNAMICS I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 7.0,
+              "catalog_kodu": "5630204"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "30"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "THIRD YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Semester 5",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ENVE300",
+              "ad": "SUMMER PRACTICE I",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600300"
+            },
+            {
+              "kod": "ENVE303",
+              "ad": "UNIT OP. & PROCES. OF WATER TREAT.",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5600303"
+            },
+            {
+              "kod": "ENVE309",
+              "ad": "FUNDAMENTALS OF BIOLOGICAL TREATMENT",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5600309"
+            },
+            {
+              "kod": "CE374",
+              "ad": "FLUID MECHANICS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5620374"
+            },
+            {
+              "kod": "CE375",
+              "ad": "ENVIRONMENTAL ENGINEERING HYDROLOGY",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5620375"
+            },
+            {
+              "kod": "OHS301",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770301"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH I",
+                  "catalog_kodu": "6420201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK303",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420303",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "NONTECHNICAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "39"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ENVE304",
+              "ad": "UNIT OP. & PROCES.OF WASTEWATER TREAT.",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5600304"
+            },
+            {
+              "kod": "ENVE312",
+              "ad": "WATER SUPPLY AND URBAN DRAINAGE",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5600312"
+            },
+            {
+              "kod": "ENVE322",
+              "ad": "TRANSPORT PROCESSES IN ENVIRONMENTAL ENGINEERING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5600322"
+            },
+            {
+              "kod": "ES361",
+              "ad": "COMPUTING METHODS IN ENGINEERING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5610361"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH I",
+                  "catalog_kodu": "6420202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK304",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420304",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            },
+            {
+              "tur": "RESTRICTED ELECTIVE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "FOURTH YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Semester 7",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ENVE400",
+              "ad": "SUMMER PRACTICE II",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600400"
+            },
+            {
+              "kod": "ENVE404",
+              "ad": "ENVIRONMENTAL MODELING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5600404"
+            },
+            {
+              "kod": "ENVE407",
+              "ad": "ENVIRONMENTAL ENGINEERING DESIGN I",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "5600407"
+            },
+            {
+              "kod": "ENVE412",
+              "ad": "SOLID WASTE MANAGEMENT",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5600412"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ENVE408",
+              "ad": "ENVIRONMENTAL ENGINEERING DESIGN II",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "5600408"
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

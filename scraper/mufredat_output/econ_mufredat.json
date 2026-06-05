@@ -1,0 +1,479 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "İktisat",
+  "kod": "ECON",
+  "fac_prog": 311,
+  "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=311",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "FIRST YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Semester 1",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "MATH119",
+              "ad": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "2360119"
+            },
+            {
+              "kod": "ECON101",
+              "ad": "INTRODUCTION TO ECONOMICS I",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 8.0,
+              "catalog_kodu": "3110101"
+            },
+            {
+              "kod": "ECON105",
+              "ad": "INTRODUCTION TO RESEARCH METHODS I",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.0,
+              "catalog_kodu": "3110105"
+            },
+            {
+              "kod": "ECON107",
+              "ad": "ECONOMY. SOCIETY. AND CIVILIZATION I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "3110107"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK101",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420101",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH I",
+                  "catalog_kodu": "6420201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "34"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "MATH120",
+              "ad": "CALCULUS OF FUNCTIONS OF SEVERAL VARIABLES",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360120"
+            },
+            {
+              "kod": "ECON102",
+              "ad": "INTRODUCTION TO ECONOMICS II",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 8.0,
+              "catalog_kodu": "3110102"
+            },
+            {
+              "kod": "ECON106",
+              "ad": "INTRODUCTION TO RESEARCH METHODS II",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "3110106"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "metu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK102",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420102",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH I",
+                  "catalog_kodu": "6420202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "",
+                  "ad": "ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "35.5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "SECOND YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Semester 3",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "MATH260",
+              "ad": "BASIC LINEAR ALGEBRA",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "2360260"
+            },
+            {
+              "kod": "ECON201",
+              "ad": "MICROECONOMIC THEORY I",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "3110201"
+            },
+            {
+              "kod": "ECON202",
+              "ad": "MACROECONOMIC THEORY I",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "3110202"
+            },
+            {
+              "kod": "ECON205",
+              "ad": "STATISTICS FOR ECONOMISTS I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3110205"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "33"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ECON203",
+              "ad": "MICROECONOMIC THEORY II",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "3110203"
+            },
+            {
+              "kod": "ECON204",
+              "ad": "MACROECONOMIC THEORY II",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "3110204"
+            },
+            {
+              "kod": "ECON206",
+              "ad": "STATISTICS FOR ECONOMISTS II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3110206"
+            },
+            {
+              "kod": "ECON208",
+              "ad": "SOCIAL AND ECONOMIC HISTORY II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3110208"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC  SPEAKING SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "32"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "THIRD YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Semester 5",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ECON301",
+              "ad": "INTRODUCTION TO ECONOMETRICS I",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "3110301"
+            },
+            {
+              "kod": "ECON361",
+              "ad": "HISTORY OF ECONOMIC THOUGHT I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3110361"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ECON302",
+              "ad": "INTRODUCTION TO ECONOMETRICS II",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "3110302"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "FOURTH YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Semester 7",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ECON460",
+              "ad": "STRUCTURE OF THE TURKISH ECONOMY",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3110460"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

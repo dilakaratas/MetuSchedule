@@ -1,0 +1,505 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "Siyaset Bilimi ve Kamu Yönetimi",
+  "kod": "PADM",
+  "fac_prog": 314,
+  "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=314",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "FIRST YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Semester 1",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ADM1121",
+              "ad": "INTRODUCTION TO POLITICS I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3101121"
+            },
+            {
+              "kod": "ECON101",
+              "ad": "INTRODUCTION TO ECONOMICS I",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 8.0,
+              "catalog_kodu": "3110101"
+            },
+            {
+              "kod": "IR101",
+              "ad": "WORLD HISTORY I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140101"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            },
+            {
+              "secmeli_grup": "Any 2 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK101",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420101",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH I",
+                  "catalog_kodu": "6420201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                }
+              ]
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "MATH117",
+                  "ad": "CALCULUS I",
+                  "catalog_kodu": "2360117",
+                  "metu_kredi": 5,
+                  "ders_saat": 4,
+                  "lab_saat": 2,
+                  "ects": 7.5
+                },
+                {
+                  "kod": "IR104",
+                  "ad": "COMPARATIVE HISTORY OF CIVILIZATION",
+                  "catalog_kodu": "3140104",
+                  "metu_kredi": 3,
+                  "ders_saat": 3,
+                  "lab_saat": 0,
+                  "ects": 8.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "38.5"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ADM1122",
+              "ad": "INTRODUCTION TO POLITICS II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3101122"
+            },
+            {
+              "kod": "ECON102",
+              "ad": "INTRODUCTION TO ECONOMICS II",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 8.0,
+              "catalog_kodu": "3110102"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "metu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "IR102",
+              "ad": "WORLD HISTORY II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140102"
+            },
+            {
+              "kod": "IR110",
+              "ad": "HISTORY OF INTERNATIONAL POLITICAL THEORY",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3140110"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK102",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420102",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH I",
+                  "catalog_kodu": "6420202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "38"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "SECOND YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Semester 3",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "IR215",
+              "ad": "INTRODUCTION TO LAW FOR INTERNATIONAL RELATIONS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3140215"
+            },
+            {
+              "kod": "IR231",
+              "ad": "INTRODUCTION TO INTERNATIONAL POLITICS I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140231"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "DEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "",
+                  "ad": "DEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "",
+                  "ad": "NONDEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "34"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "IR224",
+              "ad": "RESEARCH METHODS IN INTERNATIONAL RELATIONS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140224"
+            },
+            {
+              "kod": "IR232",
+              "ad": "INTRO.  TO INTERNATIONAL POLITICS II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140232"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC  SPEAKING SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "DEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "",
+                  "ad": "NONDEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "34"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "THIRD YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Semester 5",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "IR305",
+              "ad": "PUBLIC INTERNATIONAL LAW I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140305"
+            },
+            {
+              "kod": "IR345",
+              "ad": "TURKISH FOREIGN POLICY I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140345"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "IR306",
+              "ad": "PUBLIC INTERNATIONAL LAW II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140306"
+            },
+            {
+              "kod": "IR326",
+              "ad": "INTERNATIONAL ORGANIZATION",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140326"
+            },
+            {
+              "kod": "IR346",
+              "ad": "TURKISH FOREIGN POLICY II",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 8.0,
+              "catalog_kodu": "3140346"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "FOURTH YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Semester 7",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

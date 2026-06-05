@@ -1,0 +1,326 @@
+[
+  {
+    "kod": "ARCH",
+    "ad": "Mimarlık",
+    "fac_prog": 112,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=112",
+    "dosya": "arch_mufredat.json"
+  },
+  {
+    "kod": "CRP",
+    "ad": "Şehir ve Bölge Planlama",
+    "fac_prog": 113,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=113",
+    "dosya": "crp_mufredat.json"
+  },
+  {
+    "kod": "ID",
+    "ad": "Endüstriyel Tasarım",
+    "fac_prog": 125,
+    "yil_sayisi": 4,
+    "ders_sayisi": 47,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=125",
+    "dosya": "id_mufredat.json"
+  },
+  {
+    "kod": "BIO",
+    "ad": "Biyolojik Bilimler",
+    "fac_prog": 211,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=211",
+    "dosya": "bio_mufredat.json"
+  },
+  {
+    "kod": "CHEM",
+    "ad": "Kimya",
+    "fac_prog": 213,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=213",
+    "dosya": "chem_mufredat.json"
+  },
+  {
+    "kod": "HIST",
+    "ad": "Tarih",
+    "fac_prog": 218,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=218",
+    "dosya": "hist_mufredat.json"
+  },
+  {
+    "kod": "MATH",
+    "ad": "Matematik",
+    "fac_prog": 219,
+    "yil_sayisi": 4,
+    "ders_sayisi": 53,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=219",
+    "dosya": "math_mufredat.json"
+  },
+  {
+    "kod": "PHIL",
+    "ad": "Felsefe",
+    "fac_prog": 221,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=221",
+    "dosya": "phil_mufredat.json"
+  },
+  {
+    "kod": "PHYS",
+    "ad": "Fizik",
+    "fac_prog": 222,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=222",
+    "dosya": "phys_mufredat.json"
+  },
+  {
+    "kod": "PSY",
+    "ad": "Psikoloji",
+    "fac_prog": 223,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=223",
+    "dosya": "psy_mufredat.json"
+  },
+  {
+    "kod": "SOC",
+    "ad": "Sosyoloji",
+    "fac_prog": 224,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=224",
+    "dosya": "soc_mufredat.json"
+  },
+  {
+    "kod": "STAT",
+    "ad": "İstatistik",
+    "fac_prog": 225,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=225",
+    "dosya": "stat_mufredat.json"
+  },
+  {
+    "kod": "BA",
+    "ad": "İşletme",
+    "fac_prog": 312,
+    "yil_sayisi": 4,
+    "ders_sayisi": 42,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=312",
+    "dosya": "ba_mufredat.json"
+  },
+  {
+    "kod": "ECON",
+    "ad": "İktisat",
+    "fac_prog": 311,
+    "yil_sayisi": 4,
+    "ders_sayisi": 36,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=311",
+    "dosya": "econ_mufredat.json"
+  },
+  {
+    "kod": "IR",
+    "ad": "Uluslararası İlişkiler",
+    "fac_prog": 313,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=313",
+    "dosya": "ir_mufredat.json"
+  },
+  {
+    "kod": "PADM",
+    "ad": "Siyaset Bilimi ve Kamu Yönetimi",
+    "fac_prog": 314,
+    "yil_sayisi": 4,
+    "ders_sayisi": 36,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=314",
+    "dosya": "padm_mufredat.json"
+  },
+  {
+    "kod": "CEIT",
+    "ad": "Bilgisayar ve Öğretim Teknolojileri",
+    "fac_prog": 415,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=415",
+    "dosya": "ceit_mufredat.json"
+  },
+  {
+    "kod": "EDS",
+    "ad": "Eğitim Bilimleri",
+    "fac_prog": 414,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=414",
+    "dosya": "eds_mufredat.json"
+  },
+  {
+    "kod": "EECE",
+    "ad": "Temel Eğitim",
+    "fac_prog": 411,
+    "yil_sayisi": 4,
+    "ders_sayisi": 55,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=411",
+    "dosya": "eece_mufredat.json"
+  },
+  {
+    "kod": "FLE",
+    "ad": "Yabancı Diller Eğitimi",
+    "fac_prog": 413,
+    "yil_sayisi": 4,
+    "ders_sayisi": 51,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=413",
+    "dosya": "fle_mufredat.json"
+  },
+  {
+    "kod": "PES",
+    "ad": "Beden Eğitimi ve Spor",
+    "fac_prog": 416,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=416",
+    "dosya": "pes_mufredat.json"
+  },
+  {
+    "kod": "MSE",
+    "ad": "Matematik ve Fen Bilimleri Eğitimi",
+    "fac_prog": 412,
+    "yil_sayisi": 4,
+    "ders_sayisi": 50,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=412",
+    "dosya": "mse_mufredat.json"
+  },
+  {
+    "kod": "AEE",
+    "ad": "Havacılık ve Uzay Mühendisliği",
+    "fac_prog": 572,
+    "yil_sayisi": 4,
+    "ders_sayisi": 60,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=572",
+    "dosya": "aee_mufredat.json"
+  },
+  {
+    "kod": "CHE",
+    "ad": "Kimya Mühendisliği",
+    "fac_prog": 563,
+    "yil_sayisi": 4,
+    "ders_sayisi": 58,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=563",
+    "dosya": "che_mufredat.json"
+  },
+  {
+    "kod": "CE",
+    "ad": "İnşaat Mühendisliği",
+    "fac_prog": 562,
+    "yil_sayisi": 4,
+    "ders_sayisi": 60,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=562",
+    "dosya": "ce_mufredat.json"
+  },
+  {
+    "kod": "CENG",
+    "ad": "Bilgisayar Mühendisliği",
+    "fac_prog": 571,
+    "yil_sayisi": 4,
+    "ders_sayisi": 55,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=571",
+    "dosya": "ceng_mufredat.json"
+  },
+  {
+    "kod": "EEE",
+    "ad": "Elektrik ve Elektronik Mühendisliği",
+    "fac_prog": 567,
+    "yil_sayisi": 4,
+    "ders_sayisi": 59,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=567",
+    "dosya": "eee_mufredat.json"
+  },
+  {
+    "kod": "ES",
+    "ad": "Mühendislik Bilimleri",
+    "fac_prog": 561,
+    "yil_sayisi": 0,
+    "ders_sayisi": 0,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=561",
+    "dosya": "es_mufredat.json"
+  },
+  {
+    "kod": "ENVE",
+    "ad": "Çevre Mühendisliği",
+    "fac_prog": 560,
+    "yil_sayisi": 4,
+    "ders_sayisi": 59,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=560",
+    "dosya": "enve_mufredat.json"
+  },
+  {
+    "kod": "FDE",
+    "ad": "Gıda Mühendisliği",
+    "fac_prog": 573,
+    "yil_sayisi": 4,
+    "ders_sayisi": 58,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=573",
+    "dosya": "fde_mufredat.json"
+  },
+  {
+    "kod": "GEOE",
+    "ad": "Jeoloji Mühendisliği",
+    "fac_prog": 564,
+    "yil_sayisi": 4,
+    "ders_sayisi": 61,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=564",
+    "dosya": "geoe_mufredat.json"
+  },
+  {
+    "kod": "IE",
+    "ad": "Endüstri Mühendisliği",
+    "fac_prog": 568,
+    "yil_sayisi": 4,
+    "ders_sayisi": 61,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=568",
+    "dosya": "ie_mufredat.json"
+  },
+  {
+    "kod": "ME",
+    "ad": "Makina Mühendisliği",
+    "fac_prog": 569,
+    "yil_sayisi": 4,
+    "ders_sayisi": 60,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=569",
+    "dosya": "me_mufredat.json"
+  },
+  {
+    "kod": "METE",
+    "ad": "Metalurji ve Malzeme Mühendisliği",
+    "fac_prog": 570,
+    "yil_sayisi": 4,
+    "ders_sayisi": 59,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=570",
+    "dosya": "mete_mufredat.json"
+  },
+  {
+    "kod": "MINE",
+    "ad": "Maden Mühendisliği",
+    "fac_prog": 565,
+    "yil_sayisi": 4,
+    "ders_sayisi": 59,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=565",
+    "dosya": "mine_mufredat.json"
+  },
+  {
+    "kod": "PETE",
+    "ad": "Petrol ve Doğal Gaz Mühendisliği",
+    "fac_prog": 566,
+    "yil_sayisi": 4,
+    "ders_sayisi": 60,
+    "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=566",
+    "dosya": "pete_mufredat.json"
+  }
+]

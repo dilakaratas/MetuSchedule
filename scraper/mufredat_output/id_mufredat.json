@@ -1,0 +1,582 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "Endüstriyel Tasarım",
+  "kod": "ID",
+  "fac_prog": 125,
+  "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=125",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "FIRST YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Semester 1",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID101",
+              "ad": "BASIC DESIGN I",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250101"
+            },
+            {
+              "kod": "ID111",
+              "ad": "DESIGN COMMUNICATION I",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.0,
+              "catalog_kodu": "1250111"
+            },
+            {
+              "kod": "ID121",
+              "ad": "INTRODUCTION TO INDUSTRIAL DESIGN",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250121"
+            },
+            {
+              "kod": "PHYS101",
+              "ad": "ELEMENTARY PHYSICS I",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "2300101"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "OHS101",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770101"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID102",
+              "ad": "BASIC DESIGN II",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250102"
+            },
+            {
+              "kod": "ID112",
+              "ad": "DESIGN COMMUNICATION II",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.0,
+              "catalog_kodu": "1250112"
+            },
+            {
+              "kod": "ID113",
+              "ad": "COMPUTERS IN DESIGN",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.0,
+              "catalog_kodu": "1250113"
+            },
+            {
+              "kod": "ID233",
+              "ad": "STRUCTURES",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250233"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "metu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "SECOND YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Semester 3",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID201",
+              "ad": "INDUSTRIAL DESIGN I",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250201"
+            },
+            {
+              "kod": "ID211",
+              "ad": "DESIGN COMMUNICATION III",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.0,
+              "catalog_kodu": "1250211"
+            },
+            {
+              "kod": "ID221",
+              "ad": "HISTORY OF INDUSTRIAL DESIGN",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250221"
+            },
+            {
+              "kod": "ID290",
+              "ad": "ELEMENTARY WORKSHOP PRACTICE&COMPUTER LITERACY IN DESIGN",
+              "metu_kredi": 0,
+              "ders_saat": 3,
+              "lab_saat": 5,
+              "ects": 5.0,
+              "catalog_kodu": "1250290"
+            },
+            {
+              "kod": "ME212",
+              "ad": "PRINCIPLES OF PRODUCTION ENGINEERING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5690212"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "32"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID202",
+              "ad": "INDUSTRIAL DESIGN II",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250202"
+            },
+            {
+              "kod": "ID223",
+              "ad": "DESIGN.SOCIETY AND CULTURE",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250223"
+            },
+            {
+              "kod": "ID236",
+              "ad": "MANUFACTURING MATERIALS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250236"
+            },
+            {
+              "kod": "ID242",
+              "ad": "HUMAN FACTORS AND ERGONOMICS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250242"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC  SPEAKING SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "31"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "THIRD YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Semester 5",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID301",
+              "ad": "INDUSTRIAL DESIGN III",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250301"
+            },
+            {
+              "kod": "ID390",
+              "ad": "SUMMER PRACTICE IN A PRODUCTION ESTABLISHMENT",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250390"
+            },
+            {
+              "kod": "BA3702",
+              "ad": "INTRODUCTION TO MARKETING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "3123702"
+            },
+            {
+              "kod": "OHS301",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770301"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH I",
+                  "catalog_kodu": "6420201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK303",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420303",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "DEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "",
+                  "ad": "DEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "37"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID302",
+              "ad": "INDUSTRIAL DESIGN IV",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250302"
+            },
+            {
+              "kod": "ID395",
+              "ad": "PORTFOLIO PRESENTATION",
+              "metu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.0,
+              "catalog_kodu": "1250395"
+            },
+            {
+              "kod": "ID480",
+              "ad": "DESIGN MANAGEMENT",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250480"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH I",
+                  "catalog_kodu": "6420202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK304",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420304",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "DEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "",
+                  "ad": "NONDEPARTMENTAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "35"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "FOURTH YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Semester 7",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID401",
+              "ad": "INDUSTRIAL DESIGN V",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250401"
+            },
+            {
+              "kod": "ID490",
+              "ad": "SUMMER PRACTICE IN A DESIGN OFFICE",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "1250490"
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "ID402",
+              "ad": "GRADUATION PROJECT",
+              "metu_kredi": 8,
+              "ders_saat": 4,
+              "lab_saat": 8,
+              "ects": 10.0,
+              "catalog_kodu": "1250402"
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
