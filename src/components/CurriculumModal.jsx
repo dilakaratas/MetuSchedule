@@ -1,22 +1,47 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 
 const CURRICULA = [
-  {
-    label: "CENG — Bilgisayar Mühendisliği",
-    file: "/ceng_curriculum.json",
-    coursesFile: "/ceng_courses.json",
-  },
-  {
-    label: "IE — Endüstri Mühendisliği",
-    file: "/ie_metu_mufredat.json",
-    coursesFile: null,
-  },
+  { label: "ARCH — Mimarlık",                           file: "/scraper/mufredat_output/arch_mufredat.json",  coursesFile: null },
+  { label: "AEE — Havacılık ve Uzay Mühendisliği",      file: "/scraper/mufredat_output/aee_mufredat.json",   coursesFile: null },
+  { label: "BA — İşletme",                              file: "/scraper/mufredat_output/ba_mufredat.json",    coursesFile: null },
+  { label: "BIO — Biyolojik Bilimler",                  file: "/scraper/mufredat_output/bio_mufredat.json",   coursesFile: null },
+  { label: "CE — İnşaat Mühendisliği",                  file: "/scraper/mufredat_output/ce_mufredat.json",    coursesFile: null },
+  { label: "CEIT — Bilgisayar ve Öğretim Teknolojileri",file: "/scraper/mufredat_output/ceit_mufredat.json",  coursesFile: null },
+  { label: "CENG — Bilgisayar Mühendisliği",            file: "/ceng_curriculum.json",                        coursesFile: "/ceng_courses.json" },
+  { label: "CHE — Kimya Mühendisliği",                  file: "/scraper/mufredat_output/che_mufredat.json",   coursesFile: null },
+  { label: "CHEM — Kimya",                              file: "/scraper/mufredat_output/chem_mufredat.json",  coursesFile: null },
+  { label: "CRP — Şehir ve Bölge Planlama",             file: "/scraper/mufredat_output/crp_mufredat.json",   coursesFile: null },
+  { label: "ECON — İktisat",                            file: "/scraper/mufredat_output/econ_mufredat.json",  coursesFile: null },
+  { label: "EDS — Eğitim Bilimleri",                    file: "/scraper/mufredat_output/eds_mufredat.json",   coursesFile: null },
+  { label: "EEE — Elektrik ve Elektronik Mühendisliği", file: "/scraper/mufredat_output/eee_mufredat.json",   coursesFile: null },
+  { label: "ENVE — Çevre Mühendisliği",                 file: "/scraper/mufredat_output/enve_mufredat.json",  coursesFile: null },
+  { label: "ES — Mühendislik Bilimleri",                file: "/scraper/mufredat_output/es_mufredat.json",    coursesFile: null },
+  { label: "FDE — Gıda Mühendisliği",                   file: "/scraper/mufredat_output/fde_mufredat.json",   coursesFile: null },
+  { label: "FLE — Yabancı Diller Eğitimi",              file: "/scraper/mufredat_output/fle_mufredat.json",   coursesFile: null },
+  { label: "GEOE — Jeoloji Mühendisliği",               file: "/scraper/mufredat_output/geoe_mufredat.json",  coursesFile: null },
+  { label: "HIST — Tarih",                              file: "/scraper/mufredat_output/hist_mufredat.json",  coursesFile: null },
+  { label: "ID — Endüstriyel Tasarım",                  file: "/scraper/mufredat_output/id_mufredat.json",    coursesFile: null },
+  { label: "IE — Endüstri Mühendisliği",                file: "/ie_metu_mufredat.json",                       coursesFile: null },
+  { label: "IR — Uluslararası İlişkiler",               file: "/scraper/mufredat_output/ir_mufredat.json",    coursesFile: null },
+  { label: "MATH — Matematik",                          file: "/scraper/mufredat_output/math_mufredat.json",  coursesFile: null },
+  { label: "ME — Makina Mühendisliği",                  file: "/scraper/mufredat_output/me_mufredat.json",    coursesFile: null },
+  { label: "METE — Metalurji ve Malzeme Mühendisliği",  file: "/scraper/mufredat_output/mete_mufredat.json",  coursesFile: null },
+  { label: "MINE — Maden Mühendisliği",                 file: "/scraper/mufredat_output/mine_mufredat.json",  coursesFile: null },
+  { label: "MSE — Matematik ve Fen Bilimleri Eğitimi",  file: "/scraper/mufredat_output/mse_mufredat.json",   coursesFile: null },
+  { label: "PADM — Siyaset Bilimi ve Kamu Yönetimi",    file: "/scraper/mufredat_output/padm_mufredat.json",  coursesFile: null },
+  { label: "PES — Beden Eğitimi ve Spor",               file: "/scraper/mufredat_output/pes_mufredat.json",   coursesFile: null },
+  { label: "PETE — Petrol ve Doğal Gaz Mühendisliği",   file: "/scraper/mufredat_output/pete_mufredat.json",  coursesFile: null },
+  { label: "PHIL — Felsefe",                            file: "/scraper/mufredat_output/phil_mufredat.json",  coursesFile: null },
+  { label: "PHYS — Fizik",                              file: "/scraper/mufredat_output/phys_mufredat.json",  coursesFile: null },
+  { label: "PSY — Psikoloji",                           file: "/scraper/mufredat_output/psy_mufredat.json",   coursesFile: null },
+  { label: "SOC — Sosyoloji",                           file: "/scraper/mufredat_output/soc_mufredat.json",   coursesFile: null },
+  { label: "STAT — İstatistik",                         file: "/scraper/mufredat_output/stat_mufredat.json",  coursesFile: null },
 ];
 
 const CATEGORY_TABS = [
-  { key: "zorunlu", labelTr: "Zorunlu",        labelEn: "Required",      icon: "📌" },
-  { key: "secmeli", labelTr: "Teknik Seçmeli",  labelEn: "Tech Elective", icon: "🔧" },
-  { key: "servis",  labelTr: "Servis",          labelEn: "Service",       icon: "🔗" },
+  { key: "zorunlu", labelTr: "Zorunlu",        labelEn: "Required"      },
+  { key: "secmeli", labelTr: "Teknik Seçmeli",  labelEn: "Tech Elective" },
+  { key: "servis",  labelTr: "Servis",          labelEn: "Service"       },
 ];
 
 const VIEW_FILTERS = [
@@ -464,7 +489,7 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
           display: "flex", alignItems: "center", justifyContent: "space-between",
         }}>
           <div style={{ fontWeight: 700, fontSize: "1rem", color: "#1a1a1a" }}>
-            📚 {tr ? "Müfredattan Program Oluştur" : "Build from Curriculum"}
+            {tr ? "Müfredattan Program Oluştur" : "Build from Curriculum"}
           </div>
           <button onClick={onClose} style={{
             background: "none", border: "none", fontSize: "1.1rem",
@@ -479,19 +504,24 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
             <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>
               {tr ? "Bölüm" : "Department"}
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
+            <select
+              value={selectedDept.file}
+              onChange={e => setSelectedDept(CURRICULA.find(d => d.file === e.target.value))}
+              style={{
+                width: "100%", padding: "8px 12px", borderRadius: 8, fontSize: "0.85rem",
+                border: "2px solid #e5e0da", background: "#fff", color: "#333",
+                cursor: "pointer", fontWeight: 600, outline: "none",
+                appearance: "none",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "right 12px center",
+                paddingRight: 32,
+              }}
+            >
               {CURRICULA.map(dept => (
-                <button key={dept.file} onClick={() => setSelectedDept(dept)} style={{
-                  padding: "6px 13px", borderRadius: 8, fontSize: "0.82rem",
-                  cursor: "pointer", fontWeight: 600, transition: "all .15s",
-                  border: selectedDept.file === dept.file ? "2px solid #7a1f2b" : "2px solid #e5e0da",
-                  background: selectedDept.file === dept.file ? "#7a1f2b" : "#fff",
-                  color: selectedDept.file === dept.file ? "#fff" : "#333",
-                }}>
-                  {dept.label}
-                </button>
+                <option key={dept.file} value={dept.file}>{dept.label}</option>
               ))}
-            </div>
+            </select>
           </div>
 
           {loading && <div style={{ color: "#888", fontSize: "0.85rem", padding: "10px 0" }}>{tr ? "Yükleniyor..." : "Loading..."}</div>}
@@ -502,40 +532,35 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
               {/* ── İlerleme kartı ── */}
               <div style={{
                 background: "linear-gradient(135deg, #7a1f2b 0%, #a33040 100%)",
-                borderRadius: 12, padding: "14px 16px", marginBottom: 16,
+                borderRadius: 10, padding: "10px 14px", marginBottom: 14,
                 color: "#fff",
               }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
-                  <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 2 }}>
-                      <span style={{ fontSize: "0.72rem", opacity: 0.75 }}>
-                        {tr ? "GENEL İLERLEME" : "OVERALL PROGRESS"}
-                      </span>
-                      {totalDone > 0 && (
-                        <button onClick={clearDone} style={{
-                          fontSize: "0.65rem", padding: "1px 7px", borderRadius: 99,
-                          border: "1px solid rgba(255,255,255,0.4)",
-                          background: "transparent", color: "rgba(255,255,255,0.75)",
-                          cursor: "pointer", fontWeight: 600,
-                        }}>
-                          {tr ? "Temizle" : "Clear"}
-                        </button>
-                      )}
-                    </div>
-                    <div style={{ fontSize: "1.5rem", fontWeight: 800, lineHeight: 1 }}>
-                      {totalDone}
-                      <span style={{ fontSize: "0.9rem", fontWeight: 400, opacity: 0.7 }}>/{totalCodes}</span>
-                    </div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ fontSize: "0.68rem", opacity: 0.75, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                      {tr ? "GENEL İLERLEME" : "OVERALL PROGRESS"}
+                    </span>
+                    {totalDone > 0 && (
+                      <button onClick={clearDone} style={{
+                        fontSize: "0.62rem", padding: "1px 6px", borderRadius: 99,
+                        border: "1px solid rgba(255,255,255,0.4)",
+                        background: "transparent", color: "rgba(255,255,255,0.75)",
+                        cursor: "pointer", fontWeight: 600,
+                      }}>
+                        {tr ? "Temizle" : "Clear"}
+                      </button>
+                    )}
                   </div>
-                  <div style={{
-                    fontSize: "1.8rem", fontWeight: 900, opacity: 0.25,
-                    lineHeight: 1, alignSelf: "center",
-                  }}>
-                    {totalCodes ? Math.round((totalDone / totalCodes) * 100) : 0}%
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
+                    <span style={{ fontSize: "1.1rem", fontWeight: 800 }}>{totalDone}</span>
+                    <span style={{ fontSize: "0.8rem", fontWeight: 400, opacity: 0.7 }}>/{totalCodes}</span>
+                    <span style={{ fontSize: "0.95rem", fontWeight: 900, opacity: 0.3, marginLeft: 6 }}>
+                      {totalCodes ? Math.round((totalDone / totalCodes) * 100) : 0}%
+                    </span>
                   </div>
                 </div>
                 {/* Genel progress */}
-                <div style={{ height: 8, borderRadius: 99, background: "rgba(255,255,255,0.2)", overflow: "hidden" }}>
+                <div style={{ height: 5, borderRadius: 99, background: "rgba(255,255,255,0.2)", overflow: "hidden", marginBottom: 8 }}>
                   <div style={{
                     height: "100%", borderRadius: 99,
                     background: "rgba(255,255,255,0.9)",
@@ -544,23 +569,19 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
                   }} />
                 </div>
                 {/* Yıl bazlı mini barlar */}
-                <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 7 }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                   {yilStats.map(ys => (
-                    <div key={ys.yil}>
-                      <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.68rem", opacity: 0.85, marginBottom: 3 }}>
-                        <span>{ys.yil_adi || `${ys.yil}. Yıl`}</span>
-                        <span>{ys.done}/{ys.total}</span>
-                      </div>
-                      <div style={{ height: 4, borderRadius: 99, background: "rgba(255,255,255,0.2)", overflow: "hidden" }}>
+                    <div key={ys.yil} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                      <span style={{ fontSize: "0.65rem", opacity: 0.8, minWidth: 72 }}>{ys.yil_adi || `${ys.yil}. Yıl`}</span>
+                      <div style={{ flex: 1, height: 3, borderRadius: 99, background: "rgba(255,255,255,0.2)", overflow: "hidden" }}>
                         <div style={{
                           height: "100%", borderRadius: 99,
-                          background: ys.done === ys.total && ys.total > 0
-                            ? "#86efac"
-                            : "rgba(255,255,255,0.7)",
+                          background: ys.done === ys.total && ys.total > 0 ? "#86efac" : "rgba(255,255,255,0.7)",
                           width: ys.total ? `${(ys.done / ys.total) * 100}%` : "0%",
                           transition: "width .5s",
                         }} />
                       </div>
+                      <span style={{ fontSize: "0.63rem", opacity: 0.75, minWidth: 30, textAlign: "right" }}>{ys.done}/{ys.total}</span>
                     </div>
                   ))}
                 </div>
@@ -740,7 +761,7 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
                           color: isActive ? "#fff" : "#555",
                           display: "flex", flexDirection: "column", alignItems: "center", gap: 2,
                         }}>
-                          <span>{tab.icon} {tr ? tab.labelTr : tab.labelEn}</span>
+                          <span>{tr ? tab.labelTr : tab.labelEn}</span>
                           <span style={{ fontSize: "0.68rem", opacity: 0.8, fontWeight: 400 }}>
                             {count} {tr ? "katalogda" : "in catalog"}
                           </span>

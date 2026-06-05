@@ -533,7 +533,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
         <div className="ai-panel" onClick={e=>e.stopPropagation()}>
           <div className="ai-panel-header">
             <div className="ai-panel-title">
-              <span className="ai-sparkle">✦</span>
+              
               {lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}
             </div>
             <button className="ai-panel-close" onClick={onClose}>✕</button>
@@ -551,7 +551,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
         <div className="ai-panel" onClick={e=>e.stopPropagation()}>
           <div className="ai-panel-header">
             <div className="ai-panel-title">
-              <span className="ai-sparkle">✦</span>
+              
               {lang==="tr"?"Program Önizlemesi":"Schedule Preview"}
             </div>
             <button className="ai-panel-close" onClick={onClose}>✕</button>
@@ -576,7 +576,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
 
         <div className="ai-panel-header">
           <div className="ai-panel-title">
-            <span className="ai-sparkle">✦</span>
+            
             {lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}
           </div>
           <button className="ai-panel-close" onClick={onClose}>✕</button>
@@ -812,7 +812,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </button>
               <button className="ai-generate-btn" onClick={handleGenerate}
                 disabled={selectedCourses.size===0||creditOver}>
-                <span>✦</span> {lang==="tr"?"Önizle →":"Preview →"}
+                {lang==="tr"?"Önizle →":"Preview →"}
               </button>
             </>
           )}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { saveToken } from "../api/auth.js";
 
 const CAS_URL    = "https://login.metu.edu.tr/cas/login";
-const SERVICE_URL = "http://144.122.198.33";
+const SERVICE_URL = "http://planify.metu.edu.tr/";
 
 export default function Login({ onLogin, casError = "" }) {
   const [username, setUsername] = useState("");
