@@ -53,15 +53,13 @@ export default function App() {
   };
 
   const handleLogout = () => {
-    // Önce tüm local state'i temizle
     setUser(null);
     localStorage.removeItem("metu-user");
     localStorage.removeItem("metu-token");
     sessionStorage.removeItem("metu-token");
     sessionStorage.removeItem("metu-user");
-    // Sonra CAS oturumunu kapat — service parametresi login sayfasına yönlendirir
-    const service = encodeURIComponent("http://planify.metu.edu.tr/");
-    window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
+    // Sayfayı temiz URL ile yenile — login ekranına döner
+    window.location.href = window.location.origin + window.location.pathname;
   };
 
   if (casLoading) {
@@ -410,6 +408,16 @@ function MainApp({ user, onLogout }) {
                 <path d="M7 2v3M13 2v3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
               </svg>
               <span>{lang === "tr" ? "Program" : "Schedule"}</span>
+            </button>
+            <button
+              className="mobile-tab"
+              onClick={() => setCurriculumOpen(true)}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <rect x="3" y="2" width="14" height="16" rx="2" stroke="currentColor" strokeWidth="1.6" />
+                <path d="M6 7h8M6 10h6M6 13h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+              </svg>
+              <span>{lang === "tr" ? "Müfredat" : "Curriculum"}</span>
             </button>
           </div>
         </nav>

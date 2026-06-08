@@ -11,8 +11,8 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
         setMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
+    document.addEventListener("pointerdown", handler);
+    return () => document.removeEventListener("pointerdown", handler);
   }, [menuOpen]);
 
   const initials = user?.name
@@ -116,6 +116,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <div className="user-menu-wrap" ref={menuRef}>
             <button
               className="user-avatar-btn"
+              onPointerDown={(e) => e.stopPropagation()}
               onClick={() => setMenuOpen((v) => !v)}
               aria-label="Kullanıcı menüsü"
               aria-expanded={menuOpen}

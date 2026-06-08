@@ -1454,7 +1454,7 @@ input { font-family: inherit; }
     position: relative;
     z-index: 10;
     background: #fff;
-    overflow: hidden;
+    overflow: visible;
   }
   .brand-tag { display: none; }
   .brand-name { font-size: 15px; white-space: nowrap; }
@@ -2475,7 +2475,7 @@ input { font-family: inherit; }
     border-radius: var(--r-lg);
     box-shadow: var(--shadow-lg);
     min-width: 180px;
-    z-index: 100;
+    z-index: 200;
     overflow: hidden;
     animation: dropdown-in 0.12s ease;
   }
