@@ -1447,8 +1447,8 @@ input { font-family: inherit; }
   :root { --header-h: auto; }
   .header {
     height: auto;
-    padding: 10px 12px;
-    gap: 6px;
+    padding: 8px 10px;
+    gap: 4px;
     flex-wrap: nowrap;
     align-items: center;
     position: relative;
@@ -1457,42 +1457,54 @@ input { font-family: inherit; }
     overflow: visible;
   }
   .brand-tag { display: none; }
-  .brand-name { font-size: 15px; white-space: nowrap; }
-  .logo img { width: 28px; height: 26px; }
-  .brand { gap: 8px; flex-shrink: 0; }
+  .brand-name { font-size: 14px; white-space: nowrap; }
+  .logo img { width: 26px; height: 24px; }
+  .brand { gap: 6px; flex-shrink: 0; min-width: 0; }
 
   /* Stats mobilde tamamen gizle Ã¢â‚¬â€ tab bar'da gÃƒÂ¶steriyoruz */
   .header-stats { display: none; }
 
   /* Actions saÃ„Å¸a Ã¢â‚¬â€ sÃ„Â±kÃ„Â±Ã…Å¸tÃ„Â±r */
-  .header-actions { margin-left: auto; gap: 5px; align-items: center; flex-shrink: 0; }
+  /* Actions sağa — sıkıştır, taşmasın */
+  .header-actions {
+    margin-left: auto;
+    gap: 4px;
+    align-items: center;
+    flex-shrink: 0;
+    min-width: 0;
+    overflow: hidden;
+  }
 
   /* Mobilde gizlenecekler */
   .hide-mobile { display: none !important; }
   .hide-mobile-inline { display: none !important; }
 
-  /* AI butonu Ã¢â‚¬â€ kÃ„Â±sa yazÃ„Â± */
+  /* AI butonu — ikon + kısa yazı */
   .ai-btn {
-    padding: 7px 11px;
-    font-size: 12px;
-    gap: 4px;
+    padding: 6px 9px;
+    font-size: 11px;
+    gap: 3px;
     white-space: nowrap;
+    flex-shrink: 0;
   }
   .ai-btn-label-full { display: none !important; }
   .ai-btn-label-short { display: inline !important; }
 
-  /* Dil seÃƒÂ§ici kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k */
-  .lang-switch { padding: 2px; }
-  .lang-switch button { padding: 5px 7px; font-size: 11px; }
+  /* Dil seçici küçük */
+  .lang-switch { padding: 2px; flex-shrink: 0; }
+  .lang-switch button { padding: 4px 6px; font-size: 11px; }
 
-  /* Temizle Ã¢â‚¬â€ sadece ikon */
+  /* Temizle — sadece ikon, transparan arka plan */
   .btn-danger {
-    padding: 7px 8px;
+    padding: 6px 7px;
     border-color: transparent;
     background: transparent;
     flex-shrink: 0;
   }
   .btn-danger svg { width: 15px; height: 15px; }
+
+  /* Avatar küçült */
+  .user-avatar-btn { width: 30px; height: 30px; font-size: 11px; flex-shrink: 0; }
 
   /* Ã¢â€â‚¬ Panel sistemi Ã¢â€â‚¬ */
   .mobile-panel {
