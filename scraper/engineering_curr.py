@@ -1,585 +1,232 @@
 """
-ODTÜ Mühendislik Fakültesi Lisans Müfredatı Scraper
-=====================================================
-Tüm 15 mühendislik bölümünün müfredatını yıl/dönem/ders bilgisiyle çeker.
-
-Kaynak URL'ler:
-  Ana kaynak : https://catalog2.metu.edu.tr/1/{prog_id}/{slug}
-  AE fallback: https://ae2.metu.edu.tr/en/undergraduate-curriculum
-
-Gereksinimler:
-    pip install requests beautifulsoup4
+METU Academic Catalog Scraper
+Mühendislik Fakültesi (fac_inst=500) tüm lisans programlarını çeker.
 
 Kullanım:
-    python metu_eng_faculty_scraper.py
-    Çıktı: metu_eng_faculty_mufredat.json
+    pip install requests beautifulsoup4
+    python metu_catalog_scraper.py
+
+Çıktı: metu_engineering_catalog.json
 """
 
-import json
-import re
-import time
 import requests
-from bs4 import BeautifulSoup
+import json
+import time
+from bs4 import BeautifulSoup, NavigableString
 
-# ── Sabitler ───────────────────────────────────────────────────────────────────
-
-BASE          = "https://catalog2.metu.edu.tr"
-FACULTY_URL   = f"{BASE}/faculty-of-engineering/500"
-CATALOG_LEGACY = "https://catalog.metu.edu.tr"
+BASE_URL = "https://catalog.metu.edu.tr"
 
 HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-        "AppleWebKit/537.36 (KHTML, like Gecko) "
-        "Chrome/124.0.0.0 Safari/537.36"
-    ),
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                  "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-    "Accept-Language": "en-US,en;q=0.9",
+    "Accept-Language": "tr,en;q=0.9",
+    "Referer": "https://catalog.metu.edu.tr/"
 }
 
-# Bölüm tanımları: prog_id, catalog2 slug, fallback URL (403 durumunda)
-# fallback=None olan bölümler yalnızca catalog2'den çekilir.
-DEPARTMENTS = [
-    {
-        "ad":       "Aerospace Engineering",
-        "prog_id":  572,
-        "slug":     "aerospace-engineering",
-        "fallback": "https://ae2.metu.edu.tr/en/undergraduate-curriculum",
-    },
-    {"ad": "Chemical Engineering",                   "prog_id": 563, "slug": "chemical-engineering",                   "fallback": None},
-    {"ad": "Civil Engineering",                       "prog_id": 562, "slug": "civil-engineering",                       "fallback": None},
-    {"ad": "Computer Engineering",                    "prog_id": 571, "slug": "computer-engineering",                    "fallback": None},
-    {"ad": "Electrical and Electronics Engineering",  "prog_id": 567, "slug": "electrical-and-electronics-engineering",  "fallback": None},
-    {"ad": "Engineering Sciences",                    "prog_id": 561, "slug": "engineering-sciences",                    "fallback": None},
-    {"ad": "Environmental Engineering",               "prog_id": 560, "slug": "environmental-engineering",               "fallback": None},
-    {"ad": "Food Engineering",                        "prog_id": 573, "slug": "food-engineering",                        "fallback": None},
-    {"ad": "Geological Engineering",                  "prog_id": 564, "slug": "geological-engineering",                  "fallback": None},
-    {"ad": "Industrial Engineering",                  "prog_id": 568, "slug": "industrial-engineering",                  "fallback": None},
-    {"ad": "Mechanical Engineering",                  "prog_id": 569, "slug": "mechanical-engineering",                  "fallback": None},
-    {"ad": "Metallurgical and Materials Engineering", "prog_id": 570, "slug": "metallurgical-and-materials-engineering", "fallback": None},
-    {"ad": "Mining Engineering",                      "prog_id": 565, "slug": "mining-engineering",                      "fallback": None},
-    {"ad": "Petroleum and Natural Gas Engineering",   "prog_id": 566, "slug": "petroleum-and-natural-gas-engineering",   "fallback": None},
+# Mühendislik Fakültesi program ID'leri
+ENGINEERING_PROGRAMS = [
+    (572, "Aerospace Engineering"),
+    (563, "Chemical Engineering"),
+    (562, "Civil Engineering"),
+    (571, "Computer Engineering"),
+    (567, "Electrical and Electronics Engineering"),
+    (561, "Engineering Sciences"),
+    (560, "Environmental Engineering"),
+    (573, "Food Engineering"),
+    (564, "Geological Engineering"),
+    (568, "Industrial Engineering"),
+    (569, "Mechanical Engineering"),
+    (570, "Metallurgical and Materials Engineering"),
+    (565, "Mining Engineering"),
+    (566, "Petroleum and Natural Gas Engineering"),
 ]
 
-# ── Yardımcı fonksiyonlar ─────────────────────────────────────────────────────
 
-def fetch(url: str, retries: int = 3) -> BeautifulSoup:
-    for attempt in range(retries):
-        try:
-            r = requests.get(url, headers=HEADERS, timeout=20)
-            r.raise_for_status()
-            return BeautifulSoup(r.text, "html.parser")
-        except requests.RequestException as exc:
-            if attempt < retries - 1:
-                wait = 2 ** attempt
-                print(f"    [UYARI] {exc} – {wait}s sonra tekrar deneniyor...")
-                time.sleep(wait)
-            else:
-                raise
-
-
-def catalog2_url(dept: dict) -> str:
-    return f"{BASE}/1/{dept['prog_id']}/{dept['slug']}"
-
-
-def extract_catalog_code(href: str) -> str | None:
-    """
-    /course/phys105/2300105          → '2300105'
-    course.php?course_code=2300105   → '2300105'
-    course.php?prog=X&course_code=Y  → 'Y'
-    """
-    if not href:
-        return None
-    m = re.search(r"/course/[^/]+/(\d+)", href)
-    if m:
-        return m.group(1)
-    m = re.search(r"course_code=(\d+)", href)
-    return m.group(1) if m else None
-
-
-def to_float(s) -> float:
+def get_page(url):
+    """Sayfayı çek, hata olursa None döndür."""
     try:
-        return float(str(s).strip().replace(",", "."))
-    except (ValueError, AttributeError):
-        return 0.0
-
-
-def to_int(s) -> int:
-    try:
-        return int(str(s).strip().split(".")[0])
-    except (ValueError, AttributeError):
-        return 0
-
-
-# ── Parser A: catalog2.metu.edu.tr ───────────────────────────────────────────
-#
-# Yapı:
-#   <h3>First Year » First Semester</h3>
-#   <table> ... </table>
-#   ...
-# Yıl/dönem bilgisi h3 başlığından, ders bilgisi tablodan çekilir.
-
-YEAR_MAP = {
-    "first year": 1,  "second year": 2,
-    "third year": 3,  "fourth year": 4,
-    "birinci yıl": 1, "ikinci yıl":  2,
-    "üçüncü yıl":  3, "dördüncü yıl":4,
-}
-SEMESTER_WORDS = {
-    "first": 1, "second": 2, "third": 3, "fourth": 4,
-    "fifth": 5, "sixth":  6, "seventh":7, "eighth":  8,
-    "birinci": 1, "ikinci": 2, "üçüncü": 3, "dördüncü": 4,
-    "beşinci": 5, "altıncı": 6, "yedinci": 7, "sekizinci": 8,
-}
-
-
-def heading_to_year_semester(text: str):
-    lower = text.lower()
-    yil   = next((v for k, v in YEAR_MAP.items() if k in lower), None)
-
-    # "Semester N" biçimi (N = 1 veya 2 → yıl içi sıra)
-    m = re.search(r"semester\s+(\d)", lower)
-    if m:
-        rel   = int(m.group(1))
-        donem = (yil - 1) * 2 + rel if yil and rel <= 2 else rel
-        return yil, donem
-
-    # "First Semester", "İkinci Yarıyıl" gibi kelime biçimleri
-    for kelime, no in SEMESTER_WORDS.items():
-        if f"{kelime} semester" in lower or f"{kelime} yarıyıl" in lower:
-            return yil, no
-
-    return yil, None
-
-
-def parse_course_row_catalog2(cells) -> dict | None:
-    if len(cells) < 2:
-        return None
-    kod = cells[0].get_text(strip=True)
-    ad  = cells[1].get_text(strip=True)
-    if not kod or kod.lower() in ("course code", "ders kodu"):
-        return None
-
-    a = cells[0].find("a")
-    ders = {"kod": kod, "ad": ad}
-    cat  = extract_catalog_code(a["href"]) if a else None
-    if cat:
-        ders["catalog_kodu"] = cat
-    if len(cells) >= 6:
-        ders["odtu_kredi"] = to_int(cells[2].get_text())
-        ders["ders_saat"]  = to_float(cells[3].get_text())
-        ders["lab_saat"]   = to_float(cells[4].get_text())
-        ders["ects"]       = to_float(cells[5].get_text())
-    elif len(cells) >= 4:
-        ders["odtu_kredi"] = to_int(cells[2].get_text())
-        ders["ects"]       = to_float(cells[3].get_text())
-    return ders
-
-
-def parse_catalog2(soup: BeautifulSoup) -> list:
-    """catalog2.metu.edu.tr/1/... sayfasını parse eder."""
-    main = (
-        soup.find("div", id="main-content")
-        or soup.find("div", class_="region-content")
-        or soup
-    )
-    yariyillar: list       = []
-    aktif:      dict | None = None
-    secmeli:    dict | None = None
-
-    for elem in main.descendants:
-        if not hasattr(elem, "name") or not elem.name:
-            continue
-
-        # Dönem başlığı
-        if elem.name in ("h3", "h4"):
-            metin      = elem.get_text(strip=True)
-            yil, donem = heading_to_year_semester(metin)
-            if donem is not None:
-                aktif   = {"yariyil": donem, "yariyil_adi": metin, "dersler": []}
-                if yil:
-                    aktif["yil"] = yil
-                yariyillar.append(aktif)
-                secmeli = None
-
-        # Ders tablosu
-        elif elem.name == "table" and aktif is not None:
-            for row in elem.find_all("tr"):
-                cells    = row.find_all(["td", "th"])
-                if not cells:
-                    continue
-                ilk = cells[0].get_text(strip=True).lower()
-
-                # "Any N of the following set"
-                if re.search(r"\bany\b.+\bfollowing\b", ilk):
-                    secmeli = {
-                        "secmeli_grup": cells[0].get_text(strip=True),
-                        "secenekler":   [],
-                    }
-                    aktif["dersler"].append(secmeli)
-                    continue
-
-                if not ilk or ilk in ("course code", "ders kodu"):
-                    secmeli = None
-                    continue
-
-                ders = parse_course_row_catalog2(cells)
-                if not ders:
-                    secmeli = None
-                    continue
-
-                if secmeli:
-                    secmeli["secenekler"].append(ders)
-                else:
-                    aktif["dersler"].append(ders)
-
-    return yariyillar
-
-
-# ── Parser B: ae2.metu.edu.tr (Aerospace Engineering) ────────────────────────
-#
-# Yapı:
-#   <h4>1st YEAR</h4>
-#   (tablo içinde Fall/Spring sütunları, iç içe tablo)
-#
-# Bu sayfa tablo hücrelerini birleştirip Fall/Spring'i tek satırda verir;
-# h4 ile yıl, Fall/Spring metniyle dönem tespit edilir.
-
-AE_YEAR_MAP = {"prep": 0, "1st": 1, "2nd": 2, "3rd": 3, "4th": 4}
-AE_SEMESTER_MAP = {"fall": "Fall", "spring": "Spring"}
-
-
-def parse_ae_curriculum(soup: BeautifulSoup) -> list:
-    """ae2.metu.edu.tr/en/undergraduate-curriculum sayfasını parse eder."""
-    main = soup.find("div", id="main-content") or soup
-
-    yariyillar: list       = []
-    aktif_yil:  int | None = None
-    aktif_sem:  dict | None = None
-
-    for elem in main.descendants:
-        if not hasattr(elem, "name") or not elem.name:
-            continue
-
-        # Yıl başlığı: <h4>1st YEAR</h4>
-        if elem.name == "h4":
-            metin = elem.get_text(strip=True).lower()
-            for kisa, no in AE_YEAR_MAP.items():
-                if f"{kisa} year" in metin or (kisa == "prep" and "prep" in metin):
-                    aktif_yil  = no
-                    aktif_sem  = None
-                    break
-
-        # Tablo — her tablo bir dönem (Fall veya Spring)
-        elif elem.name == "table" and aktif_yil is not None:
-            # Dönem bilgisini başlık hücresinden al
-            caption    = elem.find("caption")
-            header_row = elem.find("tr")
-            sem_name   = None
-
-            if caption:
-                t = caption.get_text(strip=True).lower()
-                for k, v in AE_SEMESTER_MAP.items():
-                    if k in t:
-                        sem_name = v
-                        break
-
-            if sem_name is None and header_row:
-                for th in header_row.find_all(["th", "td"]):
-                    t = th.get_text(strip=True).lower()
-                    for k, v in AE_SEMESTER_MAP.items():
-                        if k in t:
-                            sem_name = v
-                            break
-                    if sem_name:
-                        break
-
-            if sem_name is None:
-                continue   # dönem belirlenemedi
-
-            # Mutlak dönem numarası
-            if aktif_yil == 0:
-                donem = 0   # prep school
-            else:
-                donem = (aktif_yil - 1) * 2 + (1 if sem_name == "Fall" else 2)
-
-            aktif_sem = {
-                "yil":         aktif_yil,
-                "yariyil":     donem,
-                "yariyil_adi": f"{aktif_yil}{'st' if aktif_yil==1 else 'nd' if aktif_yil==2 else 'rd' if aktif_yil==3 else 'th'} Year – {sem_name} Semester",
-                "dersler":     [],
-            }
-            yariyillar.append(aktif_sem)
-            secmeli: dict | None = None
-
-            for row in elem.find_all("tr"):
-                cells = row.find_all(["td", "th"])
-                if len(cells) < 2:
-                    continue
-                kod = cells[0].get_text(strip=True)
-                ad  = cells[1].get_text(strip=True) if len(cells) > 1 else ""
-
-                # Başlık/boş satır
-                if not kod or kod.lower() in ("code", "course code"):
-                    secmeli = None
-                    continue
-
-                # Seçmeli satırı (Restricted Technical Elective gibi)
-                if re.search(r"elective", ad, re.I) and not re.match(r"[A-Z]{2,}", kod):
-                    tur_ders = {
-                        "tur":      kod.strip(),
-                        "aciklama": ad.strip(),
-                    }
-                    # Kredi bilgisi
-                    if len(cells) >= 3:
-                        kredi_str = cells[2].get_text(strip=True)
-                        m = re.search(r"\((\d+)-(\d+)\)(\d+)", kredi_str)
-                        if m:
-                            tur_ders["ders_saat"]  = int(m.group(1))
-                            tur_ders["lab_saat"]   = int(m.group(2))
-                            tur_ders["odtu_kredi"] = int(m.group(3))
-                    aktif_sem["dersler"].append(tur_ders)
-                    continue
-
-                # Seçmeli grup (Restricted Technical Elective altındaki seçenekler)
-                # AE sayfasında seçenekler ayrı satırda, boşlukla ayrılmış kod listesiyle
-                if re.search(r"restricted.*elective", kod, re.I):
-                    secmeli = {
-                        "secmeli_grup": kod.strip(),
-                        "secenekler":   [],
-                    }
-                    aktif_sem["dersler"].append(secmeli)
-                    continue
-
-                # Normal ders
-                # AE sayfasında kredi "(3-2)4" biçiminde tek hücrede
-                ders: dict = {"kod": kod, "ad": ad}
-                a = cells[0].find("a")
-                cat = extract_catalog_code(a["href"]) if a else None
-                if cat:
-                    ders["catalog_kodu"] = cat
-
-                if len(cells) >= 3:
-                    kredi_str = cells[2].get_text(strip=True)
-                    m = re.search(r"\((\d+)-(\d+)\)(\d+)", kredi_str)
-                    if m:
-                        ders["ders_saat"]  = int(m.group(1))
-                        ders["lab_saat"]   = int(m.group(2))
-                        ders["odtu_kredi"] = int(m.group(3))
-                    elif kredi_str.upper() == "NC":
-                        ders["odtu_kredi"] = 0
-
-                if secmeli:
-                    secmeli["secenekler"].append(ders)
-                else:
-                    aktif_sem["dersler"].append(ders)
-
-    return yariyillar
-
-
-# ── Parser C: mine.metu.edu.tr ve benzeri bölüm siteleri ─────────────────────
-#
-# Yapı (catalog2'nin kapanması durumunda kullanılabilir):
-#   <strong>FIRST YEAR</strong> + <strong>First Semester</strong>
-#   <table> ... </table>
-# Bu yapı aynı zamanda orijinal CENG scraper'ının hedef aldığı
-# ceng.metu.edu.tr yapısına benzer.
-#
-# NOT: Şu an catalog2 bu bölümler için çalışıyor; bu parser ileride
-# lazım olursa kullanılabilir.
-
-STRONG_YEAR_MAP = {
-    "first year": 1, "second year": 2, "third year": 3, "fourth year": 4,
-    "1st year":   1, "2nd year":   2,  "3rd year":  3,  "4th year":  4,
-}
-STRONG_SEM_MAP = {
-    "first semester":   1, "second semester":  2, "third semester":  3,
-    "fourth semester":  4, "fifth semester":   5, "sixth semester":  6,
-    "seventh semester": 7, "eighth semester":  8,
-    "fall semester":    None,   # yıl bazında hesaplanacak
-    "spring semester":  None,
-}
-
-
-def parse_dept_site(soup: BeautifulSoup) -> list:
-    """
-    mine.metu.edu.tr, mete.metu.edu.tr gibi bölüm sitelerini parse eder.
-    <strong> ya da <b> etiketli yıl/dönem başlıkları + <table> yapısını işler.
-    """
-    main = soup.find("div", id="main-content") or soup
-    yariyillar: list        = []
-    aktif:      dict | None = None
-    aktif_yil:  int | None  = None
-    secmeli:    dict | None = None
-    sem_counter: int        = 0   # mutlak dönem sayacı
-
-    for elem in main.descendants:
-        if not hasattr(elem, "name") or not elem.name:
-            continue
-
-        # Yıl/dönem başlığı: <strong>, <b>, <p><strong>, veya <h2>/<h3>
-        if elem.name in ("strong", "b", "h2", "h3", "h4"):
-            metin  = elem.get_text(strip=True).lower().strip()
-            # Yıl tespiti
-            for k, v in STRONG_YEAR_MAP.items():
-                if k == metin:
-                    aktif_yil   = v
-                    sem_counter = (v - 1) * 2
-                    aktif       = None
-                    secmeli     = None
-                    break
-            # Dönem tespiti
-            for k, v in STRONG_SEM_MAP.items():
-                if k in metin:
-                    sem_counter += 1
-                    donem = sem_counter
-                    aktif = {
-                        "yil":         aktif_yil,
-                        "yariyil":     donem,
-                        "yariyil_adi": elem.get_text(strip=True),
-                        "dersler":     [],
-                    }
-                    yariyillar.append(aktif)
-                    secmeli = None
-                    break
-
-        # Ders tablosu
-        elif elem.name == "table" and aktif is not None:
-            for row in elem.find_all("tr"):
-                cells = row.find_all(["td", "th"])
-                if not cells:
-                    continue
-                ilk = cells[0].get_text(strip=True).lower()
-
-                if not ilk or ilk in ("course code", "ders kodu"):
-                    secmeli = None
-                    continue
-
-                ders = parse_course_row_catalog2(cells)
-                if not ders:
-                    secmeli = None
-                    continue
-
-                aktif["dersler"].append(ders)
-
-    return yariyillar
-
-
-# ── Ana scrape mantığı ────────────────────────────────────────────────────────
-
-def scrape_department(dept: dict) -> list:
-    """
-    Bir bölüm için müfredatı çeker.
-    Önce catalog2'yi dener; 4xx alırsa fallback URL'yi kullanır.
-    """
-    c2_url = catalog2_url(dept)
-
-    # 1. catalog2 denemesi
-    try:
-        soup = fetch(c2_url)
-        result = parse_catalog2(soup)
-        if result:
-            print(f"    ✓ catalog2  → {len(result)} dönem")
-            return result
-        print("    ⚠ catalog2 boş döndü, fallback deneniyor...")
-    except requests.HTTPError as e:
-        code = e.response.status_code if e.response is not None else "?"
-        print(f"    ⚠ catalog2 HTTP {code}, fallback deneniyor...")
+        resp = requests.get(url, headers=HEADERS, timeout=15)
+        resp.raise_for_status()
+        return resp.content
     except Exception as e:
-        print(f"    ⚠ catalog2 hata ({e}), fallback deneniyor...")
-
-    # 2. Fallback URL (varsa)
-    fb = dept.get("fallback")
-    if not fb:
-        raise RuntimeError("catalog2 başarısız ve fallback URL tanımlı değil")
-
-    soup   = fetch(fb)
-    result = parse_ae_curriculum(soup)   # AE tipi fallback
-    if not result:
-        result = parse_dept_site(soup)   # Genel bölüm sitesi tipi
-    if result:
-        print(f"    ✓ fallback  → {len(result)} dönem  ({fb})")
-    else:
-        print(f"    ✗ Fallback de boş döndü: {fb}")
-    return result
+        print(f"  [HATA] {url}: {e}")
+        return None
 
 
-def scrape_all() -> dict:
-    print(f"\n{len(DEPARTMENTS)} bölüm işlenecek:\n")
-    for d in DEPARTMENTS:
-        print(f"  [{d['prog_id']:3d}] {d['ad']}")
-    print()
+def parse_courses(table):
+    """Bir ders tablosunu parse edip liste döndürür."""
+    courses = []
+    for row in table.find_all("tr"):
+        code_td = row.find("td", class_="short_course")
+        name_td = row.find("td", class_="course")
+        if not (code_td and name_td):
+            continue
 
-    fakulte = {
-        "universite": "ODTÜ",
-        "fakulte":    "Mühendislik Fakültesi",
-        "kaynak":     FACULTY_URL,
-        "bolumler":   [],
+        code_raw = code_td.get_text(strip=True)
+        name = name_td.get_text(strip=True)
+        cells = row.find_all("td")
+
+        # Elective placeholder (boş code veya sadece &nbsp;)
+        is_elective = not code_raw or all(c in ('\xa0', ' ') for c in code_raw)
+
+        if is_elective:
+            if name:
+                courses.append({
+                    "code": None,
+                    "name": name,
+                    "credit": None,
+                    "contact_h_w": None,
+                    "lab_h_w": None,
+                    "ects": _parse_float(cells[5].get_text(strip=True)) if len(cells) > 5 else None,
+                    "type": "elective_slot"
+                })
+        else:
+            courses.append({
+                "code": code_raw,
+                "name": name,
+                "credit": _parse_int(cells[2].get_text(strip=True)) if len(cells) > 2 else None,
+                "contact_h_w": _parse_int(cells[3].get_text(strip=True)) if len(cells) > 3 else None,
+                "lab_h_w": _parse_int(cells[4].get_text(strip=True)) if len(cells) > 4 else None,
+                "ects": _parse_float(cells[5].get_text(strip=True)) if len(cells) > 5 else None,
+                "type": "required"
+            })
+    return courses
+
+
+def _parse_int(s):
+    try:
+        return int(s)
+    except (ValueError, TypeError):
+        return s or None
+
+
+def _parse_float(s):
+    try:
+        return float(s)
+    except (ValueError, TypeError):
+        return s or None
+
+
+def parse_curriculum(soup):
+    """
+    Müfredat yıl/dönem yapısını çıkarır.
+    Döndürür: [{"year": str, "semester": str, "courses": [...]}]
+    """
+    content = soup.find("div", class_="field-body") or soup
+
+    # Yıl başlıkları <center><h4>FIRST YEAR</h4></center> içinde
+    year_centers = [tag for tag in content.find_all("center") if tag.find("h4")]
+    curriculum = []
+
+    for i, center in enumerate(year_centers):
+        year_text = center.find("h4").get_text(strip=True)
+        next_center = year_centers[i + 1] if i + 1 < len(year_centers) else None
+
+        semester_name = None
+        node = center.next_sibling
+
+        while node:
+            if node == next_center:
+                break
+
+            if isinstance(node, NavigableString):
+                text = node.strip()
+                if "Semester" in text and len(text) < 60:
+                    semester_name = text
+            elif hasattr(node, 'name') and node.name:
+                if node.name == 'table':
+                    courses = parse_courses(node)
+                    if courses:
+                        curriculum.append({
+                            "year": year_text,
+                            "semester": semester_name or "Unknown Semester",
+                            "courses": courses
+                        })
+                else:
+                    text = node.get_text(strip=True)
+                    if "Semester" in text and len(text) < 60:
+                        semester_name = text
+
+            node = node.next_sibling
+
+    return curriculum
+
+
+def scrape_program(prog_id, prog_name):
+    """Bir programın tüm bilgilerini çek ve döndür."""
+    url = f"{BASE_URL}/program.php?fac_prog={prog_id}"
+    print(f"  Çekiliyor: [{prog_id}] {prog_name} ...")
+
+    content = get_page(url)
+    if not content:
+        return None
+
+    soup = BeautifulSoup(content, "html.parser")
+
+    # Bölüm adı
+    h2 = soup.find("h2")
+    dept_name = h2.get_text(strip=True) if h2 else prog_name
+
+    # Bölüm başkanı ve web adresi
+    head_of_dept = None
+    website = None
+    depts_div = soup.find("div", id="depts_links")
+    if depts_div:
+        for link in depts_div.find_all("a"):
+            href = link.get("href", "")
+            if "acad_pers" in href:
+                head_of_dept = link.get_text(strip=True)
+            elif href.startswith("http"):
+                website = href
+
+    curriculum = parse_curriculum(soup)
+    total_courses = sum(len(s["courses"]) for s in curriculum)
+    required = sum(
+        1 for s in curriculum for c in s["courses"] if c.get("type") == "required"
+    )
+
+    print(f"    → {len(curriculum)} dönem, {required} zorunlu ders ({total_courses} toplam)")
+
+    return {
+        "program_id": prog_id,
+        "program_name": prog_name,
+        "department_name": dept_name,
+        "head_of_department": head_of_dept,
+        "website": website,
+        "catalog_url": url,
+        "total_semesters": len(curriculum),
+        "total_course_entries": total_courses,
+        "curriculum": curriculum
     }
 
-    for idx, dept in enumerate(DEPARTMENTS, 1):
-        print(f"[{idx:2d}/{len(DEPARTMENTS)}] {dept['ad']}")
-        print(f"         catalog2: {catalog2_url(dept)}")
-
-        try:
-            yariyillar = scrape_department(dept)
-            toplam_ders = sum(
-                len(y["dersler"])
-                + sum(
-                    len(d.get("secenekler", []))
-                    for d in y["dersler"]
-                    if isinstance(d, dict) and "secenekler" in d
-                )
-                for y in yariyillar
-            )
-            print(f"         → {len(yariyillar)} dönem, ~{toplam_ders} ders/slot")
-
-            fakulte["bolumler"].append({
-                "ad":       dept["ad"],
-                "prog_id":  dept["prog_id"],
-                "kaynak":   catalog2_url(dept),
-                "mufredat": yariyillar,
-            })
-
-        except Exception as exc:
-            print(f"         ✗ HATA: {exc}")
-            fakulte["bolumler"].append({
-                "ad":       dept["ad"],
-                "prog_id":  dept["prog_id"],
-                "kaynak":   catalog2_url(dept),
-                "hata":     str(exc),
-                "mufredat": [],
-            })
-
-        time.sleep(1)
-
-    return fakulte
-
-
-# ── Giriş noktası ─────────────────────────────────────────────────────────────
 
 def main():
     print("=" * 60)
-    print("ODTÜ Mühendislik Fakültesi Müfredat Scraper")
+    print("METU Mühendislik Fakültesi Catalog Scraper")
     print("=" * 60)
 
-    data        = scrape_all()
-    basarili    = sum(1 for b in data["bolumler"] if b.get("mufredat"))
-    toplam_ders = sum(
-        sum(len(y["dersler"]) for y in b["mufredat"])
-        for b in data["bolumler"]
-    )
+    result = {
+        "faculty": "Faculty of Engineering",
+        "faculty_id": 500,
+        "source_url": f"{BASE_URL}/fac_inst.php?fac_inst=500",
+        "programs": []
+    }
+
+    for prog_id, prog_name in ENGINEERING_PROGRAMS:
+        prog_data = scrape_program(prog_id, prog_name)
+        if prog_data:
+            result["programs"].append(prog_data)
+        time.sleep(1.2)  # Sunucuyu yormamak için
+
+    output_file = "metu_engineering_catalog.json"
+    with open(output_file, "w", encoding="utf-8") as f:
+        json.dump(result, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 60)
-    print(f"  Toplam bölüm      : {len(data['bolumler'])}")
-    print(f"  Başarıyla çekilen : {basarili}")
-    print(f"  Toplam ders/slot  : {toplam_ders}")
+    print(f"✓ Tamamlandı! {len(result['programs'])} program çekildi.")
+    print(f"✓ Kaydedildi: {output_file}")
     print("=" * 60)
-
-    output = "metu_eng_faculty_mufredat.json"
-    with open(output, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    print(f"\nKaydedildi → {output}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,4167 @@
+{
+  "faculty": "Faculty of Engineering",
+  "faculty_id": 500,
+  "source_url": "https://catalog.metu.edu.tr/fac_inst.php?fac_inst=500",
+  "programs": [
+    {
+      "program_id": 572,
+      "program_name": "Aerospace Engineering",
+      "department_name": "DEPARTMENT OF AEROSPACE ENGINEERING",
+      "head_of_department": "Prof.Dr. SERKAN ÖZGEN",
+      "website": "http://www.ae.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=572",
+      "total_semesters": 4,
+      "total_course_entries": 32,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ME105",
+              "name": "COMPUTER AIDED ENGINEERING GRAPHICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE101",
+              "name": "INTRODUCTION TO AEROSPACE ENGINEERING",
+              "credit": 2,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "METE230",
+              "name": "FUNDAMENTALS OF MATERIALS SCIENCE AND ENGINEERING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE202",
+              "name": "MATHEMATICS FOR AEROSPACE ENGINEERS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE231",
+              "name": "THERMODYNAMICS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.5,
+              "type": "required"
+            },
+            {
+              "code": "AEE261",
+              "name": "STATICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 4.5,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "AEE300",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE301",
+              "name": "MEASUREMENT TECHNIQUES I",
+              "credit": 2,
+              "contact_h_w": 1,
+              "lab_h_w": 2,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE305",
+              "name": "NUMERICAL METHODS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE345",
+              "name": "AERODYNAMICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE361",
+              "name": "APPLIED ELASTICITY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE371",
+              "name": "AIRCRAFT PERFORMANCE",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE385",
+              "name": "SYSTEM DYNAMICS AND CONTROL",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "AEE400",
+              "name": "SUMMER PRACTICE III",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "AEE451",
+              "name": "AEROSPACE  ENGINEERING  DESIGN",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "FREE ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 563,
+      "program_name": "Chemical Engineering",
+      "department_name": "DEPARTMENT OF CHEMICAL ENGINEERING",
+      "head_of_department": "Prof.Dr. YUSUF ULUDAĞ",
+      "website": "http://www.che.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=563",
+      "total_semesters": 4,
+      "total_course_entries": 30,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM111",
+              "name": "GENERAL CHEMISTRY I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ME105",
+              "name": "COMPUTER AIDED ENGINEERING GRAPHICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "CHEM220",
+              "name": "ORGANIC CHEMISTRY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE203",
+              "name": "CHEMICAL PROCESS CALCULATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "CHEM353",
+              "name": "PHYSICAL CHEMISTRY II",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ECON210",
+              "name": "PRINCIPLES OF ECONOMICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE300",
+              "name": "SUMMER PRACTICE",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE305",
+              "name": "THERMODYNAMICS II",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE327",
+              "name": "HEAT & MASS TRANSFER OPERATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "CHE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE407",
+              "name": "PROCESS CONTROL",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE410",
+              "name": "CHEMICAL ENGINEERING LABORATORY II",
+              "credit": 2,
+              "contact_h_w": 0,
+              "lab_h_w": 4,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE417",
+              "name": "CHEMICAL ENGINEERING DESIGN I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CHE423",
+              "name": "CHEMICAL ENGINEERING ECONOMICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 3.5,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 562,
+      "program_name": "Civil Engineering",
+      "department_name": "DEPARTMENT OF CIVIL ENGINEERING",
+      "head_of_department": "Prof.Dr. ERDEM CANBAY",
+      "website": "http://www.ce.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=562",
+      "total_semesters": 4,
+      "total_course_entries": 31,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM107",
+              "name": "GENERAL CHEMISTRY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CE101",
+              "name": "CIVIL ENGINEERING DRAWING",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ES202",
+              "name": "MATHEMATICS FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE221",
+              "name": "ENGINEERING MECHANICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE231",
+              "name": "ENGINEERING ECONOMY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE241",
+              "name": "MATERIALS SCIENCE",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "CE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE305",
+              "name": "NUMERICAL METHODS FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE353",
+              "name": "PRINCIPLES OF TRANSPORTATION&TRAFFIC E",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE363",
+              "name": "SOIL MECHANICS",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE372",
+              "name": "HYDROMECHANICS",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CE383",
+              "name": "STRUCTURAL ANALYSIS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "CE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE410",
+              "name": "CIVIL ENGINEERING DESIGN",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "FREE ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 571,
+      "program_name": "Computer Engineering",
+      "department_name": "DEPARTMENT OF COMPUTER ENGINEERING",
+      "head_of_department": "Prof.Dr. MEHMET HALİT S. OĞUZTÜZÜN",
+      "website": "http://www.ceng.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=571",
+      "total_semesters": 4,
+      "total_course_entries": 30,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "BIOL109",
+              "name": "INTRODUCTION TO MOLECULAR BIOLOGY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG100",
+              "name": "COMPUTER ENGINEERING ORIENTATION",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 1.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG111",
+              "name": "INTRODUCTION TO COMPUTER ENG. CONCEPTS",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "EE281",
+              "name": "ELECTRICAL CIRCUITS",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG213",
+              "name": "DATA STRUCTURES",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG223",
+              "name": "DISCRETE COMPUTATIONAL STRUCTURES",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "CENG300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG315",
+              "name": "ALGORITHMS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG331",
+              "name": "COMPUTER ORGANIZATION",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG351",
+              "name": "DATA MANAGEMENT AND FILE STRUCTURES",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "CENG400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG477",
+              "name": "INTRODUCTION TO COMPUTER GRAPHICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG491",
+              "name": "COMPUTER ENGINEERING DESIGN I",
+              "credit": 4,
+              "contact_h_w": 2,
+              "lab_h_w": 4,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 567,
+      "program_name": "Electrical and Electronics Engineering",
+      "department_name": "DEPARTMENT OF ELECTRICAL AND ELECTRONICS ENGINEERING",
+      "head_of_department": "Prof.Dr. NEVZAT GÜNERİ GENÇER",
+      "website": "http://www.eee.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=567",
+      "total_semesters": 4,
+      "total_course_entries": 31,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM107",
+              "name": "GENERAL CHEMISTRY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH129",
+              "name": "SINGLE VARIABLE CALCULUS",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG240",
+              "name": "PROGRAMMING WITH PYTHON FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "PHYS213",
+              "name": "GENERAL PHYSICS III",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "EE201",
+              "name": "CIRCUIT THEORY I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "EE213",
+              "name": "ELECTRICAL CIRCUITS LABORATORY",
+              "credit": 2,
+              "contact_h_w": 0,
+              "lab_h_w": 4,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "EE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "EE301",
+              "name": "SIGNALS AND SYSTEMS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "EE303",
+              "name": "ELECTROMAGNETIC WAVES",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "EE311",
+              "name": "ANALOG ELECTRONICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "EE313",
+              "name": "ANALOG ELECTRONICS LABORATORY",
+              "credit": 2,
+              "contact_h_w": 0,
+              "lab_h_w": 4,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "EE361",
+              "name": "ELECTROMECHANICAL ENERGY CONVERSION I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "EE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "EE493",
+              "name": "ENGINEERING DESIGN I",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "FREE ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 561,
+      "program_name": "Engineering Sciences",
+      "department_name": "DEPARTMENT OF ENGINEERING SCIENCES",
+      "head_of_department": "Prof.Dr. MURAT DİCLELİ",
+      "website": "http://www.es.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=561",
+      "total_semesters": 0,
+      "total_course_entries": 0,
+      "curriculum": []
+    },
+    {
+      "program_id": 560,
+      "program_name": "Environmental Engineering",
+      "department_name": "DEPARTMENT OF ENVIRONMENTAL ENGINEERING",
+      "head_of_department": "Prof.Dr. TUBA HANDE BAYRAMOĞLU",
+      "website": "http://www.enve.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=560",
+      "total_semesters": 4,
+      "total_course_entries": 31,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM107",
+              "name": "GENERAL CHEMISTRY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE101",
+              "name": "INTRODUCTION TO ENVIRONMENTAL ENG.",
+              "credit": 2,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "CHEM229",
+              "name": "ORGANIC CHEMISTRY FOR ENGINEERS",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE201",
+              "name": "FUNDAMENTALS OF ENVIRONMENTAL ENG.PRO.",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE208",
+              "name": "ENVIRONMENTAL CHEMISTRY LABORATORY",
+              "credit": 3,
+              "contact_h_w": 1,
+              "lab_h_w": 4,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "ES223",
+              "name": "STATICS AND STRENGTH OF MATERIALS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "ENVE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE303",
+              "name": "UNIT OP. & PROCES. OF WATER TREAT.",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE309",
+              "name": "FUNDAMENTALS OF BIOLOGICAL TREATMENT",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CE374",
+              "name": "FLUID MECHANICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CE375",
+              "name": "ENVIRONMENTAL ENGINEERING HYDROLOGY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "ENVE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE404",
+              "name": "ENVIRONMENTAL MODELING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE407",
+              "name": "ENVIRONMENTAL ENGINEERING DESIGN I",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ENVE412",
+              "name": "SOLID WASTE MANAGEMENT",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 573,
+      "program_name": "Food Engineering",
+      "department_name": "DEPARTMENT OF FOOD ENGINEERING",
+      "head_of_department": "Prof.Dr. BEHİÇ MERT",
+      "website": "http://www.fde.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=573",
+      "total_semesters": 4,
+      "total_course_entries": 31,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "BIOL107",
+              "name": "CONCEPTS IN BIOLOGY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG240",
+              "name": "PROGRAMMING WITH PYTHON FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE101",
+              "name": "INTRODUCTION TO FOOD ENGINEERING",
+              "credit": 1,
+              "contact_h_w": 1,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "CHEM229",
+              "name": "ORGANIC CHEMISTRY FOR ENGINEERS",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE201",
+              "name": "MATERIAL AND ENERGY BALANCES",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "FREE ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "ES303",
+              "name": "STATISTICAL METHODS FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE305",
+              "name": "FOOD MICROBIOLOGY LAB.",
+              "credit": 1,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE311",
+              "name": "FOOD MICROBIOLOGY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE313",
+              "name": "FOOD CHEMISTRY",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE321",
+              "name": "FOOD ENGINEERING OPERATIONS II",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "FDE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE413",
+              "name": "FOOD TECHNOLOGY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "FDE425",
+              "name": "FOOD ENGINEERING DESIGN",
+              "credit": 4,
+              "contact_h_w": 2,
+              "lab_h_w": 4,
+              "ects": 8.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 564,
+      "program_name": "Geological Engineering",
+      "department_name": "DEPARTMENT OF GEOLOGICAL ENGINEERING",
+      "head_of_department": "Prof.Dr. ERDİN BOZKURT",
+      "website": "http://www.geoe.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=564",
+      "total_semesters": 4,
+      "total_course_entries": 32,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM111",
+              "name": "GENERAL CHEMISTRY I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE105",
+              "name": "INTRODUCTION TO GEOLOGICAL ENGINEERING",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ES221",
+              "name": "ENGINEERING MECHANICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE209",
+              "name": "PHYSICAL GEOLOGY",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE213",
+              "name": "MINERALOGY",
+              "credit": 4,
+              "contact_h_w": 2,
+              "lab_h_w": 4,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "GEOE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 8.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE303",
+              "name": "GEOPHYSICAL PROSPECTING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE309",
+              "name": "HISTORICAL GEOLOGY AND PALEONTOLOGY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE313",
+              "name": "STRUCTURAL GEOLOGY",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE317",
+              "name": "INTRODUCTION TO ROCK MECHANICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "RESTRICTED ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "GEOE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 8.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE401",
+              "name": "MINERAL DEPOSITS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE407",
+              "name": "ENGINEERING GEOLOGY",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE423",
+              "name": "HYDROGEOLOGY",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE425",
+              "name": "COMPUTER APPLICATIONS IN GEO.ENG.",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE491",
+              "name": "GEOLOGICAL ENGINEERING DESIGN I",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 568,
+      "program_name": "Industrial Engineering",
+      "department_name": "DEPARTMENT OF INDUSTRIAL ENGINEERING",
+      "head_of_department": "Prof.Dr. ZEYNEP PELİN BAYINDIR",
+      "website": "http://www.ie.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=568",
+      "total_semesters": 4,
+      "total_course_entries": 33,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM107",
+              "name": "GENERAL CHEMISTRY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG240",
+              "name": "PROGRAMMING WITH PYTHON FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ECON211",
+              "name": "PRIN OF.ECONOMICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "IE241",
+              "name": "FINANCIAL AND MANAGERIAL ACCOUNTING FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE251",
+              "name": "LINEAR PROGRAMMING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE265",
+              "name": "INTRODUCTION TO PROBABILITY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME212",
+              "name": "PRINCIPLES OF PRODUCTION ENGINEERING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "EE381",
+              "name": "SYSTEMS AND CONTROL",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE323",
+              "name": "PRODUCTION AND SERVICE OPERATIONS PLANNING I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE333",
+              "name": "WORK SYSTEMS ANALYSIS AND DESIGN",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE347",
+              "name": "ENGINEERING ECONOMY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE361",
+              "name": "STOCHASTIC MODELS IN OPERATIONS RESEARCH",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "IE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE404",
+              "name": "MANAGEMENT FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE422",
+              "name": "SEMINAR IN INDUSTRIAL ENGINEERING",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 1.0,
+              "type": "required"
+            },
+            {
+              "code": "IE489",
+              "name": "SYSTEMS THINKING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "IE497",
+              "name": "SYSTEMS  DESIGN  I",
+              "credit": 3,
+              "contact_h_w": 1,
+              "lab_h_w": 4,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 569,
+      "program_name": "Mechanical Engineering",
+      "department_name": "DEPARTMENT OF MECHANICAL ENGINEERING",
+      "head_of_department": "Prof.Dr. SERKAN DAĞ",
+      "website": "http://www.me.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=569",
+      "total_semesters": 4,
+      "total_course_entries": 33,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ME117",
+              "name": "COMPUTER AIDED ENGINEERING DRAWING",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG240",
+              "name": "PROGRAMMING WITH PYTHON FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "EE209",
+              "name": "FUNDAMENTALS OF ELECTRICAL&ELECTRO. EN",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME203",
+              "name": "THERMODYNAMICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME205",
+              "name": "STATICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE230",
+              "name": "FUNDAMENTALS OF MATERIALS SCIENCE AND ENGINEERING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "ECON210",
+              "name": "PRINCIPLES OF ECONOMICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME301",
+              "name": "THEORY OF MACHINES I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME303",
+              "name": "MANUFACTURING ENGINEERING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME305",
+              "name": "FLUID MECHANICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME307",
+              "name": "MACHINE ELEMENTS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME311",
+              "name": "HEAT TRANSFER",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "ME400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME407",
+              "name": "MECHANICAL ENGINEERING DESIGN",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "FREE ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 570,
+      "program_name": "Metallurgical and Materials Engineering",
+      "department_name": "DEPARTMENT OF METALLURGICAL AND MATERIALS ENGINEERING",
+      "head_of_department": "Prof.Dr. MEHMET KADRİ AYDINOL",
+      "website": "http://www.mete.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=570",
+      "total_semesters": 4,
+      "total_course_entries": 32,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM111",
+              "name": "GENERAL CHEMISTRY I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ME105",
+              "name": "COMPUTER AIDED ENGINEERING GRAPHICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "METE201",
+              "name": "MATERIALS SCIENCE I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE203",
+              "name": "THERMODYNAMICS OF MATERIALS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE215",
+              "name": "MATERIALS PROCESSING LABORATORY",
+              "credit": 2,
+              "contact_h_w": 1,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "CENG240",
+              "name": "PROGRAMMING WITH PYTHON FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG211",
+              "name": "ACADEMIC  SPEAKING SKILLS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 1,
+              "ects": 4.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS301",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "METE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE301",
+              "name": "PHASE EQUILIBRIA",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE303",
+              "name": "MECHANICAL BEHAVIOR OF MATERIALS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "METE305",
+              "name": "TRANSPORT PHENOMENA",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "METE307",
+              "name": "METALLIC MATERIALS AND METALLOGRAPHY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.5,
+              "type": "required"
+            },
+            {
+              "code": "METE349",
+              "name": "ELECTRICAL. MAGNETIC AND OPTICAL PROPERTIES OF MATERIALS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "METE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE401",
+              "name": "MATERIALS ENGINEERING DESIGN I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE451",
+              "name": "CERAMIC MATERIALS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "METE453",
+              "name": "POLYMER MATERIALS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 565,
+      "program_name": "Mining Engineering",
+      "department_name": "DEPARTMENT OF MINING ENGINEERING",
+      "head_of_department": "Prof.Dr. NURAY DEMİREL",
+      "website": "http://www.mine.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=565",
+      "total_semesters": 4,
+      "total_course_entries": 32,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM111",
+              "name": "GENERAL CHEMISTRY I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ME105",
+              "name": "COMPUTER AIDED ENGINEERING GRAPHICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ECON210",
+              "name": "PRINCIPLES OF ECONOMICS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ES225",
+              "name": "ENGINEERING MECHANICS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE207",
+              "name": "PRINCIPLES OF MINERALOGY &PETROGRAPHY",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE231",
+              "name": "ELEMENTS OF GEOLOGY",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE201",
+              "name": "UNDERGROUND MINING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "ES303",
+              "name": "STATISTICAL METHODS FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE309",
+              "name": "MINERAL PROCESSING I",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE317",
+              "name": "INTRODUCTION TO ROCK MECHANICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ME351",
+              "name": "THERMODYNAMICS OF HEAT POWER",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "FREE ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "MINE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE407",
+              "name": "MINE VALUATION",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE417",
+              "name": "MINE VENTILATION",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE419",
+              "name": "MATERIALS HANDLING &MINE TRANSPORT",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "MINE427",
+              "name": "MINERAL PROCESSING DESIGN",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "program_id": 566,
+      "program_name": "Petroleum and Natural Gas Engineering",
+      "department_name": "DEPARTMENT OF PETROLEUM AND NATURAL GAS ENGINEERING",
+      "head_of_department": "Assoc.Prof.Dr. İSMAİL DURGUT",
+      "website": "http://www.pete.metu.edu.tr/",
+      "catalog_url": "https://catalog.metu.edu.tr/program.php?fac_prog=566",
+      "total_semesters": 4,
+      "total_course_entries": 31,
+      "curriculum": [
+        {
+          "year": "FIRST YEAR",
+          "semester": "First Semester",
+          "courses": [
+            {
+              "code": "PHYS105",
+              "name": "GENERAL PHYSICS I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "CHEM111",
+              "name": "GENERAL CHEMISTRY I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "MATH119",
+              "name": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "credit": 5,
+              "contact_h_w": 4,
+              "lab_h_w": 2,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ME105",
+              "name": "COMPUTER AIDED ENGINEERING GRAPHICS",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ENG101",
+              "name": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 1,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "OHS101",
+              "name": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "IS100",
+              "name": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 2,
+              "ects": 1.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "SECOND YEAR",
+          "semester": "Third Semester",
+          "courses": [
+            {
+              "code": "MATH219",
+              "name": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "credit": 4,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 7.0,
+              "type": "required"
+            },
+            {
+              "code": "ES202",
+              "name": "MATHEMATICS FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ES221",
+              "name": "ENGINEERING MECHANICS I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "GEOE201",
+              "name": "GENERAL GEOLOGY",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE220",
+              "name": "RESERVOIR ROCK PROPERTIES",
+              "credit": 3,
+              "contact_h_w": 2,
+              "lab_h_w": 2,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2201",
+              "name": "",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": "HIST2205",
+              "name": "HISTORY OF THE TURKISH REVOLUTION I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            }
+          ]
+        },
+        {
+          "year": "THIRD YEAR",
+          "semester": "Fifth Semester",
+          "courses": [
+            {
+              "code": "ES303",
+              "name": "STATISTICAL METHODS FOR ENGINEERS",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "ES361",
+              "name": "COMPUTING METHODS IN ENGINEERING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE300",
+              "name": "SUMMER PRACTICE I",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE321",
+              "name": "DRILLING ENGINEERING I",
+              "credit": 4,
+              "contact_h_w": 3,
+              "lab_h_w": 2,
+              "ects": 6.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE331",
+              "name": "PETROLEUM PRODUCTION ENGINEERING I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE343",
+              "name": "PETROLEUM RESERVOIR ENGINEERING I",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK105",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 4,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK201",
+              "name": "ELEMENTARY TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 3.0,
+              "type": "required"
+            },
+            {
+              "code": "TURK303",
+              "name": "TURKISH I",
+              "credit": 0,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 2.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        },
+        {
+          "year": "FOURTH YEAR",
+          "semester": "Seventh Semester",
+          "courses": [
+            {
+              "code": "PETE400",
+              "name": "SUMMER PRACTICE II",
+              "credit": 0,
+              "contact_h_w": 0,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE411",
+              "name": "PETROLEUM PROPERTY VALUATION",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE417",
+              "name": "PETROLEUM ENGINEERING  DESIGN I",
+              "credit": 2,
+              "contact_h_w": 2,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": "PETE461",
+              "name": "NATURAL GAS ENGINEERING",
+              "credit": 3,
+              "contact_h_w": 3,
+              "lab_h_w": 0,
+              "ects": 5.0,
+              "type": "required"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "TECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            },
+            {
+              "code": null,
+              "name": "NONTECHNICAL ELECTIVE",
+              "credit": null,
+              "contact_h_w": null,
+              "lab_h_w": null,
+              "ects": 5.0,
+              "type": "elective_slot"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
