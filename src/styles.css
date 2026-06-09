@@ -1472,7 +1472,7 @@ input { font-family: inherit; }
     align-items: center;
     flex-shrink: 0;
     min-width: 0;
-    overflow: hidden;
+    overflow: visible;
   }
 
   /* Mobilde gizlenecekler */
@@ -1505,6 +1505,19 @@ input { font-family: inherit; }
 
   /* Avatar küçült */
   .user-avatar-btn { width: 30px; height: 30px; font-size: 11px; flex-shrink: 0; }
+
+  /* Dropdown — mobilde header'dan taşmasın, ekranın sağına sabitlensin */
+  .user-menu-wrap { position: static; }
+  .user-dropdown {
+    position: fixed;
+    top: auto;
+    bottom: auto;
+    right: 10px;
+    left: auto;
+    z-index: 9999;
+    min-width: 160px;
+  }
+
 
   /* Ã¢â€â‚¬ Panel sistemi Ã¢â€â‚¬ */
   .mobile-panel {

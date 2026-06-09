@@ -2,7 +2,9 @@ import React, { useState, useRef, useEffect } from "react";
 
 export default function Header({ tr, lang, setLang, selected, totalCredits, onClear, onCopyCRN, sidebarOpen, onToggleSidebar, onOpenAI, onOpenAutoSchedule, onOpenCurriculum, user, onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [dropdownPos, setDropdownPos] = useState(null);
   const menuRef = useRef(null);
+  const avatarRef = useRef(null);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -116,15 +118,26 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <div className="user-menu-wrap" ref={menuRef}>
             <button
               className="user-avatar-btn"
+              ref={avatarRef}
               onPointerDown={(e) => e.stopPropagation()}
-              onClick={() => setMenuOpen((v) => !v)}
+              onClick={() => {
+                if (!menuOpen && avatarRef.current) {
+                  const rect = avatarRef.current.getBoundingClientRect();
+                  setDropdownPos({ top: rect.bottom + 8, right: window.innerWidth - rect.right });
+                }
+                setMenuOpen((v) => !v);
+              }}
               aria-label="Kullanıcı menüsü"
               aria-expanded={menuOpen}
             >
               {initials}
             </button>
             {menuOpen && (
-              <div className="user-dropdown" role="menu">
+              <div
+                className="user-dropdown"
+                role="menu"
+                style={dropdownPos ? { position: "fixed", top: dropdownPos.top, right: dropdownPos.right, left: "auto" } : {}}
+              >
                 <div className="user-dropdown-info">
                   <div className="user-dropdown-name">{user.name || user.username}</div>
                   <div className="user-dropdown-username">@{user.username}</div>
