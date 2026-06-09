@@ -3,7 +3,7 @@ import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Calendar from "./components/Calendar.jsx";
 import AIPanel from "./components/AIPanel.jsx";
-import ChatBot from "./components/ChatBot.jsx";
+
 import Login from "./components/Login.jsx";
 import CurriculumModal from "./components/CurriculumModal.jsx";
 import { loadMetuCourses } from "./data.js";
