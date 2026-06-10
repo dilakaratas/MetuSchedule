@@ -96,16 +96,16 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
       for (const m of sec.meetings) {
         if (freeDays.has(m.d))
           constraintViolations.push(lang==="tr"
-            ? `📅 ${dayNames[m.d]} günü boş istenmiş`
-            : `📅 ${dayNames[m.d]} must stay free`);
+            ? `${dayNames[m.d]} günü boş istenmiş`
+            : `${dayNames[m.d]} must stay free`);
         if (earliestStart && toMin(m.s) < toMin(earliestStart))
           constraintViolations.push(lang==="tr"
-            ? `⏰ ${m.s} başlangıcı, minimum ${earliestStart}'den erken`
-            : `⏰ starts at ${m.s}, before earliest ${earliestStart}`);
+            ? `${m.s} başlangıcı, minimum ${earliestStart}'den erken`
+            : `starts at ${m.s}, before earliest ${earliestStart}`);
         if (latestEnd && toMin(m.e) > toMin(latestEnd))
           constraintViolations.push(lang==="tr"
-            ? `⏰ ${m.e} bitişi, maksimum ${latestEnd}'den geç`
-            : `⏰ ends at ${m.e}, after latest ${latestEnd}`);
+            ? `${m.e} bitişi, maksimum ${latestEnd}'den geç`
+            : `ends at ${m.e}, after latest ${latestEnd}`);
       }
       const uniq = [...new Set(constraintViolations)];
       const meetingStr = sec.meetings.map(m =>
@@ -175,14 +175,33 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
 
     const alternatives = [...sections]
       .sort((a, b) => a.constraintViolations.length - b.constraintViolations.length)
-      .slice(0, 4);
+      .slice(0, 4)
+      .map(alt => {
+        // Bu section diğer derslerle çakışıyor mu?
+        const crossConflicts = [];
+        for (const other of evaluated) {
+          if (other.course.code === course.code) continue;
+          const passingOther = other.sections.filter(s => s.passesConstraints);
+          const checkAgainst = passingOther.length > 0 ? passingOther : other.sections;
+          const allConflict = checkAgainst.every(ob => !!sectionsConflict(alt.sec, ob.sec));
+          if (allConflict && checkAgainst.length > 0) {
+            crossConflicts.push(other.course.code);
+          }
+        }
+        return { ...alt, crossConflicts };
+      });
+
+    // Hiçbir uygun section yok mu? (kısıt + çakışma birlikte)
+    const noViableSection = alternatives.every(
+      a => a.constraintViolations.length > 0 || a.crossConflicts.length > 0
+    );
 
     // Kombinatöryel tıkanma: dersin kendi section'ları kısıtları geçiyor ama
     // diğer derslerle kombine edilemiyor — bunu da göster
     const hasCombinatorialBlock = hasAnyPassing && timeConflictWith.length === 0 &&
       constraintReasons.length === 0;
 
-    return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing, hasCombinatorialBlock };
+    return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing, hasCombinatorialBlock, noViableSection };
   // Hiçbir sorun yoksa gösterme; ama sorun varsa (kısıt, conflict, veya hiç geçen yok) göster
   }).filter(d =>
     d.constraintReasons.length > 0 ||
@@ -283,8 +302,8 @@ function PreviewScreen({ schedule, courses, lang, onApply, onBack }) {
         })}
       </div>
       <div className="ai-panel-footer">
-        <button className="ai-cancel-btn" onClick={onBack}>← {lang==="tr"?"Değiştir":"Edit"}</button>
-        <button className="ai-generate-btn" onClick={onApply}>✓ {lang==="tr"?"Programı Uygula":"Apply Schedule"}</button>
+        <button className="ai-cancel-btn" onClick={onBack}>{lang==="tr"?"Değiştir":"Edit"}</button>
+        <button className="ai-generate-btn" onClick={onApply}>{lang==="tr"?"Programı Uygula":"Apply Schedule"}</button>
       </div>
     </div>
   );
@@ -294,7 +313,7 @@ function PreviewScreen({ schedule, courses, lang, onApply, onBack }) {
 function FailureCard({ diagnosis, lang }) {
   const [open, setOpen] = useState(false);
   const tr = lang === "tr";
-  const { course, constraintReasons, timeConflictWith, alternatives } = diagnosis;
+  const { course, constraintReasons, timeConflictWith, alternatives, noViableSection } = diagnosis;
   const hasIssue = constraintReasons.length > 0 || timeConflictWith.length > 0;
 
   return (
@@ -324,12 +343,18 @@ function FailureCard({ diagnosis, lang }) {
             <div style={{ marginTop:4 }}>
               {timeConflictWith.map(({ other, examples }, i) => (
                 <div key={i} style={{ fontSize:"0.77rem", color:"#7c3aed", lineHeight:1.5 }}>
-                  ⚡ {tr ? `${other} ile çakışıyor` : `conflicts with ${other}`}
+                  {tr ? `${other} ile çakışıyor` : `conflicts with ${other}`}
                   {examples[0] && (
                     <span style={{ opacity:.8 }}> — {examples[0].info}</span>
                   )}
                 </div>
               ))}
+            </div>
+          )}
+
+          {noViableSection && (
+            <div style={{ marginTop:4, fontSize:"0.77rem", color:"#b91c1c", fontWeight:600 }}>
+              {tr ? "Mevcut kısıtlara uygun şube bulunamadı" : "No section fits the current constraints"}
             </div>
           )}
         </div>
@@ -345,38 +370,50 @@ function FailureCard({ diagnosis, lang }) {
           }}
         >
           {open
-            ? (tr ? "Gizle ▲" : "Hide ▲")
-            : (tr ? `Şubeler (${alternatives.length}) ▼` : `Sections (${alternatives.length}) ▼`)}
+            ? (tr ? "Gizle" : "Hide")
+            : (tr ? `Şubeler (${alternatives.length})` : `Sections (${alternatives.length})`)}
         </button>
       </div>
 
       {open && (
         <div style={{ marginTop:8, borderTop:"1px solid #f5c6a0", paddingTop:8 }}>
           <div style={{ fontSize:"0.72rem", fontWeight:600, color:"#7a5c1f", marginBottom:5 }}>
-            {tr ? "Mevcut şubeler (en uygundan):" : "Available sections (best first):"}
+            {tr ? "Mevcut şubeler:" : "Available sections:"}
           </div>
-          {alternatives.map(({ sec, constraintViolations, meetingStr }, i) => (
-            <div key={i} style={{
-              fontSize:"0.73rem", padding:"6px 8px", borderRadius:6, marginBottom:4,
-              background: constraintViolations.length===0 ? "#f0fdf4" : "#fffbeb",
-              border:`1px solid ${constraintViolations.length===0 ? "#86efac" : "#fde68a"}`,
-            }}>
-              <div style={{ display:"flex", justifyContent:"space-between", gap:6 }}>
-                <span style={{ fontWeight:700 }}>§{sec.id}</span>
-                <span style={{ color:"#374151" }}>{sec.instructor || "—"}</span>
+          {alternatives.map(({ sec, constraintViolations, meetingStr, crossConflicts }, i) => {
+            const ok = constraintViolations.length === 0 && crossConflicts.length === 0;
+            return (
+              <div key={i} style={{
+                fontSize:"0.73rem", padding:"6px 8px", borderRadius:6, marginBottom:4,
+                background: ok ? "#f0fdf4" : "#fffbeb",
+                border:`1px solid ${ok ? "#86efac" : "#fde68a"}`,
+              }}>
+                <div style={{ display:"flex", justifyContent:"space-between", gap:6 }}>
+                  <span style={{ fontWeight:700 }}>§{sec.id}</span>
+                  <span style={{ color:"#374151" }}>{sec.instructor || "—"}</span>
+                </div>
+                <div style={{ color:"#374151", marginTop:2 }}>{meetingStr}</div>
+                {constraintViolations.length > 0 && (
+                  <div style={{ color:"#b45309", marginTop:3, fontSize:"0.7rem" }}>
+                    {constraintViolations.map((v,vi) => <div key={vi}>{v}</div>)}
+                  </div>
+                )}
+                {crossConflicts.length > 0 && (
+                  <div style={{ color:"#7c3aed", marginTop:3, fontSize:"0.7rem" }}>
+                    {tr
+                      ? `${crossConflicts.join(", ")} ile çakışıyor`
+                      : `conflicts with ${crossConflicts.join(", ")}`
+                    }
+                  </div>
+                )}
+                {ok && (
+                  <div style={{ color:"#15803d", marginTop:3, fontWeight:600, fontSize:"0.7rem" }}>
+                    {tr ? "Kısıtları karşılıyor" : "Meets all constraints"}
+                  </div>
+                )}
               </div>
-              <div style={{ color:"#374151", marginTop:2 }}>{meetingStr}</div>
-              {constraintViolations.length > 0 ? (
-                <div style={{ color:"#b45309", marginTop:3, fontSize:"0.7rem" }}>
-                  {constraintViolations.map((v,vi) => <div key={vi}>{v}</div>)}
-                </div>
-              ) : (
-                <div style={{ color:"#15803d", marginTop:3, fontWeight:600, fontSize:"0.7rem" }}>
-                  ✓ {tr ? "Kısıtları karşılıyor" : "Meets all constraints"}
-                </div>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
@@ -470,9 +507,9 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
             const sections = course.sections.map(sec => {
               const violations = [];
               for (const m of sec.meetings) {
-                if (freeDays.has(m.d)) violations.push(lang==="tr" ? `📅 ${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş` : `📅 ${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
-                if (earliestStart && toMin(m.s) < toMin(earliestStart)) violations.push(lang==="tr" ? `⏰ ${m.s} başlangıcı çok erken (min ${earliestStart})` : `⏰ ${m.s} starts before ${earliestStart}`);
-                if (latestEnd && toMin(m.e) > toMin(latestEnd)) violations.push(lang==="tr" ? `⏰ ${m.e} bitişi çok geç (max ${latestEnd})` : `⏰ ${m.e} ends after ${latestEnd}`);
+                if (freeDays.has(m.d)) violations.push(lang==="tr" ? `${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş` : `${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
+                if (earliestStart && toMin(m.s) < toMin(earliestStart)) violations.push(lang==="tr" ? `${m.s} başlangıcı çok erken (min ${earliestStart})` : `${m.s} starts before ${earliestStart}`);
+                if (latestEnd && toMin(m.e) > toMin(latestEnd)) violations.push(lang==="tr" ? `${m.e} bitişi çok geç (max ${latestEnd})` : `${m.e} ends after ${latestEnd}`);
               }
               const uniq = [...new Set(violations)];
               const meetingStr = sec.meetings.map(m => `${["Pzt","Sal","Çar","Per","Cum"][m.d]} ${m.s}–${m.e}`).join(", ");
@@ -799,10 +836,10 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
             <>
               <button className="ai-cancel-btn"
                 onClick={() => { setStage("form"); setViolations([]); setDiagnoses([]); }}>
-                ← {lang==="tr"?"Geri":"Back"}
+                {lang==="tr"?"Geri":"Back"}
               </button>
               <button className="ai-generate-btn" onClick={() => setStage("preview")}>
-                {lang==="tr"?"Önizle →":"Preview →"}
+                {lang==="tr"?"Önizle":"Preview"}
               </button>
             </>
           ) : (
@@ -812,7 +849,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </button>
               <button className="ai-generate-btn" onClick={handleGenerate}
                 disabled={selectedCourses.size===0||creditOver}>
-                {lang==="tr"?"Önizle →":"Preview →"}
+                {lang==="tr"?"Önizle":"Preview"}
               </button>
             </>
           )}

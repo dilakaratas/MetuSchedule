@@ -37,15 +37,6 @@ function readStoredUser() {
   return null;
 }
 
-// Test kullanıcısı için bölüm kodu tespiti
-// Öğrenci numarasından bölüm prefix'i çıkarır
-// Gerçek bir API'den gelecekse buraya entegre edilir
-const STUDENT_DEPT_MAP = {
-  "e251702": { dept: "CENG", deptName: "Bilgisayar Mühendisliği", year: 3 },
-  "e2517025": { dept: "CENG", deptName: "Bilgisayar Mühendisliği", year: 3 },
-  // Buraya yeni test kullanıcıları eklenebilir
-};
-
 // ─────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -67,32 +58,25 @@ export default function App() {
     validateCasTicket(ticket, "http://planify.metu.edu.tr/")
       .then(({ token, user: userData }) => {
         saveToken(token);
-        // CAS'tan gelen kullanıcıya dept bilgisi ekle
-        const enriched = enrichUser(userData);
-        localStorage.setItem("metu-user", JSON.stringify(enriched));
-        setUser(enriched);
+        localStorage.setItem("metu-user", JSON.stringify(userData));
+        setUser(userData);
       })
       .catch((err) => setCasError(err.message || "CAS girişi başarısız."))
       .finally(() => setCasLoading(false));
   }, []);
 
   const handleLogin = (userData) => {
-    const enriched = enrichUser(userData);
-    setUser(enriched);
-    localStorage.setItem("metu-user", JSON.stringify(enriched));
+    setUser(userData);
+    localStorage.setItem("metu-user", JSON.stringify(userData));
   };
 
   const handleLogout = () => {
     clearAllAuth();
-    // setUser(null) YAPMA — direkt CAS logout'a yönlendir.
-    // Geri dönerken ?loggedout=1 ile readStoredUser null döndürür,
-    // sayfa yenilenince yeni Login.jsx render edilir.
     const base    = window.location.origin + window.location.pathname;
     const service = encodeURIComponent(`${base}?loggedout=1`);
     window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
   };
 
-  // Yönetici çıkışı (CAS kullanmaz, direkt login'e döner)
   const handleAdminLogout = () => {
     clearAllAuth();
     setUser(null);
@@ -115,17 +99,6 @@ export default function App() {
 
   const logoutFn = user.role === "admin" ? handleAdminLogout : handleLogout;
   return <MainApp user={user} onLogout={logoutFn} />;
-}
-
-// Kullanıcıya bölüm/yıl bilgisi ekler
-function enrichUser(userData) {
-  const username = (userData.username || userData.netid || "").toLowerCase();
-  const deptInfo = STUDENT_DEPT_MAP[username];
-  if (deptInfo) {
-    return { ...userData, ...deptInfo };
-  }
-  // Bilinmeyen kullanıcı — dept yok, tüm dersler görünür
-  return userData;
 }
 
 // ─────────────────────────────────────────────────────────────────
@@ -163,22 +136,23 @@ function MainApp({ user, onLogout }) {
   const [curriculumCodes, setCurriculumCodes] = useState(null);
   const [mobileTab, setMobileTab] = useState("courses");
 
-  // Kullanıcının yılına ait müfredat ders kodları (otomatik filtre)
-  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null); // null = filtre yok
+  // Öğrencinin yılına ait müfredat ders kodları (otomatik filtre)
+  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null);
   const [curriculumYearLabel, setCurriculumYearLabel] = useState("");
 
   const calendarRef = useRef(null);
 
-  // Öğrenci girişi yapınca bölüm+yılına ait müfredat derslerini otomatik yükle
+  // OIBS'den gelen dept + yearNum ile müfredat derslerini otomatik yükle
   useEffect(() => {
-    if (!user?.dept || !user?.year) return;
-    const dept = user.dept.toUpperCase();
-    const year = Number(user.year);
-    if (!year) return;
+    const dept = (user?.dept || user?.programCode || "").toUpperCase();
+    const year = Number(user?.yearNum);
+    if (!dept || !year) return;
 
     const ENG_FILES = ["/metu_engineering_catalog.json", "/metu_eng_faculty_mufredat.json"];
-    const YEAR_TO_NUM = { "FIRST YEAR": 1, "SECOND YEAR": 2, "THIRD YEAR": 3, "FOURTH YEAR": 4, "FIFTH YEAR": 5 };
-    const SEM_TO_NUM = { "First Semester": 1, "Second Semester": 2, "Third Semester": 3, "Fourth Semester": 4, "Fifth Semester": 5, "Sixth Semester": 6, "Seventh Semester": 7, "Eighth Semester": 8 };
+    const YEAR_TO_NUM = {
+      "FIRST YEAR": 1, "SECOND YEAR": 2, "THIRD YEAR": 3,
+      "FOURTH YEAR": 4, "FIFTH YEAR": 5,
+    };
 
     (async () => {
       for (const file of ENG_FILES) {
@@ -189,11 +163,10 @@ function MainApp({ user, onLogout }) {
 
           let programs = [];
           let fmt = null;
-          if (data?.programs?.length) { programs = data.programs; fmt = "new"; }
-          else if (data?.bolumler?.length) { programs = data.bolumler; fmt = "old"; }
+          if (data?.programs?.length)       { programs = data.programs; fmt = "new"; }
+          else if (data?.bolumler?.length)  { programs = data.bolumler; fmt = "old"; }
           if (!programs.length) continue;
 
-          // Bölümü bul
           const prog = programs.find((p) => {
             const code = (p.program_code || p.bolum_kodu || p.department_code || "").toUpperCase();
             const name = (p.program_name || p.bolum_adi || p.name || "").toUpperCase();
@@ -201,7 +174,6 @@ function MainApp({ user, onLogout }) {
           });
           if (!prog) continue;
 
-          // Kodları çek
           const codes = new Set();
           if (fmt === "new") {
             for (const entry of prog.curriculum || []) {
@@ -228,7 +200,7 @@ function MainApp({ user, onLogout }) {
         } catch {}
       }
     })();
-  }, [user?.dept, user?.year]);
+  }, [user?.dept, user?.programCode, user?.yearNum]);
 
   useEffect(() => {
     try {
@@ -241,26 +213,22 @@ function MainApp({ user, onLogout }) {
     localStorage.setItem("metu-schedule", JSON.stringify(selected));
   }, [selected]);
 
-  // Kullanıcının bölümüne göre dersleri filtrele
-  const userDept = user?.dept; // örn: "CENG"
+  // OIBS'den gelen programCode → sidebar filtresi
+  const userDept = (user?.dept || user?.programCode || "").toUpperCase() || null;
 
   const deptFilteredCourses = useMemo(() => {
-    if (!userDept) return courses; // admin veya dept'siz kullanıcı → tümü
-    const prefix = userDept.toUpperCase();
+    if (!userDept) return courses;
     return courses.filter((c) => {
       const code = normCode(c.code);
-      // Hem kendi bölüm dersleri hem de bölüme bağlı servis dersleri
-      return code.startsWith(prefix) || isServiceCourse(code);
+      return code.startsWith(userDept) || isServiceCourse(code);
     });
   }, [courses, userDept]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return deptFilteredCourses.filter((c) => {
-      // Müfredat yılı filtresi aktifse sadece o yılın derslerini göster
       if (curriculumYearCodes) {
-        const code = normCode(c.code);
-        if (!curriculumYearCodes.has(code)) return false;
+        if (!curriculumYearCodes.has(normCode(c.code))) return false;
       }
       if (dayFilter.size > 0) {
         const meetsOnDay = c.sections.some((s) =>
@@ -280,7 +248,6 @@ function MainApp({ user, onLogout }) {
     [selected, courses]
   );
 
-  // Her çakışan section için detay bilgisi: hangi dersle, hangi gün/saatte
   const conflictDetails = useMemo(() => {
     const details = {};
     const DAY_NAMES_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
@@ -345,10 +312,8 @@ function MainApp({ user, onLogout }) {
       if (alt) {
         setConflictFlash(conflictKey);
         setTimeout(() => setConflictFlash(null), 800);
-        const msg = `§${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`;
-        toast(msg);
-        const newSelected = [...cleaned, { code, sectionId: alt.id }];
-        setSelected(newSelected);
+        toast(`§${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`);
+        setSelected([...cleaned, { code, sectionId: alt.id }]);
       } else {
         toast(`${code} için uygun section yok — tüm sectionlar ${conflictName} ile çakışıyor.`);
         setConflictFlash(conflictKey);
@@ -443,7 +408,7 @@ function MainApp({ user, onLogout }) {
       const course = courses.find((c) => c.code === normCd || normCode(c.code) === normCd);
       if (!course || !course.sections?.length) return;
       const existing = [...selected, ...newEntries];
-      let picked = course.sections.find((sec) => {
+      const picked = course.sections.find((sec) => {
         const trial = [...existing, { code: course.code, sectionId: sec.id }];
         return !findConflicts(trial, courses)[`${course.code}-${sec.id}`];
       }) || course.sections[0];
@@ -454,9 +419,7 @@ function MainApp({ user, onLogout }) {
 
     const merged = [...selected];
     newEntries.forEach((entry) => {
-      if (!merged.find((s) => s.code === entry.code)) {
-        merged.push(entry);
-      }
+      if (!merged.find((s) => s.code === entry.code)) merged.push(entry);
     });
     setSelected(merged);
     setCurriculumOpen(false);
@@ -471,7 +434,7 @@ function MainApp({ user, onLogout }) {
     return (
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        height: "100vh", fontSize: "1.1rem", color: "#666"
+        height: "100vh", fontSize: "1.1rem", color: "#666",
       }}>
         Ders verisi yükleniyor...
       </div>
@@ -482,7 +445,7 @@ function MainApp({ user, onLogout }) {
     return (
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        height: "100vh", fontSize: "1.1rem", color: "#e53e3e"
+        height: "100vh", fontSize: "1.1rem", color: "#e53e3e",
       }}>
         {dataError}
       </div>
