@@ -8,7 +8,7 @@ import Login from "./components/Login.jsx";
 import CurriculumModal from "./components/CurriculumModal.jsx";
 import { loadMetuCourses } from "./data.js";
 import { I18N } from "./i18n.js";
-import { findConflicts } from "./utils.js";
+import { findConflicts, sectionsConflict } from "./utils.js";
 import { saveToken, validateCasTicket } from "./api/auth.js";
 
 const normCode = (s) => (s || "").replace(/\s+/g, "").toUpperCase();
@@ -163,7 +163,72 @@ function MainApp({ user, onLogout }) {
   const [curriculumCodes, setCurriculumCodes] = useState(null);
   const [mobileTab, setMobileTab] = useState("courses");
 
+  // Kullanıcının yılına ait müfredat ders kodları (otomatik filtre)
+  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null); // null = filtre yok
+  const [curriculumYearLabel, setCurriculumYearLabel] = useState("");
+
   const calendarRef = useRef(null);
+
+  // Öğrenci girişi yapınca bölüm+yılına ait müfredat derslerini otomatik yükle
+  useEffect(() => {
+    if (!user?.dept || !user?.year) return;
+    const dept = user.dept.toUpperCase();
+    const year = Number(user.year);
+    if (!year) return;
+
+    const ENG_FILES = ["/metu_engineering_catalog.json", "/metu_eng_faculty_mufredat.json"];
+    const YEAR_TO_NUM = { "FIRST YEAR": 1, "SECOND YEAR": 2, "THIRD YEAR": 3, "FOURTH YEAR": 4, "FIFTH YEAR": 5 };
+    const SEM_TO_NUM = { "First Semester": 1, "Second Semester": 2, "Third Semester": 3, "Fourth Semester": 4, "Fifth Semester": 5, "Sixth Semester": 6, "Seventh Semester": 7, "Eighth Semester": 8 };
+
+    (async () => {
+      for (const file of ENG_FILES) {
+        try {
+          const r = await fetch(file);
+          if (!r.ok) continue;
+          const data = await r.json();
+
+          let programs = [];
+          let fmt = null;
+          if (data?.programs?.length) { programs = data.programs; fmt = "new"; }
+          else if (data?.bolumler?.length) { programs = data.bolumler; fmt = "old"; }
+          if (!programs.length) continue;
+
+          // Bölümü bul
+          const prog = programs.find((p) => {
+            const code = (p.program_code || p.bolum_kodu || p.department_code || "").toUpperCase();
+            const name = (p.program_name || p.bolum_adi || p.name || "").toUpperCase();
+            return code === dept || name.startsWith(dept);
+          });
+          if (!prog) continue;
+
+          // Kodları çek
+          const codes = new Set();
+          if (fmt === "new") {
+            for (const entry of prog.curriculum || []) {
+              const yilNo = YEAR_TO_NUM[entry.year] ?? 0;
+              if (yilNo !== year) continue;
+              for (const c of entry.courses || []) {
+                if (c.code) codes.add(c.code.replace(/\s+/g, "").toUpperCase());
+              }
+            }
+          } else {
+            const yilData = (prog.mufredat || []).find((y) => Number(y.yil) === year);
+            for (const yy of yilData?.yariyillar || []) {
+              for (const d of yy.dersler || []) {
+                if (d.kod) codes.add(d.kod.replace(/\s+/g, "").toUpperCase());
+              }
+            }
+          }
+
+          if (codes.size > 0) {
+            setCurriculumYearCodes(codes);
+            setCurriculumYearLabel(`${year}. Yıl ${dept} Dersleri`);
+            return;
+          }
+        } catch {}
+      }
+    })();
+  }, [user?.dept, user?.year]);
 
   useEffect(() => {
     try {
@@ -192,6 +257,11 @@ function MainApp({ user, onLogout }) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return deptFilteredCourses.filter((c) => {
+      // Müfredat yılı filtresi aktifse sadece o yılın derslerini göster
+      if (curriculumYearCodes) {
+        const code = normCode(c.code);
+        if (!curriculumYearCodes.has(code)) return false;
+      }
       if (dayFilter.size > 0) {
         const meetsOnDay = c.sections.some((s) =>
           s.meetings.some((m) => dayFilter.has(m.d))
@@ -203,12 +273,41 @@ function MainApp({ user, onLogout }) {
         .map((s) => s.instructor).join(" ")}`.toLowerCase();
       return hay.includes(q);
     });
-  }, [query, dayFilter, deptFilteredCourses]);
+  }, [query, dayFilter, deptFilteredCourses, curriculumYearCodes]);
 
   const conflicts = useMemo(
     () => findConflicts(selected, courses),
     [selected, courses]
   );
+
+  // Her çakışan section için detay bilgisi: hangi dersle, hangi gün/saatte
+  const conflictDetails = useMemo(() => {
+    const details = {};
+    const DAY_NAMES_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
+    const DAY_NAMES_EN = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+    const list = selected.map((sel) => {
+      const course = courses.find((c) => c.code === sel.code);
+      const section = course?.sections.find((s) => s.id === sel.sectionId);
+      return { sel, course, section };
+    });
+    for (let i = 0; i < list.length; i++) {
+      for (let j = i + 1; j < list.length; j++) {
+        const a = list[i]; const b = list[j];
+        if (!a.section || !b.section) continue;
+        const overlap = sectionsConflict(a.section, b.section);
+        if (overlap) {
+          const dayNames = lang === "tr" ? DAY_NAMES_TR : DAY_NAMES_EN;
+          const day = dayNames[overlap.m1.d] || overlap.m1.d;
+          const timeStr = `${overlap.m1.s}–${overlap.m1.e}`;
+          const ka = `${a.sel.code}-${a.sel.sectionId}`;
+          const kb = `${b.sel.code}-${b.sel.sectionId}`;
+          details[ka] = { withCode: b.sel.code, withName: lang === "tr" ? b.course?.nameTr : b.course?.name, day, time: timeStr };
+          details[kb] = { withCode: a.sel.code, withName: lang === "tr" ? a.course?.nameTr : a.course?.name, day, time: timeStr };
+        }
+      }
+    }
+    return details;
+  }, [selected, courses, lang]);
 
   const toast = (msg) => {
     setToastMsg(msg);
@@ -246,12 +345,12 @@ function MainApp({ user, onLogout }) {
       if (alt) {
         setConflictFlash(conflictKey);
         setTimeout(() => setConflictFlash(null), 800);
-        const msg = `⚠ §${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`;
+        const msg = `§${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`;
         toast(msg);
         const newSelected = [...cleaned, { code, sectionId: alt.id }];
         setSelected(newSelected);
       } else {
-        toast(`⚠ ${code} için uygun section yok — tüm sectionlar ${conflictName} ile çakışıyor.`);
+        toast(`${code} için uygun section yok — tüm sectionlar ${conflictName} ile çakışıyor.`);
         setConflictFlash(conflictKey);
         setTimeout(() => setConflictFlash(null), 800);
       }
@@ -265,10 +364,26 @@ function MainApp({ user, onLogout }) {
     setMobileTab("calendar");
   };
 
-  const removeSelected = (code) =>
+  const removeSelected = (code) => {
+    const course = courses.find((c) => c.code === code);
+    const name = course ? (lang === "tr" ? course.nameTr : course.name) : code;
+    if (!window.confirm(
+      lang === "tr"
+        ? `"${code} – ${name}" takvimden kaldırılacak. Emin misin?`
+        : `"${code} – ${name}" will be removed from your schedule. Are you sure?`
+    )) return;
     setSelected(selected.filter((s) => s.code !== code));
+  };
 
-  const clearAll = () => setSelected([]);
+  const clearAll = () => {
+    if (selected.length === 0) return;
+    if (!window.confirm(
+      lang === "tr"
+        ? `Takvimden ${selected.length} dersin tamamı silinecek. Emin misin?`
+        : `All ${selected.length} courses will be removed from the schedule. Are you sure?`
+    )) return;
+    setSelected([]);
+  };
 
   const copyCRNs = () => {
     const crns = selected
@@ -377,8 +492,10 @@ function MainApp({ user, onLogout }) {
   const sidebarProps = {
     tr, lang, query, setQuery, dayFilter, setDayFilter,
     courses: filtered, expandedCourse, setExpandedCourse,
-    selected, conflicts, toggleSelect, setHoveredSection,
+    selected, conflicts, conflictDetails, toggleSelect, setHoveredSection,
     setDraggingSection, conflictFlash, suggestAlternative, sidebarOpen,
+    curriculumYearLabel: curriculumYearCodes ? curriculumYearLabel : null,
+    onClearCurriculumYear: () => { setCurriculumYearCodes(null); setCurriculumYearLabel(""); },
   };
 
   const calendarProps = {
@@ -435,7 +552,7 @@ function MainApp({ user, onLogout }) {
                 <>
                   <span className="mobile-tab-stats-dot">·</span>
                   <span className="mobile-tab-stats-conflict">
-                    ⚠ {conflictCount} {lang === "tr" ? "çakışma" : "conflict"}
+                    {conflictCount} {lang === "tr" ? "çakışma" : "conflict"}
                   </span>
                 </>
               )}

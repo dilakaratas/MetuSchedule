@@ -4,8 +4,9 @@ import { colorFor } from "../utils.js";
 export default function Sidebar({
   tr, lang, query, setQuery, dayFilter, setDayFilter,
   courses, expandedCourse, setExpandedCourse,
-  selected, conflicts, toggleSelect,
+  selected, conflicts, conflictDetails, toggleSelect,
   setHoveredSection, setDraggingSection, conflictFlash, suggestAlternative,
+  curriculumYearLabel, onClearCurriculumYear,
 }) {
   const toggleDay = (idx) => {
     const next = new Set(dayFilter);
@@ -27,6 +28,32 @@ export default function Sidebar({
         </div>
       </div>
 
+      {curriculumYearLabel && (
+        <div style={{
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          margin: "0 12px 8px", padding: "7px 10px",
+          background: "var(--primary-light, #fdf0f2)", border: "1px solid var(--primary-border, #f5c6cc)",
+          borderRadius: 8, fontSize: 12, color: "var(--primary, #7a1e2e)",
+        }}>
+          <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
+              <path d="M2 4h12M4 1v2M12 1v2M2 6h12v8a1 1 0 01-1 1H3a1 1 0 01-1-1V6z"
+                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+            <strong>{curriculumYearLabel}</strong>
+          </span>
+          <button
+            onClick={onClearCurriculumYear}
+            style={{
+              background: "none", border: "none", cursor: "pointer",
+              color: "var(--primary, #7a1e2e)", fontSize: 14, lineHeight: 1,
+              padding: "0 2px", opacity: 0.7,
+            }}
+            title="Filtreyi kaldır"
+          >×</button>
+        </div>
+      )}
+
       <div className="filter-section">
         <div className="filter-label">
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{ marginRight: 6, verticalAlign: -2 }}>
@@ -46,7 +73,6 @@ export default function Sidebar({
       <div className="course-list">
         {courses.length === 0 && (
           <div className="empty-state">
-            <div className="empty-emoji">🔍</div>
             <div>{tr.noResults}</div>
           </div>
         )}
@@ -54,7 +80,7 @@ export default function Sidebar({
           <CourseAccordion key={course.code} course={course} tr={tr} lang={lang}
             expanded={expandedCourse === course.code}
             onToggleExpand={() => setExpandedCourse(expandedCourse === course.code ? null : course.code)}
-            selected={selected} conflicts={conflicts} toggleSelect={toggleSelect}
+            selected={selected} conflicts={conflicts} conflictDetails={conflictDetails} toggleSelect={toggleSelect}
             setHoveredSection={setHoveredSection} setDraggingSection={setDraggingSection}
             conflictFlash={conflictFlash} suggestAlternative={suggestAlternative} />
         ))}
@@ -65,7 +91,7 @@ export default function Sidebar({
 
 function CourseAccordion({
   course, tr, lang, expanded, onToggleExpand,
-  selected, conflicts, toggleSelect,
+  selected, conflicts, conflictDetails, toggleSelect,
   setHoveredSection, setDraggingSection, conflictFlash, suggestAlternative,
 }) {
   const colors = colorFor(course.dept);
@@ -87,7 +113,7 @@ function CourseAccordion({
           <div className="course-name">{courseName}</div>
         </div>
         <div className="course-header-right">
-          {selectedSection && <div className="course-tick">✓</div>}
+          {selectedSection && <div className="course-tick">Eklendi</div>}
           <div className="course-credits">{course.credits}</div>
           <svg className="chev" width="14" height="14" viewBox="0 0 16 16" fill="none">
             <path d="M4 6 L8 10 L12 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -128,31 +154,68 @@ function CourseAccordion({
                     </div>
                   ))}
                 </div>
-                {hasConflict && (
-                  <div className="conflict-banner">
-                    <span className="conflict-icon">⚠</span>
-                    <span>{tr.conflictMsg}</span>
-                    {(() => {
-                      const alt = suggestAlternative(course.code);
-                      if (alt && alt.id !== sec.id) {
-                        return (
-                          <button className="suggest-btn"
-                            onClick={(e) => { e.stopPropagation(); toggleSelect(course.code, alt.id); }}>
-                            {tr.suggestion}: §{alt.id}
-                          </button>
-                        );
-                      }
-                      return null;
-                    })()}
-                  </div>
-                )}
+                {hasConflict && (() => {
+                  const key = `${course.code}-${sec.id}`;
+                  const detail = conflictDetails?.[key];
+                  const alt = suggestAlternative(course.code);
+                  const hasAlt = alt && alt.id !== sec.id;
+                  const altMeeting = hasAlt ? alt.meetings?.[0] : null;
+                  const DAY_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
+                  const DAY_EN = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+                  const dayLabel = altMeeting
+                    ? (lang === "tr" ? DAY_TR : DAY_EN)[altMeeting.d] ?? ""
+                    : "";
+                  return (
+                    <div className="conflict-banner" style={{ flexDirection: "column", alignItems: "flex-start", gap: 4 }}>
+                      <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                        <span style={{ fontWeight: 600 }}>
+                          {lang === "tr" ? "Zaman çakışması" : "Time conflict"}
+                        </span>
+                      </div>
+                      {detail && (
+                        <div style={{ fontSize: 11, opacity: 0.85, paddingLeft: 2 }}>
+                          {lang === "tr"
+                            ? <>
+                                <strong>{detail.withCode}</strong>
+                                {detail.withName ? ` (${detail.withName})` : ""}
+                                {" "}ile{" "}
+                                <strong>{detail.day} {detail.time}</strong>
+                                {" "}saatinde çakışıyor
+                              </>
+                            : <>
+                                Conflicts with <strong>{detail.withCode}</strong>
+                                {detail.withName ? ` (${detail.withName})` : ""}
+                                {" "}on <strong>{detail.day}</strong> at <strong>{detail.time}</strong>
+                              </>
+                          }
+                        </div>
+                      )}
+                      {hasAlt ? (
+                        <button className="suggest-btn" style={{ marginTop: 2 }}
+                          onClick={(e) => { e.stopPropagation(); toggleSelect(course.code, alt.id); }}>
+                          {lang === "tr"
+                            ? `§${alt.id} önerilir${altMeeting ? ` — ${dayLabel} ${altMeeting.s}–${altMeeting.e}` : ""}`
+                            : `Try §${alt.id}${altMeeting ? ` — ${dayLabel} ${altMeeting.s}–${altMeeting.e}` : ""}`
+                          }
+                        </button>
+                      ) : (
+                        <div style={{ fontSize: 11, color: "#c0392b", paddingLeft: 2, marginTop: 2 }}>
+                          {lang === "tr"
+                            ? "Bu ders için uygun başka şube yok"
+                            : "No available alternative section"
+                          }
+                        </div>
+                      )}
+                    </div>
+                  );
+                })()}
                 <div className="section-actions">
                   <button className={`add-btn ${isSelected ? "added" : ""}`}
                     onClick={(e) => { e.stopPropagation(); toggleSelect(course.code, sec.id); }}
                     disabled={isFull && !isSelected}>
-                    {isSelected ? `✓ ${tr.added}` : tr.add}
+                    {isSelected ? tr.added : tr.add}
                   </button>
-                  <span className="drag-hint">⠿ {tr.drag}</span>
+                  <span className="drag-hint">{tr.drag}</span>
                 </div>
               </div>
             );

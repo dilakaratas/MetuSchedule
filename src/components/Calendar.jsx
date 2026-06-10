@@ -175,6 +175,7 @@ export default function Calendar({
                     key={b.key}
                     block={b}
                     tr={tr}
+                    lang={lang}
                     hasConflict={hasConflict}
                     conflictWithName={conflictWithName}
                     isFlash={isFlash}
@@ -193,6 +194,7 @@ export default function Calendar({
 function CalendarBlock({
   block,
   tr,
+  lang,
   hasConflict,
   conflictWithName,
   isFlash,
@@ -223,6 +225,11 @@ function CalendarBlock({
 
   const handleRemoveClick = (e) => {
     e.stopPropagation();
+    const label = (lang === "tr" ? block.nameTr : block.name) || block.name || block.code;
+    const msg = lang === "tr"
+      ? `"${block.code} – ${label}" takvimden kaldırılacak. Emin misin?`
+      : `Remove "${block.code} – ${label}" from your schedule?`;
+    if (!window.confirm(msg)) return;
     onRemove?.();
   };
 
@@ -270,7 +277,7 @@ function CalendarBlock({
 
       {hasConflict && tier !== "xs" && (
         <div className="cal-block-warn">
-          ⚠ {conflictWithName ? `${conflictWithName} ile çakışıyor` : tr.conflict}
+          {conflictWithName ? `${conflictWithName} ile çakışıyor` : tr.conflict}
         </div>
       )}
     </div>
