@@ -269,7 +269,6 @@ app.get("/api/auth/me", (req, res) => {
   }
 });
 
-
 app.post("/api/auth/logout", (_req, res) => {
   res.json({ message: "Çıkış yapıldı." });
 });

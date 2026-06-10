@@ -21,7 +21,6 @@ const SEM_TO_NUM = {
   "Seventh Semester": 7, "Eighth Semester":  8,
 };
 
-
 function convertNewCatalog(program) {
   const yilMap = {};
   for (const entry of program.curriculum || []) {
@@ -73,7 +72,6 @@ function convertOldCatalog(bolum) {
   }));
   return { mufredat };
 }
-
 
 const ENG_DEPTS = [
   { label: "AEE — Havacılık ve Uzay Mühendisliği",      prog_id: 572 },
