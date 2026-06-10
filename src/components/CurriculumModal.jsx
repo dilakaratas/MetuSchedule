@@ -329,25 +329,32 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
 
   // Kullanıcının bölümünü otomatik seç, yoksa ilk bölüm
   const autoDetectedDept = findDeptByCode(user?.dept || user?.programCode) || ALL_CURRICULA[0];
-  // yearNum = OIBS'den türetilen integer yıl (1-5), year = ham string
+  // yearNum = OIBS'den türetilen integer yıl (1-5)
   const autoDetectedYear = user?.yearNum ? Number(user.yearNum) : (user?.year ? Number(user.year) : null);
 
-  const [selectedDept,   setSelectedDept]   = useState(autoDetectedDept);
-  const [engData,        setEngData]        = useState(null);
-  const [engFormat,      setEngFormat]      = useState(null);
-  const [curriculum,     setCurriculum]     = useState(null);
-  const [cengCourses,    setCengCourses]    = useState(null);
-  const [loading,        setLoading]        = useState(false);
-  const [error,          setError]          = useState(null);
-  const [selectedYil,    setSelectedYil]    = useState(autoDetectedYear);
-  const [selectedYariyil,setSelectedYariyil]= useState(null);
-  const [activeTab,      setActiveTab]      = useState("zorunlu");
-  const [viewFilter,     setViewFilter]     = useState("all");
-  const [confirmClear,   setConfirmClear]   = useState(false);
+  const [selectedDept,    setSelectedDept]    = useState(autoDetectedDept);
+  const [engData,         setEngData]         = useState(null);
+  const [engFormat,       setEngFormat]       = useState(null);
+  const [curriculum,      setCurriculum]      = useState(null);
+  const [cengCourses,     setCengCourses]     = useState(null);
+  const [loading,         setLoading]         = useState(false);
+  const [error,           setError]           = useState(null);
+  const [selectedYil,     setSelectedYil]     = useState(autoDetectedYear);
+  const [selectedYariyil, setSelectedYariyil] = useState(null);
+  const [activeTab,       setActiveTab]       = useState("zorunlu");
+  const [viewFilter,      setViewFilter]      = useState("all");
+  const [confirmClear,    setConfirmClear]    = useState(null); // null | "progress" | "year"
 
   const doneKey = selectedDept.isEng ? `eng_${selectedDept.prog_id}` : selectedDept.file;
   const [done, setDone] = useState(() => loadDone(doneKey));
   useEffect(() => { setDone(loadDone(doneKey)); }, [doneKey]);
+
+  // Müfredat yüklenince otomatik yılı seç
+  useEffect(() => {
+    if (!autoDetectedYear || !curriculum?.mufredat?.length) return;
+    const exists = curriculum.mufredat.find((y) => y.yil === autoDetectedYear);
+    if (exists) setSelectedYil(autoDetectedYear);
+  }, [curriculum, autoDetectedYear]);
 
   const toggleDone = useCallback((kod) => {
     setDone((prev) => {
@@ -529,7 +536,7 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     onClose();
   };
 
-  const clearDone = () => { const e = new Set(); setDone(e); saveDone(doneKey, e); setConfirmClear(false); };
+  const clearDone = () => { const e = new Set(); setDone(e); saveDone(doneKey, e); setConfirmClear(null); };
   const yilLabel  = (y) => y.yil_adi || `${y.yil}. Yıl`;
 
   const renderOptions = () => (
@@ -576,7 +583,7 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <span style={{ fontSize: "0.68rem", opacity: 0.75, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>{tr ? "GENEL İLERLEME" : "OVERALL PROGRESS"}</span>
                   {totalDone > 0 && (
-                    <button onClick={clearDone} style={{ fontSize: "0.62rem", padding: "1px 6px", borderRadius: 99, border: "1px solid rgba(255,255,255,0.4)", background: "transparent", color: "rgba(255,255,255,0.75)", cursor: "pointer", fontWeight: 600 }}>
+                    <button onClick={() => setConfirmClear("progress")} style={{ fontSize: "0.62rem", padding: "1px 6px", borderRadius: 99, border: "1px solid rgba(255,255,255,0.4)", background: "transparent", color: "rgba(255,255,255,0.75)", cursor: "pointer", fontWeight: 600 }}>
                       {tr ? "Temizle" : "Clear"}
                     </button>
                   )}
@@ -660,17 +667,9 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                   ))}
                 </div>
                 {done.size > 0 && (
-                  confirmClear ? (
-                    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <span style={{ fontSize: "0.73rem", color: "#555" }}>{tr ? "Emin misin?" : "Are you sure?"}</span>
-                      <button onClick={clearDone} style={{ fontSize: "0.73rem", padding: "4px 10px", borderRadius: 7, border: "none", background: "#dc2626", color: "#fff", cursor: "pointer", fontWeight: 700 }}>{tr ? "Evet" : "Yes"}</button>
-                      <button onClick={() => setConfirmClear(false)} style={{ fontSize: "0.73rem", padding: "4px 10px", borderRadius: 7, border: "1px solid #e5e0da", background: "#fff", color: "#555", cursor: "pointer", fontWeight: 600 }}>{tr ? "Hayır" : "No"}</button>
-                    </div>
-                  ) : (
-                    <button onClick={() => setConfirmClear(true)} style={{ fontSize: "0.75rem", padding: "5px 12px", borderRadius: 8, border: "1px solid #fca5a5", background: "#fff5f5", color: "#dc2626", cursor: "pointer", fontWeight: 600 }}>
-                      {tr ? "Temizle" : "Clear all"}
-                    </button>
-                  )
+                  <button onClick={() => setConfirmClear("year")} style={{ fontSize: "0.75rem", padding: "5px 12px", borderRadius: 8, border: "1px solid #fca5a5", background: "#fff5f5", color: "#dc2626", cursor: "pointer", fontWeight: 600 }}>
+                    {tr ? "Temizle" : "Clear all"}
+                  </button>
                 )}
               </div>
             )}
@@ -754,6 +753,46 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
           </button>
         </div>
       </div>
+
+      {/* Profesyonel onay modalı */}
+      {confirmClear && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 1100,
+          background: "rgba(0,0,0,0.35)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: 20,
+        }} onClick={() => setConfirmClear(null)}>
+          <div style={{
+            background: "#fff", borderRadius: 14, padding: "28px 32px",
+            maxWidth: 340, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{ fontSize: "0.95rem", color: "#222", lineHeight: 1.6, marginBottom: 20 }}>
+              {tr ? "Tamamlanan ders işaretlemeleri sıfırlanacak. Emin misin?" : "All progress marks will be cleared. Are you sure?"}
+            </div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
+              <button
+                onClick={() => setConfirmClear(null)}
+                style={{
+                  padding: "8px 20px", borderRadius: 8, border: "1px solid #ddd",
+                  background: "#f5f5f5", color: "#444", cursor: "pointer", fontSize: "0.88rem",
+                }}
+              >
+                {tr ? "Vazgeç" : "Cancel"}
+              </button>
+              <button
+                onClick={clearDone}
+                style={{
+                  padding: "8px 20px", borderRadius: 8, border: "none",
+                  background: "#dc2626", color: "#fff", cursor: "pointer",
+                  fontSize: "0.88rem", fontWeight: 600,
+                }}
+              >
+                {tr ? "Evet, sıfırla" : "Yes, clear"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

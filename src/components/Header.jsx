@@ -141,32 +141,33 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
                 <div className="user-dropdown-info">
                   <div className="user-dropdown-name">{user.name || user.username}</div>
                   <div className="user-dropdown-username">@{user.username}</div>
-                  {(user.dept || user.yearNum || user.cgpa) && (
+                  {(user.dept || user.programCode || user.yearNum || user.cgpa) && (
                     <div style={{
-                      marginTop: 10, padding: "8px 10px",
+                      marginTop: 10, padding: "10px 12px",
                       background: "#f9f2f3", borderRadius: 8,
-                      display: "flex", flexDirection: "column", gap: 4,
+                      display: "flex", flexDirection: "column", gap: 5,
                     }}>
-                      {user.dept && (
-                        <div style={{ fontSize: 12, fontWeight: 600, color: "#7a1e2e" }}>
-                          {user.dept}{user.programName ? ` — ${user.programName}` : ""}
+                      {(user.dept || user.programCode) && (
+                        <div style={{ fontSize: 12, fontWeight: 700, color: "#7a1e2e" }}>
+                          {user.dept || user.programCode}
+                          {user.programName ? ` — ${user.programName}` : ""}
                         </div>
                       )}
                       {user.faculty && (
                         <div style={{ fontSize: 11, color: "#666" }}>{user.faculty}</div>
                       )}
                       {(user.yearNum || user.cgpa) && (
-                        <div style={{ display: "flex", gap: 16, marginTop: 2 }}>
+                        <div style={{ display: "flex", gap: 16, marginTop: 2, paddingTop: 6, borderTop: "1px solid #f0dde0" }}>
                           {user.yearNum && (
                             <div style={{ fontSize: 11, color: "#444" }}>
                               <span style={{ color: "#999", marginRight: 3 }}>{lang === "tr" ? "Yıl" : "Year"}</span>
-                              <span style={{ fontWeight: 600 }}>{user.yearNum}</span>
+                              <span style={{ fontWeight: 700, color: "#222" }}>{user.yearNum}</span>
                             </div>
                           )}
                           {user.cgpa && (
                             <div style={{ fontSize: 11, color: "#444" }}>
                               <span style={{ color: "#999", marginRight: 3 }}>GPA</span>
-                              <span style={{ fontWeight: 600 }}>{user.cgpa}</span>
+                              <span style={{ fontWeight: 700, color: "#222" }}>{user.cgpa}</span>
                             </div>
                           )}
                         </div>

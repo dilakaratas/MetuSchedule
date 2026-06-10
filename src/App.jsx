@@ -605,7 +605,7 @@ function MainApp({ user, onLogout }) {
                   fontSize: "0.88rem", fontWeight: 600,
                 }}
               >
-                {lang === "tr" ? "Evet, kaldır" : "Yes, remove"}
+                {lang === "tr" ? "Evet" : "Yes"}
               </button>
             </div>
           </div>
