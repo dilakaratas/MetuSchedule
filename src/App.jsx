@@ -13,18 +13,38 @@ import { saveToken, validateCasTicket } from "./api/auth.js";
 
 const normCode = (s) => (s || "").replace(/\s+/g, "").toUpperCase();
 
-export default function App() {
-  const [user, setUser] = useState(() => {
-    const token =
-      localStorage.getItem("metu-token") || sessionStorage.getItem("metu-token");
-    const savedUser = localStorage.getItem("metu-user");
-    if (token && savedUser) {
-      try { return JSON.parse(savedUser); } catch { return null; }
-    }
+// ── Yardımcılar ──────────────────────────────────────────────────
+function clearAllAuth() {
+  localStorage.removeItem("metu-user");
+  localStorage.removeItem("metu-token");
+  sessionStorage.removeItem("metu-token");
+  sessionStorage.removeItem("metu-user");
+}
+
+function readStoredUser() {
+  // ?loggedout=1 varsa localStorage'ı temizle ve null dön —
+  // CAS'tan geri dönerken aynı SSO oturumunun tekrar kullanılmasını engeller.
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("loggedout") === "1") {
+    clearAllAuth();
+    // Parametreyi URL'den temizle
+    const clean = window.location.origin + window.location.pathname;
+    window.history.replaceState({}, document.title, clean);
     return null;
-  });
+  }
+  const token = localStorage.getItem("metu-token") || sessionStorage.getItem("metu-token");
+  const saved = localStorage.getItem("metu-user");
+  if (token && saved) {
+    try { return JSON.parse(saved); } catch { return null; }
+  }
+  return null;
+}
+// ─────────────────────────────────────────────────────────────────
+
+export default function App() {
+  const [user, setUser]           = useState(() => readStoredUser());
   const [casLoading, setCasLoading] = useState(false);
-  const [casError, setCasError] = useState("");
+  const [casError,   setCasError]   = useState("");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -53,20 +73,23 @@ export default function App() {
   };
 
   const handleLogout = () => {
+    // 1. Önce tüm local state + storage'ı temizle
+    clearAllAuth();
     setUser(null);
-    localStorage.removeItem("metu-user");
-    localStorage.removeItem("metu-token");
-    sessionStorage.removeItem("metu-token");
-    sessionStorage.removeItem("metu-user");
-    // Sayfayı temiz URL ile yenile — login ekranına döner
-    window.location.href = window.location.origin + window.location.pathname;
+
+    // 2. CAS sunucu oturumunu da sonlandır.
+    //    service= parametresi: CAS logout sonrası geri döneceği URL.
+    //    ?loggedout=1 ekleyerek App'in SSO'yu tekrar kullanmasını engelliyoruz.
+    const base    = window.location.origin + window.location.pathname;
+    const service = encodeURIComponent(`${base}?loggedout=1`);
+    window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
   };
 
   if (casLoading) {
     return (
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        height: "100vh", fontSize: "1.1rem", color: "#7a1e2e"
+        height: "100vh", fontSize: "1.1rem", color: "#7a1e2e",
       }}>
         ODTÜ kimliği doğrulanıyor...
       </div>
@@ -140,7 +163,7 @@ function MainApp({ user, onLogout }) {
         .map((s) => s.instructor).join(" ")}`.toLowerCase();
       return hay.includes(q);
     });
-  }, [query, dayFilter, allCoursesForUser, courses, previewUser, user]);
+  }, [query, dayFilter, courses, user]);
 
   const conflicts = useMemo(
     () => findConflicts(selected, courses),
