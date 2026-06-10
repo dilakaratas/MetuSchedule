@@ -1,0 +1,491 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "İşletme",
+  "kod": "BA",
+  "fac_prog": 312,
+  "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=312",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "FIRST YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Semester 1",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "MATH117",
+              "ad": "CALCULUS I",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360117"
+            },
+            {
+              "kod": "BA1101",
+              "ad": "FUNDAMENTALS OF BUSINESS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3121101"
+            },
+            {
+              "kod": "BA1103",
+              "ad": "BUSINESS PRACTICE WORKSHOP",
+              "metu_kredi": 1,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "3121103"
+            },
+            {
+              "kod": "BA1201",
+              "ad": "PRINCIPLES OF BEHAVIORAL SCIENCES",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3121201"
+            },
+            {
+              "kod": "BA1401",
+              "ad": "FINANCIAL ACCOUNTING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3121401"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK101",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420101",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH I",
+                  "catalog_kodu": "6420201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "35.5"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "MATH118",
+              "ad": "CALCULUS II",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360118"
+            },
+            {
+              "kod": "ADM1102",
+              "ad": "INTRODUCTION TO LAW FOR MANAGERS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3101102"
+            },
+            {
+              "kod": "ECON122",
+              "ad": "PRINCIPLES OF MACROECONOMICS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3110122"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "metu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "BA1502",
+              "ad": "BUSINESS STATISTICS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3121502"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK102",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420102",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH I",
+                  "catalog_kodu": "6420202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "35.5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "SECOND YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Semester 3",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "BA2203",
+              "ad": "ORGANIZATIONS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122203"
+            },
+            {
+              "kod": "BA2601",
+              "ad": "OPERATIONS MANAGEMENT",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122601"
+            },
+            {
+              "kod": "BA2701",
+              "ad": "PRINCIPLES OF MARKETING",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122701"
+            },
+            {
+              "kod": "BA2801",
+              "ad": "MICROECONOMICS FOR BUSINESS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122801"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "BA2204",
+              "ad": "HUMAN RESOURCE MANAGEMENT",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122204"
+            },
+            {
+              "kod": "BA2206",
+              "ad": "ORGANIZATION THEORY",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122206"
+            },
+            {
+              "kod": "BA2802",
+              "ad": "PRINCIPLES OF FINANCE",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3122802"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC  SPEAKING SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "THIRD YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Semester 5",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "BA3301",
+              "ad": "INFORMATION SYSTEMS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3123301"
+            },
+            {
+              "kod": "ENG311",
+              "ad": "PROFESSIONAL COMMUNICATION AND CAREER SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390311"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "BA3504",
+              "ad": "MANAGEMENT SCIENCE",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3123504"
+            },
+            {
+              "tur": "FREE ELECTIVE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "FOURTH YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Semester 7",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "BA4103",
+              "ad": "STRATEGIC MANAGEMENT",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3124103"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "BA4104",
+              "ad": "MANAGERIAL SKILLS LABORATORY II",
+              "metu_kredi": 1,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "3124104"
+            },
+            {
+              "kod": "BA4106",
+              "ad": "BUSINESS LAW",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "3124106"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

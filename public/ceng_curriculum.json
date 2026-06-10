@@ -1,0 +1,553 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "Bilgisayar Mühendisliği",
+  "kaynak": "https://ceng.metu.edu.tr/index.php/tr/lisans-mufredati",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "Birinci Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Birinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "PHYS105",
+              "ad": "GENERAL PHYSICS I",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300105"
+            },
+            {
+              "kod": "BIOL109",
+              "ad": "INTRODUCTION TO MOLECULAR BIOLOGY",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "2380109"
+            },
+            {
+              "kod": "MATH119",
+              "ad": "CALCULUS WITH ANALYTIC GEOMETRY",
+              "odtu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "2360119"
+            },
+            {
+              "kod": "CENG100",
+              "ad": "COMPUTER ENGINEERING ORIENTATION",
+              "odtu_kredi": 0,
+              "ders_saat": 2,
+              "lab_saat": 0,
+              "ects": 1.0,
+              "catalog_kodu": "5710100"
+            },
+            {
+              "kod": "CENG111",
+              "ad": "INTRODUCTION TO COMPUTER ENG. CONCEPTS",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "5710111"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "OHS101",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770101"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            }
+          ]
+        },
+        {
+          "yariyil": 2,
+          "yariyil_adi": "İkinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "PHYS106",
+              "ad": "GENERAL PHYSICS II",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300106"
+            },
+            {
+              "kod": "MATH120",
+              "ad": "CALCULUS OF FUNCTIONS OF SEVERAL VARIABLES",
+              "odtu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360120"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "odtu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "MATH260",
+              "ad": "BASIC LINEAR ALGEBRA",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "2360260"
+            },
+            {
+              "kod": "CENG140",
+              "ad": "C PROGRAMMING",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 4.0,
+              "catalog_kodu": "5710140"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "İkinci Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Üçüncü Yarıyıl",
+          "dersler": [
+            {
+              "kod": "MATH219",
+              "ad": "INTRODUCTION TO DIFFERENTIAL EQUATIONS",
+              "odtu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 7.0,
+              "catalog_kodu": "2360219"
+            },
+            {
+              "kod": "EE281",
+              "ad": "ELECTRICAL CIRCUITS",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "5670281"
+            },
+            {
+              "kod": "CENG213",
+              "ad": "DATA STRUCTURES",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "5710213"
+            },
+            {
+              "kod": "CENG223",
+              "ad": "DISCRETE COMPUTATIONAL STRUCTURES",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710223"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC ORAL PRESENTATION SKILLS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "yariyil": 4,
+          "yariyil_adi": "Dördüncü Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG222",
+              "ad": "STATISTICAL METHODS OF COMPUTER ENGINEERING",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710222"
+            },
+            {
+              "kod": "CENG232",
+              "ad": "LOGIC DESIGN",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "5710232"
+            },
+            {
+              "kod": "CENG242",
+              "ad": "PROGRAMMING LANGUAGE CONCEPTS",
+              "odtu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "5710242"
+            },
+            {
+              "kod": "CENG280",
+              "ad": "FORMAL LANGU.AND ABSTRACT MACHINES",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710280"
+            },
+            {
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            },
+            {
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "Üçüncü Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Beşinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG300",
+              "ad": "SUMMER PRACTICE I",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710300"
+            },
+            {
+              "kod": "CENG315",
+              "ad": "ALGORITHMS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710315"
+            },
+            {
+              "kod": "CENG331",
+              "ad": "COMPUTER ORGANIZATION",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710331"
+            },
+            {
+              "kod": "CENG351",
+              "ad": "DATA MANAGEMENT AND FILE STRUCTURES",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710351"
+            },
+            {
+              "kod": "OHS301",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-II",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770301"
+            },
+            {
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "odtu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH",
+                  "catalog_kodu": "6420201",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK303",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420303",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            },
+            {
+              "tur": "KISITLI SEÇMELİ",
+              "aciklama": "Kisitli Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            }
+          ]
+        },
+        {
+          "yariyil": 6,
+          "yariyil_adi": "Altıncı Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG334",
+              "ad": "INTRODUCTION TO OPERATING SYSTEMS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.5,
+              "catalog_kodu": "5710334"
+            },
+            {
+              "kod": "CENG336",
+              "ad": "INTRO.TO EMBEDDED SYSTEMS DEVELOPMENT",
+              "odtu_kredi": 3,
+              "ders_saat": 2,
+              "lab_saat": 2,
+              "ects": 5.5,
+              "catalog_kodu": "5710336"
+            },
+            {
+              "kod": "CENG350",
+              "ad": "SOFTWARE ENGINEERING",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.5,
+              "catalog_kodu": "5710350"
+            },
+            {
+              "kod": "CENG384",
+              "ad": "SIGNALS AND SYSTEMS FOR COMPUTER ENGINEERS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710384"
+            },
+            {
+              "secmeli_grup": "Alttaki setten herhangi biri:",
+              "secenekler": [
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "odtu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH",
+                  "catalog_kodu": "6420202",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK304",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420304",
+                  "odtu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            },
+            {
+              "tur": "TEKNİK OLMAYAN SEÇMELİ",
+              "aciklama": "Tekni̇k Olmayan Seçmeli̇ ders slotu"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "Dördüncü Yıl",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Yedinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG400",
+              "ad": "SUMMER PRACTICE II",
+              "odtu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 5.0,
+              "catalog_kodu": "5710400"
+            },
+            {
+              "kod": "CENG477",
+              "ad": "INTRODUCTION TO COMPUTER GRAPHICS",
+              "odtu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "5710477"
+            },
+            {
+              "kod": "CENG491",
+              "ad": "COMPUTER ENGINEERING DESIGN I",
+              "odtu_kredi": 4,
+              "ders_saat": 2,
+              "lab_saat": 4,
+              "ects": 8.0,
+              "catalog_kodu": "5710491"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            }
+          ]
+        },
+        {
+          "yariyil": 8,
+          "yariyil_adi": "Sekizinci Yarıyıl",
+          "dersler": [
+            {
+              "kod": "CENG492",
+              "ad": "COMPUTER ENGINEERING DESIGN II",
+              "odtu_kredi": 4,
+              "ders_saat": 2,
+              "lab_saat": 4,
+              "ects": 8.0,
+              "catalog_kodu": "5710492"
+            },
+            {
+              "tur": "SERBEST SEÇMELİ",
+              "aciklama": "Serbest Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            },
+            {
+              "tur": "TEKNİK SEÇMELİ",
+              "aciklama": "Tekni̇k Seçmeli̇ ders slotu"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

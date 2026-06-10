@@ -1,0 +1,616 @@
+{
+  "source": {
+    "courseListUrl": "https://ceng.metu.edu.tr/index.php/tr/course-list",
+    "technicalElectivesUrl": "https://ceng.metu.edu.tr/tr/teknik-secmeli-dersler",
+    "note": "courseCode: boşuksuz (CENG100) | metuCourseCode: katalog kodu (5710100)"
+  },
+  "zorunlu_dersler": [
+    {
+      "courseCode": "CENG100",
+      "metuCourseCode": "5710100",
+      "courseName": "Computer Engineering Orientation",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710100"
+    },
+    {
+      "courseCode": "CENG111",
+      "metuCourseCode": "5710111",
+      "courseName": "Introduction to Computer Engineering Concepts",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710111"
+    },
+    {
+      "courseCode": "CENG140",
+      "metuCourseCode": "5710140",
+      "courseName": "C Programming",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710140"
+    },
+    {
+      "courseCode": "CENG213",
+      "metuCourseCode": "5710213",
+      "courseName": "Data Structures",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710213"
+    },
+    {
+      "courseCode": "CENG223",
+      "metuCourseCode": "5710223",
+      "courseName": "Discrete Computational Structures",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710223"
+    },
+    {
+      "courseCode": "CENG232",
+      "metuCourseCode": "5710232",
+      "courseName": "Logic Design",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710232"
+    },
+    {
+      "courseCode": "CENG242",
+      "metuCourseCode": "5710242",
+      "courseName": "Programming Language Concepts",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710242"
+    },
+    {
+      "courseCode": "CENG280",
+      "metuCourseCode": "5710280",
+      "courseName": "Formal Languages And Abstract Machines",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710280"
+    },
+    {
+      "courseCode": "CENG300",
+      "metuCourseCode": "5710300",
+      "courseName": "Summer Practice - I",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710300"
+    },
+    {
+      "courseCode": "CENG315",
+      "metuCourseCode": "5710315",
+      "courseName": "Algorithms",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710315"
+    },
+    {
+      "courseCode": "CENG331",
+      "metuCourseCode": "5710331",
+      "courseName": "Computer Organization",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710331"
+    },
+    {
+      "courseCode": "CENG334",
+      "metuCourseCode": "5710334",
+      "courseName": "Introduction to Operating Systems",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710334"
+    },
+    {
+      "courseCode": "CENG336",
+      "metuCourseCode": "5710336",
+      "courseName": "Int. to Embedded Systems Development",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710336"
+    },
+    {
+      "courseCode": "CENG350",
+      "metuCourseCode": "5710350",
+      "courseName": "Software Engineering",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710350"
+    },
+    {
+      "courseCode": "CENG351",
+      "metuCourseCode": "5710351",
+      "courseName": "Data Management And File Structures",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710351"
+    },
+    {
+      "courseCode": "CENG378",
+      "metuCourseCode": "5710378",
+      "courseName": "Computer Graphics - I",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710378"
+    },
+    {
+      "courseCode": "CENG384",
+      "metuCourseCode": "5710384",
+      "courseName": "Signals and Systems for Computer Engineers",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710384"
+    },
+    {
+      "courseCode": "CENG400",
+      "metuCourseCode": "5710400",
+      "courseName": "Summer Practice - II",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710400"
+    },
+    {
+      "courseCode": "CENG436",
+      "metuCourseCode": "5710436",
+      "courseName": "Data Communications and Computer Networking",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710436"
+    },
+    {
+      "courseCode": "CENG477",
+      "metuCourseCode": "5710477",
+      "courseName": "Introduction to Computer Graphics",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710477"
+    },
+    {
+      "courseCode": "CENG491",
+      "metuCourseCode": "5710491",
+      "courseName": "Computer Engineering Design I",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710491"
+    },
+    {
+      "courseCode": "CENG492",
+      "metuCourseCode": "5710492",
+      "courseName": "Computer Engineering Design II",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710492"
+    }
+  ],
+  "servis_dersleri": [
+    {
+      "courseCode": "CENG240",
+      "metuCourseCode": "5710240",
+      "courseName": "Programming with Python for Engineers",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710240"
+    },
+    {
+      "courseCode": "CENG301",
+      "metuCourseCode": "5710301",
+      "courseName": "Algorithms And Data Structures",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710301"
+    },
+    {
+      "courseCode": "CENG302",
+      "metuCourseCode": "5710302",
+      "courseName": "Introduction to Database Management Systems",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710302"
+    },
+    {
+      "courseCode": "CENG305",
+      "metuCourseCode": "5710305",
+      "courseName": "Object-Oriented Programming with JAVA",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710305"
+    },
+    {
+      "courseCode": "CENG310",
+      "metuCourseCode": "5710310",
+      "courseName": "Algorithms and Data Structures with Python",
+      "catalogUrl": "https://catalog.metu.edu.tr/course.php?prog=571&course_code=5710310"
+    }
+  ],
+  "teknik_secmeli_dersler": {
+    "kategori_1": {
+      "aciklama": "Bölüm tarafından açılan teknik seçmeli dersler (token-tabanlı atama).",
+      "dersler": [
+        {
+          "courseCode": "CENG316",
+          "metuCourseCode": null,
+          "courseName": "Practice of Algorithms",
+          "credit": "(2-2)3"
+        },
+        {
+          "courseCode": "CENG340",
+          "metuCourseCode": null,
+          "courseName": "Rapid Application Development",
+          "credit": "(2-2)3"
+        },
+        {
+          "courseCode": "CENG352",
+          "metuCourseCode": null,
+          "courseName": "Database Management Systems",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG371",
+          "metuCourseCode": null,
+          "courseName": "Scientific Computing",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG382",
+          "metuCourseCode": null,
+          "courseName": "Analysis of Dynamic Systems with Feedback",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG403",
+          "metuCourseCode": null,
+          "courseName": "Intro. to Deep Learning",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG414",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Data Mining",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG424",
+          "metuCourseCode": null,
+          "courseName": "Logic for Computer Sciences",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG435",
+          "metuCourseCode": null,
+          "courseName": "Data Communications and Networking",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG443",
+          "metuCourseCode": null,
+          "courseName": "Intro. to Object-Oriented Programming Languages and Systems",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG444",
+          "metuCourseCode": null,
+          "courseName": "Language Processors",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG445",
+          "metuCourseCode": null,
+          "courseName": "Software Development with Scripting Languages",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG451",
+          "metuCourseCode": null,
+          "courseName": "Information Systems Development",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG453",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Software Construction",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG454",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Comp. Eng.: Introduction to Software Architecture",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG460",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Robotics for Computer Engineering",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG462",
+          "metuCourseCode": null,
+          "courseName": "Artificial Intelligence",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG463",
+          "metuCourseCode": null,
+          "courseName": "Introduction to NLP",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG465",
+          "metuCourseCode": null,
+          "courseName": "Intro. to Bioinformatics",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG466",
+          "metuCourseCode": null,
+          "courseName": "Fundamental Image Processing Techniques",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG469",
+          "metuCourseCode": null,
+          "courseName": "Computer Graphics - II",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG476",
+          "metuCourseCode": null,
+          "courseName": "System Simulation",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG478",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Parallel Computing",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG483",
+          "metuCourseCode": null,
+          "courseName": "Int. to Computer Vision",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG486",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Computer Engineering: Advanced Topics in Networking",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG487",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Introduction to Quantum Computing",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG488",
+          "metuCourseCode": null,
+          "courseName": "Guided Research",
+          "credit": "(1-4)3"
+        },
+        {
+          "courseCode": "CENG489",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Introduction to Computer Security",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG493",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Cluster Computing",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG495",
+          "metuCourseCode": null,
+          "courseName": "Cloud Computing",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG496",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Semantic Web",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG497",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Intro. to Mainframe Architectures and Computing",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG498",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Software Development with Scripting Languages",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CENG499",
+          "metuCourseCode": null,
+          "courseName": "Special Topics in Com. Eng.: Intro. to Machine Learning",
+          "credit": "(3-0)3"
+        }
+      ]
+    },
+    "kategori_2": {
+      "aciklama": "Diğer bölümler tarafından açılan, ön-onaylı dersler. Bölüm onayı gerektirir.",
+      "dersler": [
+        {
+          "courseCode": "IS533",
+          "metuCourseCode": null,
+          "courseName": "Decision Support Systems: Design and Implementation",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IS536",
+          "metuCourseCode": null,
+          "courseName": "Information Systems Infrastructure for Contemporary Organizations",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IS551",
+          "metuCourseCode": null,
+          "courseName": "Computer Security and Cryptography",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IS572",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Medical Informatics",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IS573",
+          "metuCourseCode": null,
+          "courseName": "Human Computer Interaction",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IS532",
+          "metuCourseCode": null,
+          "courseName": "Human Factors in Information Systems",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "CE413",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Geographic Information Systems",
+          "credit": "(2-2)3"
+        },
+        {
+          "courseCode": "EE212",
+          "metuCourseCode": null,
+          "courseName": "Semiconductor Devices and Modeling",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "EE312",
+          "metuCourseCode": null,
+          "courseName": "Digital Electronics",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH301",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Probability Theory",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH341",
+          "metuCourseCode": null,
+          "courseName": "Graph Theory",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH353",
+          "metuCourseCode": null,
+          "courseName": "Complex Calculus",
+          "credit": "(4-0)4"
+        },
+        {
+          "courseCode": "MATH365",
+          "metuCourseCode": null,
+          "courseName": "Elementary Number Theory - I",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH390",
+          "metuCourseCode": null,
+          "courseName": "Computer Algebra",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH401",
+          "metuCourseCode": null,
+          "courseName": "Probability Theory",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH402",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Optimization",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH407",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Game Theory",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH478",
+          "metuCourseCode": null,
+          "courseName": "Mathematical Aspects of Cryptography",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH489",
+          "metuCourseCode": null,
+          "courseName": "Dynamical Systems",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "MATH490",
+          "metuCourseCode": null,
+          "courseName": "Difference Equations",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IE407",
+          "metuCourseCode": null,
+          "courseName": "Fundamentals of Operational Research",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IE451",
+          "metuCourseCode": null,
+          "courseName": "Decision Analysis",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IE455",
+          "metuCourseCode": null,
+          "courseName": "An Introduction to Combinatorial Analysis",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "BIN504",
+          "metuCourseCode": null,
+          "courseName": "Probabilistic and Statistical Modeling for Bioinformatics",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "IAM501",
+          "metuCourseCode": null,
+          "courseName": "Introduction to Cryptography",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "GATE541",
+          "metuCourseCode": null,
+          "courseName": "Physics for Computer Games",
+          "credit": "(3-0)3"
+        },
+        {
+          "courseCode": "STAT464",
+          "metuCourseCode": null,
+          "courseName": "Operations Research",
+          "credit": "3(2-2)"
+        },
+        {
+          "courseCode": "STAT465",
+          "metuCourseCode": null,
+          "courseName": "Multivariate Analysis",
+          "credit": "4(3-2)"
+        },
+        {
+          "courseCode": "STAT479",
+          "metuCourseCode": null,
+          "courseName": "Linear Programming",
+          "credit": "3(2-2)"
+        },
+        {
+          "courseCode": "STAT497",
+          "metuCourseCode": null,
+          "courseName": "Applied Time Series Analysis",
+          "credit": "4(3-2)"
+        },
+        {
+          "courseCode": "MIN703",
+          "metuCourseCode": null,
+          "courseName": "Medical Imaging Applications",
+          "credit": "3(3-0)"
+        },
+        {
+          "courseCode": "MIN704",
+          "metuCourseCode": null,
+          "courseName": "Reasoning Under Uncertainty",
+          "credit": "3(3-0)"
+        },
+        {
+          "courseCode": "MIN711",
+          "metuCourseCode": null,
+          "courseName": "Advance Topics in Medical Image Analysis",
+          "credit": "3(3-0)"
+        },
+        {
+          "courseCode": "CSEC507",
+          "metuCourseCode": null,
+          "courseName": "Applied Cryptology",
+          "credit": "3(0-0)"
+        },
+        {
+          "courseCode": "CSEC513",
+          "metuCourseCode": null,
+          "courseName": "Lightweight Cryptography for the Internet of Things",
+          "credit": "3(3-0)"
+        },
+        {
+          "courseCode": "CSEC519",
+          "metuCourseCode": null,
+          "courseName": "Blockchain and Cryptocurrency Technologies",
+          "credit": "3(3-0)"
+        }
+      ]
+    },
+    "kategori_3": {
+      "aciklama": "2. kategori dışındaki tüm uygun dersler. Bölüm onayı gerektirir, 1xx kodlu dersler kabul edilmez.",
+      "dersler": []
+    }
+  },
+  "summary": {
+    "zorunluDersCount": 22,
+    "servisDersCount": 5,
+    "teknikSecmeli1Count": 34,
+    "teknikSecmeli2Count": 36,
+    "totalCount": 97
+  }
+}

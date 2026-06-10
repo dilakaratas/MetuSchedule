@@ -1,0 +1,600 @@
+{
+  "universite": "ODTÜ",
+  "bolum": "Matematik",
+  "kod": "MATH",
+  "fac_prog": 219,
+  "kaynak": "https://catalog.metu.edu.tr/program.php?fac_prog=219",
+  "mufredat": [
+    {
+      "yil": 1,
+      "yil_adi": "FIRST YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 1,
+          "yariyil_adi": "Semester 1",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE103",
+              "ad": "MOLECULAR AND CELLULAR BIOLOGY I",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2190103"
+            },
+            {
+              "kod": "CHEM111",
+              "ad": "GENERAL CHEMISTRY I",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2340111"
+            },
+            {
+              "kod": "MATH117",
+              "ad": "CALCULUS I",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360117"
+            },
+            {
+              "kod": "ENG101",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390101"
+            },
+            {
+              "kod": "OHS101",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY-I",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770101"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE104",
+              "ad": "MOLECULAR AND CELLULAR BIOLOGY II",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2190104"
+            },
+            {
+              "kod": "CHEM112",
+              "ad": "GENERAL CHEMISTRY II",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2340112"
+            },
+            {
+              "kod": "MATH118",
+              "ad": "CALCULUS II",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 7.5,
+              "catalog_kodu": "2360118"
+            },
+            {
+              "kod": "BA100",
+              "ad": "CAREER PLANNING",
+              "metu_kredi": 0,
+              "ders_saat": 1,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "3120100"
+            },
+            {
+              "kod": "ENG102",
+              "ad": "ENGLISH FOR ACADEMIC PURPOSES II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 1,
+              "ects": 6.0,
+              "catalog_kodu": "6390102"
+            },
+            {
+              "kod": "IS100",
+              "ad": "INTRODUCTION TO INFORMATION TECHNOLOGIES AND APPLICATIONS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 1.0,
+              "catalog_kodu": "9010100"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 2,
+      "yil_adi": "SECOND YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 3,
+          "yariyil_adi": "Semester 3",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE205",
+              "ad": "ECOLOGY AND EVOLUTIONARY BIOLOGY",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "2190205"
+            },
+            {
+              "kod": "PHYS111",
+              "ad": "PHYSICS I (MECHANICS)",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300111"
+            },
+            {
+              "kod": "BIOL220",
+              "ad": "INTRODUCTION TO BIOMETRY",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "2380220"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2201",
+                  "ad": "",
+                  "catalog_kodu": "2402201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2205",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION I",
+                  "catalog_kodu": "2402205",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "NONTECHNICAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "27"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "PHYS112",
+              "ad": "PHYSICS II (ELECTRICITY AND MAGNETISM)",
+              "metu_kredi": 5,
+              "ders_saat": 4,
+              "lab_saat": 2,
+              "ects": 6.0,
+              "catalog_kodu": "2300112"
+            },
+            {
+              "kod": "CHEM231",
+              "ad": "ORGANIC CHEMISTRY",
+              "metu_kredi": 5,
+              "ders_saat": 3,
+              "lab_saat": 4,
+              "ects": 7.0,
+              "catalog_kodu": "2340231"
+            },
+            {
+              "kod": "BIOL252",
+              "ad": "PHYSIOLOGY",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 5.5,
+              "catalog_kodu": "2380252"
+            },
+            {
+              "kod": "ENG211",
+              "ad": "ACADEMIC  SPEAKING SKILLS",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 1,
+              "ects": 4.0,
+              "catalog_kodu": "6390211"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "HIST2202",
+                  "ad": "",
+                  "catalog_kodu": "2402202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "HIST2206",
+                  "ad": "HISTORY OF THE TURKISH REVOLUTION II",
+                  "catalog_kodu": "2402206",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "",
+                  "ad": "NONTECHNICAL ELECTIVE",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 0,
+                  "ects": 6.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "30.5"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 3,
+      "yil_adi": "THIRD YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 5,
+          "yariyil_adi": "Semester 5",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE365",
+              "ad": "GENERAL AND MOLECULAR GENETICS",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "2190365"
+            },
+            {
+              "kod": "GENE367",
+              "ad": "GENERAL AND MOLECULAR GENETICS LAB.",
+              "metu_kredi": 2,
+              "ders_saat": 0,
+              "lab_saat": 4,
+              "ects": 4.0,
+              "catalog_kodu": "2190367"
+            },
+            {
+              "kod": "BIOL303",
+              "ad": "MICROBIOLOGY",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "2380303"
+            },
+            {
+              "kod": "BIOL307",
+              "ad": "BIOCHEMISTRY I",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 7.0,
+              "catalog_kodu": "2380307"
+            },
+            {
+              "kod": "BIOL355",
+              "ad": "MICROBIOLOGY LAB",
+              "metu_kredi": 2,
+              "ders_saat": 0,
+              "lab_saat": 4,
+              "ects": 4.0,
+              "catalog_kodu": "2380355"
+            },
+            {
+              "kod": "OHS301",
+              "ad": "OCCUPATIONAL HEALTH AND SAFETY - II",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "8770301"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK105",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420105",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK201",
+                  "ad": "ELEMENTARY TURKISH I",
+                  "catalog_kodu": "6420201",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK303",
+                  "ad": "TURKISH I",
+                  "catalog_kodu": "6420303",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                },
+                {
+                  "kod": "Semester Total:",
+                  "ad": "34"
+                }
+              ]
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE366",
+              "ad": "MOLECULAR BIOLOGY OF THE GENE",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "2190366"
+            },
+            {
+              "kod": "BIOL308",
+              "ad": "BIOCHEMISTRY  II",
+              "metu_kredi": 4,
+              "ders_saat": 4,
+              "lab_saat": 0,
+              "ects": 7.0,
+              "catalog_kodu": "2380308"
+            },
+            {
+              "kod": "BIOL310",
+              "ad": "BIOCHEMISTRY LABORATORY",
+              "metu_kredi": 2,
+              "ders_saat": 0,
+              "lab_saat": 4,
+              "ects": 4.0,
+              "catalog_kodu": "2380310"
+            },
+            {
+              "kod": "BIOL356",
+              "ad": "PLANT BIOLOGY",
+              "metu_kredi": 4,
+              "ders_saat": 3,
+              "lab_saat": 2,
+              "ects": 7.0,
+              "catalog_kodu": "2380356"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "TURK106",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420106",
+                  "metu_kredi": 0,
+                  "ders_saat": 4,
+                  "lab_saat": 0,
+                  "ects": 5.0
+                },
+                {
+                  "kod": "TURK202",
+                  "ad": "INTERMEDIATE TURKISH I",
+                  "catalog_kodu": "6420202",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 3.0
+                },
+                {
+                  "kod": "TURK304",
+                  "ad": "TURKISH II",
+                  "catalog_kodu": "6420304",
+                  "metu_kredi": 0,
+                  "ders_saat": 2,
+                  "lab_saat": 0,
+                  "ects": 2.0
+                }
+              ]
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "yil": 4,
+      "yil_adi": "FOURTH YEAR",
+      "yariyillar": [
+        {
+          "yariyil": 7,
+          "yariyil_adi": "Semester 7",
+          "dersler": [
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE456",
+              "ad": "MOLECULAR BIOLOGY TECHNIQUES AND TECHNOLOGIES",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "2190456"
+            },
+            {
+              "kod": "GENE473",
+              "ad": "MOLECULAR BIOLOGY OF THE CELL",
+              "metu_kredi": 3,
+              "ders_saat": 3,
+              "lab_saat": 0,
+              "ects": 6.0,
+              "catalog_kodu": "2190473"
+            },
+            {
+              "kod": "GENE475",
+              "ad": "MOLECULAR BIOLOGY LABORATORY",
+              "metu_kredi": 2,
+              "ders_saat": 0,
+              "lab_saat": 4,
+              "ects": 4.0,
+              "catalog_kodu": "2190475"
+            },
+            {
+              "kod": "GENE479",
+              "ad": "CURRENT RESEARCH IN BIOLOGICAL SCIENCES",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 2.0,
+              "catalog_kodu": "2190479"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "kod": "Course Code",
+              "ad": "Course Name",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 0,
+              "ects": 0.0
+            },
+            {
+              "kod": "GENE480",
+              "ad": "STUDENT SEMINARS IN MOLECULAR BIOLOGY AND GENETICS",
+              "metu_kredi": 0,
+              "ders_saat": 0,
+              "lab_saat": 2,
+              "ects": 2.0,
+              "catalog_kodu": "2190480"
+            },
+            {
+              "secmeli_grup": "Any 1 of the following set ",
+              "secenekler": [
+                {
+                  "kod": "BIOL360",
+                  "ad": "SUMMER PRACTICE",
+                  "catalog_kodu": "2380360",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 4,
+                  "ects": 9.0
+                },
+                {
+                  "kod": "BIOL361",
+                  "ad": "INTERNATIONAL STUDENT PRACTICE",
+                  "catalog_kodu": "2380361",
+                  "metu_kredi": 0,
+                  "ders_saat": 0,
+                  "lab_saat": 4,
+                  "ects": 9.0
+                }
+              ]
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            },
+            {
+              "tur": "TECHNICAL ELECTIVE"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
