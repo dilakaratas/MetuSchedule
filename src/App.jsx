@@ -37,6 +37,7 @@ function readStoredUser() {
   return null;
 }
 
+
 // ─────────────────────────────────────────────────────────────────
 
 export default function App() {
@@ -72,11 +73,15 @@ export default function App() {
 
   const handleLogout = () => {
     clearAllAuth();
+    // setUser(null) YAPMA — direkt CAS logout'a yönlendir.
+    // Geri dönerken ?loggedout=1 ile readStoredUser null döndürür,
+    // sayfa yenilenince yeni Login.jsx render edilir.
     const base    = window.location.origin + window.location.pathname;
     const service = encodeURIComponent(`${base}?loggedout=1`);
     window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
   };
 
+  // Yönetici çıkışı (CAS kullanmaz, direkt login'e döner)
   const handleAdminLogout = () => {
     clearAllAuth();
     setUser(null);
@@ -136,23 +141,20 @@ function MainApp({ user, onLogout }) {
   const [curriculumCodes, setCurriculumCodes] = useState(null);
   const [mobileTab, setMobileTab] = useState("courses");
 
-  // Öğrencinin yılına ait müfredat ders kodları (otomatik filtre)
-  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null);
+  // Kullanıcının yılına ait müfredat ders kodları (otomatik filtre)
+  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null); // null = filtre yok
   const [curriculumYearLabel, setCurriculumYearLabel] = useState("");
 
   const calendarRef = useRef(null);
 
-  // OIBS'den gelen dept + yearNum ile müfredat derslerini otomatik yükle
+  // Öğrenci girişi yapınca bölüm+yılına ait müfredat derslerini otomatik yükle
   useEffect(() => {
-    const dept = (user?.dept || user?.programCode || "").toUpperCase();
+    const dept = user?.dept?.toUpperCase();
     const year = Number(user?.yearNum);
     if (!dept || !year) return;
 
     const ENG_FILES = ["/metu_engineering_catalog.json", "/metu_eng_faculty_mufredat.json"];
-    const YEAR_TO_NUM = {
-      "FIRST YEAR": 1, "SECOND YEAR": 2, "THIRD YEAR": 3,
-      "FOURTH YEAR": 4, "FIFTH YEAR": 5,
-    };
+    const YEAR_TO_NUM = { "FIRST YEAR": 1, "SECOND YEAR": 2, "THIRD YEAR": 3, "FOURTH YEAR": 4, "FIFTH YEAR": 5 };
 
     (async () => {
       for (const file of ENG_FILES) {
@@ -163,10 +165,11 @@ function MainApp({ user, onLogout }) {
 
           let programs = [];
           let fmt = null;
-          if (data?.programs?.length)       { programs = data.programs; fmt = "new"; }
-          else if (data?.bolumler?.length)  { programs = data.bolumler; fmt = "old"; }
+          if (data?.programs?.length) { programs = data.programs; fmt = "new"; }
+          else if (data?.bolumler?.length) { programs = data.bolumler; fmt = "old"; }
           if (!programs.length) continue;
 
+          // Bölümü bul
           const prog = programs.find((p) => {
             const code = (p.program_code || p.bolum_kodu || p.department_code || "").toUpperCase();
             const name = (p.program_name || p.bolum_adi || p.name || "").toUpperCase();
@@ -174,6 +177,7 @@ function MainApp({ user, onLogout }) {
           });
           if (!prog) continue;
 
+          // O yılın ders kodlarını çek
           const codes = new Set();
           if (fmt === "new") {
             for (const entry of prog.curriculum || []) {
@@ -200,7 +204,7 @@ function MainApp({ user, onLogout }) {
         } catch {}
       }
     })();
-  }, [user?.dept, user?.programCode, user?.yearNum]);
+  }, [user?.dept, user?.yearNum]);
 
   useEffect(() => {
     try {
@@ -213,22 +217,26 @@ function MainApp({ user, onLogout }) {
     localStorage.setItem("metu-schedule", JSON.stringify(selected));
   }, [selected]);
 
-  // OIBS'den gelen programCode → sidebar filtresi
+  // Kullanıcının bölümüne göre dersleri filtrele
   const userDept = (user?.dept || user?.programCode || "").toUpperCase() || null;
 
   const deptFilteredCourses = useMemo(() => {
-    if (!userDept) return courses;
+    if (!userDept) return courses; // admin veya dept'siz kullanıcı → tümü
+    const prefix = userDept.toUpperCase();
     return courses.filter((c) => {
       const code = normCode(c.code);
-      return code.startsWith(userDept) || isServiceCourse(code);
+      // Hem kendi bölüm dersleri hem de bölüme bağlı servis dersleri
+      return code.startsWith(prefix) || isServiceCourse(code);
     });
   }, [courses, userDept]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return deptFilteredCourses.filter((c) => {
+      // Müfredat yılı filtresi aktifse sadece o yılın derslerini göster
       if (curriculumYearCodes) {
-        if (!curriculumYearCodes.has(normCode(c.code))) return false;
+        const code = normCode(c.code);
+        if (!curriculumYearCodes.has(code)) return false;
       }
       if (dayFilter.size > 0) {
         const meetsOnDay = c.sections.some((s) =>
@@ -248,6 +256,7 @@ function MainApp({ user, onLogout }) {
     [selected, courses]
   );
 
+  // Her çakışan section için detay bilgisi: hangi dersle, hangi gün/saatte
   const conflictDetails = useMemo(() => {
     const details = {};
     const DAY_NAMES_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
@@ -312,8 +321,10 @@ function MainApp({ user, onLogout }) {
       if (alt) {
         setConflictFlash(conflictKey);
         setTimeout(() => setConflictFlash(null), 800);
-        toast(`§${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`);
-        setSelected([...cleaned, { code, sectionId: alt.id }]);
+        const msg = `§${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`;
+        toast(msg);
+        const newSelected = [...cleaned, { code, sectionId: alt.id }];
+        setSelected(newSelected);
       } else {
         toast(`${code} için uygun section yok — tüm sectionlar ${conflictName} ile çakışıyor.`);
         setConflictFlash(conflictKey);
@@ -329,25 +340,27 @@ function MainApp({ user, onLogout }) {
     setMobileTab("calendar");
   };
 
+  const [confirmDialog, setConfirmDialog] = useState(null); // { message, onConfirm }
+
   const removeSelected = (code) => {
     const course = courses.find((c) => c.code === code);
     const name = course ? (lang === "tr" ? course.nameTr : course.name) : code;
-    if (!window.confirm(
-      lang === "tr"
-        ? `"${code} – ${name}" takvimden kaldırılacak. Emin misin?`
-        : `"${code} – ${name}" will be removed from your schedule. Are you sure?`
-    )) return;
-    setSelected(selected.filter((s) => s.code !== code));
+    setConfirmDialog({
+      message: lang === "tr"
+        ? `"${code} – ${name}" takvimden kaldırılacak.`
+        : `"${code} – ${name}" will be removed from your schedule.`,
+      onConfirm: () => setSelected(selected.filter((s) => s.code !== code)),
+    });
   };
 
   const clearAll = () => {
     if (selected.length === 0) return;
-    if (!window.confirm(
-      lang === "tr"
-        ? `Takvimden ${selected.length} dersin tamamı silinecek. Emin misin?`
-        : `All ${selected.length} courses will be removed from the schedule. Are you sure?`
-    )) return;
-    setSelected([]);
+    setConfirmDialog({
+      message: lang === "tr"
+        ? `Takvimden ${selected.length} dersin tamamı silinecek.`
+        : `All ${selected.length} courses will be removed from the schedule.`,
+      onConfirm: () => setSelected([]),
+    });
   };
 
   const copyCRNs = () => {
@@ -408,7 +421,7 @@ function MainApp({ user, onLogout }) {
       const course = courses.find((c) => c.code === normCd || normCode(c.code) === normCd);
       if (!course || !course.sections?.length) return;
       const existing = [...selected, ...newEntries];
-      const picked = course.sections.find((sec) => {
+      let picked = course.sections.find((sec) => {
         const trial = [...existing, { code: course.code, sectionId: sec.id }];
         return !findConflicts(trial, courses)[`${course.code}-${sec.id}`];
       }) || course.sections[0];
@@ -419,7 +432,9 @@ function MainApp({ user, onLogout }) {
 
     const merged = [...selected];
     newEntries.forEach((entry) => {
-      if (!merged.find((s) => s.code === entry.code)) merged.push(entry);
+      if (!merged.find((s) => s.code === entry.code)) {
+        merged.push(entry);
+      }
     });
     setSelected(merged);
     setCurriculumOpen(false);
@@ -434,7 +449,7 @@ function MainApp({ user, onLogout }) {
     return (
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        height: "100vh", fontSize: "1.1rem", color: "#666",
+        height: "100vh", fontSize: "1.1rem", color: "#666"
       }}>
         Ders verisi yükleniyor...
       </div>
@@ -445,7 +460,7 @@ function MainApp({ user, onLogout }) {
     return (
       <div style={{
         display: "flex", alignItems: "center", justifyContent: "center",
-        height: "100vh", fontSize: "1.1rem", color: "#e53e3e",
+        height: "100vh", fontSize: "1.1rem", color: "#e53e3e"
       }}>
         {dataError}
       </div>
@@ -557,6 +572,45 @@ function MainApp({ user, onLogout }) {
           </div>
         </nav>
       </div>
+
+      {confirmDialog && (
+        <div style={{
+          position: "fixed", inset: 0, zIndex: 9999,
+          background: "rgba(0,0,0,0.35)",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          padding: 20,
+        }}>
+          <div style={{
+            background: "#fff", borderRadius: 14, padding: "28px 32px",
+            maxWidth: 360, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
+          }}>
+            <div style={{ fontSize: "0.95rem", color: "#222", lineHeight: 1.5, marginBottom: 24 }}>
+              {confirmDialog.message}
+            </div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
+              <button
+                onClick={() => setConfirmDialog(null)}
+                style={{
+                  padding: "8px 20px", borderRadius: 8, border: "1px solid #ddd",
+                  background: "#f5f5f5", color: "#444", cursor: "pointer", fontSize: "0.88rem",
+                }}
+              >
+                {lang === "tr" ? "Vazgeç" : "Cancel"}
+              </button>
+              <button
+                onClick={() => { confirmDialog.onConfirm(); setConfirmDialog(null); }}
+                style={{
+                  padding: "8px 20px", borderRadius: 8, border: "none",
+                  background: "#7a1e2e", color: "#fff", cursor: "pointer",
+                  fontSize: "0.88rem", fontWeight: 600,
+                }}
+              >
+                {lang === "tr" ? "Evet, kaldır" : "Yes, remove"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {toastMsg && <div className="toast">{toastMsg}</div>}
 

@@ -225,11 +225,6 @@ function CalendarBlock({
 
   const handleRemoveClick = (e) => {
     e.stopPropagation();
-    const label = (lang === "tr" ? block.nameTr : block.name) || block.name || block.code;
-    const msg = lang === "tr"
-      ? `"${block.code} – ${label}" takvimden kaldırılacak. Emin misin?`
-      : `Remove "${block.code} – ${label}" from your schedule?`;
-    if (!window.confirm(msg)) return;
     onRemove?.();
   };
 

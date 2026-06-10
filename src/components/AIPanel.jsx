@@ -8,7 +8,6 @@ const DAY_NAMES_EN  = ["Monday","Tuesday","Wednesday","Thursday","Friday"];
 const DAY_KEYS      = [0, 1, 2, 3, 4];
 const TIME_OPTIONS  = ["08:40","09:40","10:40","11:40","12:40","13:40","14:40","15:40","16:40","17:40"];
 
-// ─── yardımcılar ────────────────────────────────────────────────────────────
 function normalizeText(v) {
   return String(v||"").toLocaleLowerCase("tr-TR")
     .replace(/ı/g,"i").replace(/ğ/g,"g").replace(/ü/g,"u")
@@ -22,7 +21,7 @@ function sectionPassesConstraints(section, freeDays, earliestStart, latestEnd) {
   for (const m of section.meetings) {
     if (freeDays.has(m.d)) return false;
     if (earliestStart && toMin(m.s) < toMin(earliestStart)) return false;
-    if (latestEnd   && toMin(m.e) > toMin(latestEnd))   return false;
+    if (latestEnd     && toMin(m.e) > toMin(latestEnd))     return false;
   }
   return true;
 }
@@ -86,9 +85,8 @@ function findBestSchedule(courseList, options) {
     .sort((a,b) => b.score-a.score)[0].schedule;
 }
 
-// ─── KAPSAMLI HATA ANALİZİ ──────────────────────────────────────────────────
 function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
-  const dayNames = lang==="tr" ? DAY_NAMES_TR  : DAY_NAMES_EN;
+  const dayNames = lang==="tr" ? DAY_NAMES_TR : DAY_NAMES_EN;
 
   const evaluated = courseList.map(course => {
     const sections = course.sections.map(sec => {
@@ -159,9 +157,7 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
       const allViolations = sections.flatMap(s => s.constraintViolations);
       const freq = {};
       allViolations.forEach(v => freq[v] = (freq[v]||0)+1);
-      Object.entries(freq)
-        .sort((a,b) => b[1]-a[1])
-        .forEach(([v]) => constraintReasons.push(v));
+      Object.entries(freq).sort((a,b) => b[1]-a[1]).forEach(([v]) => constraintReasons.push(v));
     }
 
     const timeConflictWith = [];
@@ -177,32 +173,25 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
       .sort((a, b) => a.constraintViolations.length - b.constraintViolations.length)
       .slice(0, 4)
       .map(alt => {
-        // Bu section diğer derslerle çakışıyor mu?
         const crossConflicts = [];
         for (const other of evaluated) {
           if (other.course.code === course.code) continue;
           const passingOther = other.sections.filter(s => s.passesConstraints);
           const checkAgainst = passingOther.length > 0 ? passingOther : other.sections;
           const allConflict = checkAgainst.every(ob => !!sectionsConflict(alt.sec, ob.sec));
-          if (allConflict && checkAgainst.length > 0) {
-            crossConflicts.push(other.course.code);
-          }
+          if (allConflict && checkAgainst.length > 0) crossConflicts.push(other.course.code);
         }
         return { ...alt, crossConflicts };
       });
 
-    // Hiçbir uygun section yok mu? (kısıt + çakışma birlikte)
     const noViableSection = alternatives.every(
       a => a.constraintViolations.length > 0 || a.crossConflicts.length > 0
     );
 
-    // Kombinatöryel tıkanma: dersin kendi section'ları kısıtları geçiyor ama
-    // diğer derslerle kombine edilemiyor — bunu da göster
     const hasCombinatorialBlock = hasAnyPassing && timeConflictWith.length === 0 &&
       constraintReasons.length === 0;
 
     return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing, hasCombinatorialBlock, noViableSection };
-  // Hiçbir sorun yoksa gösterme; ama sorun varsa (kısıt, conflict, veya hiç geçen yok) göster
   }).filter(d =>
     d.constraintReasons.length > 0 ||
     d.timeConflictWith.length > 0 ||
@@ -210,7 +199,6 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
   );
 }
 
-// ─── Loading ekranı ─────────────────────────────────────────────────────────
 function LoadingScreen({ lang }) {
   return (
     <div style={{
@@ -233,7 +221,6 @@ function LoadingScreen({ lang }) {
   );
 }
 
-// ─── Önizleme ekranı ────────────────────────────────────────────────────────
 function PreviewScreen({ schedule, courses, lang, onApply, onBack }) {
   const dayNames = lang==="tr" ? DAY_NAMES_TR : DAY_NAMES_EN;
   const byDay = useMemo(() => {
@@ -309,7 +296,6 @@ function PreviewScreen({ schedule, courses, lang, onApply, onBack }) {
   );
 }
 
-// ─── Hata analiz kartı ──────────────────────────────────────────────────────
 function FailureCard({ diagnosis, lang }) {
   const [open, setOpen] = useState(false);
   const tr = lang === "tr";
@@ -420,7 +406,6 @@ function FailureCard({ diagnosis, lang }) {
   );
 }
 
-// ─── Ana bileşen ────────────────────────────────────────────────────────────
 export default function AIPanel({ lang, courses, initialCourses, onApply, onClose }) {
   const [freeDays,        setFreeDays]        = useState(new Set());
   const [maxDailyHours,   setMaxDailyHours]   = useState(8);
@@ -429,12 +414,17 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
   const [compactMode,     setCompactMode]     = useState("any");
   const [creditLimit,     setCreditLimit]     = useState("");
   const [preferredByCode, setPreferredByCode] = useState({});
-  const [selectedCourses, setSelectedCourses] = useState(() => { if (!initialCourses) return new Set(); if (initialCourses instanceof Set) return initialCourses; if (typeof initialCourses[Symbol.iterator] === "function") return new Set(initialCourses); return new Set(); });
-  const [courseSearch,    setCourseSearch]    = useState("");
-  const [error,           setError]           = useState(null);
-  const [diagnoses,       setDiagnoses]       = useState([]);
-  const [violations,      setViolations]      = useState([]);
-  const [stage,           setStage]           = useState("form"); // form | loading | conflict | preview
+  const [selectedCourses, setSelectedCourses] = useState(() => {
+    if (!initialCourses) return new Set();
+    if (initialCourses instanceof Set) return initialCourses;
+    if (typeof initialCourses[Symbol.iterator] === "function") return new Set(initialCourses);
+    return new Set();
+  });
+  const [courseSearch,      setCourseSearch]      = useState("");
+  const [error,             setError]             = useState(null);
+  const [diagnoses,         setDiagnoses]         = useState([]);
+  const [violations,        setViolations]        = useState([]);
+  const [stage,             setStage]             = useState("form");
   const [generatedSchedule, setGeneratedSchedule] = useState(null);
 
   const daysShort = lang==="tr" ? DAYS_SHORT_TR : DAYS_SHORT_EN;
@@ -470,13 +460,13 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
   const handleGenerate = () => {
     setError(null); setDiagnoses([]); setViolations([]);
     if (selectedCourses.size===0) {
-      setError(lang==="tr"?"En az bir ders seç.":"Select at least one course.");
+      setError(lang==="tr" ? "En az bir ders seç." : "Select at least one course.");
       return;
     }
     if (creditOver) {
       setError(lang==="tr"
-        ?`Kredi limiti aşıldı (${totalCredits}/${creditLimitNum}).`
-        :"Credit limit exceeded.");
+        ? `Kredi limiti aşıldı (${totalCredits}/${creditLimitNum}).`
+        : "Credit limit exceeded.");
       return;
     }
 
@@ -491,34 +481,45 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
       preferredTeachers: allPreferredTeachers,
     };
 
-    // Hesaplamayı async yap — tarayıcı donmasın
     setStage("loading");
     setTimeout(() => {
       const schedule = findBestSchedule(courseList, options);
 
       if (!schedule) {
         let diag = analyzeFailure(
-          courseList, freeDays,
-          earliestStart||null, latestEnd||null, lang
+          courseList, freeDays, earliestStart||null, latestEnd||null, lang
         );
-        // Eğer analiz boş dönerse (kombinatöryel tıkanma) — tüm dersleri section bilgisiyle göster
         if (diag.length === 0) {
           diag = courseList.map(course => {
             const sections = course.sections.map(sec => {
-              const violations = [];
+              const viol = [];
               for (const m of sec.meetings) {
-                if (freeDays.has(m.d)) violations.push(lang==="tr" ? `${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş` : `${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
-                if (earliestStart && toMin(m.s) < toMin(earliestStart)) violations.push(lang==="tr" ? `${m.s} başlangıcı çok erken (min ${earliestStart})` : `${m.s} starts before ${earliestStart}`);
-                if (latestEnd && toMin(m.e) > toMin(latestEnd)) violations.push(lang==="tr" ? `${m.e} bitişi çok geç (max ${latestEnd})` : `${m.e} ends after ${latestEnd}`);
+                if (freeDays.has(m.d))
+                  viol.push(lang==="tr"
+                    ? `${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş`
+                    : `${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
+                if (earliestStart && toMin(m.s) < toMin(earliestStart))
+                  viol.push(lang==="tr"
+                    ? `${m.s} başlangıcı çok erken (min ${earliestStart})`
+                    : `${m.s} starts before ${earliestStart}`);
+                if (latestEnd && toMin(m.e) > toMin(latestEnd))
+                  viol.push(lang==="tr"
+                    ? `${m.e} bitişi çok geç (max ${latestEnd})`
+                    : `${m.e} ends after ${latestEnd}`);
               }
-              const uniq = [...new Set(violations)];
-              const meetingStr = sec.meetings.map(m => `${["Pzt","Sal","Çar","Per","Cum"][m.d]} ${m.s}–${m.e}`).join(", ");
-              return { sec, constraintViolations: uniq, meetingStr, passesConstraints: uniq.length===0 };
+              const uniq = [...new Set(viol)];
+              const meetingStr = sec.meetings.map(m =>
+                `${["Pzt","Sal","Çar","Per","Cum"][m.d]} ${m.s}–${m.e}`
+              ).join(", ");
+              return { sec, constraintViolations: uniq, meetingStr, passesConstraints: uniq.length===0, crossConflicts: [] };
             });
             const hasAnyPassing = sections.some(s => s.passesConstraints);
-            const alternatives = [...sections].sort((a,b) => a.constraintViolations.length - b.constraintViolations.length).slice(0,4);
-            const constraintReasons = hasAnyPassing ? [] : [...new Set(sections.flatMap(s => s.constraintViolations))];
-            return { course, constraintReasons, timeConflictWith: [], alternatives, hasAnyPassing };
+            const alternatives = [...sections]
+              .sort((a,b) => a.constraintViolations.length - b.constraintViolations.length)
+              .slice(0,4);
+            const constraintReasons = hasAnyPassing ? [] :
+              [...new Set(sections.flatMap(s => s.constraintViolations))];
+            return { course, constraintReasons, timeConflictWith: [], alternatives, hasAnyPassing, noViableSection: false };
           });
         }
         setDiagnoses(diag);
@@ -563,17 +564,13 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
     onClose();
   };
 
-  // ─── Loading ekranı ───────────────────────────────────────────────────────
   if (stage==="loading") {
     return (
       <div className="ai-panel-overlay" onClick={onClose}>
         <div className="ai-panel" onClick={e=>e.stopPropagation()}>
           <div className="ai-panel-header">
-            <div className="ai-panel-title">
-              
-              {lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}
-            </div>
-            <button className="ai-panel-close" onClick={onClose}>✕</button>
+            <div className="ai-panel-title">{lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}</div>
+            <button className="ai-panel-close" onClick={onClose}>×</button>
           </div>
           <LoadingScreen lang={lang} />
         </div>
@@ -581,17 +578,13 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
     );
   }
 
-  // ─── Önizleme ekranı ──────────────────────────────────────────────────────
   if (stage==="preview") {
     return (
       <div className="ai-panel-overlay" onClick={onClose}>
         <div className="ai-panel" onClick={e=>e.stopPropagation()}>
           <div className="ai-panel-header">
-            <div className="ai-panel-title">
-              
-              {lang==="tr"?"Program Önizlemesi":"Schedule Preview"}
-            </div>
-            <button className="ai-panel-close" onClick={onClose}>✕</button>
+            <div className="ai-panel-title">{lang==="tr"?"Program Önizlemesi":"Schedule Preview"}</div>
+            <button className="ai-panel-close" onClick={onClose}>×</button>
           </div>
           <PreviewScreen
             schedule={generatedSchedule}
@@ -606,30 +599,39 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
     );
   }
 
-  // ─── Form ekranı ──────────────────────────────────────────────────────────
   return (
     <div className="ai-panel-overlay" onClick={onClose}>
       <div className="ai-panel" onClick={e=>e.stopPropagation()}>
 
         <div className="ai-panel-header">
-          <div className="ai-panel-title">
-            
-            {lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}
-          </div>
-          <button className="ai-panel-close" onClick={onClose}>✕</button>
+          <div className="ai-panel-title">{lang==="tr"?"Otomatik Program Oluştur":"Auto Schedule"}</div>
+          <button className="ai-panel-close" onClick={onClose}>×</button>
         </div>
 
         <div className="ai-panel-body ai-panel-grid">
 
-          {/* ── Sol kolon: ders listesi ── */}
+          {/* Sol kolon: ders listesi */}
           <div className="ai-col ai-col-left">
             <div className="ai-field" style={{height:"100%",display:"flex",flexDirection:"column"}}>
               <label className="ai-label">
                 {lang==="tr"?"Dersler":"Courses"}
                 {selectedCourses.size>0 && (
-                  <span className={`ai-label-badge${creditOver?" ai-badge-warn":""}`}>
-                    {selectedCourses.size} ders · {totalCredits} kredi
-                    {creditLimitNum?` / ${creditLimitNum}`:""}
+                  <span style={{ display:"flex", alignItems:"center", gap:6 }}>
+                    <span className={`ai-label-badge${creditOver?" ai-badge-warn":""}`}>
+                      {selectedCourses.size} ders · {totalCredits} kredi
+                      {creditLimitNum ? ` / ${creditLimitNum}` : ""}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCourses(new Set())}
+                      style={{
+                        fontSize:"0.72rem", padding:"2px 8px", borderRadius:6,
+                        border:"1px solid #ddd", background:"#f5f5f5",
+                        color:"#666", cursor:"pointer", lineHeight:1.4,
+                      }}
+                    >
+                      {lang==="tr"?"Temizle":"Clear"}
+                    </button>
                   </span>
                 )}
               </label>
@@ -658,10 +660,9 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
             </div>
           </div>
 
-          {/* ── Sağ kolon: kısıtlar + hata ── */}
+          {/* Sağ kolon: kısıtlar */}
           <div className="ai-col ai-col-right">
 
-            {/* Boş günler */}
             <div className="ai-field">
               <label className="ai-label">{lang==="tr"?"Boş kalsın":"Free days"}</label>
               <div className="ai-day-pills">
@@ -681,7 +682,6 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </div>
             </div>
 
-            {/* Günlük max */}
             <div className="ai-field">
               <label className="ai-label">
                 {lang==="tr"?"Günlük max ders saati":"Daily max hours"}
@@ -697,7 +697,6 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </div>
             </div>
 
-            {/* Saat aralığı */}
             <div className="ai-field">
               <label className="ai-label">{lang==="tr"?"Saat aralığı":"Time range"}</label>
               <div className="ai-time-range-box">
@@ -725,7 +724,6 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </div>
             </div>
 
-            {/* Kredi limiti */}
             <div className="ai-field">
               <label className="ai-label">{lang==="tr"?"Kredi limiti":"Credit limit"}</label>
               <div className="ai-credit-row">
@@ -743,14 +741,13 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </div>
               {creditOver && (
                 <div className="ai-credit-warn">
-                  ⚠ {lang==="tr"
-                    ?`${totalCredits} kredi seçildi, limit ${creditLimitNum}`
-                    :`${totalCredits} credits, limit ${creditLimitNum}`}
+                  {lang==="tr"
+                    ? `${totalCredits} kredi seçildi, limit ${creditLimitNum}`
+                    : `${totalCredits} credits, limit ${creditLimitNum}`}
                 </div>
               )}
             </div>
 
-            {/* Hoca tercihi */}
             {selectedCourseList.length>0 && (
               <div className="ai-field">
                 <label className="ai-label">
@@ -795,26 +792,24 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               </div>
             )}
 
-            {/* ── Conflict aşaması ── */}
             {stage==="conflict" && diagnoses.length>0 && (
               <div className="ai-warning">
                 <div className="ai-warning-title">
-                  ⚠ {lang==="tr"
-                    ?"Bazı dersler kısıtlara tam uymadı — en uygun şube seçildi:"
-                    :"Some courses couldn't fully match constraints — best section was chosen:"}
+                  {lang==="tr"
+                    ? "Bazı dersler kısıtlara tam uymadı — en uygun şube seçildi:"
+                    : "Some courses couldn't fully match constraints — best section was chosen:"}
                 </div>
                 <div style={{ marginTop:8 }}>
                   {diagnoses.map((d,i) => <FailureCard key={i} diagnosis={d} lang={lang} />)}
                 </div>
                 <div className="ai-warning-hint">
                   {lang==="tr"
-                    ?"Önizlemeye devam etmek istiyor musun?"
-                    :"Would you like to continue to preview?"}
+                    ? "Önizlemeye devam etmek istiyor musun?"
+                    : "Would you like to continue to preview?"}
                 </div>
               </div>
             )}
 
-            {/* ── Program bulunamadı hatası ── */}
             {error && (
               <div className="ai-error" style={{ padding:"10px 12px" }}>
                 <div style={{ fontWeight:600, marginBottom: diagnoses.length>0 ? 10 : 0 }}>

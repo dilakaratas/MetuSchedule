@@ -328,9 +328,9 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
   const tr = lang === "tr";
 
   // Kullanıcının bölümünü otomatik seç, yoksa ilk bölüm
-  const autoDetectedDept = findDeptByCode(user?.dept) || ALL_CURRICULA[0];
-  // Kullanıcının yılını otomatik seç
-  const autoDetectedYear = user?.year || null;
+  const autoDetectedDept = findDeptByCode(user?.dept || user?.programCode) || ALL_CURRICULA[0];
+  // yearNum = OIBS'den türetilen integer yıl (1-5), year = ham string
+  const autoDetectedYear = user?.yearNum ? Number(user.yearNum) : (user?.year ? Number(user.year) : null);
 
   const [selectedDept,   setSelectedDept]   = useState(autoDetectedDept);
   const [engData,        setEngData]        = useState(null);

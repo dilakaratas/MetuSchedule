@@ -21,13 +21,6 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
     ? user.name.split(" ").map((w) => w[0]).slice(0, 2).join("").toUpperCase()
     : (user?.username?.[0] || "?").toUpperCase();
 
-  // OIBS'den gelen bölüm ve yıl bilgisi
-  const dept     = user?.dept || user?.programCode || null;
-  const yearNum  = user?.yearNum ? Number(user.yearNum) : null;
-  const deptName = user?.programName || null;
-  const faculty  = user?.faculty || null;
-  const cgpa     = user?.cgpa || null;
-
   return (
     <header className="header">
 
@@ -73,15 +66,16 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
       {/* Aksiyonlar */}
       <div className="header-actions">
 
-        {/* Müfredat */}
+        {/* Müfredattan Oluştur */}
         <button className="btn btn-ghost hide-mobile" onClick={onOpenCurriculum} style={{ gap: 5 }}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            
+            <rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.4"/>
+            <path d="M5 6h6M5 9h4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
           </svg>
           <span className="btn-label">{lang === "tr" ? "Müfredat" : "Curriculum"}</span>
         </button>
 
-        {/* Akıllı Planlama */}
+        {/* Otomatik Program */}
         <button className="btn ai-btn" onClick={onOpenAutoSchedule || onOpenAI}>
           <span className="btn-label ai-btn-label-full">{lang === "tr" ? "Akıllı Planlama" : "Smart Planner"}</span>
           <span className="btn-label ai-btn-label-short">{lang === "tr" ? "Planlama" : "Planner"}</span>
@@ -102,9 +96,16 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
           <span className="btn-label">{tr.copyCRN}</span>
         </button>
 
-       
+        {/* PNG İndir */}
+        <button className="btn btn-ghost hide-mobile" onClick={() => window.print()} disabled={selected.length === 0}>
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8 L3 2 L13 2 L13 8 M3 12 L1 12 L1 8 L15 8 L15 12 L13 12 M4 12 L12 12 L12 15 L4 15 Z"
+              stroke="currentColor" strokeWidth="1.4" fill="none" strokeLinejoin="round" />
+          </svg>
+          <span className="btn-label">{tr.exportPNG}</span>
+        </button>
 
-        {/* Hepsini Temizle */}
+        {/* Temizle */}
         <button className="btn btn-danger" onClick={onClear} disabled={selected.length === 0}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
             <path d="M3 4h10M6 4V2h4v2M5 4l1 9h4l1-9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
@@ -140,22 +141,36 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
                 <div className="user-dropdown-info">
                   <div className="user-dropdown-name">{user.name || user.username}</div>
                   <div className="user-dropdown-username">@{user.username}</div>
-
-                  {/* OIBS'den gelen bölüm bilgisi */}
-                  {dept && (
-                    <div style={{ fontSize: 12, color: "#444", marginTop: 6 }}>
-                      {dept}{deptName ? ` — ${deptName}` : ""}
-                    </div>
-                  )}
-                  {yearNum && (
-                    <div style={{ fontSize: 12, color: "#444", marginTop: 2 }}>
-                      {lang === "tr" ? `${yearNum}. Yıl` : `Year ${yearNum}`}
-                      {cgpa ? `  ·  GPA ${cgpa}` : ""}
-                    </div>
-                  )}
-                  {faculty && (
-                    <div style={{ fontSize: 11, color: "#888", marginTop: 2 }}>
-                      {faculty}
+                  {(user.dept || user.yearNum || user.cgpa) && (
+                    <div style={{
+                      marginTop: 10, padding: "8px 10px",
+                      background: "#f9f2f3", borderRadius: 8,
+                      display: "flex", flexDirection: "column", gap: 4,
+                    }}>
+                      {user.dept && (
+                        <div style={{ fontSize: 12, fontWeight: 600, color: "#7a1e2e" }}>
+                          {user.dept}{user.programName ? ` — ${user.programName}` : ""}
+                        </div>
+                      )}
+                      {user.faculty && (
+                        <div style={{ fontSize: 11, color: "#666" }}>{user.faculty}</div>
+                      )}
+                      {(user.yearNum || user.cgpa) && (
+                        <div style={{ display: "flex", gap: 16, marginTop: 2 }}>
+                          {user.yearNum && (
+                            <div style={{ fontSize: 11, color: "#444" }}>
+                              <span style={{ color: "#999", marginRight: 3 }}>{lang === "tr" ? "Yıl" : "Year"}</span>
+                              <span style={{ fontWeight: 600 }}>{user.yearNum}</span>
+                            </div>
+                          )}
+                          {user.cgpa && (
+                            <div style={{ fontSize: 11, color: "#444" }}>
+                              <span style={{ color: "#999", marginRight: 3 }}>GPA</span>
+                              <span style={{ fontWeight: 600 }}>{user.cgpa}</span>
+                            </div>
+                          )}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
