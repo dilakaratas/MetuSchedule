@@ -13,7 +13,7 @@ import { saveToken, validateCasTicket } from "./api/auth.js";
 
 const normCode = (s) => (s || "").replace(/\s+/g, "").toUpperCase();
 
-// ── Yardımcılar ──────────────────────────────────────────────────
+// ── Auth yardımcıları ─────────────────────────────────────────────
 function clearAllAuth() {
   localStorage.removeItem("metu-user");
   localStorage.removeItem("metu-token");
@@ -22,12 +22,9 @@ function clearAllAuth() {
 }
 
 function readStoredUser() {
-  // ?loggedout=1 varsa localStorage'ı temizle ve null dön —
-  // CAS'tan geri dönerken aynı SSO oturumunun tekrar kullanılmasını engeller.
   const params = new URLSearchParams(window.location.search);
   if (params.get("loggedout") === "1") {
     clearAllAuth();
-    // Parametreyi URL'den temizle
     const clean = window.location.origin + window.location.pathname;
     window.history.replaceState({}, document.title, clean);
     return null;
@@ -39,10 +36,20 @@ function readStoredUser() {
   }
   return null;
 }
+
+// Test kullanıcısı için bölüm kodu tespiti
+// Öğrenci numarasından bölüm prefix'i çıkarır
+// Gerçek bir API'den gelecekse buraya entegre edilir
+const STUDENT_DEPT_MAP = {
+  "e251702": { dept: "CENG", deptName: "Bilgisayar Mühendisliği", year: 3 },
+  "e2517025": { dept: "CENG", deptName: "Bilgisayar Mühendisliği", year: 3 },
+  // Buraya yeni test kullanıcıları eklenebilir
+};
+
 // ─────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [user, setUser]           = useState(() => readStoredUser());
+  const [user, setUser]             = useState(() => readStoredUser());
   const [casLoading, setCasLoading] = useState(false);
   const [casError,   setCasError]   = useState("");
 
@@ -60,29 +67,35 @@ export default function App() {
     validateCasTicket(ticket, "http://planify.metu.edu.tr/")
       .then(({ token, user: userData }) => {
         saveToken(token);
-        localStorage.setItem("metu-user", JSON.stringify(userData));
-        setUser(userData);
+        // CAS'tan gelen kullanıcıya dept bilgisi ekle
+        const enriched = enrichUser(userData);
+        localStorage.setItem("metu-user", JSON.stringify(enriched));
+        setUser(enriched);
       })
       .catch((err) => setCasError(err.message || "CAS girişi başarısız."))
       .finally(() => setCasLoading(false));
   }, []);
 
   const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem("metu-user", JSON.stringify(userData));
+    const enriched = enrichUser(userData);
+    setUser(enriched);
+    localStorage.setItem("metu-user", JSON.stringify(enriched));
   };
 
   const handleLogout = () => {
-    // 1. Önce tüm local state + storage'ı temizle
     clearAllAuth();
-    setUser(null);
-
-    // 2. CAS sunucu oturumunu da sonlandır.
-    //    service= parametresi: CAS logout sonrası geri döneceği URL.
-    //    ?loggedout=1 ekleyerek App'in SSO'yu tekrar kullanmasını engelliyoruz.
+    // setUser(null) YAPMA — direkt CAS logout'a yönlendir.
+    // Geri dönerken ?loggedout=1 ile readStoredUser null döndürür,
+    // sayfa yenilenince yeni Login.jsx render edilir.
     const base    = window.location.origin + window.location.pathname;
     const service = encodeURIComponent(`${base}?loggedout=1`);
     window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
+  };
+
+  // Yönetici çıkışı (CAS kullanmaz, direkt login'e döner)
+  const handleAdminLogout = () => {
+    clearAllAuth();
+    setUser(null);
   };
 
   if (casLoading) {
@@ -100,8 +113,22 @@ export default function App() {
     return <Login onLogin={handleLogin} casError={casError} />;
   }
 
-  return <MainApp user={user} onLogout={handleLogout} />;
+  const logoutFn = user.role === "admin" ? handleAdminLogout : handleLogout;
+  return <MainApp user={user} onLogout={logoutFn} />;
 }
+
+// Kullanıcıya bölüm/yıl bilgisi ekler
+function enrichUser(userData) {
+  const username = (userData.username || userData.netid || "").toLowerCase();
+  const deptInfo = STUDENT_DEPT_MAP[username];
+  if (deptInfo) {
+    return { ...userData, ...deptInfo };
+  }
+  // Bilinmeyen kullanıcı — dept yok, tüm dersler görünür
+  return userData;
+}
+
+// ─────────────────────────────────────────────────────────────────
 
 function MainApp({ user, onLogout }) {
   const [lang, setLang] = useState("tr");
@@ -149,9 +176,22 @@ function MainApp({ user, onLogout }) {
     localStorage.setItem("metu-schedule", JSON.stringify(selected));
   }, [selected]);
 
+  // Kullanıcının bölümüne göre dersleri filtrele
+  const userDept = user?.dept; // örn: "CENG"
+
+  const deptFilteredCourses = useMemo(() => {
+    if (!userDept) return courses; // admin veya dept'siz kullanıcı → tümü
+    const prefix = userDept.toUpperCase();
+    return courses.filter((c) => {
+      const code = normCode(c.code);
+      // Hem kendi bölüm dersleri hem de bölüme bağlı servis dersleri
+      return code.startsWith(prefix) || isServiceCourse(code);
+    });
+  }, [courses, userDept]);
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return courses.filter((c) => {
+    return deptFilteredCourses.filter((c) => {
       if (dayFilter.size > 0) {
         const meetsOnDay = c.sections.some((s) =>
           s.meetings.some((m) => dayFilter.has(m.d))
@@ -163,7 +203,7 @@ function MainApp({ user, onLogout }) {
         .map((s) => s.instructor).join(" ")}`.toLowerCase();
       return hay.includes(q);
     });
-  }, [query, dayFilter, courses, user]);
+  }, [query, dayFilter, deptFilteredCourses]);
 
   const conflicts = useMemo(
     () => findConflicts(selected, courses),
@@ -191,13 +231,11 @@ function MainApp({ user, onLogout }) {
     const conflictKey = `${code}-${sectionId}`;
 
     if (newConflicts[conflictKey]) {
-      // Çakışan dersin kodunu bul
-      const conflictingKey = newConflicts[conflictKey]; // "OTHERCODE-01"
+      const conflictingKey = newConflicts[conflictKey];
       const conflictingCode = conflictingKey.split("-")[0];
       const conflictingCourse = courses.find(c => c.code === conflictingCode);
       const conflictName = conflictingCourse?.name || conflictingCode;
 
-      // Alternatif section var mı?
       const course = courses.find(c => c.code === code);
       const alt = course?.sections.find(sec => {
         if (sec.id === sectionId) return false;
@@ -206,12 +244,10 @@ function MainApp({ user, onLogout }) {
       });
 
       if (alt) {
-        // Alternatif section öner
         setConflictFlash(conflictKey);
         setTimeout(() => setConflictFlash(null), 800);
         const msg = `⚠ §${sectionId} — ${conflictName} ile çakışıyor. §${alt.id} eklenebilir.`;
         toast(msg);
-        // Alternatifi otomatik ekle
         const newSelected = [...cleaned, { code, sectionId: alt.id }];
         setSelected(newSelected);
       } else {
@@ -224,7 +260,6 @@ function MainApp({ user, onLogout }) {
       return;
     }
 
-    // Çakışma yok, normal ekle
     setSelected(trial);
     setSidebarOpen(false);
     setMobileTab("calendar");
@@ -288,12 +323,10 @@ function MainApp({ user, onLogout }) {
   };
 
   const handleCurriculumApply = (codes) => {
-    // Her ders kodu için katalogdan ilk section'ı bul ve takvime ekle
     const newEntries = [];
     codes.forEach((normCd) => {
       const course = courses.find((c) => c.code === normCd || normCode(c.code) === normCd);
       if (!course || !course.sections?.length) return;
-      // Çakışmayan ilk section'ı bul, yoksa ilkini al
       const existing = [...selected, ...newEntries];
       let picked = course.sections.find((sec) => {
         const trial = [...existing, { code: course.code, sectionId: sec.id }];
@@ -304,7 +337,6 @@ function MainApp({ user, onLogout }) {
 
     if (!newEntries.length) return;
 
-    // Mevcut seçimde olmayan dersleri ekle (aynı ders zaten varsa geçme)
     const merged = [...selected];
     newEntries.forEach((entry) => {
       if (!merged.find((s) => s.code === entry.code)) {
@@ -452,6 +484,7 @@ function MainApp({ user, onLogout }) {
         <CurriculumModal
           lang={lang}
           courses={courses}
+          user={user}
           onApplyToScheduler={handleCurriculumApply}
           onClose={() => setCurriculumOpen(false)}
         />
@@ -477,4 +510,14 @@ function MainApp({ user, onLogout }) {
       )}
     </div>
   );
+}
+
+// Servis dersleri — bunlar her bölümde ortak
+const SERVICE_PREFIXES = [
+  "PHYS", "MATH", "CHEM", "ENG", "TURK", "HIST", "PE", "ATA",
+  "GE", "IS", "NE", "PHED",
+];
+
+function isServiceCourse(normCd) {
+  return SERVICE_PREFIXES.some((p) => normCd.startsWith(p));
 }

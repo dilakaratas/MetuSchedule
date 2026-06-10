@@ -313,17 +313,33 @@ function SlotRow({ slot, isLast, viewFilter }) {
 }
 
 // ─── Ana bileşen ──────────────────────────────────────────────────────────────
-export default function CurriculumModal({ lang, courses, onApplyToScheduler, onClose }) {
+// Bölüm adından ALL_CURRICULA içinde eşleşen bölümü bul
+function findDeptByCode(deptCode) {
+  if (!deptCode) return null;
+  const upper = deptCode.toUpperCase();
+  return ALL_CURRICULA.find((d) => {
+    const label = d.label.toUpperCase();
+    // "CENG — ..." formatında prefix eşleşmesi
+    return label.startsWith(upper + " ") || label.startsWith(upper + "—") || label.startsWith(upper + " —");
+  }) || null;
+}
+
+export default function CurriculumModal({ lang, courses, user, onApplyToScheduler, onClose }) {
   const tr = lang === "tr";
 
-  const [selectedDept,   setSelectedDept]   = useState(ALL_CURRICULA[0]);
-  const [engData,        setEngData]        = useState(null);   // yüklenen JSON (herhangi format)
-  const [engFormat,      setEngFormat]      = useState(null);   // "new" | "old"
+  // Kullanıcının bölümünü otomatik seç, yoksa ilk bölüm
+  const autoDetectedDept = findDeptByCode(user?.dept) || ALL_CURRICULA[0];
+  // Kullanıcının yılını otomatik seç
+  const autoDetectedYear = user?.year || null;
+
+  const [selectedDept,   setSelectedDept]   = useState(autoDetectedDept);
+  const [engData,        setEngData]        = useState(null);
+  const [engFormat,      setEngFormat]      = useState(null);
   const [curriculum,     setCurriculum]     = useState(null);
   const [cengCourses,    setCengCourses]    = useState(null);
   const [loading,        setLoading]        = useState(false);
   const [error,          setError]          = useState(null);
-  const [selectedYil,    setSelectedYil]    = useState(null);
+  const [selectedYil,    setSelectedYil]    = useState(autoDetectedYear);
   const [selectedYariyil,setSelectedYariyil]= useState(null);
   const [activeTab,      setActiveTab]      = useState("zorunlu");
   const [viewFilter,     setViewFilter]     = useState("all");
@@ -589,15 +605,24 @@ export default function CurriculumModal({ lang, courses, onApplyToScheduler, onC
 
             {/* Yıl seç */}
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>{tr ? "Yıl" : "Year"}</div>
+              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span>{tr ? "Yıl" : "Year"}</span>
+                {autoDetectedYear && (
+                  <span style={{ fontSize: "0.68rem", fontWeight: 500, color: "#7a1f2b", background: "#fdf0f2", border: "1px solid #f5c6cb", borderRadius: 6, padding: "1px 7px", letterSpacing: 0 }}>
+                    {tr ? `${autoDetectedYear}. yılın otomatik seçildi` : `Year ${autoDetectedYear} auto-selected`}
+                  </span>
+                )}
+              </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                 {mufredat.map((y) => {
                   const st = yilStats.find((s) => s.yil === y.yil);
                   const isComplete = st && st.total > 0 && st.done === st.total;
+                  const isAuto = autoDetectedYear === y.yil && selectedYil === y.yil;
                   return (
                     <button key={y.yil} onClick={() => setSelectedYil(selectedYil === y.yil ? null : y.yil)} style={{ padding: "6px 13px", borderRadius: 8, fontSize: "0.82rem", cursor: "pointer", fontWeight: 600, transition: "all .15s", border: selectedYil === y.yil ? "2px solid #7a1f2b" : "2px solid #e5e0da", background: selectedYil === y.yil ? "#7a1f2b" : "#fff", color: selectedYil === y.yil ? "#fff" : "#333", position: "relative" }}>
                       {yilLabel(y)}
-                      {isComplete && <span style={{ position: "absolute", top: -5, right: -5, fontSize: "0.65rem", background: "#22c55e", color: "#fff", borderRadius: 99, padding: "1px 4px", fontWeight: 700 }}>✓</span>}
+                      {isAuto && <span style={{ position: "absolute", top: -6, right: -6, fontSize: "0.58rem", background: "#e53e3e", color: "#fff", borderRadius: 99, padding: "1px 4px", fontWeight: 700 }}>●</span>}
+                      {isComplete && !isAuto && <span style={{ position: "absolute", top: -5, right: -5, fontSize: "0.65rem", background: "#22c55e", color: "#fff", borderRadius: 99, padding: "1px 4px", fontWeight: 700 }}>✓</span>}
                     </button>
                   );
                 })}
