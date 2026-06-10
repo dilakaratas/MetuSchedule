@@ -141,39 +141,49 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
                 <div className="user-dropdown-info">
                   <div className="user-dropdown-name">{user.name || user.username}</div>
                   <div className="user-dropdown-username">@{user.username}</div>
-                  {(user.dept || user.programCode || user.yearNum || user.cgpa) && (
-                    <div style={{
-                      marginTop: 10, padding: "10px 12px",
-                      background: "#f9f2f3", borderRadius: 8,
-                      display: "flex", flexDirection: "column", gap: 5,
-                    }}>
-                      {(user.dept || user.programCode) && (
-                        <div style={{ fontSize: 12, fontWeight: 700, color: "#7a1e2e" }}>
-                          {user.dept || user.programCode}
-                          {user.programName ? ` — ${user.programName}` : ""}
-                        </div>
-                      )}
-                      {user.faculty && (
-                        <div style={{ fontSize: 11, color: "#666" }}>{user.faculty}</div>
-                      )}
-                      {(user.yearNum || user.cgpa) && (
-                        <div style={{ display: "flex", gap: 16, marginTop: 2, paddingTop: 6, borderTop: "1px solid #f0dde0" }}>
-                          {user.yearNum && (
-                            <div style={{ fontSize: 11, color: "#444" }}>
-                              <span style={{ color: "#999", marginRight: 3 }}>{lang === "tr" ? "Yıl" : "Year"}</span>
-                              <span style={{ fontWeight: 700, color: "#222" }}>{user.yearNum}</span>
-                            </div>
-                          )}
-                          {user.cgpa && (
-                            <div style={{ fontSize: 11, color: "#444" }}>
-                              <span style={{ color: "#999", marginRight: 3 }}>GPA</span>
-                              <span style={{ fontWeight: 700, color: "#222" }}>{user.cgpa}</span>
-                            </div>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  )}
+                  {(() => {
+                    const dept    = user.dept || user.programCode || "";
+                    const semNum  = parseInt(user.semester, 10);
+                    const yearNum = user.yearNum
+                      ? Number(user.yearNum)
+                      : (semNum > 0 ? Math.ceil(semNum / 2) : null);
+                    const cgpa    = user.cgpa || "";
+                    const faculty = user.faculty || "";
+                    const name    = user.programName || "";
+                    if (!dept && !yearNum && !cgpa) return null;
+                    return (
+                      <div style={{
+                        marginTop: 10, padding: "10px 12px",
+                        background: "#f9f2f3", borderRadius: 8,
+                        display: "flex", flexDirection: "column", gap: 5,
+                      }}>
+                        {dept && (
+                          <div style={{ fontSize: 12, fontWeight: 700, color: "#7a1e2e" }}>
+                            {dept}{name ? ` — ${name}` : ""}
+                          </div>
+                        )}
+                        {faculty && (
+                          <div style={{ fontSize: 11, color: "#666" }}>{faculty}</div>
+                        )}
+                        {(yearNum || cgpa) && (
+                          <div style={{ display: "flex", gap: 16, marginTop: 2, paddingTop: 6, borderTop: "1px solid #f0dde0" }}>
+                            {yearNum && (
+                              <div style={{ fontSize: 11, color: "#444" }}>
+                                <span style={{ color: "#999", marginRight: 3 }}>{lang === "tr" ? "Yıl" : "Year"}</span>
+                                <span style={{ fontWeight: 700, color: "#222" }}>{yearNum}</span>
+                              </div>
+                            )}
+                            {cgpa && (
+                              <div style={{ fontSize: 11, color: "#444" }}>
+                                <span style={{ color: "#999", marginRight: 3 }}>GPA</span>
+                                <span style={{ fontWeight: 700, color: "#222" }}>{cgpa}</span>
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
                 </div>
                 <div className="user-dropdown-divider" />
                 <button

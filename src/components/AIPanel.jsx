@@ -87,7 +87,6 @@ function findBestSchedule(courseList, options) {
 
 function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
   const dayNames = lang==="tr" ? DAY_NAMES_TR : DAY_NAMES_EN;
-
   const evaluated = courseList.map(course => {
     const sections = course.sections.map(sec => {
       const constraintViolations = [];
@@ -118,35 +117,28 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
   const conflictMatrix = {};
   for (let i=0; i<evaluated.length; i++) {
     for (let j=i+1; j<evaluated.length; j++) {
-      const a = evaluated[i];
-      const b = evaluated[j];
+      const a = evaluated[i], b = evaluated[j];
       const passA = a.sections.filter(s => s.passesConstraints);
       const passB = b.sections.filter(s => s.passesConstraints);
-      let allConflict = false;
       if (passA.length > 0 && passB.length > 0) {
-        const hasNonConflicting = passA.some(sa =>
-          passB.some(sb => !sectionsConflict(sa.sec, sb.sec))
-        );
-        allConflict = !hasNonConflicting;
-      }
-      if (allConflict) {
-        const examples = [];
-        for (const sa of passA.slice(0,3)) {
-          for (const sb of passB.slice(0,3)) {
-            const cf = sectionsConflict(sa.sec, sb.sec);
-            if (cf) {
-              const dayIdx = cf.m1.d;
-              examples.push({
-                secA: sa, secB: sb,
-                info: lang==="tr"
-                  ? `§${sa.sec.id} & §${sb.sec.id} — ${dayNames[dayIdx]} ${cf.m1.s}–${cf.m1.e} çakışıyor`
-                  : `§${sa.sec.id} & §${sb.sec.id} — ${dayNames[dayIdx]} ${cf.m1.s}–${cf.m1.e} overlap`
-              });
+        const hasNonConflicting = passA.some(sa => passB.some(sb => !sectionsConflict(sa.sec, sb.sec)));
+        if (!hasNonConflicting) {
+          const examples = [];
+          for (const sa of passA.slice(0,3)) {
+            for (const sb of passB.slice(0,3)) {
+              const cf = sectionsConflict(sa.sec, sb.sec);
+              if (cf) {
+                examples.push({
+                  secA: sa, secB: sb,
+                  info: lang==="tr"
+                    ? `§${sa.sec.id} & §${sb.sec.id} — ${dayNames[cf.m1.d]} ${cf.m1.s}–${cf.m1.e} çakışıyor`
+                    : `§${sa.sec.id} & §${sb.sec.id} — ${dayNames[cf.m1.d]} ${cf.m1.s}–${cf.m1.e} overlap`
+                });
+              }
             }
           }
+          conflictMatrix[`${a.course.code}|||${b.course.code}`] = examples.slice(0,2);
         }
-        const key = `${a.course.code}|||${b.course.code}`;
-        conflictMatrix[key] = examples.slice(0,2);
       }
     }
   }
@@ -154,21 +146,16 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
   return evaluated.map(({ course, sections, hasAnyPassing }) => {
     const constraintReasons = [];
     if (!hasAnyPassing) {
-      const allViolations = sections.flatMap(s => s.constraintViolations);
       const freq = {};
-      allViolations.forEach(v => freq[v] = (freq[v]||0)+1);
+      sections.flatMap(s => s.constraintViolations).forEach(v => freq[v] = (freq[v]||0)+1);
       Object.entries(freq).sort((a,b) => b[1]-a[1]).forEach(([v]) => constraintReasons.push(v));
     }
-
     const timeConflictWith = [];
     for (const key of Object.keys(conflictMatrix)) {
       const [cA, cB] = key.split("|||");
-      if (cA === course.code || cB === course.code) {
-        const other = cA === course.code ? cB : cA;
-        timeConflictWith.push({ other, examples: conflictMatrix[key] });
-      }
+      if (cA === course.code || cB === course.code)
+        timeConflictWith.push({ other: cA === course.code ? cB : cA, examples: conflictMatrix[key] });
     }
-
     const alternatives = [...sections]
       .sort((a, b) => a.constraintViolations.length - b.constraintViolations.length)
       .slice(0, 4)
@@ -176,43 +163,21 @@ function analyzeFailure(courseList, freeDays, earliestStart, latestEnd, lang) {
         const crossConflicts = [];
         for (const other of evaluated) {
           if (other.course.code === course.code) continue;
-          const passingOther = other.sections.filter(s => s.passesConstraints);
-          const checkAgainst = passingOther.length > 0 ? passingOther : other.sections;
-          const allConflict = checkAgainst.every(ob => !!sectionsConflict(alt.sec, ob.sec));
-          if (allConflict && checkAgainst.length > 0) crossConflicts.push(other.course.code);
+          const checkAgainst = other.sections.filter(s => s.passesConstraints);
+          if (checkAgainst.length > 0 && checkAgainst.every(ob => !!sectionsConflict(alt.sec, ob.sec)))
+            crossConflicts.push(other.course.code);
         }
         return { ...alt, crossConflicts };
       });
-
-    const noViableSection = alternatives.every(
-      a => a.constraintViolations.length > 0 || a.crossConflicts.length > 0
-    );
-
-    const hasCombinatorialBlock = hasAnyPassing && timeConflictWith.length === 0 &&
-      constraintReasons.length === 0;
-
-    return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing, hasCombinatorialBlock, noViableSection };
-  }).filter(d =>
-    d.constraintReasons.length > 0 ||
-    d.timeConflictWith.length > 0 ||
-    !d.hasAnyPassing
-  );
+    const noViableSection = alternatives.every(a => a.constraintViolations.length > 0 || a.crossConflicts.length > 0);
+    return { course, constraintReasons, timeConflictWith, alternatives, hasAnyPassing, noViableSection };
+  }).filter(d => d.constraintReasons.length > 0 || d.timeConflictWith.length > 0 || !d.hasAnyPassing);
 }
 
 function LoadingScreen({ lang }) {
   return (
-    <div style={{
-      display:"flex", flexDirection:"column",
-      alignItems:"center", justifyContent:"center",
-      flex:1, gap:16, padding:40,
-    }}>
-      <div style={{
-        width:40, height:40,
-        border:"3px solid #e5e7eb",
-        borderTop:"3px solid #7a1f2b",
-        borderRadius:"50%",
-        animation:"ai-spin 0.8s linear infinite",
-      }} />
+    <div style={{ display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", flex:1, gap:16, padding:40 }}>
+      <div style={{ width:40, height:40, border:"3px solid #e5e7eb", borderTop:"3px solid #7a1f2b", borderRadius:"50%", animation:"ai-spin 0.8s linear infinite" }} />
       <div style={{ fontSize:"0.9rem", color:"#6b7280" }}>
         {lang==="tr" ? "Program hesaplanıyor…" : "Finding best schedule…"}
       </div>
@@ -242,8 +207,7 @@ function PreviewScreen({ schedule, courses, lang, onApply, onBack }) {
     return map;
   }, [schedule, courses, lang]);
 
-  const totalCredits = schedule.reduce((sum,item) =>
-    sum + (courses.find(c=>c.code===item.code)?.credits||0), 0);
+  const totalCredits = schedule.reduce((sum,item) => sum + (courses.find(c=>c.code===item.code)?.credits||0), 0);
 
   return (
     <div className="ai-preview">
@@ -303,20 +267,11 @@ function FailureCard({ diagnosis, lang }) {
   const hasIssue = constraintReasons.length > 0 || timeConflictWith.length > 0;
 
   return (
-    <div style={{
-      background: hasIssue ? "#fff8f0" : "#f0fdf4",
-      border: hasIssue ? "1px solid #f5c6a0" : "1px solid #86efac",
-      borderRadius:10, padding:"10px 12px", marginBottom:8,
-    }}>
+    <div style={{ background: hasIssue ? "#fff8f0" : "#f0fdf4", border: hasIssue ? "1px solid #f5c6a0" : "1px solid #86efac", borderRadius:10, padding:"10px 12px", marginBottom:8 }}>
       <div style={{ display:"flex", alignItems:"flex-start", justifyContent:"space-between", gap:8 }}>
         <div style={{ flex:1 }}>
-          <span style={{ fontWeight:700, fontSize:"0.83rem", color:"#7a1f2b" }}>
-            {course.code}
-          </span>
-          <span style={{ fontSize:"0.76rem", color:"#555", marginLeft:6 }}>
-            {tr ? (course.nameTr||course.name) : course.name}
-          </span>
-
+          <span style={{ fontWeight:700, fontSize:"0.83rem", color:"#7a1f2b" }}>{course.code}</span>
+          <span style={{ fontSize:"0.76rem", color:"#555", marginLeft:6 }}>{tr ? (course.nameTr||course.name) : course.name}</span>
           {constraintReasons.length > 0 && (
             <div style={{ marginTop:4 }}>
               {[...new Set(constraintReasons)].map((r,i) => (
@@ -324,56 +279,35 @@ function FailureCard({ diagnosis, lang }) {
               ))}
             </div>
           )}
-
           {timeConflictWith.length > 0 && (
             <div style={{ marginTop:4 }}>
               {timeConflictWith.map(({ other, examples }, i) => (
                 <div key={i} style={{ fontSize:"0.77rem", color:"#7c3aed", lineHeight:1.5 }}>
                   {tr ? `${other} ile çakışıyor` : `conflicts with ${other}`}
-                  {examples[0] && (
-                    <span style={{ opacity:.8 }}> — {examples[0].info}</span>
-                  )}
+                  {examples[0] && <span style={{ opacity:.8 }}> — {examples[0].info}</span>}
                 </div>
               ))}
             </div>
           )}
-
           {noViableSection && (
             <div style={{ marginTop:4, fontSize:"0.77rem", color:"#b91c1c", fontWeight:600 }}>
               {tr ? "Mevcut kısıtlara uygun şube bulunamadı" : "No section fits the current constraints"}
             </div>
           )}
         </div>
-
-        <button
-          onClick={() => setOpen(v => !v)}
-          style={{
-            fontSize:"0.72rem", padding:"4px 9px", borderRadius:6,
-            border:"1px solid #e07b39",
-            background: open ? "#e07b39" : "transparent",
-            color: open ? "#fff" : "#e07b39",
-            cursor:"pointer", whiteSpace:"nowrap", flexShrink:0,
-          }}
-        >
-          {open
-            ? (tr ? "Gizle" : "Hide")
-            : (tr ? `Şubeler (${alternatives.length})` : `Sections (${alternatives.length})`)}
+        <button onClick={() => setOpen(v => !v)} style={{ fontSize:"0.72rem", padding:"4px 9px", borderRadius:6, border:"1px solid #e07b39", background: open ? "#e07b39" : "transparent", color: open ? "#fff" : "#e07b39", cursor:"pointer", whiteSpace:"nowrap", flexShrink:0 }}>
+          {open ? (tr ? "Gizle" : "Hide") : (tr ? `Şubeler (${alternatives.length})` : `Sections (${alternatives.length})`)}
         </button>
       </div>
-
       {open && (
         <div style={{ marginTop:8, borderTop:"1px solid #f5c6a0", paddingTop:8 }}>
           <div style={{ fontSize:"0.72rem", fontWeight:600, color:"#7a5c1f", marginBottom:5 }}>
             {tr ? "Mevcut şubeler:" : "Available sections:"}
           </div>
           {alternatives.map(({ sec, constraintViolations, meetingStr, crossConflicts }, i) => {
-            const ok = constraintViolations.length === 0 && crossConflicts.length === 0;
+            const ok = constraintViolations.length === 0 && (crossConflicts||[]).length === 0;
             return (
-              <div key={i} style={{
-                fontSize:"0.73rem", padding:"6px 8px", borderRadius:6, marginBottom:4,
-                background: ok ? "#f0fdf4" : "#fffbeb",
-                border:`1px solid ${ok ? "#86efac" : "#fde68a"}`,
-              }}>
+              <div key={i} style={{ fontSize:"0.73rem", padding:"6px 8px", borderRadius:6, marginBottom:4, background: ok ? "#f0fdf4" : "#fffbeb", border:`1px solid ${ok ? "#86efac" : "#fde68a"}` }}>
                 <div style={{ display:"flex", justifyContent:"space-between", gap:6 }}>
                   <span style={{ fontWeight:700 }}>§{sec.id}</span>
                   <span style={{ color:"#374151" }}>{sec.instructor || "—"}</span>
@@ -384,12 +318,9 @@ function FailureCard({ diagnosis, lang }) {
                     {constraintViolations.map((v,vi) => <div key={vi}>{v}</div>)}
                   </div>
                 )}
-                {crossConflicts.length > 0 && (
+                {(crossConflicts||[]).length > 0 && (
                   <div style={{ color:"#7c3aed", marginTop:3, fontSize:"0.7rem" }}>
-                    {tr
-                      ? `${crossConflicts.join(", ")} ile çakışıyor`
-                      : `conflicts with ${crossConflicts.join(", ")}`
-                    }
+                    {tr ? `${crossConflicts.join(", ")} ile çakışıyor` : `conflicts with ${crossConflicts.join(", ")}`}
                   </div>
                 )}
                 {ok && (
@@ -407,14 +338,14 @@ function FailureCard({ diagnosis, lang }) {
 }
 
 export default function AIPanel({ lang, courses, initialCourses, onApply, onClose }) {
-  const [freeDays,        setFreeDays]        = useState(new Set());
-  const [maxDailyHours,   setMaxDailyHours]   = useState(8);
-  const [earliestStart,   setEarliestStart]   = useState("");
-  const [latestEnd,       setLatestEnd]       = useState("");
-  const [compactMode,     setCompactMode]     = useState("any");
-  const [creditLimit,     setCreditLimit]     = useState("");
-  const [preferredByCode, setPreferredByCode] = useState({});
-  const [selectedCourses, setSelectedCourses] = useState(() => {
+  const [freeDays,          setFreeDays]          = useState(new Set());
+  const [maxDailyHours,     setMaxDailyHours]     = useState(8);
+  const [earliestStart,     setEarliestStart]     = useState("");
+  const [latestEnd,         setLatestEnd]         = useState("");
+  const [compactMode,       setCompactMode]       = useState("any");
+  const [creditLimit,       setCreditLimit]       = useState("");
+  const [preferredByCode,   setPreferredByCode]   = useState({});
+  const [selectedCourses,   setSelectedCourses]   = useState(() => {
     if (!initialCourses) return new Set();
     if (initialCourses instanceof Set) return initialCourses;
     if (typeof initialCourses[Symbol.iterator] === "function") return new Set(initialCourses);
@@ -424,6 +355,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
   const [error,             setError]             = useState(null);
   const [diagnoses,         setDiagnoses]         = useState([]);
   const [violations,        setViolations]        = useState([]);
+  const [showClearConfirm,  setShowClearConfirm]  = useState(false);
   const [stage,             setStage]             = useState("form");
   const [generatedSchedule, setGeneratedSchedule] = useState(null);
 
@@ -434,16 +366,14 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
   [selectedCourses, courses]);
 
   const totalCredits = useMemo(() =>
-    [...selectedCourses].reduce((sum,code) =>
-      sum+(courses.find(c=>c.code===code)?.credits||0), 0),
+    [...selectedCourses].reduce((sum,code) => sum+(courses.find(c=>c.code===code)?.credits||0), 0),
   [selectedCourses, courses]);
 
   const filteredCourses = useMemo(() => {
     const q = courseSearch.trim().toLowerCase();
     if (!q) return courses.slice(0,60);
     return courses.filter(c =>
-      `${c.code} ${c.name} ${c.nameTr||""} ${c.sections.map(s=>s.instructor).join(" ")}`
-        .toLowerCase().includes(q)
+      `${c.code} ${c.name} ${c.nameTr||""} ${c.sections.map(s=>s.instructor).join(" ")}`.toLowerCase().includes(q)
     ).slice(0,40);
   }, [courses, courseSearch]);
 
@@ -459,78 +389,44 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
 
   const handleGenerate = () => {
     setError(null); setDiagnoses([]); setViolations([]);
-    if (selectedCourses.size===0) {
-      setError(lang==="tr" ? "En az bir ders seç." : "Select at least one course.");
-      return;
-    }
-    if (creditOver) {
-      setError(lang==="tr"
-        ? `Kredi limiti aşıldı (${totalCredits}/${creditLimitNum}).`
-        : "Credit limit exceeded.");
-      return;
-    }
+    if (selectedCourses.size===0) { setError(lang==="tr"?"En az bir ders seç.":"Select at least one course."); return; }
+    if (creditOver) { setError(lang==="tr" ? `Kredi limiti aşıldı (${totalCredits}/${creditLimitNum}).` : "Credit limit exceeded."); return; }
 
-    const courseList = [...selectedCourses]
-      .map(code=>courses.find(c=>c.code===code)).filter(Boolean);
-    const options = {
-      freeDays,
-      maxDailyHours,
-      earliestStart: earliestStart||null,
-      latestEnd:     latestEnd||null,
-      compactMode,
-      preferredTeachers: allPreferredTeachers,
-    };
+    const courseList = [...selectedCourses].map(code=>courses.find(c=>c.code===code)).filter(Boolean);
+    const options = { freeDays, maxDailyHours, earliestStart: earliestStart||null, latestEnd: latestEnd||null, compactMode, preferredTeachers: allPreferredTeachers };
 
     setStage("loading");
     setTimeout(() => {
       const schedule = findBestSchedule(courseList, options);
 
       if (!schedule) {
-        let diag = analyzeFailure(
-          courseList, freeDays, earliestStart||null, latestEnd||null, lang
-        );
+        let diag = analyzeFailure(courseList, freeDays, earliestStart||null, latestEnd||null, lang);
         if (diag.length === 0) {
           diag = courseList.map(course => {
             const sections = course.sections.map(sec => {
               const viol = [];
               for (const m of sec.meetings) {
-                if (freeDays.has(m.d))
-                  viol.push(lang==="tr"
-                    ? `${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş`
-                    : `${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
-                if (earliestStart && toMin(m.s) < toMin(earliestStart))
-                  viol.push(lang==="tr"
-                    ? `${m.s} başlangıcı çok erken (min ${earliestStart})`
-                    : `${m.s} starts before ${earliestStart}`);
-                if (latestEnd && toMin(m.e) > toMin(latestEnd))
-                  viol.push(lang==="tr"
-                    ? `${m.e} bitişi çok geç (max ${latestEnd})`
-                    : `${m.e} ends after ${latestEnd}`);
+                if (freeDays.has(m.d)) viol.push(lang==="tr" ? `${["Pzt","Sal","Çar","Per","Cum"][m.d]} boş istenmiş` : `${["Mon","Tue","Wed","Thu","Fri"][m.d]} must stay free`);
+                if (earliestStart && toMin(m.s) < toMin(earliestStart)) viol.push(lang==="tr" ? `${m.s} başlangıcı çok erken (min ${earliestStart})` : `${m.s} starts before ${earliestStart}`);
+                if (latestEnd && toMin(m.e) > toMin(latestEnd)) viol.push(lang==="tr" ? `${m.e} bitişi çok geç (max ${latestEnd})` : `${m.e} ends after ${latestEnd}`);
               }
               const uniq = [...new Set(viol)];
-              const meetingStr = sec.meetings.map(m =>
-                `${["Pzt","Sal","Çar","Per","Cum"][m.d]} ${m.s}–${m.e}`
-              ).join(", ");
+              const meetingStr = sec.meetings.map(m => `${["Pzt","Sal","Çar","Per","Cum"][m.d]} ${m.s}–${m.e}`).join(", ");
               return { sec, constraintViolations: uniq, meetingStr, passesConstraints: uniq.length===0, crossConflicts: [] };
             });
             const hasAnyPassing = sections.some(s => s.passesConstraints);
-            const alternatives = [...sections]
-              .sort((a,b) => a.constraintViolations.length - b.constraintViolations.length)
-              .slice(0,4);
-            const constraintReasons = hasAnyPassing ? [] :
-              [...new Set(sections.flatMap(s => s.constraintViolations))];
+            const alternatives = [...sections].sort((a,b) => a.constraintViolations.length - b.constraintViolations.length).slice(0,4);
+            const constraintReasons = hasAnyPassing ? [] : [...new Set(sections.flatMap(s => s.constraintViolations))];
             return { course, constraintReasons, timeConflictWith: [], alternatives, hasAnyPassing, noViableSection: false };
           });
         }
         setDiagnoses(diag);
-
         const hints = [];
-        if (freeDays.size > 0)  hints.push(lang==="tr" ? `${freeDays.size} boş gün` : `${freeDays.size} free days`);
-        if (earliestStart)      hints.push(lang==="tr" ? `en erken ${earliestStart}` : `earliest ${earliestStart}`);
-        if (latestEnd)          hints.push(lang==="tr" ? `en geç ${latestEnd}` : `latest ${latestEnd}`);
-        if (maxDailyHours < 6)  hints.push(lang==="tr" ? `günlük max ${maxDailyHours}s` : `max ${maxDailyHours}h/day`);
+        if (freeDays.size > 0) hints.push(lang==="tr" ? `${freeDays.size} boş gün` : `${freeDays.size} free days`);
+        if (earliestStart)     hints.push(lang==="tr" ? `en erken ${earliestStart}` : `earliest ${earliestStart}`);
+        if (latestEnd)         hints.push(lang==="tr" ? `en geç ${latestEnd}` : `latest ${latestEnd}`);
+        if (maxDailyHours < 6) hints.push(lang==="tr" ? `günlük max ${maxDailyHours}s` : `max ${maxDailyHours}h/day`);
         const hintStr = hints.length ? " (" + hints.join(", ") + ")" : "";
-
         setError(lang==="tr"
           ? `Kısıtlara uyan program bulunamadı${hintStr}. Aşağıda sorunlu dersler ve mevcut şubeler gösteriliyor:`
           : `No valid schedule found${hintStr}. Problematic courses and available sections are shown below:`);
@@ -539,14 +435,10 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
       }
 
       const forcedCourses = courseList.filter(course =>
-        !course.sections.some(s =>
-          sectionPassesConstraints(s, freeDays, earliestStart||null, latestEnd||null)
-        )
+        !course.sections.some(s => sectionPassesConstraints(s, freeDays, earliestStart||null, latestEnd||null))
       );
       if (forcedCourses.length > 0) {
-        const diag = analyzeFailure(
-          forcedCourses, freeDays, earliestStart||null, latestEnd||null, lang
-        );
+        const diag = analyzeFailure(forcedCourses, freeDays, earliestStart||null, latestEnd||null, lang);
         setViolations(forcedCourses.map(c => ({ code: c.code })));
         setDiagnoses(diag);
         setGeneratedSchedule(schedule);
@@ -610,49 +502,52 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
 
         <div className="ai-panel-body ai-panel-grid">
 
-          {/* Sol kolon: ders listesi */}
+          {/* Sol: ders listesi */}
           <div className="ai-col ai-col-left">
             <div className="ai-field" style={{height:"100%",display:"flex",flexDirection:"column"}}>
               <label className="ai-label">
                 {lang==="tr"?"Dersler":"Courses"}
                 {selectedCourses.size>0 && (
-                  <span style={{ display:"flex", alignItems:"center", gap:6 }}>
+                  <span style={{ display:"flex", alignItems:"center", gap:8 }}>
                     <span className={`ai-label-badge${creditOver?" ai-badge-warn":""}`}>
                       {selectedCourses.size} ders · {totalCredits} kredi
                       {creditLimitNum ? ` / ${creditLimitNum}` : ""}
                     </span>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedCourses(new Set())}
-                      style={{
-                        fontSize:"0.72rem", padding:"2px 8px", borderRadius:6,
-                        border:"1px solid #ddd", background:"#f5f5f5",
-                        color:"#666", cursor:"pointer", lineHeight:1.4,
-                      }}
-                    >
-                      {lang==="tr"?"Temizle":"Clear"}
-                    </button>
+                    {showClearConfirm ? (
+                      <span style={{ display:"flex", alignItems:"center", gap:6 }}>
+                        <span style={{ fontSize:"0.72rem", color:"#555" }}>
+                          {lang==="tr" ? "Emin misin?" : "Are you sure?"}
+                        </span>
+                        <button type="button"
+                          onClick={() => { setSelectedCourses(new Set()); setShowClearConfirm(false); }}
+                          style={{ fontSize:"0.72rem", padding:"2px 8px", borderRadius:6, border:"none", background:"#7a1e2e", color:"#fff", cursor:"pointer", fontWeight:600 }}>
+                          {lang==="tr"?"Evet":"Yes"}
+                        </button>
+                        <button type="button"
+                          onClick={() => setShowClearConfirm(false)}
+                          style={{ fontSize:"0.72rem", padding:"2px 8px", borderRadius:6, border:"1px solid #ddd", background:"#f5f5f5", color:"#555", cursor:"pointer" }}>
+                          {lang==="tr"?"Hayır":"No"}
+                        </button>
+                      </span>
+                    ) : (
+                      <button type="button"
+                        onClick={() => setShowClearConfirm(true)}
+                        style={{ fontSize:"0.72rem", padding:"3px 10px", borderRadius:6, border:"1px solid #fca5a5", background:"#fff5f5", color:"#dc2626", cursor:"pointer", fontWeight:600 }}>
+                        {lang==="tr"?"Temizle":"Clear"}
+                      </button>
+                    )}
                   </span>
                 )}
               </label>
-              <input
-                type="text" className="ai-course-search"
+              <input type="text" className="ai-course-search"
                 placeholder={lang==="tr"?"Ders kodu, isim veya hoca...":"Code, name or instructor..."}
-                value={courseSearch} onChange={e=>setCourseSearch(e.target.value)}
-              />
+                value={courseSearch} onChange={e=>setCourseSearch(e.target.value)} />
               <div className="ai-course-list" style={{flex:1}}>
                 {filteredCourses.map(c => (
-                  <label key={c.code}
-                    className={`ai-course-item${selectedCourses.has(c.code)?" selected":""}`}>
-                    <input
-                      type="checkbox"
-                      checked={selectedCourses.has(c.code)}
-                      onChange={() => toggleCourse(c.code)}
-                    />
+                  <label key={c.code} className={`ai-course-item${selectedCourses.has(c.code)?" selected":""}`}>
+                    <input type="checkbox" checked={selectedCourses.has(c.code)} onChange={() => toggleCourse(c.code)} />
                     <span className="ai-course-code">{c.code}</span>
-                    <span className="ai-course-name">
-                      {lang==="tr"?(c.nameTr||c.name):c.name}
-                    </span>
+                    <span className="ai-course-name">{lang==="tr"?(c.nameTr||c.name):c.name}</span>
                     <span className="ai-course-cr">{c.credits}k</span>
                   </label>
                 ))}
@@ -660,18 +555,15 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
             </div>
           </div>
 
-          {/* Sağ kolon: kısıtlar */}
+          {/* Sağ: kısıtlar */}
           <div className="ai-col ai-col-right">
 
             <div className="ai-field">
               <label className="ai-label">{lang==="tr"?"Boş kalsın":"Free days"}</label>
               <div className="ai-day-pills">
                 {daysShort.map((d,i) => (
-                  <button
-                    key={DAY_KEYS[i]}
-                    className={`ai-day-pill${freeDays.has(DAY_KEYS[i])?" active":""}`}
-                    onClick={() => toggleDay(DAY_KEYS[i])}
-                  >{d}</button>
+                  <button key={DAY_KEYS[i]} className={`ai-day-pill${freeDays.has(DAY_KEYS[i])?" active":""}`}
+                    onClick={() => toggleDay(DAY_KEYS[i])}>{d}</button>
                 ))}
               </div>
               <div className="ai-campus-row">
@@ -691,8 +583,7 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
                 {[2,3,4,5,6,7,8,9,10].map(h => (
                   <button key={h}
                     className={`ai-hours-step${maxDailyHours===h?" active":""}${maxDailyHours>h?" past":""}`}
-                    onClick={() => setMaxDailyHours(h)}
-                  >{h}</button>
+                    onClick={() => setMaxDailyHours(h)}>{h}</button>
                 ))}
               </div>
             </div>
@@ -701,22 +592,16 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               <label className="ai-label">{lang==="tr"?"Saat aralığı":"Time range"}</label>
               <div className="ai-time-range-box">
                 <div className="ai-time-slot">
-                  <span className="ai-time-slot-label">
-                    {lang==="tr"?"En erken başlangıç":"Earliest start"}
-                  </span>
-                  <select className="ai-select" value={earliestStart}
-                    onChange={e=>setEarliestStart(e.target.value)}>
+                  <span className="ai-time-slot-label">{lang==="tr"?"En erken başlangıç":"Earliest start"}</span>
+                  <select className="ai-select" value={earliestStart} onChange={e=>setEarliestStart(e.target.value)}>
                     <option value="">{lang==="tr"?"Fark etmez":"Any"}</option>
                     {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
                 </div>
                 <div className="ai-time-range-sep" />
                 <div className="ai-time-slot">
-                  <span className="ai-time-slot-label">
-                    {lang==="tr"?"En geç bitiş":"Latest end"}
-                  </span>
-                  <select className="ai-select" value={latestEnd}
-                    onChange={e=>setLatestEnd(e.target.value)}>
+                  <span className="ai-time-slot-label">{lang==="tr"?"En geç bitiş":"Latest end"}</span>
+                  <select className="ai-select" value={latestEnd} onChange={e=>setLatestEnd(e.target.value)}>
                     <option value="">{lang==="tr"?"Fark etmez":"Any"}</option>
                     {TIME_OPTIONS.map(t => <option key={t} value={t}>{t}</option>)}
                   </select>
@@ -728,16 +613,12 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               <label className="ai-label">{lang==="tr"?"Kredi limiti":"Credit limit"}</label>
               <div className="ai-credit-row">
                 {[15,18,21,24].map(n => (
-                  <button key={n}
-                    className={`ai-credit-chip${creditLimit==n?" active":""}`}
-                    onClick={() => setCreditLimit(creditLimit==n?"":String(n))}
-                  >{n}</button>
+                  <button key={n} className={`ai-credit-chip${creditLimit==n?" active":""}`}
+                    onClick={() => setCreditLimit(creditLimit==n?"":String(n))}>{n}</button>
                 ))}
-                <input
-                  className="ai-credit-input" type="number" min={1} max={30}
+                <input className="ai-credit-input" type="number" min={1} max={30}
                   placeholder={lang==="tr"?"özel":"custom"}
-                  value={creditLimit} onChange={e=>setCreditLimit(e.target.value)}
-                />
+                  value={creditLimit} onChange={e=>setCreditLimit(e.target.value)} />
               </div>
               {creditOver && (
                 <div className="ai-credit-warn">
@@ -752,14 +633,11 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
               <div className="ai-field">
                 <label className="ai-label">
                   {lang==="tr"?"Tercih edilen hocalar":"Preferred instructors"}
-                  {allPreferredTeachers.length>0 &&
-                    <span className="ai-label-badge">{allPreferredTeachers.length} seçili</span>}
+                  {allPreferredTeachers.length>0 && <span className="ai-label-badge">{allPreferredTeachers.length} seçili</span>}
                 </label>
                 <div className="ai-instructor-selects">
                   {selectedCourseList.map(course => {
-                    const instructors = [...new Set(
-                      course.sections.map(s=>s.instructor).filter(Boolean)
-                    )];
+                    const instructors = [...new Set(course.sections.map(s=>s.instructor).filter(Boolean))];
                     if (!instructors.length) return null;
                     const sel = preferredByCode[course.code] || new Set();
                     const currentVal = [...sel].find(t => instructors.includes(t)) || "";
@@ -767,21 +645,13 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
                       <div key={course.code} className="ai-instructor-select-row">
                         <div className="ai-instructor-select-label">
                           <span className="ai-instructor-course-code">{course.code}</span>
-                          <span className="ai-instructor-select-name">
-                            {lang==="tr"?(course.nameTr||course.name):course.name}
-                          </span>
+                          <span className="ai-instructor-select-name">{lang==="tr"?(course.nameTr||course.name):course.name}</span>
                         </div>
-                        <select
-                          className="ai-select"
-                          value={currentVal}
+                        <select className="ai-select" value={currentVal}
                           onChange={e => {
                             const val = e.target.value;
-                            setPreferredByCode(prev => ({
-                              ...prev,
-                              [course.code]: val ? new Set([val]) : new Set()
-                            }));
-                          }}
-                        >
+                            setPreferredByCode(prev => ({ ...prev, [course.code]: val ? new Set([val]) : new Set() }));
+                          }}>
                           <option value="">{lang==="tr"?"— Fark etmez":"— Any instructor"}</option>
                           {instructors.map(t => <option key={t} value={t}>{t}</option>)}
                         </select>
@@ -803,22 +673,16 @@ export default function AIPanel({ lang, courses, initialCourses, onApply, onClos
                   {diagnoses.map((d,i) => <FailureCard key={i} diagnosis={d} lang={lang} />)}
                 </div>
                 <div className="ai-warning-hint">
-                  {lang==="tr"
-                    ? "Önizlemeye devam etmek istiyor musun?"
-                    : "Would you like to continue to preview?"}
+                  {lang==="tr" ? "Önizlemeye devam etmek istiyor musun?" : "Would you like to continue to preview?"}
                 </div>
               </div>
             )}
 
             {error && (
               <div className="ai-error" style={{ padding:"10px 12px" }}>
-                <div style={{ fontWeight:600, marginBottom: diagnoses.length>0 ? 10 : 0 }}>
-                  {error}
-                </div>
+                <div style={{ fontWeight:600, marginBottom: diagnoses.length>0 ? 10 : 0 }}>{error}</div>
                 {diagnoses.length>0 && (
-                  <div>
-                    {diagnoses.map((d,i) => <FailureCard key={i} diagnosis={d} lang={lang} />)}
-                  </div>
+                  <div>{diagnoses.map((d,i) => <FailureCard key={i} diagnosis={d} lang={lang} />)}</div>
                 )}
               </div>
             )}

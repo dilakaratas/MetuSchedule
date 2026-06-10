@@ -612,13 +612,8 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
 
             {/* Yıl seç */}
             <div style={{ marginBottom: 14 }}>
-              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <div style={{ fontSize: "0.75rem", fontWeight: 600, color: "#888", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.05em" }}>
                 <span>{tr ? "Yıl" : "Year"}</span>
-                {autoDetectedYear && (
-                  <span style={{ fontSize: "0.68rem", fontWeight: 500, color: "#7a1f2b", background: "#fdf0f2", border: "1px solid #f5c6cb", borderRadius: 6, padding: "1px 7px", letterSpacing: 0 }}>
-                    {tr ? `${autoDetectedYear}. yılın otomatik seçildi` : `Year ${autoDetectedYear} auto-selected`}
-                  </span>
-                )}
               </div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                 {mufredat.map((y) => {
