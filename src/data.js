@@ -337,7 +337,7 @@ export async function loadMetuCourses() {
   const rawMetuData = await res.json();
   const departments = Array.isArray(rawMetuData?.departments) ? rawMetuData.departments : [];
 
-  return departments
+  const allCourses = departments
     .filter((department) => {
       const name = cleanText(department?.departmentName).toLowerCase();
       return !name.includes("kuzey kıbrıs kampüsü");
@@ -346,4 +346,15 @@ export async function loadMetuCourses() {
       (department.courses || []).map((course) => convertCourse(course, department))
     )
     .filter((course) => course.code && course.name && course.sections.length > 0);
+
+  // Duplicate dedupe: aynı kod birden fazla dept'ten gelirse
+  // en fazla section'ı olan (ya da ilk gelen) tercihen kullan.
+  const seen = new Map();
+  for (const course of allCourses) {
+    const existing = seen.get(course.code);
+    if (!existing || course.sections.length > existing.sections.length) {
+      seen.set(course.code, course);
+    }
+  }
+  return Array.from(seen.values());
 }

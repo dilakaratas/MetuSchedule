@@ -596,6 +596,7 @@ export default function CurriculumModal({
   courses,
   user,
   onApplyToScheduler,
+  onApplyWithSections,
   onClose,
 }) {
   const tr = lang === "tr";
@@ -820,6 +821,8 @@ export default function CurriculumModal({
     return list;
   }, [yilDersleri, courses, viewFilter, done]);
 
+  const [smartPlanOpen, setSmartPlanOpen] = useState(false);
+
   const handleApply = () => {
     if (!matchedYilDersleri.length) return;
 
@@ -843,6 +846,302 @@ export default function CurriculumModal({
   };
 
   
+
+// ═══════════════════════════════════════════════════════════════════════
+// SmartPlanWizard
+// Müfredat yapısına dokunmadan, seçilen derslerin section'larını
+// kullanıcı tercihlerine göre çakışmasız olarak önerir.
+// ═══════════════════════════════════════════════════════════════════════
+function sectionsOverlap(a, b) {
+  for (const ma of a.meetings || []) {
+    for (const mb of b.meetings || []) {
+      if (ma.d !== mb.d) continue;
+      const aStart = ma.s, aEnd = ma.e, bStart = mb.s, bEnd = mb.e;
+      if (aStart < bEnd && bStart < aEnd) return true;
+    }
+  }
+  return false;
+}
+
+function buildConflictFree(picks) {
+  // picks: [{code, sections:[...], preferred}]
+  // Greedy: her ders için mevcut seçilenlerle çakışmayan ilk section'ı seç
+  const chosen = [];
+  const result = [];
+  for (const pick of picks) {
+    const candidates = [...pick.sections].sort((a, b) => {
+      // preferred hoca varsa önce ona bak
+      if (pick.preferred?.instructor) {
+        const pa = a.instructor?.toLowerCase().includes(pick.preferred.instructor.toLowerCase()) ? 0 : 1;
+        const pb = b.instructor?.toLowerCase().includes(pick.preferred.instructor.toLowerCase()) ? 0 : 1;
+        if (pa !== pb) return pa - pb;
+      }
+      // preferred gün varsa önce ona bak
+      if (pick.preferred?.day !== undefined) {
+        const da = a.meetings?.some(m => m.d === pick.preferred.day) ? 0 : 1;
+        const db = b.meetings?.some(m => m.d === pick.preferred.day) ? 0 : 1;
+        if (da !== db) return da - db;
+      }
+      // preferred saat aralığı
+      if (pick.preferred?.timeSlot) {
+        const score = (sec) => {
+          const m = sec.meetings?.[0];
+          if (!m) return 99;
+          const h = parseInt(m.s?.split(':')?.[0] ?? '99');
+          if (pick.preferred.timeSlot === 'morning' && h < 12) return 0;
+          if (pick.preferred.timeSlot === 'afternoon' && h >= 12 && h < 17) return 0;
+          if (pick.preferred.timeSlot === 'evening' && h >= 17) return 0;
+          return 1;
+        };
+        if (score(a) !== score(b)) return score(a) - score(b);
+      }
+      return 0;
+    });
+
+    let placed = false;
+    for (const sec of candidates) {
+      const conflict = chosen.some(cs => sectionsOverlap(sec, cs));
+      if (!conflict) {
+        chosen.push(sec);
+        result.push({ code: pick.code, sectionId: sec.id, section: sec });
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      // Çakışmadan yerleştirilemedi, yine de ekle (çakışma uyarısı gösterilecek)
+      const sec = candidates[0];
+      if (sec) {
+        result.push({ code: pick.code, sectionId: sec.id, section: sec, hasConflict: true });
+      }
+    }
+  }
+  return result;
+}
+
+const DAY_LABELS_TR = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'];
+const DAY_LABELS_EN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+
+function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
+  const lang = isTr ? 'tr' : 'en';
+  const DAY_LABELS = isTr ? DAY_LABELS_TR : DAY_LABELS_EN;
+
+  // Her ders için tercih state'i: { instructor:'', day:undefined, timeSlot:'' }
+  const [prefs, setPrefs] = useState(() => {
+    const init = {};
+    dersler.forEach(d => { init[normCode(d.kod)] = { instructor: '', day: undefined, timeSlot: '' }; });
+    return init;
+  });
+
+  const [step, setStep] = useState('prefs'); // 'prefs' | 'result'
+  const [result, setResult] = useState(null);
+
+  // Katalogdaki ders + section bilgisi
+  const catalogDers = useMemo(() => {
+    return dersler.map(d => {
+      const entry = findInCatalog(d, courses);
+      return { ders: d, entry };
+    }).filter(x => x.entry && x.entry.sections?.length > 0);
+  }, [dersler, courses]);
+
+  const setPref = (kod, key, val) => {
+    setPrefs(prev => ({ ...prev, [kod]: { ...prev[kod], [key]: val } }));
+  };
+
+  const handleGenerate = () => {
+    const picks = catalogDers.map(({ ders, entry }) => ({
+      code: entry.code,
+      sections: entry.sections,
+      preferred: prefs[normCode(ders.kod)] || {},
+    }));
+    const res = buildConflictFree(picks);
+    setResult(res);
+    setStep('result');
+  };
+
+  const handleApplyResult = () => {
+    if (!result) return;
+    onApply(result.map(r => ({ code: r.code, sectionId: r.sectionId })));
+    onClose();
+  };
+
+  if (step === 'result') {
+    const conflicts = result.filter(r => r.hasConflict);
+    return (
+      <div style={{ display:'flex', flexDirection:'column', flex:1, minHeight:0 }}>
+        <div style={{ padding:'14px 20px', borderBottom:'1px solid #f0ece8', display:'flex', alignItems:'center', gap:10, flexShrink:0 }}>
+          <button onClick={() => setStep('prefs')} style={{ background:'none', border:'none', cursor:'pointer', color:'#7a1f2b', fontSize:'1.1rem', padding:'0 4px' }}>←</button>
+          <span style={{ fontWeight:700, fontSize:'0.95rem' }}>
+            {isTr ? 'Önerilen Program' : 'Suggested Schedule'}
+          </span>
+        </div>
+
+        <div style={{ flex:1, overflowY:'auto', padding:'14px 20px' }}>
+          {conflicts.length > 0 && (
+            <div style={{ marginBottom:12, padding:'8px 12px', background:'#fff7ed', border:'1px solid #fed7aa', borderRadius:8, fontSize:'0.78rem', color:'#92400e' }}>
+              ⚠ {conflicts.length} {isTr ? 'ders çakışmasız yerleştirilemedi, en uygun section seçildi.' : 'course(s) could not be placed without conflict.'}
+            </div>
+          )}
+          <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+            {result.map((r, i) => {
+              const sec = r.section;
+              const schedule = (sec?.meetings || [])
+                .map(m => `${DAY_LABELS[m.d] ?? m.d} ${m.s}–${m.e}`)
+                .join(', ');
+              return (
+                <div key={i} style={{
+                  padding:'10px 14px', borderRadius:10,
+                  border: r.hasConflict ? '1.5px solid #fca5a5' : '1.5px solid #d1fae5',
+                  background: r.hasConflict ? '#fff5f5' : '#f0fdf4',
+                }}>
+                  <div style={{ display:'flex', justifyContent:'space-between', alignItems:'flex-start', gap:8 }}>
+                    <div>
+                      <span style={{ fontWeight:700, fontSize:'0.82rem', color:'#7a1f2b' }}>{r.code}</span>
+                      <span style={{ marginLeft:8, fontSize:'0.75rem', color:'#555', fontWeight:600 }}>§{sec?.id}</span>
+                      {r.hasConflict && <span style={{ marginLeft:8, fontSize:'0.7rem', color:'#dc2626' }}>⚠ çakışma</span>}
+                    </div>
+                    <span style={{ fontSize:'0.7rem', color:'#888', flexShrink:0 }}>CRN {sec?.crn}</span>
+                  </div>
+                  <div style={{ fontSize:'0.75rem', color:'#444', marginTop:3 }}>{sec?.instructor}</div>
+                  <div style={{ fontSize:'0.73rem', color:'#374151', marginTop:2 }}>{schedule || (isTr ? 'Zaman yok' : 'No schedule')}</div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div style={{ padding:'12px 20px', borderTop:'1px solid #f0ece8', display:'flex', gap:10, justifyContent:'flex-end', flexShrink:0 }}>
+          <button onClick={onClose} style={{ padding:'9px 18px', borderRadius:8, border:'1px solid #e5e0da', background:'#fff', color:'#555', fontSize:'0.85rem', cursor:'pointer', fontWeight:500 }}>
+            {isTr ? 'İptal' : 'Cancel'}
+          </button>
+          <button onClick={handleApplyResult} style={{ padding:'9px 20px', borderRadius:8, border:'none', background:'#7a1f2b', color:'#fff', fontSize:'0.85rem', cursor:'pointer', fontWeight:700 }}>
+            {isTr ? `${result.length} dersi uygula` : `Apply ${result.length} courses`}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // step === 'prefs'
+  return (
+    <div style={{ display:'flex', flexDirection:'column', flex:1, minHeight:0 }}>
+      <div style={{ padding:'14px 20px', borderBottom:'1px solid #f0ece8', display:'flex', alignItems:'center', gap:10, flexShrink:0 }}>
+        <button onClick={onClose} style={{ background:'none', border:'none', cursor:'pointer', color:'#888', fontSize:'1.1rem', padding:'0 4px' }}>✕</button>
+        <div>
+          <div style={{ fontWeight:700, fontSize:'0.95rem' }}>{isTr ? 'Akıllı Planlama' : 'Smart Schedule'}</div>
+          <div style={{ fontSize:'0.72rem', color:'#aaa' }}>
+            {isTr ? `${catalogDers.length} ders · tercihlerini seç, çakışmasız program oluştur` : `${catalogDers.length} courses · set preferences, get conflict-free schedule`}
+          </div>
+        </div>
+      </div>
+
+      <div style={{ flex:1, overflowY:'auto', padding:'12px 16px' }}>
+        {catalogDers.length === 0 ? (
+          <div style={{ textAlign:'center', color:'#aaa', padding:24, fontSize:'0.85rem' }}>
+            {isTr ? 'Bu dönem için katalogda ders bulunamadı.' : 'No catalog courses found for this period.'}
+          </div>
+        ) : catalogDers.map(({ ders, entry }) => {
+          const kod = normCode(ders.kod);
+          const pref = prefs[kod] || {};
+          // Unique hocalar
+          const instructors = [...new Set(
+            (entry.sections || []).map(s => s.instructor).filter(Boolean)
+          )];
+          // Unique günler
+          const days = [...new Set(
+            (entry.sections || []).flatMap(s => (s.meetings || []).map(m => m.d))
+          )].filter(d => d !== undefined).sort();
+
+          return (
+            <div key={kod} style={{ marginBottom:12, padding:'10px 12px', borderRadius:10, border:'1.5px solid #f0ece8', background:'#fff' }}>
+              {/* Ders başlığı */}
+              <div style={{ display:'flex', justifyContent:'space-between', marginBottom:8 }}>
+                <div>
+                  <span style={{ fontWeight:700, fontSize:'0.82rem', color:'#7a1f2b' }}>{ders.kod}</span>
+                  <span style={{ marginLeft:6, fontSize:'0.75rem', color:'#555' }}>{safeText(ders.ad)}</span>
+                </div>
+                <span style={{ fontSize:'0.7rem', color:'#aaa' }}>{entry.sections?.length} şube</span>
+              </div>
+
+              {/* Hoca tercihi */}
+              {instructors.length > 1 && (
+                <div style={{ marginBottom:6 }}>
+                  <div style={{ fontSize:'0.68rem', fontWeight:600, color:'#888', marginBottom:4, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+                    {isTr ? 'Hoca tercihi' : 'Instructor preference'}
+                  </div>
+                  <div style={{ display:'flex', flexWrap:'wrap', gap:4 }}>
+                    <button onClick={() => setPref(kod, 'instructor', '')}
+                      style={{ padding:'3px 9px', borderRadius:6, fontSize:'0.72rem', border: !pref.instructor ? '1.5px solid #7a1f2b' : '1.5px solid #e5e0da', background: !pref.instructor ? '#7a1f2b' : '#fff', color: !pref.instructor ? '#fff' : '#555', cursor:'pointer', fontWeight:600 }}>
+                      {isTr ? 'Fark etmez' : 'Any'}
+                    </button>
+                    {instructors.map(ins => (
+                      <button key={ins} onClick={() => setPref(kod, 'instructor', ins)}
+                        style={{ padding:'3px 9px', borderRadius:6, fontSize:'0.72rem', border: pref.instructor === ins ? '1.5px solid #7a1f2b' : '1.5px solid #e5e0da', background: pref.instructor === ins ? '#7a1f2b' : '#fff', color: pref.instructor === ins ? '#fff' : '#555', cursor:'pointer', maxWidth:160, overflow:'hidden', textOverflow:'ellipsis', whiteSpace:'nowrap' }}>
+                        {ins}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Gün tercihi */}
+              {days.length > 1 && (
+                <div style={{ marginBottom:6 }}>
+                  <div style={{ fontSize:'0.68rem', fontWeight:600, color:'#888', marginBottom:4, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+                    {isTr ? 'Gün tercihi' : 'Day preference'}
+                  </div>
+                  <div style={{ display:'flex', flexWrap:'wrap', gap:4 }}>
+                    <button onClick={() => setPref(kod, 'day', undefined)}
+                      style={{ padding:'3px 9px', borderRadius:6, fontSize:'0.72rem', border: pref.day === undefined ? '1.5px solid #7a1f2b' : '1.5px solid #e5e0da', background: pref.day === undefined ? '#7a1f2b' : '#fff', color: pref.day === undefined ? '#fff' : '#555', cursor:'pointer', fontWeight:600 }}>
+                      {isTr ? 'Fark etmez' : 'Any'}
+                    </button>
+                    {days.map(d => (
+                      <button key={d} onClick={() => setPref(kod, 'day', d)}
+                        style={{ padding:'3px 9px', borderRadius:6, fontSize:'0.72rem', border: pref.day === d ? '1.5px solid #7a1f2b' : '1.5px solid #e5e0da', background: pref.day === d ? '#7a1f2b' : '#fff', color: pref.day === d ? '#fff' : '#555', cursor:'pointer', fontWeight:600 }}>
+                        {DAY_LABELS[d]}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Saat tercihi */}
+              <div>
+                <div style={{ fontSize:'0.68rem', fontWeight:600, color:'#888', marginBottom:4, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+                  {isTr ? 'Saat tercihi' : 'Time preference'}
+                </div>
+                <div style={{ display:'flex', gap:4 }}>
+                  {[
+                    { key:'', label: isTr ? 'Fark etmez' : 'Any' },
+                    { key:'morning', label: isTr ? 'Sabah' : 'Morning' },
+                    { key:'afternoon', label: isTr ? 'Öğleden sonra' : 'Afternoon' },
+                    { key:'evening', label: isTr ? 'Akşam' : 'Evening' },
+                  ].map(opt => (
+                    <button key={opt.key} onClick={() => setPref(kod, 'timeSlot', opt.key)}
+                      style={{ padding:'3px 9px', borderRadius:6, fontSize:'0.72rem', border: pref.timeSlot === opt.key ? '1.5px solid #7a1f2b' : '1.5px solid #e5e0da', background: pref.timeSlot === opt.key ? '#7a1f2b' : '#fff', color: pref.timeSlot === opt.key ? '#fff' : '#555', cursor:'pointer', fontWeight:600 }}>
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div style={{ padding:'12px 20px', borderTop:'1px solid #f0ece8', display:'flex', gap:10, justifyContent:'flex-end', flexShrink:0 }}>
+        <button onClick={onClose} style={{ padding:'9px 18px', borderRadius:8, border:'1px solid #e5e0da', background:'#fff', color:'#555', fontSize:'0.85rem', cursor:'pointer', fontWeight:500 }}>
+          {isTr ? 'İptal' : 'Cancel'}
+        </button>
+        <button onClick={handleGenerate} disabled={!catalogDers.length}
+          style={{ padding:'9px 20px', borderRadius:8, border:'none', background: catalogDers.length ? '#7a1f2b' : '#e5e0da', color: catalogDers.length ? '#fff' : '#aaa', fontSize:'0.85rem', cursor: catalogDers.length ? 'pointer' : 'not-allowed', fontWeight:700 }}>
+          {isTr ? 'Program Oluştur' : 'Generate Schedule'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────
 // SearchableDeptSelect — arama yapılabilir bölüm seçici
 // ─────────────────────────────────────────────────────────
@@ -1064,6 +1363,7 @@ const renderOptions = () => (
           display: "flex",
           flexDirection: "column",
           maxHeight: "92vh",
+          minHeight: 0,
         }}
       >
         <div
@@ -1513,53 +1813,112 @@ const renderOptions = () => (
 
         <div
           style={{
-            padding: "12px 20px",
+            padding: "10px 16px",
             borderTop: "1px solid #f0ece8",
             display: "flex",
-            gap: 10,
-            justifyContent: "flex-end",
+            flexDirection: "column",
+            gap: 8,
+            flexShrink: 0,
+            background: "#fff",
           }}
         >
-          <button
-            onClick={onClose}
-            style={{
-              padding: "9px 18px",
-              borderRadius: 8,
-              border: "1px solid #e5e0da",
-              background: "#fff",
-              color: "#555",
-              fontSize: "0.85rem",
-              cursor: "pointer",
-              fontWeight: 500,
-            }}
-          >
-            {tr ? "İptal" : "Cancel"}
-          </button>
+          {/* Akıllı Planla — tam genişlik, üstte */}
+          {selectedYil && (
+            <button
+              onClick={() => { if (matchedYilDersleri.length) setSmartPlanOpen(true); }}
+              disabled={!matchedYilDersleri.length}
+              style={{
+                width: "100%",
+                padding: "9px 16px",
+                borderRadius: 8,
+                border: matchedYilDersleri.length ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+                background: "#fff",
+                color: matchedYilDersleri.length ? "#7a1f2b" : "#aaa",
+                fontSize: "0.85rem",
+                cursor: matchedYilDersleri.length ? "pointer" : "not-allowed",
+                fontWeight: 700,
+                textAlign: "center",
+              }}
+            >
+              {tr ? "Akıllı Planla — Tercihlerime Göre Section Seç" : "Smart Plan — Pick Sections by Preference"}
+            </button>
+          )}
 
-          <button
-            onClick={handleApply}
-            disabled={!matchedYilDersleri.length}
-            style={{
-              padding: "9px 20px",
-              borderRadius: 8,
-              border: "none",
-              background: matchedYilDersleri.length ? "#7a1f2b" : "#e5e0da",
-              color: matchedYilDersleri.length ? "#fff" : "#aaa",
-              fontSize: "0.85rem",
-              cursor: matchedYilDersleri.length ? "pointer" : "not-allowed",
-              fontWeight: 700,
-            }}
-          >
-            {selectedYil
-              ? tr
-                ? `${matchedYilDersleri.length} dersi Planlayıcıya Yükle`
-                : `Load ${matchedYilDersleri.length} courses to Scheduler`
-              : tr
-              ? "Yıl seç"
-              : "Select a year"}
-          </button>
+          {/* Alt satır: İptal + Planlayıcıya Yükle */}
+          <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
+            <button
+              onClick={onClose}
+              style={{
+                padding: "9px 18px",
+                borderRadius: 8,
+                border: "1px solid #e5e0da",
+                background: "#fff",
+                color: "#555",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+                fontWeight: 500,
+              }}
+            >
+              {tr ? "İptal" : "Cancel"}
+            </button>
+
+            <button
+              onClick={handleApply}
+              disabled={!matchedYilDersleri.length}
+              style={{
+                padding: "9px 20px",
+                borderRadius: 8,
+                border: "none",
+                background: matchedYilDersleri.length ? "#7a1f2b" : "#e5e0da",
+                color: matchedYilDersleri.length ? "#fff" : "#aaa",
+                fontSize: "0.85rem",
+                cursor: matchedYilDersleri.length ? "pointer" : "not-allowed",
+                fontWeight: 700,
+              }}
+            >
+              {selectedYil
+                ? tr
+                  ? `${matchedYilDersleri.length} dersi Planlayıcıya Yükle`
+                  : `Load ${matchedYilDersleri.length} courses to Scheduler`
+                : tr
+                ? "Yıl seç"
+                : "Select a year"}
+            </button>
+          </div>
         </div>
       </div>
+
+      {smartPlanOpen && matchedYilDersleri.length > 0 && (
+        <div
+          onClick={() => setSmartPlanOpen(false)}
+          style={{ position:"fixed", inset:0, zIndex:1050, background:"rgba(0,0,0,0.45)", display:"flex", alignItems:"center", justifyContent:"center", padding:16 }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ background:"#fff", borderRadius:16, width:"100%", maxWidth:540, height:"92vh", display:"flex", flexDirection:"column", overflow:"hidden", boxShadow:"0 8px 40px rgba(0,0,0,0.18)" }}
+          >
+            <SmartPlanWizard
+              dersler={matchedYilDersleri}
+              courses={courses}
+              tr={tr}
+              onApply={(suggestions) => {
+                // suggestions: [{code, sectionId}]
+                // onApplyToScheduler sadece code set kabul ediyor,
+                // ama App.jsx'e direkt section seçimini iletmek için
+                // onApplyWithSections prop'u kullanıyoruz
+                if (onApplyWithSections) {
+                  onApplyWithSections(suggestions);
+                } else {
+                  onApplyToScheduler(new Set(suggestions.map(s => s.code)));
+                }
+                setSmartPlanOpen(false);
+                onClose();
+              }}
+              onClose={() => setSmartPlanOpen(false)}
+            />
+          </div>
+        </div>
+      )}
 
       {confirmClear && (
         <div

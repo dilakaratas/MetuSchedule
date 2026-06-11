@@ -13,6 +13,20 @@ import { saveToken, validateCasTicket } from "./api/auth.js";
 
 const normCode = (s) => String(s || "").replace(/\s+/g, "").toUpperCase();
 
+// Türkçe karakterleri normalize ederek arama yapılabilir hale getirir.
+// İ→i, ı→i, Ş→s, ş→s, Ğ→g, ğ→g, Ü→u, ü→u, Ö→o, ö→o, Ç→c, ç→c
+// Böylece "TOKDEMIR" yazınca "TOKDEMİR" olan hocayı bulur.
+const normSearch = (s) =>
+  String(s || "")
+    .toLowerCase()
+    .replace(/İ/g, "i").replace(/I/g, "i")
+    .replace(/ı/g, "i")
+    .replace(/ş/g, "s").replace(/Ş/g, "s")
+    .replace(/ğ/g, "g").replace(/Ğ/g, "g")
+    .replace(/ü/g, "u").replace(/Ü/g, "u")
+    .replace(/ö/g, "o").replace(/Ö/g, "o")
+    .replace(/ç/g, "c").replace(/Ç/g, "c");
+
 // ─────────────────────────────────────────────
 // program_id → bu bölüme özgü ders kod prefix'leri
 // metu_all_programsv3.json'daki müfredat analiz edilerek üretilmiştir.
@@ -401,7 +415,9 @@ function MainApp({ user, onLogout }) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return deptFilteredCourses.filter((c) => {
-      if (curriculumYearCodes) {
+      // Kullanıcı arama yaparken müfredat yılı filtresini bypass et —
+      // aksi halde sadece o yılın dersleri aranır ve search "çalışmıyor" gibi görünür.
+      if (curriculumYearCodes && !q) {
         if (!curriculumYearCodes.has(normCode(c.code))) return false;
       }
       if (dayFilter.size > 0) {
@@ -411,8 +427,10 @@ function MainApp({ user, onLogout }) {
         if (!meetsOnDay) return false;
       }
       if (!q) return true;
-      const hay = `${c.code} ${c.name} ${c.nameTr} ${c.sections.map((s) => s.instructor).join(" ")}`.toLowerCase();
-      return hay.includes(q);
+      const hay = normSearch(
+        `${c.code} ${c.name} ${c.nameTr} ${c.sections.map((s) => s.instructor).join(" ")}`
+      );
+      return hay.includes(normSearch(q));
     });
   }, [query, dayFilter, deptFilteredCourses, curriculumYearCodes]);
 
@@ -570,6 +588,29 @@ function MainApp({ user, onLogout }) {
     toast(`${newEntries.length} ders takvime eklendi`);
   };
 
+  // SmartPlanWizard'dan gelen section seçimlerini doğrudan uygula
+  const handleSmartPlanApply = (suggestions) => {
+    // suggestions: [{code, sectionId}]
+    const newEntries = suggestions
+      .map(({ code, sectionId }) => {
+        const course = courses.find((c) => c.code === code);
+        const section = course?.sections.find((s) => s.id === sectionId);
+        if (!course || !section) return null;
+        return { code, sectionId };
+      })
+      .filter(Boolean);
+    if (!newEntries.length) return;
+    const merged = [...selected];
+    newEntries.forEach((entry) => {
+      if (!merged.find((s) => s.code === entry.code)) merged.push(entry);
+    });
+    setSelected(merged);
+    setCurriculumOpen(false);
+    setSidebarOpen(false);
+    setMobileTab("calendar");
+    toast(`${newEntries.length} ders akıllı planlamayla eklendi`);
+  };
+
   const handleAdminViewCurriculum = (studentUser) => {
     setAdminCurriculumUser(studentUser); setCurriculumOpen(true);
   };
@@ -596,6 +637,7 @@ function MainApp({ user, onLogout }) {
         {curriculumOpen && adminCurriculumUser && (
           <CurriculumModal lang={lang} courses={courses} user={adminCurriculumUser}
             onApplyToScheduler={handleCurriculumApply}
+            onApplyWithSections={handleSmartPlanApply}
             onClose={() => { setCurriculumOpen(false); setAdminCurriculumUser(null); }} />
         )}
         {toastMsg && <div className="toast">{safeText(toastMsg)}</div>}
@@ -706,6 +748,7 @@ function MainApp({ user, onLogout }) {
       {curriculumOpen && (
         <CurriculumModal lang={lang} courses={courses} user={curriculumUser}
           onApplyToScheduler={handleCurriculumApply}
+          onApplyWithSections={handleSmartPlanApply}
           onClose={() => setCurriculumOpen(false)} />
       )}
 
