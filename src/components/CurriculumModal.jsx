@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 
-const CURRICULUM_FILE = "/metu_all_programsv2.json";
+const CURRICULUM_FILE = "/metu_all_programsv3.json";
 
 const YEAR_TO_NUM = {
   "FIRST YEAR": 1,
@@ -27,6 +27,15 @@ const SEM_TO_NUM = {
   "Sixth Semester": 6,
   "Seventh Semester": 7,
   "Eighth Semester": 8,
+
+  "1. Dönem": 1,
+  "2. Dönem": 2,
+  "3. Dönem": 3,
+  "4. Dönem": 4,
+  "5. Dönem": 5,
+  "6. Dönem": 6,
+  "7. Dönem": 7,
+  "8. Dönem": 8,
 };
 
 function normalizeDersler(dersler) {
@@ -37,9 +46,19 @@ function normalizeDersler(dersler) {
     })
     .map((d) => {
       const out = { ...d };
-      if (out.odtu_kredi != null && out.metu_kredi == null) out.metu_kredi = out.odtu_kredi;
-      if (out.metu_kredi != null && out.odtu_kredi == null) out.odtu_kredi = out.metu_kredi;
-      if (out.secenekler) out.secenekler = normalizeDersler(out.secenekler);
+
+      if (out.odtu_kredi != null && out.metu_kredi == null) {
+        out.metu_kredi = out.odtu_kredi;
+      }
+
+      if (out.metu_kredi != null && out.odtu_kredi == null) {
+        out.odtu_kredi = out.metu_kredi;
+      }
+
+      if (out.secenekler) {
+        out.secenekler = normalizeDersler(out.secenekler);
+      }
+
       return out;
     });
 }
@@ -48,11 +67,26 @@ function convertNewCatalog(program) {
   const yilMap = {};
 
   for (const entry of program.curriculum || []) {
-    const yilNo = YEAR_TO_NUM[entry.year] ?? 0;
-    const semNo = SEM_TO_NUM[entry.semester] ?? 0;
+    const yilNo =
+      Number(entry.year_number) ||
+      YEAR_TO_NUM[entry.year] ||
+      0;
 
-    if (!yilNo || !semNo) continue;
-    if (!yilMap[yilNo]) yilMap[yilNo] = {};
+    const globalSemesterNo =
+      Number(entry.semester_number) ||
+      SEM_TO_NUM[entry.semester] ||
+      0;
+
+    const yearSemesterNo =
+      Number(entry.year_semester_number) ||
+      SEM_TO_NUM[entry.year_semester] ||
+      (globalSemesterNo ? ((globalSemesterNo - 1) % 2) + 1 : 0);
+
+    if (!yilNo || !yearSemesterNo) continue;
+
+    if (!yilMap[yilNo]) {
+      yilMap[yilNo] = {};
+    }
 
     const dersler = (entry.courses || []).map((c) =>
       c.type === "elective_slot"
@@ -73,9 +107,13 @@ function convertNewCatalog(program) {
           }
     );
 
-    yilMap[yilNo][semNo] = {
-      yariyil: semNo,
-      yariyil_adi: `${semNo}. Dönem`,
+    yilMap[yilNo][yearSemesterNo] = {
+      yariyil: yearSemesterNo,
+      yariyil_adi: `${yearSemesterNo}. Dönem`,
+
+      global_yariyil: globalSemesterNo || null,
+      global_yariyil_adi: globalSemesterNo ? `${globalSemesterNo}. Dönem` : null,
+
       dersler: normalizeDersler(dersler),
     };
   }
@@ -133,16 +171,23 @@ function findDeptByCode(deptCode, allCurricula) {
   if (!deptCode || !allCurricula?.length) return null;
 
   const numericCode = Number(deptCode);
+
   if (numericCode) {
     const byProgramId = allCurricula.find((d) => Number(d.prog_id) === numericCode);
     if (byProgramId) return byProgramId;
   }
 
   const upper = String(deptCode).toUpperCase();
+
   return (
     allCurricula.find((d) => {
       const label = String(d.label || "").toUpperCase();
-      return label.startsWith(upper + " ") || label.startsWith(upper + "—") || label.startsWith(upper + " —");
+
+      return (
+        label.startsWith(upper + " ") ||
+        label.startsWith(upper + "—") ||
+        label.startsWith(upper + " —")
+      );
     }) || null
   );
 }
@@ -153,13 +198,16 @@ function getAutoDetectedYear(user) {
 }
 
 function getAutoDetectedYariyil(user) {
-  const year = getAutoDetectedYear(user);
   const semesterCode = String(user?.semester || "");
   const academicTerm = Number(semesterCode.slice(-1));
 
-  if (!year || !academicTerm) return null;
+  if (!academicTerm) return null;
 
-  return (year - 1) * 2 + academicTerm;
+  if (academicTerm === 1 || academicTerm === 2) {
+    return academicTerm;
+  }
+
+  return null;
 }
 
 const CATEGORY_TABS = [
@@ -178,6 +226,7 @@ function catalogUrl(ders) {
   if (ders.catalog_kodu) {
     return `https://catalog.metu.edu.tr/course.php?course_code=${ders.catalog_kodu}`;
   }
+
   return null;
 }
 
@@ -189,7 +238,11 @@ function findInCatalog(ders, courses) {
   const kod = normCode(ders.kod);
   const cat = ders.catalog_kodu ? String(ders.catalog_kodu) : null;
 
-  return courses.find((mc) => normCode(mc.code) === kod || (cat && normCode(mc.code) === normCode(cat)));
+  return courses.find(
+    (mc) =>
+      normCode(mc.code) === kod ||
+      (cat && normCode(mc.code) === normCode(cat))
+  );
 }
 
 function storageKey(id) {
@@ -213,6 +266,7 @@ function saveDone(id, set) {
 
 function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter }) {
   const [open, setOpen] = useState(false);
+
   const sections = catalogEntry?.sections || [];
   const hasSections = sections.length > 0;
   const url = catalogUrl(ders) || catalogEntry?.catalogUrl || null;
@@ -227,15 +281,25 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
         onClick={(e) => {
           if (e.target.dataset.toggle) return;
           if (!catalogEntry) return;
-          if (hasSections) setOpen((v) => !v);
-          else if (url) window.open(url, "_blank");
+
+          if (hasSections) {
+            setOpen((v) => !v);
+          } else if (url) {
+            window.open(url, "_blank");
+          }
         }}
         style={{
           padding: "7px 12px",
           display: "flex",
           alignItems: "center",
           gap: 9,
-          background: isDone ? "#f0fdf4" : open ? "#fdf8f5" : catalogEntry ? "#fff" : "#fafafa",
+          background: isDone
+            ? "#f0fdf4"
+            : open
+            ? "#fdf8f5"
+            : catalogEntry
+            ? "#fff"
+            : "#fafafa",
           opacity: catalogEntry ? 1 : 0.55,
           cursor: catalogEntry ? "pointer" : "default",
           transition: "background .12s",
@@ -247,7 +311,15 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
             e.stopPropagation();
             onToggle(normCode(ders.kod));
           }}
-          title={isDone ? (tr ? "Alındı — kaldır" : "Marked done — undo") : tr ? "Alındı işaretle" : "Mark as done"}
+          title={
+            isDone
+              ? tr
+                ? "Alındı — kaldır"
+                : "Marked done — undo"
+              : tr
+              ? "Alındı işaretle"
+              : "Mark as done"
+          }
           style={{
             width: 18,
             height: 18,
@@ -332,15 +404,30 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
       </div>
 
       {open && hasSections && (
-        <div style={{ background: "#fdf8f5", borderTop: "1px solid #f0ece8", padding: "8px 12px 10px 40px" }}>
-          <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "#7a5c1f", marginBottom: 6 }}>
+        <div
+          style={{
+            background: "#fdf8f5",
+            borderTop: "1px solid #f0ece8",
+            padding: "8px 12px 10px 40px",
+          }}
+        >
+          <div
+            style={{
+              fontSize: "0.72rem",
+              fontWeight: 600,
+              color: "#7a5c1f",
+              marginBottom: 6,
+            }}
+          >
             {tr ? `${sections.length} şube:` : `${sections.length} section(s):`}
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
             {sections.map((sec, i) => {
               const dayNames = ["Pzt", "Sal", "Çar", "Per", "Cum"];
-              const schedule = (sec.meetings || []).map((m) => `${dayNames[m.d] ?? m.d} ${m.s}–${m.e}`).join(", ");
+              const schedule = (sec.meetings || [])
+                .map((m) => `${dayNames[m.d] ?? m.d} ${m.s}–${m.e}`)
+                .join(", ");
 
               return (
                 <div
@@ -359,8 +446,14 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
                 >
                   <span style={{ fontWeight: 700, color: "#7a1f2b" }}>§{sec.id}</span>
                   <span style={{ color: "#555" }}>{sec.instructor || "—"}</span>
-                  <span style={{ color: "#374151", flex: 1 }}>{schedule || (tr ? "Zaman yok" : "No schedule")}</span>
-                  {sec.crn && <span style={{ fontSize: "0.69rem", color: "#888" }}>CRN: {sec.crn}</span>}
+                  <span style={{ color: "#374151", flex: 1 }}>
+                    {schedule || (tr ? "Zaman yok" : "No schedule")}
+                  </span>
+                  {sec.crn && (
+                    <span style={{ fontSize: "0.69rem", color: "#888" }}>
+                      CRN: {sec.crn}
+                    </span>
+                  )}
                 </div>
               );
             })}
@@ -371,7 +464,12 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
               href={url}
               target="_blank"
               rel="noreferrer"
-              style={{ fontSize: "0.71rem", color: "#7a1f2b", marginTop: 6, display: "inline-block" }}
+              style={{
+                fontSize: "0.71rem",
+                color: "#7a1f2b",
+                marginTop: 6,
+                display: "inline-block",
+              }}
             >
               ↗ {tr ? "Katalog sayfasını aç" : "Open catalog page"}
             </a>
@@ -387,8 +485,10 @@ function SecmeliGrupRow({ grup, courses, isLast, tr, done, onToggle, viewFilter 
 
   const visibleCount = (grup.secenekler || []).filter((s) => {
     const d = done.has(normCode(s.kod));
+
     if (viewFilter === "done") return d;
     if (viewFilter === "todo") return !d;
+
     return true;
   }).length;
 
@@ -408,8 +508,25 @@ function SecmeliGrupRow({ grup, courses, isLast, tr, done, onToggle, viewFilter 
         }}
       >
         <div style={{ width: 18, height: 18, flexShrink: 0 }} />
-        <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#f59e0b", flexShrink: 0 }} />
-        <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#92400e", flex: 1 }}>{grup.secmeli_grup}</span>
+        <div
+          style={{
+            width: 7,
+            height: 7,
+            borderRadius: "50%",
+            background: "#f59e0b",
+            flexShrink: 0,
+          }}
+        />
+        <span
+          style={{
+            fontSize: "0.75rem",
+            fontWeight: 600,
+            color: "#92400e",
+            flex: 1,
+          }}
+        >
+          {grup.secmeli_grup}
+        </span>
         <span
           style={{
             fontSize: "0.68rem",
@@ -459,13 +576,29 @@ function SlotRow({ slot, isLast, viewFilter }) {
       }}
     >
       <div style={{ width: 18, height: 18, flexShrink: 0 }} />
-      <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#d1d5db", flexShrink: 0 }} />
-      <span style={{ fontSize: "0.75rem", color: "#666", fontStyle: "italic" }}>{slot.tur || slot.aciklama}</span>
+      <div
+        style={{
+          width: 7,
+          height: 7,
+          borderRadius: "50%",
+          background: "#d1d5db",
+          flexShrink: 0,
+        }}
+      />
+      <span style={{ fontSize: "0.75rem", color: "#666", fontStyle: "italic" }}>
+        {slot.tur || slot.aciklama}
+      </span>
     </div>
   );
 }
 
-export default function CurriculumModal({ lang, courses, user, onApplyToScheduler, onClose }) {
+export default function CurriculumModal({
+  lang,
+  courses,
+  user,
+  onApplyToScheduler,
+  onClose,
+}) {
   const tr = lang === "tr";
 
   const autoDetectedYear = getAutoDetectedYear(user);
@@ -516,10 +649,15 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
         setAllCurricula(curricula);
 
         if (!curricula.length) {
-          setError(tr ? "Müfredat dosyasında program bulunamadı." : "No programs found in curriculum file.");
+          setError(
+            tr
+              ? "Müfredat dosyasında program bulunamadı."
+              : "No programs found in curriculum file."
+          );
         }
       } catch (err) {
         if (!alive) return;
+
         setError(tr ? "Müfredat yüklenemedi." : "Failed to load curriculum.");
       } finally {
         if (alive) setLoading(false);
@@ -535,8 +673,12 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     if (!allCurricula.length) return;
 
     const detected = findDeptByCode(user?.programCode || user?.dept, allCurricula);
+
     setSelectedDept((prev) => {
-      if (prev && allCurricula.some((d) => d.prog_id === prev.prog_id)) return prev;
+      if (prev && allCurricula.some((d) => d.prog_id === prev.prog_id)) {
+        return prev;
+      }
+
       return detected || allCurricula[0];
     });
   }, [allCurricula, user?.programCode, user?.dept]);
@@ -565,7 +707,10 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     if (!autoDetectedYear || !curriculum?.mufredat?.length) return;
 
     const exists = curriculum.mufredat.find((y) => y.yil === autoDetectedYear);
-    if (exists) setSelectedYil(autoDetectedYear);
+
+    if (exists) {
+      setSelectedYil(autoDetectedYear);
+    }
   }, [curriculum, autoDetectedYear]);
 
   useEffect(() => {
@@ -583,8 +728,15 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     (kod) => {
       setDone((prev) => {
         const next = new Set(prev);
-        next.has(kod) ? next.delete(kod) : next.add(kod);
+
+        if (next.has(kod)) {
+          next.delete(kod);
+        } else {
+          next.add(kod);
+        }
+
         saveDone(doneKey, next);
+
         return next;
       });
     },
@@ -599,8 +751,11 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     mufredat.forEach((yil) =>
       yil.yariyillar?.forEach((y) =>
         y.dersler?.forEach((d) => {
-          if (d.kod) codes.push(normCode(d.kod));
-          else if (d.secenekler) d.secenekler.forEach((s) => codes.push(normCode(s.kod)));
+          if (d.kod) {
+            codes.push(normCode(d.kod));
+          } else if (d.secenekler) {
+            d.secenekler.forEach((s) => codes.push(normCode(s.kod)));
+          }
         })
       )
     );
@@ -615,8 +770,11 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
 
         yil.yariyillar?.forEach((y) =>
           y.dersler?.forEach((d) => {
-            if (d.kod) codes.push(normCode(d.kod));
-            else if (d.secenekler) d.secenekler.forEach((s) => codes.push(normCode(s.kod)));
+            if (d.kod) {
+              codes.push(normCode(d.kod));
+            } else if (d.secenekler) {
+              d.secenekler.forEach((s) => codes.push(normCode(s.kod)));
+            }
           })
         );
 
@@ -638,14 +796,18 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     if (!yilData) return [];
 
     const list = [];
+
     const yariyillar = selectedYariyil
       ? yilData.yariyillar.filter((y) => y.yariyil === selectedYariyil)
       : yilData.yariyillar;
 
     yariyillar.forEach((y) =>
       y.dersler.forEach((d) => {
-        if (d.kod) list.push(d);
-        else if (d.secenekler) d.secenekler.forEach((s) => list.push(s));
+        if (d.kod) {
+          list.push(d);
+        } else if (d.secenekler) {
+          d.secenekler.forEach((s) => list.push(s));
+        }
       })
     );
 
@@ -655,8 +817,13 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
   const matchedYilDersleri = useMemo(() => {
     let list = yilDersleri.filter((d) => findInCatalog(d, courses));
 
-    if (viewFilter === "todo") list = list.filter((d) => !done.has(normCode(d.kod)));
-    if (viewFilter === "done") list = list.filter((d) => done.has(normCode(d.kod)));
+    if (viewFilter === "todo") {
+      list = list.filter((d) => !done.has(normCode(d.kod)));
+    }
+
+    if (viewFilter === "done") {
+      list = list.filter((d) => done.has(normCode(d.kod)));
+    }
 
     return list;
   }, [yilDersleri, courses, viewFilter, done]);
@@ -671,12 +838,14 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
 
     if (activeTab === "secmeli") {
       const result = [];
+
       Object.values(secmeliCats).forEach((cat) => {
         if (cat.dersler?.length) {
           result.push({ _isHeader: true, label: cat.aciklama });
           result.push(...cat.dersler);
         }
       });
+
       return result;
     }
 
@@ -687,7 +856,11 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
     if (!matchedYilDersleri.length) return;
 
     onApplyToScheduler(
-      new Set(matchedYilDersleri.map((d) => (d.catalog_kodu ? String(d.catalog_kodu) : normCode(d.kod))))
+      new Set(
+        matchedYilDersleri.map((d) =>
+          d.catalog_kodu ? String(d.catalog_kodu) : normCode(d.kod)
+        )
+      )
     );
 
     onClose();
@@ -695,6 +868,7 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
 
   const clearDone = () => {
     const empty = new Set();
+
     setDone(empty);
     saveDone(doneKey, empty);
     setConfirmClear(null);
@@ -812,7 +986,8 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                 fontWeight: 600,
                 outline: "none",
                 appearance: "none",
-                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
+                backgroundImage:
+                  `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "right 12px center",
                 paddingRight: 32,
@@ -828,7 +1003,11 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
             </div>
           )}
 
-          {error && <div style={{ color: "#c0392b", fontSize: "0.85rem" }}>{error}</div>}
+          {error && (
+            <div style={{ color: "#c0392b", fontSize: "0.85rem" }}>
+              {error}
+            </div>
+          )}
 
           {mufredat.length > 0 && (
             <>
@@ -841,7 +1020,14 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                   color: "#fff",
                 }}
               >
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: 6,
+                  }}
+                >
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span
                       style={{
@@ -876,14 +1062,31 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
 
                   <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
                     <span style={{ fontSize: "1.1rem", fontWeight: 800 }}>{totalDone}</span>
-                    <span style={{ fontSize: "0.8rem", fontWeight: 400, opacity: 0.7 }}>/{totalCodes}</span>
-                    <span style={{ fontSize: "0.95rem", fontWeight: 900, opacity: 0.3, marginLeft: 6 }}>
+                    <span style={{ fontSize: "0.8rem", fontWeight: 400, opacity: 0.7 }}>
+                      /{totalCodes}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: "0.95rem",
+                        fontWeight: 900,
+                        opacity: 0.3,
+                        marginLeft: 6,
+                      }}
+                    >
                       {totalCodes ? Math.round((totalDone / totalCodes) * 100) : 0}%
                     </span>
                   </div>
                 </div>
 
-                <div style={{ height: 5, borderRadius: 99, background: "rgba(255,255,255,0.2)", overflow: "hidden", marginBottom: 8 }}>
+                <div
+                  style={{
+                    height: 5,
+                    borderRadius: 99,
+                    background: "rgba(255,255,255,0.2)",
+                    overflow: "hidden",
+                    marginBottom: 8,
+                  }}
+                >
                   <div
                     style={{
                       height: "100%",
@@ -898,19 +1101,41 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                 <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                   {yilStats.map((ys) => (
                     <div key={ys.yil} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{ fontSize: "0.65rem", opacity: 0.8, minWidth: 72 }}>{ys.yil_adi || `${ys.yil}. Yıl`}</span>
-                      <div style={{ flex: 1, height: 3, borderRadius: 99, background: "rgba(255,255,255,0.2)", overflow: "hidden" }}>
+                      <span style={{ fontSize: "0.65rem", opacity: 0.8, minWidth: 72 }}>
+                        {ys.yil_adi || `${ys.yil}. Yıl`}
+                      </span>
+
+                      <div
+                        style={{
+                          flex: 1,
+                          height: 3,
+                          borderRadius: 99,
+                          background: "rgba(255,255,255,0.2)",
+                          overflow: "hidden",
+                        }}
+                      >
                         <div
                           style={{
                             height: "100%",
                             borderRadius: 99,
-                            background: ys.done === ys.total && ys.total > 0 ? "#86efac" : "rgba(255,255,255,0.7)",
+                            background:
+                              ys.done === ys.total && ys.total > 0
+                                ? "#86efac"
+                                : "rgba(255,255,255,0.7)",
                             width: ys.total ? `${(ys.done / ys.total) * 100}%` : "0%",
                             transition: "width .5s",
                           }}
                         />
                       </div>
-                      <span style={{ fontSize: "0.63rem", opacity: 0.75, minWidth: 30, textAlign: "right" }}>
+
+                      <span
+                        style={{
+                          fontSize: "0.63rem",
+                          opacity: 0.75,
+                          minWidth: 30,
+                          textAlign: "right",
+                        }}
+                      >
                         {ys.done}/{ys.total}
                       </span>
                     </div>
@@ -952,13 +1177,17 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                           cursor: "pointer",
                           fontWeight: 600,
                           transition: "all .15s",
-                          border: selectedYil === y.yil ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+                          border:
+                            selectedYil === y.yil
+                              ? "2px solid #7a1f2b"
+                              : "2px solid #e5e0da",
                           background: selectedYil === y.yil ? "#7a1f2b" : "#fff",
                           color: selectedYil === y.yil ? "#fff" : "#333",
                           position: "relative",
                         }}
                       >
                         {yilLabel(y)}
+
                         {isAuto && (
                           <span
                             style={{
@@ -976,6 +1205,7 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                             ●
                           </span>
                         )}
+
                         {isComplete && !isAuto && (
                           <span
                             style={{
@@ -1024,7 +1254,10 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                         cursor: "pointer",
                         fontWeight: 600,
                         transition: "all .12s",
-                        border: selectedYariyil === null ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+                        border:
+                          selectedYariyil === null
+                            ? "2px solid #7a1f2b"
+                            : "2px solid #e5e0da",
                         background: selectedYariyil === null ? "#7a1f2b" : "#fff",
                         color: selectedYariyil === null ? "#fff" : "#333",
                       }}
@@ -1033,12 +1266,23 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                     </button>
 
                     {yilData.yariyillar.map((yy) => {
-                      const isAuto = autoDetectedYariyil === yy.yariyil && selectedYariyil === yy.yariyil;
+                      const isAuto =
+                        autoDetectedYariyil === yy.yariyil &&
+                        selectedYariyil === yy.yariyil;
 
                       return (
                         <button
                           key={yy.yariyil}
-                          onClick={() => setSelectedYariyil(selectedYariyil === yy.yariyil ? null : yy.yariyil)}
+                          onClick={() =>
+                            setSelectedYariyil(
+                              selectedYariyil === yy.yariyil ? null : yy.yariyil
+                            )
+                          }
+                          title={
+                            yy.global_yariyil_adi
+                              ? `Genel dönem: ${yy.global_yariyil_adi}`
+                              : ""
+                          }
                           style={{
                             padding: "5px 12px",
                             borderRadius: 8,
@@ -1046,13 +1290,18 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                             cursor: "pointer",
                             fontWeight: 600,
                             transition: "all .12s",
-                            border: selectedYariyil === yy.yariyil ? "2px solid #7a1f2b" : "2px solid #e5e0da",
-                            background: selectedYariyil === yy.yariyil ? "#7a1f2b" : "#fff",
+                            border:
+                              selectedYariyil === yy.yariyil
+                                ? "2px solid #7a1f2b"
+                                : "2px solid #e5e0da",
+                            background:
+                              selectedYariyil === yy.yariyil ? "#7a1f2b" : "#fff",
                             color: selectedYariyil === yy.yariyil ? "#fff" : "#333",
                             position: "relative",
                           }}
                         >
                           {yy.yariyil_adi || `${yy.yariyil}. Dönem`}
+
                           {isAuto && (
                             <span
                               style={{
@@ -1078,8 +1327,22 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
               )}
 
               {selectedYil && yilData && (
-                <div style={{ marginBottom: 10, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                  <div style={{ display: "inline-flex", borderRadius: 8, overflow: "hidden", border: "1px solid #e5e0da" }}>
+                <div
+                  style={{
+                    marginBottom: 10,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "inline-flex",
+                      borderRadius: 8,
+                      overflow: "hidden",
+                      border: "1px solid #e5e0da",
+                    }}
+                  >
                     {VIEW_FILTERS.map((f) => (
                       <button
                         key={f.key}
@@ -1097,12 +1360,16 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                         }}
                       >
                         {tr ? f.tr : f.en}
+
                         {f.key === "done" && done.size > 0 && (
                           <span
                             style={{
                               marginLeft: 5,
                               fontSize: "0.68rem",
-                              background: viewFilter === f.key ? "rgba(255,255,255,0.25)" : "#f0fdf4",
+                              background:
+                                viewFilter === f.key
+                                  ? "rgba(255,255,255,0.25)"
+                                  : "#f0fdf4",
                               color: viewFilter === f.key ? "#fff" : "#15803d",
                               borderRadius: 99,
                               padding: "1px 5px",
@@ -1152,13 +1419,25 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                   >
                     <span>{tr ? "Dersler" : "Courses"}</span>
                     <span style={{ fontWeight: 400, fontSize: "0.73rem" }}>
-                      {matchedYilDersleri.length}/{yilDersleri.length} {tr ? "katalogda" : "in catalog"}
+                      {matchedYilDersleri.length}/{yilDersleri.length}{" "}
+                      {tr ? "katalogda" : "in catalog"}
                     </span>
                   </div>
 
-                  <div style={{ border: "1px solid #f0ece8", borderRadius: 10, overflow: "hidden", maxHeight: 340, overflowY: "auto" }}>
+                  <div
+                    style={{
+                      border: "1px solid #f0ece8",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      maxHeight: 340,
+                      overflowY: "auto",
+                    }}
+                  >
                     {yilData.yariyillar
-                      .filter((yariyil) => selectedYariyil == null || yariyil.yariyil === selectedYariyil)
+                      .filter(
+                        (yariyil) =>
+                          selectedYariyil == null || yariyil.yariyil === selectedYariyil
+                      )
                       .map((yariyil) => (
                         <div key={yariyil.yariyil}>
                           <div
@@ -1194,7 +1473,14 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                             }
 
                             if (d.tur || d.aciklama) {
-                              return <SlotRow key={di} slot={d} isLast={isLast} viewFilter={viewFilter} />;
+                              return (
+                                <SlotRow
+                                  key={di}
+                                  slot={d}
+                                  isLast={isLast}
+                                  viewFilter={viewFilter}
+                                />
+                              );
                             }
 
                             return (
@@ -1215,16 +1501,32 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                   </div>
 
                   <div style={{ fontSize: "0.71rem", color: "#aaa", marginTop: 6 }}>
-                    {tr ? "☑ tıkla → alındı işaretle · ● yeşil = katalogda var" : "☑ click → mark done · ● green = in catalog"}
+                    {tr
+                      ? "☑ tıkla → alındı işaretle · ● yeşil = katalogda var"
+                      : "☑ click → mark done · ● green = in catalog"}
                   </div>
                 </div>
               )}
 
               {cengCourses && (
                 <div>
-                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 14 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      marginBottom: 14,
+                    }}
+                  >
                     <div style={{ flex: 1, height: 1, background: "#f0ece8" }} />
-                    <span style={{ fontSize: "0.73rem", color: "#bbb", fontWeight: 600, whiteSpace: "nowrap" }}>
+                    <span
+                      style={{
+                        fontSize: "0.73rem",
+                        color: "#bbb",
+                        fontWeight: 600,
+                        whiteSpace: "nowrap",
+                      }}
+                    >
                       {tr ? "BÖLÜM DERS HAVUZU" : "DEPARTMENT COURSE POOL"}
                     </span>
                     <div style={{ flex: 1, height: 1, background: "#f0ece8" }} />
@@ -1233,20 +1535,45 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                   <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
                     {CATEGORY_TABS.map((tab) => {
                       const isActive = activeTab === tab.key;
+
                       let count = 0;
 
                       if (tab.key === "zorunlu") {
-                        count = zorunluList.filter((c) => findInCatalog({ kod: c.courseCode, catalog_kodu: c.metuCourseCode }, courses)).length;
+                        count = zorunluList.filter((c) =>
+                          findInCatalog(
+                            {
+                              kod: c.courseCode,
+                              catalog_kodu: c.metuCourseCode,
+                            },
+                            courses
+                          )
+                        ).length;
                       }
 
                       if (tab.key === "servis") {
-                        count = servisList.filter((c) => findInCatalog({ kod: c.courseCode, catalog_kodu: c.metuCourseCode }, courses)).length;
+                        count = servisList.filter((c) =>
+                          findInCatalog(
+                            {
+                              kod: c.courseCode,
+                              catalog_kodu: c.metuCourseCode,
+                            },
+                            courses
+                          )
+                        ).length;
                       }
 
                       if (tab.key === "secmeli") {
                         count = Object.values(secmeliCats)
                           .flatMap((c) => c.dersler || [])
-                          .filter((c) => findInCatalog({ kod: c.courseCode, catalog_kodu: c.metuCourseCode }, courses)).length;
+                          .filter((c) =>
+                            findInCatalog(
+                              {
+                                kod: c.courseCode,
+                                catalog_kodu: c.metuCourseCode,
+                              },
+                              courses
+                            )
+                          ).length;
                       }
 
                       return (
@@ -1279,9 +1606,24 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                     })}
                   </div>
 
-                  <div style={{ border: "1px solid #f0ece8", borderRadius: 10, overflow: "hidden", maxHeight: 280, overflowY: "auto" }}>
+                  <div
+                    style={{
+                      border: "1px solid #f0ece8",
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      maxHeight: 280,
+                      overflowY: "auto",
+                    }}
+                  >
                     {tabCourseList.length === 0 && (
-                      <div style={{ padding: 16, fontSize: "0.82rem", color: "#888", textAlign: "center" }}>
+                      <div
+                        style={{
+                          padding: 16,
+                          fontSize: "0.82rem",
+                          color: "#888",
+                          textAlign: "center",
+                        }}
+                      >
                         {tr ? "Bu kategoride ders bulunamadı." : "No courses in this category."}
                       </div>
                     )}
@@ -1315,7 +1657,8 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                       };
 
                       const cat = findInCatalog(ders, courses);
-                      const isLast = i === tabCourseList.length - 1 || tabCourseList[i + 1]?._isHeader;
+                      const isLast =
+                        i === tabCourseList.length - 1 || tabCourseList[i + 1]?._isHeader;
 
                       return (
                         <CourseRow
@@ -1333,7 +1676,9 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
                   </div>
 
                   <div style={{ fontSize: "0.72rem", color: "#aaa", marginTop: 6 }}>
-                    {tr ? "● yeşil = katalogda var · tıkla → şubeler veya katalog sayfası" : "● green = in catalog · click → sections or catalog page"}
+                    {tr
+                      ? "● yeşil = katalogda var · tıkla → şubeler veya katalog sayfası"
+                      : "● green = in catalog · click → sections or catalog page"}
                   </div>
                 </div>
               )}
@@ -1416,8 +1761,17 @@ export default function CurriculumModal({ lang, courses, user, onApplyToSchedule
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div style={{ fontSize: "0.95rem", color: "#222", lineHeight: 1.6, marginBottom: 20 }}>
-              {tr ? "Tamamlanan ders işaretlemeleri sıfırlanacak. Emin misin?" : "All progress marks will be cleared. Are you sure?"}
+            <div
+              style={{
+                fontSize: "0.95rem",
+                color: "#222",
+                lineHeight: 1.6,
+                marginBottom: 20,
+              }}
+            >
+              {tr
+                ? "Tamamlanan ders işaretlemeleri sıfırlanacak. Emin misin?"
+                : "All progress marks will be cleared. Are you sure?"}
             </div>
 
             <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>

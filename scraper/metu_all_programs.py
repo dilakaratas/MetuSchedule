@@ -35,6 +35,7 @@ def discover_faculties():
     Döndürür: [(fac_id, fac_name), ...]
     """
     content = get_page(f"{BASE_URL}/index.php")
+
     if not content:
         return []
 
@@ -147,7 +148,13 @@ def _is_year_text(text):
 
 
 def _normalize_year_text(text):
+    """
+    HTML içindeki yıl yazısını normalize eder.
+    Örn:
+    'FIRST YEAR' -> 'FIRST YEAR'
+    """
     text = _clean_text(text)
+    upper_text = text.upper()
 
     year_keywords = [
         "FIRST YEAR",
@@ -158,13 +165,38 @@ def _normalize_year_text(text):
         "SIXTH YEAR"
     ]
 
-    upper_text = text.upper()
-
     for keyword in year_keywords:
         if keyword in upper_text:
             return keyword
 
     return text
+
+
+def _year_to_number(year_text):
+    """
+    FIRST YEAR -> 1
+    SECOND YEAR -> 2
+    THIRD YEAR -> 3
+    FOURTH YEAR -> 4
+    FIFTH YEAR -> 5
+    SIXTH YEAR -> 6
+    """
+    text = _clean_text(year_text).upper()
+
+    year_map = {
+        "FIRST YEAR": 1,
+        "SECOND YEAR": 2,
+        "THIRD YEAR": 3,
+        "FOURTH YEAR": 4,
+        "FIFTH YEAR": 5,
+        "SIXTH YEAR": 6
+    }
+
+    for key, value in year_map.items():
+        if key in text:
+            return value
+
+    return None
 
 
 def _is_semester_text(text):
@@ -189,27 +221,32 @@ def _is_semester_text(text):
     return any(pattern in text for pattern in semester_patterns)
 
 
-def _extract_semester_text(text):
-    text = _clean_text(text)
+def _semester_to_number(semester_text):
+    """
+    First Semester -> 1
+    Second Semester -> 2
+    Third Semester -> 3
+    Fourth Semester -> 4
+    ...
+    """
+    text = _clean_text(semester_text).lower()
 
-    semester_patterns = [
-        "First Semester",
-        "Second Semester",
-        "Third Semester",
-        "Fourth Semester",
-        "Fifth Semester",
-        "Sixth Semester",
-        "Seventh Semester",
-        "Eighth Semester",
-        "Ninth Semester",
-        "Tenth Semester"
-    ]
+    semester_map = {
+        "first semester": 1,
+        "second semester": 2,
+        "third semester": 3,
+        "fourth semester": 4,
+        "fifth semester": 5,
+        "sixth semester": 6,
+        "seventh semester": 7,
+        "eighth semester": 8,
+        "ninth semester": 9,
+        "tenth semester": 10
+    }
 
-    lower_text = text.lower()
-
-    for pattern in semester_patterns:
-        if pattern.lower() in lower_text:
-            return pattern
+    for key, value in semester_map.items():
+        if key in text:
+            return value
 
     return None
 
@@ -230,6 +267,7 @@ def parse_courses(table):
         name = _clean_text(name_td.get_text(" ", strip=True))
         cells = row.find_all("td")
 
+        # Ders kodu boşsa elective slot kabul ediyoruz.
         is_elective = not code_raw.replace("\xa0", "").strip()
 
         if is_elective:
@@ -262,14 +300,23 @@ def parse_curriculum(soup):
     """
     Program sayfasındaki müfredatı yıl + dönem + ders listesi şeklinde çeker.
 
-    Eski problem:
-    center.next_sibling ile gidildiği için her yılın sadece ilk dönemi yakalanıyordu.
+    Bu versiyonda Unknown Semester yoktur.
 
-    Yeni mantık:
-    Her h4 yıl başlığını bulur.
-    O yıl başlığından sonraki tüm elementleri, bir sonraki yıl başlığına kadar gezer.
-    Bu aralıkta gördüğü semester text'ini current_semester yapar.
-    Her table gördüğünde o anki semester ile dersleri eşleştirir.
+    Mantık:
+    - Önce yıl başlıklarını bulur: FIRST YEAR, SECOND YEAR...
+    - Her yılın içindeki tabloları sırayla gezer.
+    - Eğer HTML'den semester yakalanırsa onu kullanır.
+    - Eğer yakalanamazsa yıl + tablo sırasına göre dönem üretir.
+
+    Örnek:
+    FIRST YEAR içindeki 1. tablo  -> 1. Dönem
+    FIRST YEAR içindeki 2. tablo  -> 2. Dönem
+    SECOND YEAR içindeki 1. tablo -> 3. Dönem
+    SECOND YEAR içindeki 2. tablo -> 4. Dönem
+    THIRD YEAR içindeki 1. tablo  -> 5. Dönem
+    THIRD YEAR içindeki 2. tablo  -> 6. Dönem
+    FOURTH YEAR içindeki 1. tablo -> 7. Dönem
+    FOURTH YEAR içindeki 2. tablo -> 8. Dönem
     """
     content = soup.find("div", class_="field-body") or soup
 
@@ -286,9 +333,13 @@ def parse_curriculum(soup):
 
     for i, year_h4 in enumerate(year_headers):
         year_text = _normalize_year_text(year_h4.get_text(" ", strip=True))
+        year_number = _year_to_number(year_text)
+
         next_year_h4 = year_headers[i + 1] if i + 1 < len(year_headers) else None
 
-        current_semester = None
+        current_semester_number = None
+        table_index_in_year = 0
+
         node = year_h4
 
         while True:
@@ -301,7 +352,7 @@ def parse_curriculum(soup):
             if next_year_h4 is not None and node == next_year_h4:
                 break
 
-            # Başka bir yıl h4'üne geldiysek yine dur.
+            # Başka bir yıl h4'üne geldiysek dur.
             if node.name == "h4" and node != year_h4:
                 node_text = _clean_text(node.get_text(" ", strip=True))
 
@@ -310,12 +361,12 @@ def parse_curriculum(soup):
 
             node_text = _clean_text(node.get_text(" ", strip=True)) if hasattr(node, "get_text") else ""
 
-            # Semester bilgisini yakala
+            # HTML içinde semester yazısı varsa yakala
             if _is_semester_text(node_text):
-                semester = _extract_semester_text(node_text)
+                detected_semester_number = _semester_to_number(node_text)
 
-                if semester:
-                    current_semester = semester
+                if detected_semester_number:
+                    current_semester_number = detected_semester_number
 
                 continue
 
@@ -324,11 +375,37 @@ def parse_curriculum(soup):
                 courses = parse_courses(node)
 
                 if courses:
+                    table_index_in_year += 1
+
+                    # Eğer semester HTML'den yakalanmışsa onu kullan.
+                    # Yakalanmadıysa yıl + tablo sırasına göre otomatik üret.
+                    if current_semester_number is not None:
+                        semester_number = current_semester_number
+                    elif year_number is not None:
+                        semester_number = ((year_number - 1) * 2) + table_index_in_year
+                    else:
+                        semester_number = table_index_in_year
+
+                    # Yıl içi dönem: her yıl için 1. Dönem / 2. Dönem
+                    year_semester_number = table_index_in_year
+
                     curriculum.append({
                         "year": year_text,
-                        "semester": current_semester or "Unknown Semester",
+                        "year_number": year_number,
+
+                        # Global dönem: 1,2,3,4,5,6,7,8...
+                        "semester": f"{semester_number}. Dönem",
+                        "semester_number": semester_number,
+
+                        # Yıl içi dönem: her yıl içinde 1 veya 2
+                        "year_semester": f"{year_semester_number}. Dönem",
+                        "year_semester_number": year_semester_number,
+
                         "courses": courses
                     })
+
+                    # Aynı semester yanlışlıkla sonraki tabloya taşınmasın.
+                    current_semester_number = None
 
     return curriculum
 
@@ -486,7 +563,7 @@ def main():
 
         time.sleep(1.5)
 
-    output_file = "metu_all_programsv2.json"
+    output_file = "metu_all_programsv3.json"
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(all_data, f, ensure_ascii=False, indent=2)
