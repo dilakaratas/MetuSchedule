@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 
 const CURRICULUM_FILE = "/metu_all_programsv3.json";
 
@@ -224,22 +224,45 @@ function flattenProgramsFromAllProgramsJson(data) {
     .sort((a, b) => a.label.localeCompare(b.label, "tr"));
 }
 
+// program_id → bölüm prefix map (App.jsx ile aynı)
+const PROGRAM_ID_TO_PREFIXES_CM = {
+  "120":["ARCH"],"121":["CRP"],"125":["ID"],"219":["GENE"],"232":["SOC"],
+  "233":["PSY"],"234":["CHEM"],"238":["BIO"],"240":["HIST"],"241":["PHIL"],
+  "246":["STAT"],"310":["ADM"],"311":["ECON"],"312":["ADM","ECON"],
+  "314":["IR"],"315":["GIA"],"316":["BAS"],"411":["ECE"],"412":["MSE"],
+  "413":["MSE"],"421":["MSE"],"422":["MSE"],"423":["MSE"],"430":["CEIT"],
+  "450":["FLE"],"451":["TEFL"],"453":["PES"],"560":["ENVE"],"562":["CE"],
+  "563":["CHE"],"564":["GEOE"],"565":["MINE"],"566":["PETE"],
+  "567":["EE","EEE"],"568":["IE"],"569":["ME"],"570":["METE"],
+  "571":["CENG"],"572":["AEE"],"573":["FDE"],"575":["CNGB"],
+};
+
 function findDeptByCode(deptCode, allCurricula) {
   if (!deptCode || !allCurricula?.length) return null;
 
   const numericCode = Number(deptCode);
 
+  // 1. Doğrudan program_id eşleşmesi
   if (numericCode) {
     const byProgramId = allCurricula.find((d) => Number(d.prog_id) === numericCode);
     if (byProgramId) return byProgramId;
   }
 
+  // 2. prefix üzerinden: kullanıcı dept="CENG" gibi string verirse
+  //    o prefix'e sahip program_id'yi map'ten bul
   const upper = String(deptCode).toUpperCase();
+  const matchedPid = Object.entries(PROGRAM_ID_TO_PREFIXES_CM).find(
+    ([, prefixes]) => prefixes.includes(upper)
+  )?.[0];
+  if (matchedPid) {
+    const byPrefix = allCurricula.find((d) => String(d.prog_id) === matchedPid);
+    if (byPrefix) return byPrefix;
+  }
 
+  // 3. Label ile eşleşme
   return (
     allCurricula.find((d) => {
       const label = String(d.label || "").toUpperCase();
-
       return (
         label.startsWith(upper + " ") ||
         label.startsWith(upper + "—") ||
@@ -286,14 +309,17 @@ function normCode(code) {
 }
 
 function findInCatalog(ders, courses) {
-  const kod = normCode(ders.kod);
-  const cat = ders.catalog_kodu ? String(ders.catalog_kodu) : null;
-
-  return courses.find(
-    (mc) =>
-      normCode(mc.code) === kod ||
-      (cat && normCode(mc.code) === normCode(cat))
-  );
+  if (!ders?.kod || !courses?.length) return null;
+  const dersKod = normCode(ders.kod);
+  const dersCat = ders.catalog_kodu ? normCode(String(ders.catalog_kodu)) : null;
+  return courses.find((mc) => {
+    const mcCode = normCode(mc.code);
+    const mcOrig = mc.originalCode ? normCode(String(mc.originalCode)) : null;
+    if (mcCode === dersKod) return true;
+    if (dersCat && mcCode === dersCat) return true;
+    if (mcOrig && (mcOrig === dersKod || (dersCat && mcOrig === dersCat))) return true;
+    return false;
+  }) || null;
 }
 
 function storageKey(id) {
@@ -816,7 +842,179 @@ export default function CurriculumModal({
     setConfirmClear(null);
   };
 
-  const renderOptions = () => (
+  
+// ─────────────────────────────────────────────────────────
+// SearchableDeptSelect — arama yapılabilir bölüm seçici
+// ─────────────────────────────────────────────────────────
+function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const containerRef = useRef(null);
+  const inputRef = useRef(null);
+
+  // Dışarı tıklayınca kapat
+  useEffect(() => {
+    function handleClick(e) {
+      if (containerRef.current && !containerRef.current.contains(e.target)) {
+        setOpen(false);
+        setQuery("");
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, []);
+
+  // Açılınca input'a odaklan
+  useEffect(() => {
+    if (open && inputRef.current) inputRef.current.focus();
+  }, [open]);
+
+  const filtered = useMemo(() => {
+    if (!query.trim()) return allCurricula;
+    const q = query.toLowerCase();
+    return allCurricula.filter((d) =>
+      d.label.toLowerCase().includes(q)
+    );
+  }, [allCurricula, query]);
+
+  const displayLabel = selectedDept
+    ? selectedDept.label
+    : (tr ? "Bölüm seçin..." : "Select department...");
+
+  return (
+    <div ref={containerRef} style={{ position: "relative" }}>
+      {/* Trigger butonu */}
+      <button
+        onClick={() => { setOpen((v) => !v); setQuery(""); }}
+        disabled={!allCurricula.length}
+        style={{
+          width: "100%",
+          padding: "8px 36px 8px 12px",
+          borderRadius: 8,
+          fontSize: "0.85rem",
+          border: open ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+          background: "#fff",
+          color: selectedDept ? "#333" : "#aaa",
+          cursor: allCurricula.length ? "pointer" : "not-allowed",
+          fontWeight: selectedDept ? 600 : 400,
+          outline: "none",
+          textAlign: "left",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          transition: "border-color .15s",
+          position: "relative",
+        }}
+      >
+        {displayLabel}
+        {/* Ok ikonu */}
+        <span style={{
+          position: "absolute", right: 10, top: "50%",
+          transform: `translateY(-50%) rotate(${open ? 180 : 0}deg)`,
+          transition: "transform .15s",
+          fontSize: "0.7rem", color: "#999", pointerEvents: "none",
+        }}>▼</span>
+      </button>
+
+      {/* Dropdown panel */}
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "calc(100% + 4px)",
+          left: 0, right: 0,
+          background: "#fff",
+          border: "2px solid #7a1f2b",
+          borderRadius: 10,
+          boxShadow: "0 8px 32px rgba(0,0,0,0.13)",
+          zIndex: 2000,
+          display: "flex",
+          flexDirection: "column",
+          maxHeight: 320,
+          overflow: "hidden",
+        }}>
+          {/* Arama kutusu */}
+          <div style={{ padding: "8px 10px", borderBottom: "1px solid #f0ece8" }}>
+            <div style={{ position: "relative" }}>
+              <svg style={{ position:"absolute", left:8, top:"50%", transform:"translateY(-50%)", color:"#aaa" }}
+                width="13" height="13" viewBox="0 0 16 16" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.6"/>
+                <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder={tr ? "Bölüm ara..." : "Search department..."}
+                style={{
+                  width: "100%",
+                  padding: "6px 8px 6px 28px",
+                  border: "1.5px solid #e5e0da",
+                  borderRadius: 6,
+                  fontSize: "0.82rem",
+                  outline: "none",
+                  boxSizing: "border-box",
+                }}
+              />
+              {query && (
+                <button onClick={() => setQuery("")}
+                  style={{ position:"absolute", right:6, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", cursor:"pointer", color:"#aaa", fontSize:14, lineHeight:1, padding:"0 2px" }}>
+                  ×
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Liste */}
+          <div style={{ overflowY: "auto", flex: 1 }}>
+            {filtered.length === 0 ? (
+              <div style={{ padding: "12px 14px", fontSize: "0.82rem", color: "#aaa", textAlign: "center" }}>
+                {tr ? "Sonuç bulunamadı" : "No results"}
+              </div>
+            ) : filtered.map((d) => {
+              const isSelected = selectedDept?.prog_id === d.prog_id;
+              return (
+                <button
+                  key={d.prog_id}
+                  onClick={() => { onSelect(d); setOpen(false); setQuery(""); }}
+                  style={{
+                    width: "100%",
+                    padding: "8px 14px",
+                    textAlign: "left",
+                    border: "none",
+                    background: isSelected ? "#fdf0f2" : "transparent",
+                    color: isSelected ? "#7a1f2b" : "#333",
+                    fontSize: "0.82rem",
+                    fontWeight: isSelected ? 700 : 400,
+                    cursor: "pointer",
+                    borderBottom: "1px solid #f9f5f3",
+                    display: "block",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                  onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = "#fdf8f5"; }}
+                  onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = "transparent"; }}
+                >
+                  {d.label}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Kaç sonuç */}
+          {query && (
+            <div style={{ padding: "5px 12px", borderTop: "1px solid #f0ece8", fontSize: "0.7rem", color: "#bbb" }}>
+              {filtered.length} {tr ? "sonuç" : "results"}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+const renderOptions = () => (
     <>
       {allCurricula.map((d) => (
         <option key={`program_${d.prog_id}`} value={`program_${d.prog_id}`}>
@@ -910,25 +1108,17 @@ export default function CurriculumModal({
               {tr ? "Bölüm" : "Department"}
             </div>
 
-            <select
-              value={selectValue}
-              onChange={handleSelectChange}
-              disabled={!allCurricula.length}
-              style={{
-                width: "100%",
-                padding: "8px 12px",
-                borderRadius: 8,
-                fontSize: "0.85rem",
-                border: "2px solid #e5e0da",
-                background: "#fff",
-                color: "#333",
-                cursor: allCurricula.length ? "pointer" : "not-allowed",
-                fontWeight: 600,
-                outline: "none",
+            <SearchableDeptSelect
+              allCurricula={allCurricula}
+              selectedDept={selectedDept}
+              tr={tr}
+              onSelect={(nextDept) => {
+                setSelectedDept(nextDept);
+                setSelectedYil(null);
+                setSelectedYariyil(null);
+                setViewFilter("all");
               }}
-            >
-              {renderOptions()}
-            </select>
+            />
           </div>
 
           {loading && (
