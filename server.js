@@ -227,9 +227,7 @@ app.post("/api/auth/cas/validate", async (req, res) => {
   }
 });
 
-// ─── Admin: OIBS öğrenci sorgula ─────────────────────────────────────────────
-// Sadece admin token'ıyla erişilebilir.
-// Body: { idNumber, userCode } → OIBS'den gerçek zamanlı öğrenci bilgisi döner.
+
 app.post("/api/admin/student-lookup", async (req, res) => {
   const token = (req.headers.authorization || "").replace("Bearer ", "");
   if (!token) return res.status(401).json({ message: "Token gerekli." });

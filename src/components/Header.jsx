@@ -142,11 +142,9 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
                   <div className="user-dropdown-name">{user.name || user.username}</div>
                   <div className="user-dropdown-username">@{user.username}</div>
                   {(() => {
-                    const dept    = user.dept || user.programCode || "";
-                    const semNum  = parseInt(user.semester, 10);
-                    const yearNum = user.yearNum
-                      ? Number(user.yearNum)
-                      : (semNum > 0 ? Math.ceil(semNum / 2) : null);
+                    const dept    = user.programCode ;
+                    const semNum  = user.semester;
+                    const yearNum = user.year;
                     const cgpa    = user.cgpa || "";
                     const faculty = user.faculty || "";
                     const name    = user.programName || "";
