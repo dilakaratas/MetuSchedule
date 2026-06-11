@@ -1,16 +1,98 @@
 import React, { useState, useRef, useEffect } from "react";
 
-function safeText(value, fallback = "—") {
-  if (value === null || value === undefined || value === "") return fallback;
-  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return String(value);
-  if (Array.isArray(value)) return value.map((x) => safeText(x, "")).filter(Boolean).join(", ") || fallback;
+function isNilObject(value) {
+  return (
+    value &&
+    typeof value === "object" &&
+    !Array.isArray(value) &&
+    (
+      value?.$?.nil === "true" ||
+      value?.$?.nil === true ||
+      value?.nil === "true" ||
+      value?.nil === true
+    )
+  );
+}
+
+function isDisplayable(value) {
+  if (value === null || value === undefined || value === "") return false;
+  if (isNilObject(value)) return false;
+
+  if (Array.isArray(value)) {
+    return value.some((item) => isDisplayable(item));
+  }
+
   if (typeof value === "object") {
+    const possibleValue =
+      value.name ||
+      value.label ||
+      value.text ||
+      value.value ||
+      value.description ||
+      value.desc ||
+      value.tr ||
+      value.en ||
+      value.programName ||
+      value.programNameEng ||
+      value.programNameTr ||
+      value.faculty ||
+      value.facultyLongNameEng ||
+      value.facultyLongNameTr;
+
+    return isDisplayable(possibleValue);
+  }
+
+  const text = String(value).trim();
+
+  if (!text) return false;
+  if (text === "—") return false;
+  if (text.toLowerCase() === "null") return false;
+  if (text.toLowerCase() === "undefined") return false;
+  if (text.includes('"nil"')) return false;
+
+  return true;
+}
+
+function safeText(value, fallback = "—") {
+  if (!isDisplayable(value)) return fallback;
+
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean"
+  ) {
+    return String(value).trim();
+  }
+
+  if (Array.isArray(value)) {
     return (
-      value.name || value.label || value.text || value.value || value.description || value.desc ||
-      value.tr || value.en || value.programName || value.programNameEng || value.programNameTr ||
-      value.faculty || value.facultyLongNameEng || value.facultyLongNameTr || JSON.stringify(value)
+      value
+        .map((x) => safeText(x, ""))
+        .filter(Boolean)
+        .join(", ") || fallback
     );
   }
+
+  if (typeof value === "object") {
+    const possibleValue =
+      value.name ||
+      value.label ||
+      value.text ||
+      value.value ||
+      value.description ||
+      value.desc ||
+      value.tr ||
+      value.en ||
+      value.programName ||
+      value.programNameEng ||
+      value.programNameTr ||
+      value.faculty ||
+      value.facultyLongNameEng ||
+      value.facultyLongNameTr;
+
+    return safeText(possibleValue, fallback);
+  }
+
   return fallback;
 }
 
@@ -18,13 +100,16 @@ function getInitials(user) {
   const fullName = safeText(user?.name, "");
   const username = safeText(user?.username, "");
   const source = fullName || username || "?";
-  return source
-    .split(" ")
-    .filter(Boolean)
-    .map((w) => w[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase() || "?";
+
+  return (
+    source
+      .split(" ")
+      .filter(Boolean)
+      .map((w) => w[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase() || "?"
+  );
 }
 
 export default function Header({
@@ -97,11 +182,12 @@ export default function Header({
         <div className="logo">
           <img src="/metu-logo.svg" alt="ODTÜ" width="44" height="40" />
         </div>
+
         <div className="brand-text">
           <div className="brand-name">
             Metu<span>Schedule</span>
           </div>
-          <div className="brand-tag">{safeText(tr.tagline, "")}</div>
+          <div className="brand-tag">{safeText(tr?.tagline, "")}</div>
         </div>
       </div>
 
@@ -109,12 +195,14 @@ export default function Header({
       <div className="header-stats">
         <div className="stat">
           <div className="stat-num">{selected.length}</div>
-          <div className="stat-lbl">{safeText(tr.courses, "")}</div>
+          <div className="stat-lbl">{safeText(tr?.courses, "")}</div>
         </div>
+
         <div className="stat-divider" />
+
         <div className="stat">
           <div className="stat-num">{safeText(totalCredits, "0")}</div>
-          <div className="stat-lbl">{safeText(tr.totalCredits, "")}</div>
+          <div className="stat-lbl">{safeText(tr?.totalCredits, "")}</div>
         </div>
       </div>
 
@@ -143,6 +231,7 @@ export default function Header({
               strokeLinecap="round"
             />
           </svg>
+
           <span className="btn-label">
             {lang === "tr" ? "Müfredat" : "Curriculum"}
           </span>
@@ -153,6 +242,7 @@ export default function Header({
           <span className="btn-label ai-btn-label-full">
             {lang === "tr" ? "Akıllı Planlama" : "Smart Planner"}
           </span>
+
           <span className="btn-label ai-btn-label-short">
             {lang === "tr" ? "Planlama" : "Planner"}
           </span>
@@ -167,6 +257,7 @@ export default function Header({
           >
             TR
           </button>
+
           <button
             className={lang === "en" ? "active" : ""}
             onClick={() => setLang("en")}
@@ -199,7 +290,8 @@ export default function Header({
               fill="none"
             />
           </svg>
-          <span className="btn-label">{safeText(tr.copyCRN, "")}</span>
+
+          <span className="btn-label">{safeText(tr?.copyCRN, "")}</span>
         </button>
 
         {/* PNG İndir */}
@@ -217,7 +309,8 @@ export default function Header({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="btn-label">{safeText(tr.exportPNG, "")}</span>
+
+          <span className="btn-label">{safeText(tr?.exportPNG, "")}</span>
         </button>
 
         {/* Temizle */}
@@ -235,7 +328,10 @@ export default function Header({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="btn-label hide-mobile-inline">{safeText(tr.clearAll, "")}</span>
+
+          <span className="btn-label hide-mobile-inline">
+            {safeText(tr?.clearAll, "")}
+          </span>
         </button>
 
         {/* Kullanıcı menüsü */}
@@ -248,6 +344,7 @@ export default function Header({
               onClick={() => {
                 if (!menuOpen && avatarRef.current) {
                   const rect = avatarRef.current.getBoundingClientRect();
+
                   setDropdownPos({
                     top: rect.bottom + 8,
                     right: window.innerWidth - rect.right,
@@ -279,22 +376,55 @@ export default function Header({
               >
                 <div className="user-dropdown-info">
                   <div className="user-dropdown-name">
-                    {safeText(user.name || user.username)}
+                    {safeText(user?.name || user?.username, "")}
                   </div>
 
-                  <div className="user-dropdown-username">
-                    @{safeText(user.username, "")} 
-                  </div>
+                  {isDisplayable(user?.username) && (
+                    <div className="user-dropdown-username">
+                      @{safeText(user?.username, "")}
+                    </div>
+                  )}
 
                   {(() => {
-                    const dept = user.programCode || user.dept || "";
-                    const semNum = user.semester || "";
-                    const yearNum = user.year || user.yearNum || "";
-                    const cgpa = user.cgpa || "";
-                    const faculty = user.faculty || "";
-                    const name = user.programName || "";
+                    const dept = isDisplayable(user?.programCode)
+                      ? user.programCode
+                      : isDisplayable(user?.dept)
+                      ? user.dept
+                      : "";
 
-                    if (!dept && !yearNum && !semNum && !cgpa) return null;
+                    const semNum = isDisplayable(user?.semester)
+                      ? user.semester
+                      : "";
+
+                    const yearNum = isDisplayable(user?.year)
+                      ? user.year
+                      : isDisplayable(user?.yearNum)
+                      ? user.yearNum
+                      : "";
+
+                    const cgpa = isDisplayable(user?.cgpa)
+                      ? user.cgpa
+                      : isDisplayable(user?.gpa)
+                      ? user.gpa
+                      : "";
+
+                    const faculty = isDisplayable(user?.faculty)
+                      ? user.faculty
+                      : "";
+
+                    const name = isDisplayable(user?.programName)
+                      ? user.programName
+                      : "";
+
+                    const hasAcademicInfo =
+                      isDisplayable(dept) ||
+                      isDisplayable(yearNum) ||
+                      isDisplayable(semNum) ||
+                      isDisplayable(cgpa) ||
+                      isDisplayable(faculty) ||
+                      isDisplayable(name);
+
+                    if (!hasAcademicInfo) return null;
 
                     return (
                       <div
@@ -308,7 +438,7 @@ export default function Header({
                           gap: 5,
                         }}
                       >
-                        {dept && (
+                        {(isDisplayable(dept) || isDisplayable(name)) && (
                           <div
                             style={{
                               fontSize: 12,
@@ -316,18 +446,24 @@ export default function Header({
                               color: "#7a1e2e",
                             }}
                           >
-                            {safeText(dept, "")}
-                            {name ? ` — ${safeText(name, "")}` : ""}
+                            {isDisplayable(dept) && safeText(dept, "")}
+                            {isDisplayable(dept) && isDisplayable(name)
+                              ? ` — ${safeText(name, "")}`
+                              : isDisplayable(name)
+                              ? safeText(name, "")
+                              : ""}
                           </div>
                         )}
 
-                        {faculty && (
+                        {isDisplayable(faculty) && (
                           <div style={{ fontSize: 11, color: "#666" }}>
                             {safeText(faculty, "")}
                           </div>
                         )}
 
-                        {(yearNum || semNum || cgpa) && (
+                        {(isDisplayable(yearNum) ||
+                          isDisplayable(semNum) ||
+                          isDisplayable(cgpa)) && (
                           <div
                             style={{
                               display: "flex",
@@ -335,9 +471,10 @@ export default function Header({
                               marginTop: 2,
                               paddingTop: 6,
                               borderTop: "1px solid #f0dde0",
+                              flexWrap: "wrap",
                             }}
                           >
-                            {yearNum && (
+                            {isDisplayable(yearNum) && (
                               <div style={{ fontSize: 11, color: "#444" }}>
                                 <span
                                   style={{
@@ -347,6 +484,7 @@ export default function Header({
                                 >
                                   {lang === "tr" ? "Yıl" : "Year"}
                                 </span>
+
                                 <span
                                   style={{
                                     fontWeight: 700,
@@ -358,7 +496,7 @@ export default function Header({
                               </div>
                             )}
 
-                            {semNum && (
+                            {isDisplayable(semNum) && (
                               <div style={{ fontSize: 11, color: "#444" }}>
                                 <span
                                   style={{
@@ -368,6 +506,7 @@ export default function Header({
                                 >
                                   {lang === "tr" ? "Dönem" : "Semester"}
                                 </span>
+
                                 <span
                                   style={{
                                     fontWeight: 700,
@@ -379,7 +518,7 @@ export default function Header({
                               </div>
                             )}
 
-                            {cgpa && (
+                            {isDisplayable(cgpa) && (
                               <div style={{ fontSize: 11, color: "#444" }}>
                                 <span
                                   style={{
@@ -389,6 +528,7 @@ export default function Header({
                                 >
                                   GPA
                                 </span>
+
                                 <span
                                   style={{
                                     fontWeight: 700,
@@ -431,6 +571,7 @@ export default function Header({
                       strokeLinejoin="round"
                     />
                   </svg>
+
                   {lang === "tr" ? "Çıkış Yap" : "Log Out"}
                 </button>
               </div>

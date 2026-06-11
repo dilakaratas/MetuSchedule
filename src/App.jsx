@@ -27,7 +27,7 @@ function safeText(value, fallback = "") {
   return fallback;
 }
 
-// ── Auth yardımcıları ─────────────────────────────────────────────
+
 function clearAllAuth() {
   localStorage.removeItem("metu-user");
   localStorage.removeItem("metu-token");
@@ -52,7 +52,7 @@ function readStoredUser() {
 }
 
 
-// ─────────────────────────────────────────────────────────────────
+
 
 export default function App() {
   const [user, setUser]             = useState(() => readStoredUser());
@@ -87,15 +87,12 @@ export default function App() {
 
   const handleLogout = () => {
     clearAllAuth();
-    // setUser(null) YAPMA — direkt CAS logout'a yönlendir.
-    // Geri dönerken ?loggedout=1 ile readStoredUser null döndürür,
-    // sayfa yenilenince yeni Login.jsx render edilir.
+
     const base    = window.location.origin + window.location.pathname;
     const service = encodeURIComponent(`${base}?loggedout=1`);
     window.location.href = `https://login.metu.edu.tr/cas/logout?service=${service}`;
   };
 
-  // Yönetici çıkışı (CAS kullanmaz, direkt login'e döner)
   const handleAdminLogout = () => {
     clearAllAuth();
     setUser(null);
@@ -120,7 +117,7 @@ export default function App() {
   return <MainApp user={user} onLogout={logoutFn} />;
 }
 
-// ─────────────────────────────────────────────────────────────────
+
 
 function MainApp({ user, onLogout }) {
   const [lang, setLang] = useState("tr");
@@ -156,13 +153,13 @@ function MainApp({ user, onLogout }) {
   const [curriculumCodes, setCurriculumCodes] = useState(null);
   const [mobileTab, setMobileTab] = useState("courses");
 
-  // Kullanıcının yılına ait müfredat ders kodları (otomatik filtre)
-  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null); // null = filtre yok
+ 
+  const [curriculumYearCodes, setCurriculumYearCodes] = useState(null); 
   const [curriculumYearLabel, setCurriculumYearLabel] = useState("");
 
   const calendarRef = useRef(null);
 
-  // Öğrenci girişi yapınca bölüm+yılına ait müfredat derslerini otomatik yükle
+
   useEffect(() => {
     const dept = user?.dept?.toUpperCase();
     const year = Number(user?.yearNum);
@@ -184,7 +181,7 @@ function MainApp({ user, onLogout }) {
           else if (data?.bolumler?.length) { programs = data.bolumler; fmt = "old"; }
           if (!programs.length) continue;
 
-          // Bölümü bul
+          
           const prog = programs.find((p) => {
             const code = (p.program_code || p.bolum_kodu || p.department_code || "").toUpperCase();
             const name = (p.program_name || p.bolum_adi || p.name || "").toUpperCase();
@@ -192,7 +189,7 @@ function MainApp({ user, onLogout }) {
           });
           if (!prog) continue;
 
-          // O yılın ders kodlarını çek
+         
           const codes = new Set();
           if (fmt === "new") {
             for (const entry of prog.curriculum || []) {
@@ -232,15 +229,15 @@ function MainApp({ user, onLogout }) {
     localStorage.setItem("metu-schedule", JSON.stringify(selected));
   }, [selected]);
 
-  // Kullanıcının bölümüne göre dersleri filtrele
+  
   const userDept = (user?.dept || user?.programCode || "").toUpperCase() || null;
 
   const deptFilteredCourses = useMemo(() => {
-    if (!userDept) return courses; // admin veya dept'siz kullanıcı → tümü
+    if (!userDept) return courses; 
     const prefix = userDept.toUpperCase();
     return courses.filter((c) => {
       const code = normCode(c.code);
-      // Hem kendi bölüm dersleri hem de bölüme bağlı servis dersleri
+     
       return code.startsWith(prefix) || isServiceCourse(code);
     });
   }, [courses, userDept]);
@@ -248,7 +245,7 @@ function MainApp({ user, onLogout }) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return deptFilteredCourses.filter((c) => {
-      // Müfredat yılı filtresi aktifse sadece o yılın derslerini göster
+
       if (curriculumYearCodes) {
         const code = normCode(c.code);
         if (!curriculumYearCodes.has(code)) return false;
@@ -271,7 +268,6 @@ function MainApp({ user, onLogout }) {
     [selected, courses]
   );
 
-  // Her çakışan section için detay bilgisi: hangi dersle, hangi gün/saatte
   const conflictDetails = useMemo(() => {
     const details = {};
     const DAY_NAMES_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
@@ -355,7 +351,7 @@ function MainApp({ user, onLogout }) {
     setMobileTab("calendar");
   };
 
-  const [confirmDialog, setConfirmDialog] = useState(null); // { message, onConfirm }
+  const [confirmDialog, setConfirmDialog] = useState(null); 
 
   const removeSelected = (code) => {
     const course = courses.find((c) => c.code === code);
@@ -718,7 +714,7 @@ function MainApp({ user, onLogout }) {
   );
 }
 
-// Servis dersleri — bunlar her bölümde ortak
+
 const SERVICE_PREFIXES = [
   "PHYS", "MATH", "CHEM", "ENG", "TURK", "HIST", "PE", "ATA",
   "GE", "IS", "NE", "PHED",
