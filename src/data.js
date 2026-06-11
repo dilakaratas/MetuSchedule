@@ -1,323 +1,349 @@
 const DAY_MAP = {
-    Monday: 0,
-    Tuesday: 1,
-    Wednesday: 2,
-    Thursday: 3,
-    Friday: 4,
-    Saturday: 5,
-    Sunday: 6,
-  
-    MONDAY: 0,
-    TUESDAY: 1,
-    WEDNESDAY: 2,
-    THURSDAY: 3,
-    FRIDAY: 4,
-    SATURDAY: 5,
-    SUNDAY: 6,
-  
-    Pzt: 0,
-    Sal: 1,
-    Çar: 2,
-    Per: 3,
-    Cum: 4,
+  Monday: 0, Tuesday: 1, Wednesday: 2, Thursday: 3, Friday: 4,
+  Saturday: 5, Sunday: 6,
+  MONDAY: 0, TUESDAY: 1, WEDNESDAY: 2, THURSDAY: 3, FRIDAY: 4,
+  SATURDAY: 5, SUNDAY: 6,
+  Pzt: 0, Sal: 1, Çar: 2, Per: 3, Cum: 4,
+};
+
+/*
+  DEPT_CODE_TO_PREFIX
+  ─────────────────────────────────────────────────────────────────
+  metu_courses_clean.json'daki departmentCode → ders kodu prefix'i
+
+  Sayısal ham kod formatı: DDDXNNN (7 hane)
+    DDD = departmentCode (3 hane)
+    X   = herhangi bir rakam (0 olmak zorunda değil)
+    NNN = ders numarası (3 hane)
+  Dönüşüm: prefix + int(raw[3:])
+  Örnek: 2331010 → dept=233 → PSY → PSY + int("1010") = PSY1010
+  Örnek: 5710140 → dept=571 → CENG → CENG + int("0140") = CENG140
+*/
+const DEPT_CODE_TO_PREFIX = {
+  // Mühendislik Fakültesi
+  "571": "CENG",  // Computer Engineering
+  "567": "EE",    // Electrical and Electronics Engineering
+  "562": "CE",    // Civil Engineering
+  "563": "CHE",   // Chemical Engineering
+  "564": "GEOE",  // Geological Engineering
+  "565": "MINE",  // Mining Engineering
+  "566": "PETE",  // Petroleum and Natural Gas Engineering
+  "568": "IE",    // Industrial Engineering
+  "569": "ME",    // Mechanical Engineering
+  "570": "METE",  // Metallurgical and Materials Engineering
+  "572": "AEE",   // Aerospace Engineering
+  "573": "FDE",   // Food Engineering
+  "560": "ENVE",  // Environmental Engineering
+  "561": "ES",    // Engineering Sciences
+  "575": "CNGB",  // Computer Engineering (Türkiye-Azerbaijan)
+  "576": "BME",   // Biomedical Engineering
+  "577": "AI",    // Artificial Intelligence Engineering
+  "887": "AI",    // Artificial Intelligence Engineering (grad)
+  "393": "AI",    // Artificial Intelligence Engineering (NCC?)
+  "384": "AEE",   // Aerospace Engineering (grad/NCC)
+  "388": "IE",    // Industrial Engineering (NCC)
+  "364": "CE",    // Civil Engineering (NCC)
+  "365": "ME",    // Mechanical Engineering (NCC)
+  "367": "CHE",   // Chemical Engineering (NCC)
+  "356": "EE",    // EEE (NCC)
+  "355": "CENG",  // Computer Engineering (NCC)
+  "374": "PETE",  // Petroleum (NCC)
+  "383": "ES",    // Engineering Sciences (NCC)
+  "389": "SW",    // Software Engineering (NCC)
+  "390": "SEES",  // Sustainable Environment and Energy Systems
+
+  // Fen-Edebiyat Fakültesi
+  "230": "PHYS",  // Physics
+  "236": "MATH",  // Mathematics
+  "234": "CHEM",  // Chemistry
+  "238": "BIO",   // Biology
+  "219": "GENE",  // Molecular Biology and Genetics
+  "241": "PHIL",  // Philosophy
+  "233": "PSY",   // Psychology
+  "232": "SOC",   // Sociology
+  "246": "STAT",  // Statistics
+  "240": "HIST",  // History
+  "358": "PHYS",  // Physics (NCC)
+  "357": "MATH",  // Mathematics (NCC)
+  "360": "CHEM",  // Chemistry (NCC)
+  "371": "PSY",   // Psychology (NCC)
+  "372": "SOC",   // Sociology (NCC)
+  "362": "HIST",  // History (NCC)
+  "363": "STAT",  // Statistics (NCC)
+  "377": "PHIL",  // Philosophy (NCC)
+
+  // İktisadi ve İdari Bilimler
+  "311": "ECON",  // Economics
+  "312": "BA",    // Business Administration
+  "314": "IR",    // International Relations
+  "310": "ADM",   // Political Science and Public Administration
+  "315": "GIA",   // Global and International Affairs
+  "316": "BAS",   // Business Administration (International)
+  "352": "ECON",  // Economics (NCC)
+  "353": "BA",    // Business Administration (NCC)
+  "354": "IR",    // Political Science and International Relations (NCC)
+
+  // Mimarlık Fakültesi
+  "120": "ARCH",  // Architecture
+  "121": "CRP",   // City and Regional Planning
+  "125": "ID",    // Industrial Design
+  "801": "ARCH",  // History of Architecture (grad)
+  "853": "CP",    // City Planning (grad)
+  "854": "BS",    // Building Science (grad)
+  "855": "UD",    // Urban Design (grad)
+  "856": "CONS",  // Conservation of Cultural Heritage
+  "858": "CDF",   // Computational Design and Fabrication
+  "811": "UPL",   // Urban Policy Planning
+
+  // Eğitim Fakültesi
+  "411": "ECE",   // Early Childhood Education
+  "430": "CEIT",  // Computer Education and Instructional Technology
+  "450": "FLE",   // Foreign Language Education
+  "451": "TEFL",  // English Language Teaching (International)
+  "453": "PES",   // Physical Education and Sports
+  "454": "EDS",   // Educational Sciences
+  "460": "MSE",   // Mathematics and Science Education
+  "820": "TEFL",  // English Language Teaching
+  "821": "ELIT",  // English Literature
+  "366": "TEFL",  // Teaching English as a Foreign Language (NCC)
+  "368": "EDS",   // Educational Sciences (NCC)
+  "391": "TEFL",  // English Language Teaching (NCC)
+  "378": "GPC",   // Guidance and Psychological Counseling
+  "420": "SSME",  // Secondary Science and Mathematics Education
+
+  // Dil bölümleri
+  "642": "TURK",  // Turkish Language
+  "629": "TURK",  // Turkish as a Foreign Language
+  "639": "ENG",   // Modern Languages (English)
+  "603": "FREN",  // Modern Languages (French)
+  "604": "GER",   // Modern Languages (German)
+  "605": "JAPN",  // Modern Languages (Japanese)
+  "606": "ITAL",  // Modern Languages (Italian)
+  "607": "RUSS",  // Modern Languages (Russian)
+  "608": "SPAN",  // Modern Languages (Spanish)
+  "609": "HEBR",  // Modern Languages (Hebrew)
+  "610": "GREE",  // Modern Language (Greek)
+  "611": "CHIN",  // Modern Languages (Chinese)
+  "612": "PERS",  // Modern Languages (Persian)
+  "613": "KORE",  // Modern Languages (Korean)
+  "602": "ARA",   // Modern Languages (Arabic)
+  "369": "GER",   // Modern Languages German (NCC)
+  "380": "CHIN",  // Modern Languages Chinese (NCC)
+  "359": "ENG",   // Modern Languages English (NCC)
+  "361": "TURK",  // Turkish Language (NCC)
+
+  // Müzik ve Güzel Sanatlar
+  "651": "MUS",
+  "682": "MUS",
+  "643": "MUS",
+  "644": "MUS",
+
+  // Bilişim / IS
+  "901": "IS",    // Information Systems
+  "795": "MYO",   // Meslek Yüksekokulu
+
+  // Yüksek lisans / disiplinlerarası
+  "863": "ARCHM", // Archaeometry
+  "864": "ASTRO", // Astrophysics
+  "860": "BCHM",  // Biochemistry
+  "908": "BION",  // Bioinformatics
+  "861": "BIOT",  // Biotechnology
+  "872": "BME",   // Biomedical Engineering
+  "902": "COS",   // Cognitive Sciences
+  "870": "CEM",   // Cement Engineering
+  "910": "CS",    // Cyber Security
+  "886": "DDS",   // Data and Decision Sciences
+  "911": "DI",    // Data Informatics
+  "874": "ESS",   // Earth System Science
+  "873": "EQS",   // Earthquake Studies
+  "866": "EM",    // Engineering Management
+  "865": "GGIT",  // Geodetic and Geographical Information Technologies
+  "810": "GWS",   // Gender and Women Studies
+  "906": "MI",    // Medical Informatics
+  "832": "MES",   // Middle East Studies
+  "909": "MM",    // Multimedia Informatics
+  "871": "MNT",   // Micro and Nanotechnology
+  "878": "NEUR",  // Neuroscience
+  "877": "OHS",   // Occupational Health and Safety
+  "387": "OHS",   // Occupational Health and Safety (NCC)
+  "880": "OR",    // Operational Research
+  "862": "POLY",  // Polymer Science and Technology
+  "885": "ROB",   // Robotics
+  "831": "STP",   // Science and Technology Policy Studies
+  "814": "SEAR",  // Settlement Archaeology
+  "815": "AREA",  // Area Studies
+  "816": "MCS",   // Media and Cultural Studies
+  "833": "EU",    // European Studies
+  "835": "EURS",  // Eurasian Studies
+  "837": "EMBA",  // Executive MBA
+  "838": "EUINT", // European Integration
+  "839": "SP",    // Social Policy
+  "840": "ANTH",  // Social Anthropology
+  "841": "SOSC",  // Social Sciences
+  "842": "AS",    // Asian Studies
+  "843": "LNAS",  // Latin and North American Studies
+  "852": "REG",   // Regional Planning
+  "857": "DRI",   // Design Research for Interaction
+  "950": "MARE",  // Graduate School of Marine Sciences
+  "970": "IAM",   // Institute of Applied Mathematics
+  "976": "ACT",   // Actuarial Science
+};
+
+function cleanText(value) {
+  return String(value || "").trim();
+}
+
+function cleanInstructorName(value) {
+  return cleanText(value)
+    .split(",")
+    .map((part) => part.trim())
+    .filter((part) => part.toUpperCase() !== "STAFF")
+    .join(", ");
+}
+
+function parseCredits(credit) {
+  if (credit === null || credit === undefined) return 0;
+  const text = String(credit).trim();
+  if (!text) return 0;
+  const beforeParen = text.split("(")[0];
+  const beforeParenMatch = beforeParen.match(/\d+(?:[.,]\d+)?/);
+  if (beforeParenMatch) return Number(beforeParenMatch[0].replace(",", ".")) || 0;
+  const allNumbers = text.match(/\d+(?:[.,]\d+)?/g);
+  if (!allNumbers || allNumbers.length === 0) return 0;
+  return Number(allNumbers[0].replace(",", ".")) || 0;
+}
+
+/*
+  decodeNumericMetuCourseCode
+  ─────────────────────────────────────────────────────────────────
+  Sayısal OIBS kodunu insan-okunabilir ders koduna çevirir.
+
+  Format: DDDXNNN (7 hane)
+    DDD = departmentCode
+    X   = herhangi rakam (0 olmak zorunda değil)
+    NNN = ders numarası
+  → prefix + int(raw[3:]) → örn: PSY1010, CENG140, MATH112
+
+  Zaten alfabetik format (CENG100 vb.) geldiyse dokunmaz.
+*/
+function decodeNumericMetuCourseCode(courseCode, department = {}) {
+  const raw = cleanText(courseCode).replace(/\s+/g, "").toUpperCase();
+  if (!raw) return "";
+
+  // Zaten alfabetik formattaysa dokunma
+  if (/^[A-Z]{2,8}\d+[A-Z]?$/.test(raw)) return raw;
+
+  // Sayısal değilse dokunma
+  if (!/^\d+$/.test(raw)) return raw;
+
+  const deptCode = cleanText(department?.departmentCode);
+  const prefix = DEPT_CODE_TO_PREFIX[deptCode] ||
+                 DEPT_CODE_TO_PREFIX[raw.slice(0, 3)];
+
+  if (prefix && (raw.length === 7 || raw.length === 6)) {
+    const numPart = raw.slice(3);          // son 4 (veya 3) hane
+    const numInt = parseInt(numPart, 10);  // leading zero'ları at
+    return `${prefix}${numInt}`;
+  }
+
+  return raw;
+}
+
+function formatCourseCode(courseCode, department) {
+  return decodeNumericMetuCourseCode(courseCode, department);
+}
+
+function getDeptCode(departmentName, courseCode, departmentCode) {
+  const code = cleanText(courseCode).toUpperCase();
+  const fromCode = code.match(/^([A-Z]{2,8})\d/);
+  if (fromCode?.[1]) return fromCode[1];
+
+  const prefixFromDeptCode = DEPT_CODE_TO_PREFIX[cleanText(departmentCode)];
+  if (prefixFromDeptCode) return prefixFromDeptCode;
+
+  return "GEN";
+}
+
+function convertTimeToMeeting(time) {
+  const dayRaw = time?.day;
+  const day = DAY_MAP[dayRaw] ?? DAY_MAP[String(dayRaw || "").trim()];
+  return {
+    d: day,
+    s: time?.start || time?.s || "",
+    e: time?.end || time?.e || "",
+    room: time?.place || time?.room || "",
   };
-  
-  const PROGRAM_CODE_TO_PREFIX = {
-    // Engineering
-    "571": "CENG",
-    "567": "EEE",
-    "562": "CE",
-    "563": "CHE",
-    "564": "GEOE",
-    "565": "MINE",
-    "566": "PETE",
-    "568": "IE",
-    "569": "ME",
-    "570": "METE",
-    "572": "AEE",
-    "573": "FOOD",
-    "574": "FDE",
-    "575": "CENG",
-    "576": "BME",
-    "577": "AI",
-  
-    // Common service / institute / language codes from metu_courses_clean.json
-    "901": "IS",
-    "603": "FREN",
-    "604": "GER",
-    "605": "JAPN",
-    "606": "ITAL",
-    "607": "RUSS",
-    "608": "SPAN",
-    "609": "HEBR",
-    "610": "GREE",
-    "611": "CHIN",
-    "612": "PERS",
-    "613": "KORE",
-  
-    // Vocational school courses: prefix net değilse numeric bırakmamak için
-    // İstersen bunu "MYO" yerine başka prefix yapabiliriz.
-    "795": "MYO",
-    "796": "FOOD",
-    "797": "ELEC",
-    "798": "ELT",
-    "799": "AUTO",
+}
+
+function convertSection(section, courseCode) {
+  const sectionNo = cleanText(
+    section?.sectionNo || section?.section_no ||
+    section?.id || section?.section || ""
+  );
+  return {
+    id: sectionNo.padStart(2, "0"),
+    crn: section?.crn || `${courseCode}-${sectionNo}`,
+    instructor: Array.isArray(section?.instructors)
+      ? section.instructors.map(cleanInstructorName).filter(Boolean).join(", ")
+      : cleanInstructorName(section?.instructor || ""),
+    quota: Number(section?.quota) || 999,
+    enrolled: Number(section?.enrolled) || 0,
+    meetings: Array.isArray(section?.times)
+      ? section.times.map(convertTimeToMeeting).filter((m) => m.d !== undefined && m.s && m.e)
+      : Array.isArray(section?.meetings)
+      ? section.meetings.map(convertTimeToMeeting).filter((m) => m.d !== undefined && m.s && m.e)
+      : [],
   };
-  
-  function cleanText(value) {
-    return String(value || "").trim();
-  }
-  
-  function cleanInstructorName(value) {
-    return cleanText(value)
-      .split(",")
-      .map((part) => part.trim())
-      .filter((part) => part.toUpperCase() !== "STAFF")
-      .join(", ");
-  }
-  
-  function parseCredits(credit) {
-    if (credit === null || credit === undefined) return 0;
-  
-    const text = String(credit).trim();
-    if (!text) return 0;
-  
-    const beforeParen = text.split("(")[0];
-    const beforeParenMatch = beforeParen.match(/\d+(?:[.,]\d+)?/);
-  
-    if (beforeParenMatch) {
-      return Number(beforeParenMatch[0].replace(",", ".")) || 0;
-    }
-  
-    const allNumbers = text.match(/\d+(?:[.,]\d+)?/g);
-    if (!allNumbers || allNumbers.length === 0) return 0;
-  
-    return Number(allNumbers[0].replace(",", ".")) || 0;
-  }
-  
-  function getPrefixFromDepartmentName(departmentName) {
-    const name = cleanText(departmentName).toUpperCase();
-  
-    if (!name) return "";
-  
-    if (name.includes("COMPUTER ENGINEERING")) return "CENG";
-    if (name.includes("ELECTRICAL") || name.includes("ELECTRONICS")) return "EEE";
-    if (name.includes("INDUSTRIAL ENGINEERING")) return "IE";
-    if (name.includes("MECHANICAL ENGINEERING")) return "ME";
-    if (name.includes("CIVIL ENGINEERING")) return "CE";
-    if (name.includes("CHEMICAL ENGINEERING")) return "CHE";
-    if (name.includes("GEOLOGICAL ENGINEERING")) return "GEOE";
-    if (name.includes("MINING ENGINEERING")) return "MINE";
-    if (name.includes("PETROLEUM") || name.includes("NATURAL GAS")) return "PETE";
-    if (name.includes("METALLURGICAL") || name.includes("MATERIALS ENGINEERING")) return "METE";
-    if (name.includes("AEROSPACE ENGINEERING")) return "AEE";
-    if (name.includes("FOOD ENGINEERING")) return "FOOD";
-    if (name.includes("ARTIFICIAL INTELLIGENCE")) return "AI";
-    if (name.includes("INFORMATION SYSTEMS")) return "IS";
-  
-    if (name.includes("MODERN LANGUAGE") && name.includes("FRENCH")) return "FREN";
-    if (name.includes("MODERN LANGUAGE") && name.includes("GREEK")) return "GREE";
-    if (name.includes("MODERN LANGUAGE") && name.includes("GERMAN")) return "GER";
-    if (name.includes("MODERN LANGUAGE") && name.includes("SPANISH")) return "SPAN";
-    if (name.includes("MODERN LANGUAGE") && name.includes("ITALIAN")) return "ITAL";
-    if (name.includes("MODERN LANGUAGE") && name.includes("RUSSIAN")) return "RUSS";
-    if (name.includes("MODERN LANGUAGE") && name.includes("JAPANESE")) return "JAPN";
-    if (name.includes("MODERN LANGUAGE") && name.includes("CHINESE")) return "CHIN";
-    if (name.includes("MODERN LANGUAGE") && name.includes("KOREAN")) return "KORE";
-  
-    return "";
-  }
-  
-  function decodeNumericMetuCourseCode(courseCode, department = {}) {
-    const raw = cleanText(courseCode).replace(/\s+/g, "").toUpperCase();
-  
-    if (!raw) return "";
-  
-    // Zaten CENG100, EEE400, MATH117 gibi geldiyse dokunma
-    if (/^[A-Z]{2,8}\d{3,4}[A-Z]?$/.test(raw)) {
-      return raw;
-    }
-  
-    // Sadece sayı değilse dokunma
-    if (!/^\d+$/.test(raw)) {
-      return raw;
-    }
-  
-    const departmentCode = cleanText(department?.departmentCode);
-    const departmentName = cleanText(department?.departmentName);
-  
-    // 5670400 -> 567 + 0 + 400 -> EEE400
-    // 5710100 -> 571 + 0 + 100 -> CENG100
-    // 9010100 -> 901 + 0 + 100 -> IS100
-    if (raw.length === 7) {
-      const programCode = raw.slice(0, 3);
-      const middleDigit = raw.slice(3, 4);
-      const courseNumber = raw.slice(4);
-  
-      const prefix =
-        PROGRAM_CODE_TO_PREFIX[programCode] ||
-        PROGRAM_CODE_TO_PREFIX[departmentCode] ||
-        getPrefixFromDepartmentName(departmentName);
-  
-      if (prefix && middleDigit === "0") {
-        return `${prefix}${courseNumber}`;
-      }
-    }
-  
-    // 571100 gibi gelirse -> CENG100
-    if (raw.length === 6) {
-      const programCode = raw.slice(0, 3);
-      const courseNumber = raw.slice(3);
-  
-      const prefix =
-        PROGRAM_CODE_TO_PREFIX[programCode] ||
-        PROGRAM_CODE_TO_PREFIX[departmentCode] ||
-        getPrefixFromDepartmentName(departmentName);
-  
-      if (prefix) {
-        return `${prefix}${courseNumber}`;
-      }
-    }
-  
-    return raw;
-  }
-  
-  function formatCourseCode(courseCode, department) {
-    return decodeNumericMetuCourseCode(courseCode, department);
-  }
-  
-  function getDeptCode(departmentName, courseCode, departmentCode) {
-    const code = cleanText(courseCode).toUpperCase();
-  
-    const fromCode = code.match(/^([A-Z]{2,8})\d/);
-    if (fromCode?.[1]) return fromCode[1];
-  
-    const prefixFromDepartmentCode = PROGRAM_CODE_TO_PREFIX[cleanText(departmentCode)];
-    if (prefixFromDepartmentCode) return prefixFromDepartmentCode;
-  
-    const prefixFromName = getPrefixFromDepartmentName(departmentName);
-    if (prefixFromName) return prefixFromName;
-  
-    return "GEN";
-  }
-  
-  function convertTimeToMeeting(time) {
-    const dayRaw = time?.day;
-    const day = DAY_MAP[dayRaw] ?? DAY_MAP[String(dayRaw || "").trim()];
-  
-    return {
-      d: day,
-      s: time?.start || time?.s || "",
-      e: time?.end || time?.e || "",
-      room: time?.place || time?.room || "",
-    };
-  }
-  
-  function convertSection(section, courseCode) {
-    const sectionNo = cleanText(
-      section?.sectionNo ||
-        section?.section_no ||
-        section?.id ||
-        section?.section ||
-        ""
-    );
-  
-    return {
-      id: sectionNo.padStart(2, "0"),
-      crn: section?.crn || `${courseCode}-${sectionNo}`,
-      instructor: Array.isArray(section?.instructors)
-        ? section.instructors
-            .map(cleanInstructorName)
-            .filter(Boolean)
-            .join(", ")
-        : cleanInstructorName(section?.instructor || ""),
-      quota: Number(section?.quota) || 999,
-      enrolled: Number(section?.enrolled) || 0,
-      meetings: Array.isArray(section?.times)
-        ? section.times
-            .map(convertTimeToMeeting)
-            .filter((m) => m.d !== undefined && m.s && m.e)
-        : Array.isArray(section?.meetings)
-        ? section.meetings
-            .map(convertTimeToMeeting)
-            .filter((m) => m.d !== undefined && m.s && m.e)
-        : [],
-    };
-  }
-  
-  function getRawCourseCode(course) {
-    return cleanText(
-      course?.courseCode ||
-        course?.course_code ||
-        course?.code ||
-        course?.dersKodu ||
-        course?.kod ||
-        ""
-    );
-  }
-  
-  function getCourseName(course) {
-    return cleanText(
-      course?.courseName ||
-        course?.course_name ||
-        course?.name ||
-        course?.dersAdi ||
-        course?.ad ||
-        ""
-    );
-  }
-  
-  function convertCourse(course, department) {
-    const originalCode = getRawCourseCode(course);
-    const code = formatCourseCode(originalCode, department);
-    const name = getCourseName(course);
-  
-    const dept = getDeptCode(
-      department?.departmentName,
-      code,
-      department?.departmentCode
-    );
-  
-    return {
-      code,
-      originalCode,
-      name,
-      nameTr: name,
-      credits: parseCredits(course?.credit || course?.credits),
-      dept,
-      catalogUrl: `https://catalog.metu.edu.tr/course.php?course_code=${
-        originalCode || code
-      }`,
-      sections: Array.isArray(course?.sections)
-        ? course.sections.map((section) => convertSection(section, code))
-        : [],
-    };
-  }
-  
-  export async function loadMetuCourses() {
-    const res = await fetch("/metu_courses_clean.json");
-  
-    if (!res.ok) {
-      throw new Error(`Veri yüklenemedi: ${res.status}`);
-    }
-  
-    const rawMetuData = await res.json();
-  
-    const departments = Array.isArray(rawMetuData?.departments)
-      ? rawMetuData.departments
-      : [];
-  
-    return departments
-      .filter((department) => {
-        const name = cleanText(department?.departmentName).toLowerCase();
-  
-        // İstersen NCC derslerini ana katalogdan da gizleyelim
-        return !name.includes("kuzey kıbrıs kampüsü");
-      })
-      .flatMap((department) =>
-        (department.courses || []).map((course) =>
-          convertCourse(course, department)
-        )
-      )
-      .filter((course) => course.code && course.name && course.sections.length > 0);
-  }
+}
+
+function getRawCourseCode(course) {
+  return cleanText(
+    course?.courseCode || course?.course_code || course?.code ||
+    course?.dersKodu || course?.kod || ""
+  );
+}
+
+function getCourseName(course) {
+  return cleanText(
+    course?.courseName || course?.course_name || course?.name ||
+    course?.dersAdi || course?.ad || ""
+  );
+}
+
+function convertCourse(course, department) {
+  const originalCode = getRawCourseCode(course);
+  const code = formatCourseCode(originalCode, department);
+  const name = getCourseName(course);
+  const dept = getDeptCode(department?.departmentName, code, department?.departmentCode);
+
+  return {
+    code,
+    originalCode,
+    name,
+    nameTr: name,
+    credits: parseCredits(course?.credit || course?.credits),
+    dept,
+    catalogUrl: `https://catalog.metu.edu.tr/course.php?course_code=${originalCode || code}`,
+    sections: Array.isArray(course?.sections)
+      ? course.sections.map((section) => convertSection(section, code))
+      : [],
+  };
+}
+
+export async function loadMetuCourses() {
+  const res = await fetch("/metu_courses_clean.json");
+  if (!res.ok) throw new Error(`Veri yüklenemedi: ${res.status}`);
+
+  const rawMetuData = await res.json();
+  const departments = Array.isArray(rawMetuData?.departments) ? rawMetuData.departments : [];
+
+  return departments
+    .filter((department) => {
+      const name = cleanText(department?.departmentName).toLowerCase();
+      return !name.includes("kuzey kıbrıs kampüsü");
+    })
+    .flatMap((department) =>
+      (department.courses || []).map((course) => convertCourse(course, department))
+    )
+    .filter((course) => course.code && course.name && course.sections.length > 0);
+}
