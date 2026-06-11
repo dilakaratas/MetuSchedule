@@ -163,7 +163,7 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
                         {faculty && (
                           <div style={{ fontSize: 11, color: "#666" }}>{faculty}</div>
                         )}
-                        {(yearNum || cgpa) && (
+                        {(yearNum || semester || cgpa) && (
                           <div style={{ display: "flex", gap: 16, marginTop: 2, paddingTop: 6, borderTop: "1px solid #f0dde0" }}>
                             {yearNum && (
                               <div style={{ fontSize: 11, color: "#444" }}>
@@ -171,6 +171,14 @@ export default function Header({ tr, lang, setLang, selected, totalCredits, onCl
                                 <span style={{ fontWeight: 700, color: "#222" }}>{yearNum}</span>
                               </div>
                             )}
+
+                        {semester && (
+                              <div style={{ fontSize: 11, color: "#444" }}>
+                                <span style={{ color: "#999", marginRight: 3 }}>{lang === "tr" ? "Yıl" : "Year"}</span>
+                                <span style={{ fontWeight: 700, color: "#222" }}>{yearNum}</span>
+                              </div>
+                            )}
+
                             {cgpa && (
                               <div style={{ fontSize: 11, color: "#444" }}>
                                 <span style={{ color: "#999", marginRight: 3 }}>GPA</span>
