@@ -34,151 +34,6 @@ function safeText(value, fallback = "") {
   return fallback;
 }
 
-function getUserDepartmentPrefix(user) {
-  if (!user) return "";
-
-  const rawProgramCode = safeText(user?.programCode, "");
-  const rawDept = safeText(user?.dept, "");
-  const rawProgramName = safeText(user?.programName, "");
-  const rawDepartment = safeText(user?.department, "");
-  const rawDepartmentName = safeText(user?.departmentName, "");
-  const rawFaculty = safeText(user?.faculty, "");
-
-  const combined = [
-    rawProgramCode,
-    rawDept,
-    rawProgramName,
-    rawDepartment,
-    rawDepartmentName,
-    rawFaculty,
-  ]
-    .join(" ")
-    .toUpperCase()
-    .trim();
-
-  if (!combined) return "";
-
-  
-  if (
-    combined.includes("COMPUTER ENGINEERING") ||
-    combined.includes("DEPARTMENT OF COMPUTER ENGINEERING") ||
-    combined.includes("CENG") ||
-    rawProgramCode === "571" ||
-    rawDept === "571"
-  ) {
-    return "CENG";
-  }
-
-  if (
-    combined.includes("ELECTRICAL") ||
-    combined.includes("ELECTRONICS") ||
-    combined.includes("EEE")
-  ) {
-    return "EEE";
-  }
-
-  if (
-    combined.includes("INDUSTRIAL ENGINEERING") ||
-    combined.includes("IE")
-  ) {
-    return "IE";
-  }
-
-  if (
-    combined.includes("MECHANICAL ENGINEERING") ||
-    combined.includes("ME")
-  ) {
-    return "ME";
-  }
-
-  if (
-    combined.includes("CIVIL ENGINEERING") ||
-    combined.includes("CE")
-  ) {
-    return "CE";
-  }
-
-  if (
-    combined.includes("CHEMICAL ENGINEERING") ||
-    combined.includes("CHE")
-  ) {
-    return "CHE";
-  }
-
-  if (
-    combined.includes("AEROSPACE ENGINEERING") ||
-    combined.includes("AEE")
-  ) {
-    return "AEE";
-  }
-
-  if (
-    combined.includes("METALLURGICAL") ||
-    combined.includes("MATERIALS ENGINEERING") ||
-    combined.includes("METE")
-  ) {
-    return "METE";
-  }
-
-  if (
-    combined.includes("ENVIRONMENTAL ENGINEERING") ||
-    combined.includes("ENVE")
-  ) {
-    return "ENVE";
-  }
-
-  if (
-    combined.includes("GEOLOGICAL ENGINEERING") ||
-    combined.includes("GEOE")
-  ) {
-    return "GEOE";
-  }
-
-  if (
-    combined.includes("MINING ENGINEERING") ||
-    combined.includes("MINE")
-  ) {
-    return "MINE";
-  }
-
-  if (
-    combined.includes("PETROLEUM") ||
-    combined.includes("NATURAL GAS") ||
-    combined.includes("PETE")
-  ) {
-    return "PETE";
-  }
-
-  if (
-    combined.includes("ARTIFICIAL INTELLIGENCE") ||
-    combined.includes("AI")
-  ) {
-    return "AI";
-  }
-
-
-  const directPrefix =
-    rawDept.toUpperCase() ||
-    rawProgramCode.toUpperCase() ||
-    rawProgramName.toUpperCase();
-
-  if (/^[A-Z]{2,6}$/.test(directPrefix)) {
-    return directPrefix;
-  }
-
-  
-  return "";
-}
-
-function matchesUserDepartment(course, userDeptPrefix) {
-  if (!userDeptPrefix) return true;
-
-  const code = String(course?.code || "").toUpperCase().trim();
-  const dept = String(course?.dept || "").toUpperCase().trim();
-
-  return code.startsWith(userDeptPrefix) || dept === userDeptPrefix;
-}
-
 export default function Sidebar({
   tr,
   lang,
@@ -213,13 +68,13 @@ export default function Sidebar({
     setDayFilter(next);
   };
 
-  const userDeptPrefix = useMemo(() => getUserDepartmentPrefix(user), [user]);
-
-  const visibleCourses = useMemo(() => {
-    return (courses || []).filter((course) =>
-      matchesUserDepartment(course, userDeptPrefix)
-    );
-  }, [courses, userDeptPrefix]);
+  /*
+    Sidebar artık kendi içinde bölüm filtresi UYGULAMIYOR.
+    App.jsx zaten filtrelenmiş listeyi `courses` prop'u olarak gönderiyor.
+    Burada ikinci kez filtre uygulamak, bölümü olmayan kullanıcılarda
+    (tüm katalog görünmesi gereken durum) bile listeyi daraltıyordu.
+  */
+  const visibleCourses = useMemo(() => courses || [], [courses]);
 
   return (
     <aside className="sidebar">
