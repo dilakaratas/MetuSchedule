@@ -7,7 +7,7 @@ import AdminStudentPanel from "./components/AdminStudentPanel.jsx";
 
 import Login from "./components/Login.jsx";
 import CurriculumModal from "./components/CurriculumModal.jsx";
-import { loadMetuCourses } from "./data_old.js";
+import { loadMetuCourses } from "./data.js";
 import { I18N } from "./i18n.js";
 import { findConflicts, sectionsConflict } from "./utils.js";
 import { saveToken, validateCasTicket } from "./api/auth.js";
