@@ -6,7 +6,7 @@ const CAS_LOGIN_URL = "https://login.metu.edu.tr/cas/login";
 const SERVICE_URL   = "http://planify.metu.edu.tr/";
 
 export default function Login({ onLogin, casError = "" }) {
-  const [tab,      setTab]      = useState("user"); // "user" | "ynt"
+  const [tab,      setTab]      = useState("user"); 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPwd,  setShowPwd]  = useState(false);

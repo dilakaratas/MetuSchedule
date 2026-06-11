@@ -1,6 +1,4 @@
-/* ═══════════════════════════════════════════════
-   Login — METU Schedule
-   ═══════════════════════════════════════════════ */
+
 
    .login-wrap {
     min-height: 100vh;
@@ -11,7 +9,7 @@
     padding: 1.5rem 1rem;
   }
   
-  /* ── Kart ─────────────────────────────────────── */
+  
   .login-card {
     background: #fff;
     border: 1px solid var(--line);
@@ -27,7 +25,7 @@
     background: var(--metu-bordo);
   }
   
-  /* ── Logo ─────────────────────────────────────── */
+  
   .login-logo-row {
     display: flex;
     align-items: center;
@@ -66,7 +64,7 @@
     letter-spacing: 0.01em;
   }
   
-  /* ── Sekme geçişi ─────────────────────────────── */
+  
   .login-tabs {
     position: relative;
     display: grid;
@@ -105,7 +103,7 @@
     color: var(--ink);
   }
   
-  /* kayan beyaz pill */
+  
   .login-pill {
     position: absolute;
     top: 3px;
@@ -123,12 +121,12 @@
     transform: translateX(calc(100% + 3px));
   }
   
-  /* ── Sekme içerikleri ─────────────────────────── */
+  
   .login-section {
     padding: 0 2rem 2.25rem;
   }
   
-  /* ── CAS butonu ───────────────────────────────── */
+  
   .login-cas-btn {
     width: 100%;
     height: 48px;
@@ -163,7 +161,7 @@
     padding: 0 4px;
   }
   
-  /* ── Yönetici başlığı ─────────────────────────── */
+  
   .login-ynt-head {
     margin-bottom: 1.5rem;
   }
@@ -180,7 +178,7 @@
     margin: 0;
   }
   
-  /* ── Hata ─────────────────────────────────────── */
+  
   .login-error {
     display: flex;
     align-items: center;
@@ -194,7 +192,7 @@
     margin-bottom: 1rem;
   }
   
-  /* ── Alanlar ──────────────────────────────────── */
+  
   .login-field-group {
     margin-bottom: 14px;
   }
@@ -267,7 +265,7 @@
     color: var(--ink-soft);
   }
   
-  /* ── Seçenekler satırı ────────────────────────── */
+  
   .login-options-row {
     display: flex;
     align-items: center;
@@ -306,7 +304,7 @@
     text-decoration: underline;
   }
   
-  /* ── Giriş butonu ─────────────────────────────── */
+  
   .login-btn {
     width: 100%;
     height: 48px;
@@ -349,7 +347,7 @@
     to { transform: rotate(360deg); }
   }
   
-  /* ── Mobil ────────────────────────────────────── */
+  
   @media (max-width: 480px) {
     .login-wrap {
       align-items: flex-start;

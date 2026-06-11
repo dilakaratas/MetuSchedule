@@ -1,4 +1,4 @@
-/* MetuSchedule Ã¢â‚¬â€ vibrant playful theme */
+
 
 :root {
   --metu-bordo: #7a1f2b;
@@ -53,7 +53,7 @@ input { font-family: inherit; }
   background: var(--paper);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Hard-reset font sizes Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .app { font-size: 14px; line-height: 1.4; }
 .app .course-header,
 .app .course-name,
@@ -64,7 +64,7 @@ input { font-family: inherit; }
 .app .course-name { font-size: 13px !important; line-height: 1.3 !important; }
 .app .course-code { font-size: 12px !important; line-height: 1.2 !important; }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Header Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .header {
   height: var(--header-h);
   display: flex;
@@ -201,7 +201,7 @@ input { font-family: inherit; }
   border-color: #fee;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar toggle Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .sidebar-toggle-btn {
   display: flex;
   align-items: center;
@@ -222,7 +222,7 @@ input { font-family: inherit; }
   box-shadow: var(--shadow-sm);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar collapsed Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .main.sidebar-collapsed,
 .desktop-main.sidebar-collapsed {
   grid-template-columns: 0 1fr;
@@ -237,7 +237,7 @@ input { font-family: inherit; }
   pointer-events: none;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Main layout Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .main {
   flex: 1;
   display: grid;
@@ -259,7 +259,7 @@ input { font-family: inherit; }
   }
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Sidebar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .sidebar {
   background: var(--paper-deep);
   border-right: 1.5px solid var(--line);
@@ -383,7 +383,7 @@ input { font-family: inherit; }
 }
 .empty-emoji { font-size: 32px; margin-bottom: 8px; }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Course Card Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .course-card {
   background: #fff;
   border: 1.5px solid var(--line);
@@ -480,7 +480,7 @@ input { font-family: inherit; }
   padding-top: 12px;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Section Row Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .section-row {
   background: var(--paper);
   border: 1.5px solid var(--line);
@@ -642,7 +642,7 @@ input { font-family: inherit; }
   white-space: nowrap;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Calendar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .calendar-wrap {
   position: relative;
   flex: 1;
@@ -670,7 +670,7 @@ input { font-family: inherit; }
   min-height: 700px;
 }
 
-/* Saat ve gÃƒÂ¼n sÃƒÂ¼tunlarÃ„Â± flex Ã¢â‚¬â€ yÃƒÂ¼ksekliÃ„Å¸i eÃ…Å¸it bÃƒÂ¶ler */
+
 .cal-timecol { display: flex; flex-direction: column; }
 .cal-daycol { display: flex; flex-direction: column; }
 .cal-timelabel { flex: 1; min-height: 0; }
@@ -743,7 +743,7 @@ input { font-family: inherit; }
 .cal-slot.even { background: rgba(244, 240, 232, 0.3); }
 .cal-slot:last-child { border-bottom: 0; }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Calendar Block Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .cal-block {
   position: absolute;
   left: 4px;
@@ -878,7 +878,7 @@ input { font-family: inherit; }
   align-self: flex-start;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Calendar empty state Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .cal-empty {
   position: absolute;
   inset: 70px 20px 24px 90px;
@@ -908,7 +908,7 @@ input { font-family: inherit; }
   color: var(--ink-soft);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Toast Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .toast {
   position: fixed;
   bottom: 24px;
@@ -929,7 +929,7 @@ input { font-family: inherit; }
   to { transform: translate(-50%, 0); opacity: 1; }
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Density variants Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 [data-density="compact"] .course-header { padding: 8px 12px; }
 [data-density="compact"] .section-row { padding: 8px 10px; }
 [data-density="compact"] .course-name { font-size: 12px; }
@@ -937,7 +937,7 @@ input { font-family: inherit; }
 [data-density="comfy"] .section-row { padding: 14px; }
 [data-density="comfy"] .course-name { font-size: 14px; }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Header responsive Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 @media (max-width: 900px) {
   .header { padding: 0 16px; gap: 10px; }
   .brand-tag { display: none; }
@@ -954,7 +954,7 @@ input { font-family: inherit; }
   .btn span, .btn-ghost .btn-label { display: none; }
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Print Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 @media print {
   .header, .sidebar, .twk-panel, .toast { display: none !important; }
   .main { grid-template-columns: 1fr; }
@@ -966,7 +966,7 @@ input { font-family: inherit; }
    AI PANEL
    Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ AI Button Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-btn {
   background: linear-gradient(135deg, var(--metu-bordo) 0%, #b03a4a 100%);
   color: #fff !important;
@@ -980,7 +980,7 @@ input { font-family: inherit; }
   box-shadow: 0 4px 12px rgba(122, 31, 43, 0.4);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Overlay Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-panel-overlay {
   position: fixed;
   inset: 0;
@@ -992,20 +992,20 @@ input { font-family: inherit; }
   padding: 24px;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Panel shell Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-panel {
   background: var(--paper);
   border: 1.5px solid var(--line);
   border-radius: var(--r-xl);
   box-shadow: var(--shadow-lg);
-  width: min(820px, 95vw);  /* geniÃ…Å¸ ama ekrana sÃ„Â±Ã„Å¸ar */
+  width: min(820px, 95vw);  
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Header Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-panel-header {
   display: flex;
   align-items: center;
@@ -1037,7 +1037,7 @@ input { font-family: inherit; }
 }
 .ai-panel-close:hover { background: var(--line); color: var(--ink); }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Body Ã¢â‚¬â€ 2 sÃƒÂ¼tunlu grid Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-panel-body {
   display: flex;
   flex-direction: column;
@@ -1046,12 +1046,12 @@ input { font-family: inherit; }
   overflow-y: auto;
 }
 
-/* 2-col override when .ai-panel-grid class is present */
+
 .ai-panel-body.ai-panel-grid {
   padding: 0;
   gap: 0;
   display: grid;
-  grid-template-columns: 1.4fr 1fr;  /* sol sÃƒÂ¼tun daha geniÃ…Å¸ Ã¢â‚¬â€ ders isimleri tam gÃƒÂ¶rÃƒÂ¼nsÃƒÂ¼n */
+  grid-template-columns: 1.4fr 1fr;  
   flex: 1;
   overflow: hidden;
 }
@@ -1069,7 +1069,7 @@ input { font-family: inherit; }
   border-right: 1.5px solid var(--line);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Field & label Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-field { display: flex; flex-direction: column; gap: 8px; }
 .ai-label {
   display: flex;
@@ -1082,7 +1082,7 @@ input { font-family: inherit; }
   color: var(--ink-faint);
 }
 
-/* Badge yanÃ„Â±nda label */
+
 .ai-label-badge {
   margin-left: 8px;
   background: var(--metu-bordo);
@@ -1095,7 +1095,7 @@ input { font-family: inherit; }
   text-transform: none;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Course search & list Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-course-search {
   width: 100%;
   border: 1.5px solid var(--line);
@@ -1117,7 +1117,7 @@ input { font-family: inherit; }
   background: #fff;
   scrollbar-width: thin;
   scrollbar-color: var(--line) transparent;
-  /* Sol sÃƒÂ¼tun yÃƒÂ¼ksekliÃ„Å¸ine gÃƒÂ¶re scroll Ã¢â‚¬â€ panel yÃƒÂ¼ksekliÃ„Å¸ini aÃ…Å¸maz */
+  
   max-height: 340px;
 }
 
@@ -1153,7 +1153,7 @@ input { font-family: inherit; }
   flex: 1;
   font-size: 12px;
   color: var(--ink);
-  /* Normal wrap Ã¢â‚¬â€ isim kesilmez, gerekirse 2 satÃ„Â±r olur */
+  
   white-space: normal;
   line-height: 1.35;
 }
@@ -1165,7 +1165,7 @@ input { font-family: inherit; }
   flex-shrink: 0;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Day pills Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-day-pills { display: flex; gap: 5px; flex-wrap: wrap; }
 .ai-day-pill {
   border: 1.5px solid var(--line);
@@ -1185,7 +1185,7 @@ input { font-family: inherit; }
   border-color: var(--metu-bordo);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Slider Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-range-row { display: flex; align-items: center; gap: 10px; }
 .ai-slider {
   flex: 1;
@@ -1201,7 +1201,7 @@ input { font-family: inherit; }
   text-align: right;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Checkboxes Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-checks { display: flex; flex-direction: column; gap: 10px; }
 .ai-check {
   display: flex;
@@ -1296,7 +1296,7 @@ input { font-family: inherit; }
   border: 1px solid #fed7aa !important;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Warning box Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-warning {
   background: #fef9c3;
   color: #854d0e;
@@ -1332,7 +1332,7 @@ input { font-family: inherit; }
   margin-top: 2px;
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Error Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-error {
   background: #fff0f0;
   border: 1.5px solid #fcc;
@@ -1342,7 +1342,7 @@ input { font-family: inherit; }
   color: var(--danger);
 }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Footer Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-panel-footer {
   display: flex;
   gap: 10px;
@@ -1384,7 +1384,7 @@ input { font-family: inherit; }
 }
 .ai-generate-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Spinner Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .ai-spinner {
   display: inline-block;
   width: 14px; height: 14px;
@@ -1401,11 +1401,11 @@ input { font-family: inherit; }
    mobile-main  Ã¢â€ â€™ mobilde gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r (tab bar + panel)
    Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
 
-/* MasaÃƒÂ¼stÃƒÂ¼nde kÃ„Â±sa label gizli, uzun gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r */
+
 .ai-btn-label-short { display: none; }
 .ai-btn-label-full { display: inline; }
 
-/* Desktop: desktop-main gÃƒÂ¶rÃƒÂ¼nÃƒÂ¼r, mobile-main gizli */
+
 .desktop-main {
   display: grid;
   grid-template-columns: 380px 1fr;
@@ -1417,14 +1417,14 @@ input { font-family: inherit; }
 }
 .mobile-main { display: none; }
 
-/* Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ Mobil tab bar Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬Ã¢â€â‚¬ */
+
 .mobile-tab-bar {
   display: none;
 }
 
 @media (max-width: 768px) {
 
-  /* Desktop layout gizle, mobil layout gÃƒÂ¶ster */
+  
   .desktop-main { display: none !important; }
   .mobile-main {
     display: flex;
@@ -1434,7 +1434,7 @@ input { font-family: inherit; }
     position: relative;
   }
 
-  /* Ã¢â€â‚¬ App / body Ã¢â€â‚¬ */
+  
   body { overflow: hidden; }
   .app {
     height: 100dvh;
@@ -1443,7 +1443,7 @@ input { font-family: inherit; }
     overflow: hidden;
   }
 
-  /* Ã¢â€â‚¬ Header Ã¢â‚¬â€ tek satÃ„Â±r, minimalist Ã¢â€â‚¬ */
+  
   :root { --header-h: auto; }
   .header {
     height: auto;
@@ -1461,11 +1461,11 @@ input { font-family: inherit; }
   .logo img { width: 26px; height: 24px; }
   .brand { gap: 6px; flex-shrink: 0; min-width: 0; }
 
-  /* Stats mobilde tamamen gizle Ã¢â‚¬â€ tab bar'da gÃƒÂ¶steriyoruz */
+  
   .header-stats { display: none; }
 
-  /* Actions saÃ„Å¸a Ã¢â‚¬â€ sÃ„Â±kÃ„Â±Ã…Å¸tÃ„Â±r */
-  /* Actions sağa — sıkıştır, taşmasın */
+  
+  
   .header-actions {
     margin-left: auto;
     gap: 4px;
@@ -1475,11 +1475,11 @@ input { font-family: inherit; }
     overflow: visible;
   }
 
-  /* Mobilde gizlenecekler */
+  
   .hide-mobile { display: none !important; }
   .hide-mobile-inline { display: none !important; }
 
-  /* AI butonu — ikon + kısa yazı */
+  
   .ai-btn {
     padding: 6px 9px;
     font-size: 11px;
@@ -1490,11 +1490,11 @@ input { font-family: inherit; }
   .ai-btn-label-full { display: none !important; }
   .ai-btn-label-short { display: inline !important; }
 
-  /* Dil seçici küçük */
+  
   .lang-switch { padding: 2px; flex-shrink: 0; }
   .lang-switch button { padding: 4px 6px; font-size: 11px; }
 
-  /* Temizle — sadece ikon, transparan arka plan */
+  
   .btn-danger {
     padding: 6px 7px;
     border-color: transparent;
@@ -1503,10 +1503,10 @@ input { font-family: inherit; }
   }
   .btn-danger svg { width: 15px; height: 15px; }
 
-  /* Avatar küçült */
+  
   .user-avatar-btn { width: 30px; height: 30px; font-size: 11px; flex-shrink: 0; }
 
-  /* Dropdown — mobilde header'dan taşmasın, ekranın sağına sabitlensin */
+  
   .user-menu-wrap { position: static; }
   .user-dropdown {
     position: fixed;
@@ -1519,7 +1519,7 @@ input { font-family: inherit; }
   }
 
 
-  /* Ã¢â€â‚¬ Panel sistemi Ã¢â€â‚¬ */
+  
   .mobile-panel {
     display: none;
     flex: 1;
@@ -1531,7 +1531,7 @@ input { font-family: inherit; }
     flex-direction: column;
   }
 
-  /* Ã¢â€â‚¬ Sidebar tam yÃƒÂ¼kseklikte, scroll Ã¢â€â‚¬ */
+  
   .sidebar {
     border-right: 0;
     border-bottom: 0;
@@ -1540,14 +1540,14 @@ input { font-family: inherit; }
     overflow: hidden;
   }
   .course-list {
-    padding: 6px 10px 90px; /* tab bar boÃ…Å¸luÃ„Å¸u */
+    padding: 6px 10px 90px; 
     gap: 5px;
   }
   .course-header { padding: 10px 12px; min-height: 52px; }
   .course-name { font-size: 12px !important; }
   .course-code { font-size: 11px !important; }
 
-  /* Ã¢â€â‚¬ Calendar tam yÃƒÂ¼kseklikte Ã¢â‚¬â€ ekrana sÃ„Â±Ã„Å¸sÃ„Â±n Ã¢â€â‚¬ */
+  
   .calendar-wrap {
     flex: 1;
     padding: 8px 6px 90px;
@@ -1561,16 +1561,16 @@ input { font-family: inherit; }
     border-radius: var(--r-md);
   }
 
-  /* GÃƒÂ¼n baÃ…Å¸lÃ„Â±klarÃ„Â± kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k */
+  
   .cal-corner { min-width: unset; }
   .cal-dayhead { padding: 4px 2px; }
   .dayhead-name { font-size: 11px; }
   .dayhead-short { font-size: 8px; letter-spacing: 0.05em; }
 
-  /* Saat etiketi dar */
+  
   .cal-timelabel { font-size: 9px; padding-top: 3px; justify-content: center; }
 
-  /* Bloklar kÃƒÂ¼ÃƒÂ§ÃƒÂ¼k */
+  
   .cal-block {
     left: 2px;
     right: 2px;
@@ -1587,7 +1587,7 @@ input { font-family: inherit; }
   .cal-block-sec { font-size: 8px; }
   .cal-block-time-inline { font-size: 8px; }
 
-  /* Ã¢â€â‚¬ Alt tab bar Ã¢â€â‚¬ */
+  
   .mobile-tab-bar {
     display: flex;
     flex-direction: column;
@@ -1601,7 +1601,7 @@ input { font-family: inherit; }
     box-shadow: 0 -4px 16px rgba(26, 20, 16, 0.08);
   }
 
-  /* Stats Ã…Å¸eridi */
+  
   .mobile-tab-stats {
     display: flex;
     align-items: center;
@@ -1615,7 +1615,7 @@ input { font-family: inherit; }
   .mobile-tab-stats-dot { color: var(--line); }
   .mobile-tab-stats-conflict { color: var(--danger); }
 
-  /* Tab butonlarÃ„Â± */
+  
   .mobile-tab-buttons {
     display: flex;
     height: 56px;
@@ -1647,9 +1647,9 @@ input { font-family: inherit; }
     border-radius: 0 0 3px 3px;
   }
 
-  /* Eski .mobile-tab-badge ve .mobile-tab-count artÃ„Â±k kullanÃ„Â±lmÃ„Â±yor */
+  
 
-  /* Ã¢â€â‚¬ AI Panel Ã¢â‚¬â€ bottom sheet Ã¢â€â‚¬ */
+  
   .ai-panel-overlay {
     padding: 0;
     align-items: flex-end;
@@ -1806,9 +1806,7 @@ input { font-family: inherit; }
 }
 .curriculum-filter-clear:hover { background: var(--metu-bordo); color: #fff; }
 
-/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-   CURRICULUM MODAL
-Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+
 
 .curriculum-modal .ai-panel-body {
   display: flex;
@@ -2012,9 +2010,7 @@ input { font-family: inherit; }
 }
 .ai-curriculum-load-btn:hover { opacity: 0.88; }
 
-/* Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â
-   MOBÃ„Â°L Ã¢â‚¬â€ Curriculum uyumlarÃ„Â±
-Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â */
+
 @media (max-width: 768px) {
   .btn-curriculum { padding: 7px 10px; font-size: 12px; }
   .btn-curriculum .btn-label { display: none; }
@@ -2022,11 +2018,7 @@ input { font-family: inherit; }
   .curriculum-modal .ai-panel-body { max-height: 75vh; }
   .ai-curriculum-filter { padding: 8px; }
 }
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   CHATBOT â€” Ask Me Paneli
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* Ask Me butonu â€” bordo'dan biraz farklÄ± ton */
 .ask-me-btn {
   background: linear-gradient(135deg, var(--metu-bordo-deep) 0%, #9b2c3c 100%) !important;
   border-color: transparent !important;
@@ -2035,7 +2027,7 @@ input { font-family: inherit; }
   background: linear-gradient(135deg, #9b2c3c 0%, #b83347 100%) !important;
 }
 
-/* Chatbot paneli â€” ai-panel'den miras, sadece override'lar */
+
 .chatbot-panel {
   display: flex;
   flex-direction: column;
@@ -2043,7 +2035,7 @@ input { font-family: inherit; }
   height: min(620px, 88vh) !important;
 }
 
-/* Ä°lerleme gÃ¶stergesi */
+
 .chatbot-progress {
   display: flex;
   align-items: center;
@@ -2117,7 +2109,7 @@ input { font-family: inherit; }
   font-weight: 600;
 }
 
-/* HÄ±zlÄ± yanÄ±t butonlarÄ± */
+
 .chatbot-quick-replies {
   display: flex;
   flex-wrap: wrap;
@@ -2144,14 +2136,14 @@ input { font-family: inherit; }
   color: #fff;
 }
 
-/* Saat bilgisi schedule satÄ±rÄ±nda */
+
 .chatbot-schedule-time {
   font-size: 11px;
   color: var(--ink-faint);
   white-space: nowrap;
 }
 
-/* Mesaj akÄ±ÅŸÄ± */
+
 .chatbot-messages {
   flex: 1;
   overflow-y: auto;
@@ -2162,7 +2154,7 @@ input { font-family: inherit; }
   scroll-behavior: smooth;
 }
 
-/* Baloncuklar */
+
 .chatbot-bubble {
   display: flex;
   gap: 10px;
@@ -2212,7 +2204,7 @@ input { font-family: inherit; }
   text-align: right;
 }
 
-/* Typing indicator */
+
 .chatbot-typing {
   display: flex;
   gap: 5px;
@@ -2238,7 +2230,7 @@ input { font-family: inherit; }
   30% { transform: translateY(-4px); opacity: 1; }
 }
 
-/* Program sonuÃ§ kartÄ± */
+
 .chatbot-schedule-card {
   background: var(--metu-bordo-soft);
   border: 1.5px solid var(--metu-bordo);
@@ -2298,7 +2290,7 @@ input { font-family: inherit; }
   border-radius: var(--r-sm);
 }
 
-/* Input satÄ±rÄ± */
+
 .chatbot-input-row {
   display: flex;
   gap: 8px;
@@ -2345,7 +2337,7 @@ input { font-family: inherit; }
   cursor: not-allowed;
 }
 
-/* Mobil uyumu */
+
 @media (max-width: 768px) {
   .chatbot-panel {
     height: 90vh !important;
@@ -2353,10 +2345,7 @@ input { font-family: inherit; }
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   ASK ME FLOATING BUBBLE
-   SaÄŸ alt kÃ¶ÅŸede chatbot yÃ¼z ikonu
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+
 .ask-me-floating {
   position: fixed;
   right: 28px;
@@ -2458,10 +2447,7 @@ input { font-family: inherit; }
   }
 }
 
-/* ============================================================
-   Kullanıcı avatar + çıkış menüsü
-   Bu bloğu src/styles.css dosyasının EN SONUNA ekleyin
-   ============================================================ */
+
 
    .user-menu-wrap {
     position: relative;
@@ -2556,11 +2542,8 @@ input { font-family: inherit; }
     background: #fdf0f0;
   }
 
-  /* ============================================================
-   AIPanel UX — styles.css SONUNA ekle
-   ============================================================ */
 
-/* ── Kampüs satırı — sadece kutucuklar + X/5 ─────────────── */
+
 .ai-campus-row {
   display: flex; align-items: center; gap: 4px; margin-top: 6px;
 }
@@ -2579,7 +2562,7 @@ input { font-family: inherit; }
   font-weight: 700; white-space: nowrap;
 }
 
-/* ── Saat butonları ────────────────────────────────────────── */
+
 .ai-hours-track { display: flex; gap: 3px; }
 .ai-hours-step {
   flex: 1; border: 1.5px solid var(--line); background: #fff;
@@ -2591,7 +2574,7 @@ input { font-family: inherit; }
 .ai-hours-step.past { background: var(--metu-bordo-soft); border-color: var(--metu-bordo); color: var(--metu-bordo); opacity: 0.45; }
 .ai-hours-step.active { background: var(--metu-bordo); border-color: var(--metu-bordo); color: #fff; opacity: 1; }
 
-/* ── Saat aralığı ──────────────────────────────────────────── */
+
 .ai-time-range-box {
   display: grid; grid-template-columns: 1fr 1px 1fr; align-items: center;
   gap: 14px; background: #fff; border: 1.5px solid var(--line);
@@ -2611,7 +2594,7 @@ input { font-family: inherit; }
 }
 .ai-select:focus { border-color: var(--metu-bordo); }
 
-/* ── Kredi ─────────────────────────────────────────────────── */
+
 .ai-credit-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
 .ai-credit-chip {
   border: 1.5px solid var(--line); background: #fff; border-radius: 999px;

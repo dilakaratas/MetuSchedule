@@ -1,13 +1,4 @@
-"""
-METU Academic Catalog Scraper
-Mühendislik Fakültesi (fac_inst=500) tüm lisans programlarını çeker.
 
-Kullanım:
-    pip install requests beautifulsoup4
-    python metu_catalog_scraper.py
-
-Çıktı: metu_engineering_catalog.json
-"""
 
 import requests
 import json
@@ -217,15 +208,15 @@ def main():
         prog_data = scrape_program(prog_id, prog_name)
         if prog_data:
             result["programs"].append(prog_data)
-        time.sleep(1.2)  # Sunucuyu yormamak için
+        time.sleep(1.2) 
 
     output_file = "metu_engineering_catalog.json"
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
     print("\n" + "=" * 60)
-    print(f"✓ Tamamlandı! {len(result['programs'])} program çekildi.")
-    print(f"✓ Kaydedildi: {output_file}")
+    print(f" Tamamlandı! {len(result['programs'])} program çekildi.")
+    print(f" Kaydedildi: {output_file}")
     print("=" * 60)
 
 
