@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 
-const CURRICULUM_FILE = "/metu_all_programs.json";
+const CURRICULUM_FILE = "/metu_all_programsv2.json";
 
 const YEAR_TO_NUM = {
   "FIRST YEAR": 1,
