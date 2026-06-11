@@ -19,10 +19,12 @@ function isNilObject(value) {
     value &&
     typeof value === "object" &&
     !Array.isArray(value) &&
-    (value?.$?.nil === "true" ||
+    (
+      value?.$?.nil === "true" ||
       value?.$?.nil === true ||
       value?.nil === "true" ||
-      value?.nil === true)
+      value?.nil === true
+    )
   );
 }
 
@@ -101,8 +103,38 @@ function readStoredUser() {
   return null;
 }
 
+function hasRealStudentDepartment(user) {
+  if (!user) return false;
+
+  const dept = safeText(user?.dept, "").trim();
+  const department = safeText(user?.department, "").trim();
+  const departmentName = safeText(user?.departmentName, "").trim();
+  const programName = safeText(user?.programName, "").trim();
+  const programNameEng = safeText(user?.programNameEng, "").trim();
+  const programNameTr = safeText(user?.programNameTr, "").trim();
+  const year = safeText(user?.year || user?.yearNum, "").trim();
+  const semester = safeText(user?.semester, "").trim();
+
+  /*
+    Önemli:
+    Sadece name / username varsa öğrenci bölümü var saymıyoruz.
+    Senin kendi hesabında sadece dilak / @dilak görünüyor.
+    Bu durumda false dönmeli ve tüm katalog açılmalı.
+  */
+  return Boolean(
+    dept ||
+      department ||
+      departmentName ||
+      programName ||
+      programNameEng ||
+      programNameTr ||
+      year ||
+      semester
+  );
+}
+
 function getUserDepartmentPrefix(user) {
-  if (!user) return "";
+  if (!hasRealStudentDepartment(user)) return "";
 
   const dept = safeText(user?.dept, "").toUpperCase();
   const department = safeText(user?.department, "").toUpperCase();
@@ -110,8 +142,6 @@ function getUserDepartmentPrefix(user) {
   const programName = safeText(user?.programName, "").toUpperCase();
   const programNameEng = safeText(user?.programNameEng, "").toUpperCase();
   const programNameTr = safeText(user?.programNameTr, "").toUpperCase();
-  const faculty = safeText(user?.faculty, "").toUpperCase();
-  const programCode = safeText(user?.programCode, "").toUpperCase();
 
   const combined = [
     dept,
@@ -120,24 +150,19 @@ function getUserDepartmentPrefix(user) {
     programName,
     programNameEng,
     programNameTr,
-    faculty,
   ]
     .filter(Boolean)
     .join(" ")
     .trim();
 
-  if (!combined && !dept) {
-    return "";
-  }
+  if (!combined) return "";
 
-  if (/^[A-Z]{2,6}$/.test(dept)) {
-    return dept;
-  }
+  if (/^[A-Z]{2,6}$/.test(dept)) return dept;
 
   if (
     combined.includes("COMPUTER ENGINEERING") ||
-    combined.includes("BİLGİSAYAR MÜHENDİSLİĞİ") ||
-    combined.includes("BILGISAYAR MUHENDISLIGI") ||
+    combined.includes("BİLGİSAYAR") ||
+    combined.includes("BILGISAYAR") ||
     combined.includes("CENG")
   ) {
     return "CENG";
@@ -218,10 +243,7 @@ function getUserDepartmentPrefix(user) {
     return "GEOE";
   }
 
-  if (
-    combined.includes("MINING ENGINEERING") ||
-    combined.includes("MADEN")
-  ) {
+  if (combined.includes("MINING ENGINEERING") || combined.includes("MADEN")) {
     return "MINE";
   }
 
@@ -244,15 +266,9 @@ function getUserDepartmentPrefix(user) {
   }
 
   /*
-    Önemli:
-    Sadece numeric programCode varsa filtre uygulamıyoruz.
-    Çünkü senin durumda bölüm bilgisi yokken veya yanlış kod gelirken
-    ders listesi istemeden daralıyordu.
+    Emin değilsek filtre uygulamıyoruz.
+    Böylece yanlış/eksik kullanıcı bilgisinde katalog daralmaz.
   */
-  if (!combined && /^\d+$/.test(programCode)) {
-    return "";
-  }
-
   return "";
 }
 
@@ -262,7 +278,11 @@ function matchesDepartmentFilter(course, userDeptPrefix) {
   const code = normCode(course?.code);
   const dept = normCode(course?.dept);
 
-  return code.startsWith(userDeptPrefix) || dept === userDeptPrefix;
+  return (
+    code.startsWith(userDeptPrefix) ||
+    dept === userDeptPrefix ||
+    isServiceCourse(code)
+  );
 }
 
 export default function App() {
@@ -385,7 +405,15 @@ function MainApp({ user, onLogout }) {
     const dept = userDeptPrefix;
     const year = Number(user?.yearNum || user?.year || 0);
 
-    if (!dept || !year) return;
+    /*
+      Kullanıcıda gerçek bölüm/yıl yoksa otomatik müfredat filtresi de uygulanmasın.
+      Bu senin hesabında tüm derslerin görünmesi için önemli.
+    */
+    if (!dept || !year) {
+      setCurriculumYearCodes(null);
+      setCurriculumYearLabel("");
+      return;
+    }
 
     const ENG_FILES = [
       "/metu_engineering_catalog.json",
@@ -495,6 +523,13 @@ function MainApp({ user, onLogout }) {
   }, [selected]);
 
   const deptFilteredCourses = useMemo(() => {
+    /*
+      En kritik kısım burası:
+      userDeptPrefix boşsa tüm courses geri döner.
+      Yani profilinde bölüm yoksa tüm katalog görünür.
+    */
+    if (!userDeptPrefix) return courses;
+
     return courses.filter((course) =>
       matchesDepartmentFilter(course, userDeptPrefix)
     );
@@ -1145,7 +1180,7 @@ function MainApp({ user, onLogout }) {
         />
       )}
 
-      {chatBotOpen && (
+      {chatBotOpen && typeof ChatBot !== "undefined" && (
         <ChatBot
           lang={lang}
           courses={courses}
@@ -1170,6 +1205,16 @@ const SERVICE_PREFIXES = [
   "IS",
   "NE",
   "PHED",
+  "GREE",
+  "FREN",
+  "GER",
+  "SPAN",
+  "ITAL",
+  "RUSS",
+  "JAPN",
+  "CHIN",
+  "KORE",
+  "MYO",
 ];
 
 function isServiceCourse(normCd) {
