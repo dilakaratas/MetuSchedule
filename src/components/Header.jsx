@@ -1,5 +1,32 @@
 import React, { useState, useRef, useEffect } from "react";
 
+function safeText(value, fallback = "—") {
+  if (value === null || value === undefined || value === "") return fallback;
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return String(value);
+  if (Array.isArray(value)) return value.map((x) => safeText(x, "")).filter(Boolean).join(", ") || fallback;
+  if (typeof value === "object") {
+    return (
+      value.name || value.label || value.text || value.value || value.description || value.desc ||
+      value.tr || value.en || value.programName || value.programNameEng || value.programNameTr ||
+      value.faculty || value.facultyLongNameEng || value.facultyLongNameTr || JSON.stringify(value)
+    );
+  }
+  return fallback;
+}
+
+function getInitials(user) {
+  const fullName = safeText(user?.name, "");
+  const username = safeText(user?.username, "");
+  const source = fullName || username || "?";
+  return source
+    .split(" ")
+    .filter(Boolean)
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase() || "?";
+}
+
 export default function Header({
   tr,
   lang,
@@ -34,14 +61,7 @@ export default function Header({
     return () => document.removeEventListener("pointerdown", handler);
   }, [menuOpen]);
 
-  const initials = user?.name
-    ? user.name
-        .split(" ")
-        .map((w) => w[0])
-        .slice(0, 2)
-        .join("")
-        .toUpperCase()
-    : (user?.username?.[0] || "?").toUpperCase();
+  const initials = getInitials(user);
 
   return (
     <header className="header">
@@ -81,7 +101,7 @@ export default function Header({
           <div className="brand-name">
             Metu<span>Schedule</span>
           </div>
-          <div className="brand-tag">{tr.tagline}</div>
+          <div className="brand-tag">{safeText(tr.tagline, "")}</div>
         </div>
       </div>
 
@@ -89,12 +109,12 @@ export default function Header({
       <div className="header-stats">
         <div className="stat">
           <div className="stat-num">{selected.length}</div>
-          <div className="stat-lbl">{tr.courses}</div>
+          <div className="stat-lbl">{safeText(tr.courses, "")}</div>
         </div>
         <div className="stat-divider" />
         <div className="stat">
-          <div className="stat-num">{totalCredits}</div>
-          <div className="stat-lbl">{tr.totalCredits}</div>
+          <div className="stat-num">{safeText(totalCredits, "0")}</div>
+          <div className="stat-lbl">{safeText(tr.totalCredits, "")}</div>
         </div>
       </div>
 
@@ -179,7 +199,7 @@ export default function Header({
               fill="none"
             />
           </svg>
-          <span className="btn-label">{tr.copyCRN}</span>
+          <span className="btn-label">{safeText(tr.copyCRN, "")}</span>
         </button>
 
         {/* PNG İndir */}
@@ -197,7 +217,7 @@ export default function Header({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="btn-label">{tr.exportPNG}</span>
+          <span className="btn-label">{safeText(tr.exportPNG, "")}</span>
         </button>
 
         {/* Temizle */}
@@ -215,7 +235,7 @@ export default function Header({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="btn-label hide-mobile-inline">{tr.clearAll}</span>
+          <span className="btn-label hide-mobile-inline">{safeText(tr.clearAll, "")}</span>
         </button>
 
         {/* Kullanıcı menüsü */}
@@ -259,11 +279,11 @@ export default function Header({
               >
                 <div className="user-dropdown-info">
                   <div className="user-dropdown-name">
-                    {user.name || user.username}
+                    {safeText(user.name || user.username)}
                   </div>
 
                   <div className="user-dropdown-username">
-                    @{user.username}
+                    @{safeText(user.username, "")} 
                   </div>
 
                   {(() => {
@@ -296,14 +316,14 @@ export default function Header({
                               color: "#7a1e2e",
                             }}
                           >
-                            {dept}
-                            {name ? ` — ${name}` : ""}
+                            {safeText(dept, "")}
+                            {name ? ` — ${safeText(name, "")}` : ""}
                           </div>
                         )}
 
                         {faculty && (
                           <div style={{ fontSize: 11, color: "#666" }}>
-                            {faculty}
+                            {safeText(faculty, "")}
                           </div>
                         )}
 
@@ -333,7 +353,7 @@ export default function Header({
                                     color: "#222",
                                   }}
                                 >
-                                  {yearNum}
+                                  {safeText(yearNum, "")}
                                 </span>
                               </div>
                             )}
@@ -354,7 +374,7 @@ export default function Header({
                                     color: "#222",
                                   }}
                                 >
-                                  {semNum}
+                                  {safeText(semNum, "")}
                                 </span>
                               </div>
                             )}
@@ -375,7 +395,7 @@ export default function Header({
                                     color: "#222",
                                   }}
                                 >
-                                  {cgpa}
+                                  {safeText(cgpa, "")}
                                 </span>
                               </div>
                             )}

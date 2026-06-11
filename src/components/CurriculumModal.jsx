@@ -155,7 +155,7 @@ function flattenProgramsFromAllProgramsJson(data) {
   return (data?.faculties || [])
     .flatMap((faculty) =>
       (faculty.programs || []).map((program) => ({
-        label: `${program.program_id} — ${program.program_name}`,
+        label: `${safeText(program.program_id, "")} — ${safeText(program.program_name, "")}`,
         prog_id: Number(program.program_id),
         program,
         faculty_id: faculty.faculty_id,
@@ -221,6 +221,47 @@ const VIEW_FILTERS = [
   { key: "done", tr: "Alınanlar", en: "Completed" },
   { key: "todo", tr: "Kalanlar", en: "Remaining" },
 ];
+
+function safeText(value, fallback = "—") {
+  if (value === null || value === undefined || value === "") return fallback;
+
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean"
+  ) {
+    return String(value);
+  }
+
+  if (Array.isArray(value)) {
+    if (!value.length) return fallback;
+    return value
+      .map((item) => safeText(item, ""))
+      .filter(Boolean)
+      .join(", ");
+  }
+
+  if (typeof value === "object") {
+    return (
+      value.name ||
+      value.label ||
+      value.text ||
+      value.value ||
+      value.description ||
+      value.desc ||
+      value.tr ||
+      value.en ||
+      value.programNameEng ||
+      value.programNameTr ||
+      value.courseName ||
+      value.courseCode ||
+      value.code ||
+      JSON.stringify(value)
+    );
+  }
+
+  return fallback;
+}
 
 function catalogUrl(ders) {
   if (ders.catalog_kodu) {
@@ -362,7 +403,7 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
             opacity: isDone ? 0.7 : 1,
           }}
         >
-          {ders.kod}
+          {safeText(ders.kod, "")}
         </span>
 
         <span
@@ -374,12 +415,12 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
             textDecoration: isDone ? "line-through" : "none",
           }}
         >
-          {ders.ad}
+          {safeText(ders.ad)}
         </span>
 
         {(ders.odtu_kredi != null || ders.ects || ders.akts) && (
           <span style={{ fontSize: "0.72rem", color: "#aaa", flexShrink: 0, marginRight: 4 }}>
-            {ders.odtu_kredi != null ? `${ders.odtu_kredi}k` : `${ders.ects ?? ders.akts} ECTS`}
+            {ders.odtu_kredi != null ? `${safeText(ders.odtu_kredi, "")}k` : `${safeText(ders.ects ?? ders.akts, "")} ECTS`}
           </span>
         )}
 
@@ -444,14 +485,14 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
                     flexWrap: "wrap",
                   }}
                 >
-                  <span style={{ fontWeight: 700, color: "#7a1f2b" }}>§{sec.id}</span>
-                  <span style={{ color: "#555" }}>{sec.instructor || "—"}</span>
+                  <span style={{ fontWeight: 700, color: "#7a1f2b" }}>§{safeText(sec.id, "")}</span>
+                  <span style={{ color: "#555" }}>{safeText(sec.instructor)}</span>
                   <span style={{ color: "#374151", flex: 1 }}>
                     {schedule || (tr ? "Zaman yok" : "No schedule")}
                   </span>
                   {sec.crn && (
                     <span style={{ fontSize: "0.69rem", color: "#888" }}>
-                      CRN: {sec.crn}
+                      CRN: {safeText(sec.crn, "")}
                     </span>
                   )}
                 </div>
@@ -525,7 +566,7 @@ function SecmeliGrupRow({ grup, courses, isLast, tr, done, onToggle, viewFilter 
             flex: 1,
           }}
         >
-          {grup.secmeli_grup}
+          {safeText(grup.secmeli_grup)}
         </span>
         <span
           style={{
@@ -586,7 +627,7 @@ function SlotRow({ slot, isLast, viewFilter }) {
         }}
       />
       <span style={{ fontSize: "0.75rem", color: "#666", fontStyle: "italic" }}>
-        {slot.tur || slot.aciklama}
+        {safeText(slot.tur || slot.aciklama)}
       </span>
     </div>
   );
@@ -880,7 +921,7 @@ export default function CurriculumModal({
     <>
       {allCurricula.map((d) => (
         <option key={`program_${d.prog_id}`} value={`program_${d.prog_id}`}>
-          {d.label}
+          {safeText(d.label)}
         </option>
       ))}
     </>
@@ -1005,7 +1046,7 @@ export default function CurriculumModal({
 
           {error && (
             <div style={{ color: "#c0392b", fontSize: "0.85rem" }}>
-              {error}
+              {safeText(error)}
             </div>
           )}
 
@@ -1102,7 +1143,7 @@ export default function CurriculumModal({
                   {yilStats.map((ys) => (
                     <div key={ys.yil} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                       <span style={{ fontSize: "0.65rem", opacity: 0.8, minWidth: 72 }}>
-                        {ys.yil_adi || `${ys.yil}. Yıl`}
+                        {safeText(ys.yil_adi || `${ys.yil}. Yıl`)}
                       </span>
 
                       <div
@@ -1186,7 +1227,7 @@ export default function CurriculumModal({
                           position: "relative",
                         }}
                       >
-                        {yilLabel(y)}
+                        {safeText(yilLabel(y))}
 
                         {isAuto && (
                           <span
@@ -1280,7 +1321,7 @@ export default function CurriculumModal({
                           }
                           title={
                             yy.global_yariyil_adi
-                              ? `Genel dönem: ${yy.global_yariyil_adi}`
+                              ? `Genel dönem: ${safeText(yy.global_yariyil_adi, "")}`
                               : ""
                           }
                           style={{
@@ -1300,7 +1341,7 @@ export default function CurriculumModal({
                             position: "relative",
                           }}
                         >
-                          {yy.yariyil_adi || `${yy.yariyil}. Dönem`}
+                          {safeText(yy.yariyil_adi || `${yy.yariyil}. Dönem`)}
 
                           {isAuto && (
                             <span
@@ -1451,7 +1492,7 @@ export default function CurriculumModal({
                               borderBottom: "1px solid #ede8e3",
                             }}
                           >
-                            {yariyil.yariyil_adi}
+                            {safeText(yariyil.yariyil_adi)}
                           </div>
 
                           {(yariyil.dersler || []).map((d, di) => {
@@ -1597,7 +1638,7 @@ export default function CurriculumModal({
                             gap: 2,
                           }}
                         >
-                          <span>{tr ? tab.labelTr : tab.labelEn}</span>
+                          <span>{safeText(tr ? tab.labelTr : tab.labelEn)}</span>
                           <span style={{ fontSize: "0.68rem", opacity: 0.8, fontWeight: 400 }}>
                             {count} {tr ? "katalogda" : "in catalog"}
                           </span>
@@ -1642,7 +1683,7 @@ export default function CurriculumModal({
                               borderBottom: "1px solid #f0ece8",
                             }}
                           >
-                            {c.label}
+                            {safeText(c.label)}
                           </div>
                         );
                       }

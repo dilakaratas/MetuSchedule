@@ -3,6 +3,7 @@ import Header from "./components/Header.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Calendar from "./components/Calendar.jsx";
 import AIPanel from "./components/AIPanel.jsx";
+import AdminStudentPanel from "./components/AdminStudentPanel.jsx";
 
 import Login from "./components/Login.jsx";
 import CurriculumModal from "./components/CurriculumModal.jsx";
@@ -11,7 +12,20 @@ import { I18N } from "./i18n.js";
 import { findConflicts, sectionsConflict } from "./utils.js";
 import { saveToken, validateCasTicket } from "./api/auth.js";
 
-const normCode = (s) => (s || "").replace(/\s+/g, "").toUpperCase();
+const normCode = (s) => String(s || "").replace(/\s+/g, "").toUpperCase();
+
+function safeText(value, fallback = "") {
+  if (value === null || value === undefined || value === "") return fallback;
+  if (typeof value === "string" || typeof value === "number" || typeof value === "boolean") return String(value);
+  if (Array.isArray(value)) return value.map((x) => safeText(x, "")).filter(Boolean).join(", ");
+  if (typeof value === "object") {
+    return (
+      value.name || value.label || value.text || value.value || value.description || value.desc ||
+      value.tr || value.en || value.programName || value.programNameEng || value.programNameTr || JSON.stringify(value)
+    );
+  }
+  return fallback;
+}
 
 // ── Auth yardımcıları ─────────────────────────────────────────────
 function clearAllAuth() {
@@ -138,6 +152,7 @@ function MainApp({ user, onLogout }) {
   const [aiPanelOpen, setAiPanelOpen] = useState(false);
   const [chatBotOpen, setChatBotOpen] = useState(false);
   const [curriculumOpen, setCurriculumOpen] = useState(false);
+  const [adminCurriculumUser, setAdminCurriculumUser] = useState(null);
   const [curriculumCodes, setCurriculumCodes] = useState(null);
   const [mobileTab, setMobileTab] = useState("courses");
 
@@ -344,7 +359,7 @@ function MainApp({ user, onLogout }) {
 
   const removeSelected = (code) => {
     const course = courses.find((c) => c.code === code);
-    const name = course ? (lang === "tr" ? course.nameTr : course.name) : code;
+    const name = safeText(course ? (lang === "tr" ? course.nameTr : course.name) : code, code);
     setConfirmDialog({
       message: lang === "tr"
         ? `"${code} – ${name}" takvimden kaldırılacak.`
@@ -443,6 +458,13 @@ function MainApp({ user, onLogout }) {
     toast(`${newEntries.length} ders takvime eklendi`);
   };
 
+  const handleAdminViewCurriculum = (studentUser) => {
+    setAdminCurriculumUser(studentUser);
+    setCurriculumOpen(true);
+  };
+
+  const curriculumUser = user?.role === "admin" && adminCurriculumUser ? adminCurriculumUser : user;
+
   const conflictCount = Object.keys(conflicts).length / 2;
 
   if (dataLoading) {
@@ -462,7 +484,57 @@ function MainApp({ user, onLogout }) {
         display: "flex", alignItems: "center", justifyContent: "center",
         height: "100vh", fontSize: "1.1rem", color: "#e53e3e"
       }}>
-        {dataError}
+        {safeText(dataError)}
+      </div>
+    );
+  }
+
+
+  if (user?.role === "admin") {
+    return (
+      <div className="app">
+        <div
+          style={{
+            position: "fixed",
+            top: 12,
+            right: 14,
+            zIndex: 1200,
+          }}
+        >
+          <button
+            onClick={onLogout}
+            style={{
+              padding: "8px 14px",
+              borderRadius: 8,
+              border: "1px solid #e5e0da",
+              background: "#fff",
+              color: "#7a1f2b",
+              fontSize: "0.84rem",
+              fontWeight: 700,
+              cursor: "pointer",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.08)",
+            }}
+          >
+            {lang === "tr" ? "Çıkış Yap" : "Log Out"}
+          </button>
+        </div>
+
+        <AdminStudentPanel onViewCurriculum={handleAdminViewCurriculum} />
+
+        {curriculumOpen && adminCurriculumUser && (
+          <CurriculumModal
+            lang={lang}
+            courses={courses}
+            user={adminCurriculumUser}
+            onApplyToScheduler={handleCurriculumApply}
+            onClose={() => {
+              setCurriculumOpen(false);
+              setAdminCurriculumUser(null);
+            }}
+          />
+        )}
+
+        {toastMsg && <div className="toast">{safeText(toastMsg)}</div>}
       </div>
     );
   }
@@ -585,7 +657,7 @@ function MainApp({ user, onLogout }) {
             maxWidth: 360, width: "100%", boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
           }}>
             <div style={{ fontSize: "0.95rem", color: "#222", lineHeight: 1.5, marginBottom: 24 }}>
-              {confirmDialog.message}
+              {safeText(confirmDialog.message)}
             </div>
             <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
               <button
@@ -612,13 +684,13 @@ function MainApp({ user, onLogout }) {
         </div>
       )}
 
-      {toastMsg && <div className="toast">{toastMsg}</div>}
+      {toastMsg && <div className="toast">{safeText(toastMsg)}</div>}
 
       {curriculumOpen && (
         <CurriculumModal
           lang={lang}
           courses={courses}
-          user={user}
+          user={curriculumUser}
           onApplyToScheduler={handleCurriculumApply}
           onClose={() => setCurriculumOpen(false)}
         />
