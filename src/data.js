@@ -84,20 +84,16 @@ const DAY_MAP = {
   function decodeNumericMetuCourseCode(courseCode) {
     const raw = cleanText(courseCode).replace(/\s+/g, "").toUpperCase();
   
-    // Zaten CENG100, MATH117 gibi geldiyse dokunma
+  
     if (/^[A-Z]{2,6}\d{3,4}[A-Z]?$/.test(raw)) {
       return raw;
     }
   
-    // Sadece sayı değilse dokunma
+
     if (!/^\d+$/.test(raw)) {
       return raw;
     }
-  
-    // Örnek: 5710100
-    // 571 -> program code
-    // 0   -> ara digit
-    // 100 -> course number
+ 
     if (raw.length === 7) {
       const programCode = raw.slice(0, 3);
       const middleDigit = raw.slice(3, 4);
@@ -110,9 +106,6 @@ const DAY_MAP = {
       }
     }
   
-    // Örnek ihtimal: 571100 gibi gelirse
-    // 571 -> program code
-    // 100 -> course number
     if (raw.length === 6) {
       const programCode = raw.slice(0, 3);
       const courseNumber = raw.slice(3);

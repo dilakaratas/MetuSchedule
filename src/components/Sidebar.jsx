@@ -1,88 +1,383 @@
 import React, { useMemo } from "react";
 import { colorFor } from "../utils.js";
 
+function safeText(value, fallback = "") {
+  if (value === null || value === undefined || value === "") return fallback;
+
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean"
+  ) {
+    return String(value).trim();
+  }
+
+  if (typeof value === "object") {
+    return (
+      value.name ||
+      value.label ||
+      value.text ||
+      value.value ||
+      value.description ||
+      value.desc ||
+      value.tr ||
+      value.en ||
+      value.programName ||
+      value.programNameEng ||
+      value.programNameTr ||
+      value.department ||
+      value.departmentName ||
+      fallback
+    );
+  }
+
+  return fallback;
+}
+
+function getUserDepartmentPrefix(user) {
+  if (!user) return "";
+
+  const rawProgramCode = safeText(user?.programCode, "");
+  const rawDept = safeText(user?.dept, "");
+  const rawProgramName = safeText(user?.programName, "");
+  const rawDepartment = safeText(user?.department, "");
+  const rawDepartmentName = safeText(user?.departmentName, "");
+  const rawFaculty = safeText(user?.faculty, "");
+
+  const combined = [
+    rawProgramCode,
+    rawDept,
+    rawProgramName,
+    rawDepartment,
+    rawDepartmentName,
+    rawFaculty,
+  ]
+    .join(" ")
+    .toUpperCase()
+    .trim();
+
+  if (!combined) return "";
+
+  
+  if (
+    combined.includes("COMPUTER ENGINEERING") ||
+    combined.includes("DEPARTMENT OF COMPUTER ENGINEERING") ||
+    combined.includes("CENG") ||
+    rawProgramCode === "571" ||
+    rawDept === "571"
+  ) {
+    return "CENG";
+  }
+
+  if (
+    combined.includes("ELECTRICAL") ||
+    combined.includes("ELECTRONICS") ||
+    combined.includes("EEE")
+  ) {
+    return "EEE";
+  }
+
+  if (
+    combined.includes("INDUSTRIAL ENGINEERING") ||
+    combined.includes("IE")
+  ) {
+    return "IE";
+  }
+
+  if (
+    combined.includes("MECHANICAL ENGINEERING") ||
+    combined.includes("ME")
+  ) {
+    return "ME";
+  }
+
+  if (
+    combined.includes("CIVIL ENGINEERING") ||
+    combined.includes("CE")
+  ) {
+    return "CE";
+  }
+
+  if (
+    combined.includes("CHEMICAL ENGINEERING") ||
+    combined.includes("CHE")
+  ) {
+    return "CHE";
+  }
+
+  if (
+    combined.includes("AEROSPACE ENGINEERING") ||
+    combined.includes("AEE")
+  ) {
+    return "AEE";
+  }
+
+  if (
+    combined.includes("METALLURGICAL") ||
+    combined.includes("MATERIALS ENGINEERING") ||
+    combined.includes("METE")
+  ) {
+    return "METE";
+  }
+
+  if (
+    combined.includes("ENVIRONMENTAL ENGINEERING") ||
+    combined.includes("ENVE")
+  ) {
+    return "ENVE";
+  }
+
+  if (
+    combined.includes("GEOLOGICAL ENGINEERING") ||
+    combined.includes("GEOE")
+  ) {
+    return "GEOE";
+  }
+
+  if (
+    combined.includes("MINING ENGINEERING") ||
+    combined.includes("MINE")
+  ) {
+    return "MINE";
+  }
+
+  if (
+    combined.includes("PETROLEUM") ||
+    combined.includes("NATURAL GAS") ||
+    combined.includes("PETE")
+  ) {
+    return "PETE";
+  }
+
+  if (
+    combined.includes("ARTIFICIAL INTELLIGENCE") ||
+    combined.includes("AI")
+  ) {
+    return "AI";
+  }
+
+
+  const directPrefix =
+    rawDept.toUpperCase() ||
+    rawProgramCode.toUpperCase() ||
+    rawProgramName.toUpperCase();
+
+  if (/^[A-Z]{2,6}$/.test(directPrefix)) {
+    return directPrefix;
+  }
+
+  
+  return "";
+}
+
+function matchesUserDepartment(course, userDeptPrefix) {
+  if (!userDeptPrefix) return true;
+
+  const code = String(course?.code || "").toUpperCase().trim();
+  const dept = String(course?.dept || "").toUpperCase().trim();
+
+  return code.startsWith(userDeptPrefix) || dept === userDeptPrefix;
+}
+
 export default function Sidebar({
-  tr, lang, query, setQuery, dayFilter, setDayFilter,
-  courses, expandedCourse, setExpandedCourse,
-  selected, conflicts, conflictDetails, toggleSelect,
-  setHoveredSection, setDraggingSection, conflictFlash, suggestAlternative,
-  curriculumYearLabel, onClearCurriculumYear,
+  tr,
+  lang,
+  query,
+  setQuery,
+  dayFilter,
+  setDayFilter,
+  courses,
+  expandedCourse,
+  setExpandedCourse,
+  selected,
+  conflicts,
+  conflictDetails,
+  toggleSelect,
+  setHoveredSection,
+  setDraggingSection,
+  conflictFlash,
+  suggestAlternative,
+  curriculumYearLabel,
+  onClearCurriculumYear,
+  user,
 }) {
   const toggleDay = (idx) => {
     const next = new Set(dayFilter);
-    if (next.has(idx)) next.delete(idx); else next.add(idx);
+
+    if (next.has(idx)) {
+      next.delete(idx);
+    } else {
+      next.add(idx);
+    }
+
     setDayFilter(next);
   };
+
+  const userDeptPrefix = useMemo(() => getUserDepartmentPrefix(user), [user]);
+
+  const visibleCourses = useMemo(() => {
+    return (courses || []).filter((course) =>
+      matchesUserDepartment(course, userDeptPrefix)
+    );
+  }, [courses, userDeptPrefix]);
 
   return (
     <aside className="sidebar">
       <div className="sidebar-search">
         <div className="search-wrap">
-          <svg className="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.6" />
-            <path d="M11 11 L14.5 14.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+          <svg
+            className="search-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <circle
+              cx="7"
+              cy="7"
+              r="5"
+              stroke="currentColor"
+              strokeWidth="1.6"
+            />
+            <path
+              d="M11 11 L14.5 14.5"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+            />
           </svg>
-          <input type="text" placeholder={tr.searchPlaceholder} value={query}
-            onChange={(e) => setQuery(e.target.value)} className="search-input" />
-          {query && <button className="search-clear" onClick={() => setQuery("")}>×</button>}
+
+          <input
+            type="text"
+            placeholder={tr.searchPlaceholder}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="search-input"
+          />
+
+          {query && (
+            <button className="search-clear" onClick={() => setQuery("")}>
+              ×
+            </button>
+          )}
         </div>
       </div>
 
       {curriculumYearLabel && (
-        <div style={{
-          display: "flex", alignItems: "center", justifyContent: "space-between",
-          margin: "0 12px 8px", padding: "7px 10px",
-          background: "var(--primary-light, #fdf0f2)", border: "1px solid var(--primary-border, #f5c6cc)",
-          borderRadius: 8, fontSize: 12, color: "var(--primary, #7a1e2e)",
-        }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "0 12px 8px",
+            padding: "7px 10px",
+            background: "var(--primary-light, #fdf0f2)",
+            border: "1px solid var(--primary-border, #f5c6cc)",
+            borderRadius: 8,
+            fontSize: 12,
+            color: "var(--primary, #7a1e2e)",
+          }}
+        >
           <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
             <svg width="13" height="13" viewBox="0 0 16 16" fill="none">
-              <path d="M2 4h12M4 1v2M12 1v2M2 6h12v8a1 1 0 01-1 1H3a1 1 0 01-1-1V6z"
-                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+              <path
+                d="M2 4h12M4 1v2M12 1v2M2 6h12v8a1 1 0 01-1 1H3a1 1 0 01-1-1V6z"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
             </svg>
+
             <strong>{curriculumYearLabel}</strong>
           </span>
+
           <button
             onClick={onClearCurriculumYear}
             style={{
-              background: "none", border: "none", cursor: "pointer",
-              color: "var(--primary, #7a1e2e)", fontSize: 14, lineHeight: 1,
-              padding: "0 2px", opacity: 0.7,
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              color: "var(--primary, #7a1e2e)",
+              fontSize: 14,
+              lineHeight: 1,
+              padding: "0 2px",
+              opacity: 0.7,
             }}
             title="Filtreyi kaldır"
-          >×</button>
+          >
+            ×
+          </button>
         </div>
       )}
 
       <div className="filter-section">
         <div className="filter-label">
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{ marginRight: 6, verticalAlign: -2 }}>
-            <rect x="2" y="3" width="12" height="11" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-            <path d="M2 6 L14 6 M5 1 L5 4 M11 1 L11 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 16 16"
+            fill="none"
+            style={{ marginRight: 6, verticalAlign: -2 }}
+          >
+            <rect
+              x="2"
+              y="3"
+              width="12"
+              height="11"
+              rx="1.5"
+              stroke="currentColor"
+              strokeWidth="1.4"
+            />
+            <path
+              d="M2 6 L14 6 M5 1 L5 4 M11 1 L11 4"
+              stroke="currentColor"
+              strokeWidth="1.4"
+              strokeLinecap="round"
+            />
           </svg>
+
           {tr.filterByDay}
         </div>
+
         <div className="day-pills">
           {tr.daysShort.map((d, i) => (
-            <button key={i} className={`day-pill ${dayFilter.has(i) ? "active" : ""}`}
-              onClick={() => toggleDay(i)}>{d}</button>
+            <button
+              key={i}
+              className={`day-pill ${dayFilter.has(i) ? "active" : ""}`}
+              onClick={() => toggleDay(i)}
+            >
+              {d}
+            </button>
           ))}
         </div>
       </div>
 
       <div className="course-list">
-        {courses.length === 0 && (
+        {visibleCourses.length === 0 && (
           <div className="empty-state">
             <div>{tr.noResults}</div>
           </div>
         )}
-        {courses.map((course) => (
-          <CourseAccordion key={course.code} course={course} tr={tr} lang={lang}
+
+        {visibleCourses.map((course) => (
+          <CourseAccordion
+            key={course.code}
+            course={course}
+            tr={tr}
+            lang={lang}
             expanded={expandedCourse === course.code}
-            onToggleExpand={() => setExpandedCourse(expandedCourse === course.code ? null : course.code)}
-            selected={selected} conflicts={conflicts} conflictDetails={conflictDetails} toggleSelect={toggleSelect}
-            setHoveredSection={setHoveredSection} setDraggingSection={setDraggingSection}
-            conflictFlash={conflictFlash} suggestAlternative={suggestAlternative} />
+            onToggleExpand={() =>
+              setExpandedCourse(expandedCourse === course.code ? null : course.code)
+            }
+            selected={selected}
+            conflicts={conflicts}
+            conflictDetails={conflictDetails}
+            toggleSelect={toggleSelect}
+            setHoveredSection={setHoveredSection}
+            setDraggingSection={setDraggingSection}
+            conflictFlash={conflictFlash}
+            suggestAlternative={suggestAlternative}
+          />
         ))}
       </div>
     </aside>
@@ -90,9 +385,19 @@ export default function Sidebar({
 }
 
 function CourseAccordion({
-  course, tr, lang, expanded, onToggleExpand,
-  selected, conflicts, conflictDetails, toggleSelect,
-  setHoveredSection, setDraggingSection, conflictFlash, suggestAlternative,
+  course,
+  tr,
+  lang,
+  expanded,
+  onToggleExpand,
+  selected,
+  conflicts,
+  conflictDetails,
+  toggleSelect,
+  setHoveredSection,
+  setDraggingSection,
+  conflictFlash,
+  suggestAlternative,
 }) {
   const colors = colorFor(course.dept);
   const selectedSection = selected.find((s) => s.code === course.code);
@@ -105,18 +410,36 @@ function CourseAccordion({
   };
 
   return (
-    <div className={`course-card ${expanded ? "expanded" : ""} ${selectedSection ? "has-selection" : ""}`}>
-      <button className="course-header" onClick={onToggleExpand}
-        style={{ "--dept-color": colors.bg, "--dept-soft": colors.soft }}>
+    <div
+      className={`course-card ${expanded ? "expanded" : ""} ${
+        selectedSection ? "has-selection" : ""
+      }`}
+    >
+      <button
+        className="course-header"
+        onClick={onToggleExpand}
+        style={{ "--dept-color": colors.bg, "--dept-soft": colors.soft }}
+      >
         <div className="course-header-left">
-          <div className="course-code" style={{ color: colors.bg }}>{course.code}</div>
+          <div className="course-code" style={{ color: colors.bg }}>
+            {course.code}
+          </div>
           <div className="course-name">{courseName}</div>
         </div>
+
         <div className="course-header-right">
           {selectedSection && <div className="course-tick">Eklendi</div>}
+
           <div className="course-credits">{course.credits}</div>
+
           <svg className="chev" width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <path d="M4 6 L8 10 L12 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M4 6 L8 10 L12 6"
+              stroke="currentColor"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
       </button>
@@ -129,92 +452,149 @@ function CourseAccordion({
             const hasConflict = !!conflicts[key];
             const isFlash = conflictFlash === key;
             const isFull = sec.enrolled >= sec.quota;
+
             return (
-              <div key={sec.id}
-                className={`section-row ${isSelected ? "selected" : ""} ${hasConflict ? "conflict" : ""} ${isFlash ? "flash" : ""}`}
-                onMouseEnter={() => setHoveredSection({ code: course.code, sectionId: sec.id })}
+              <div
+                key={sec.id}
+                className={`section-row ${isSelected ? "selected" : ""} ${
+                  hasConflict ? "conflict" : ""
+                } ${isFlash ? "flash" : ""}`}
+                onMouseEnter={() =>
+                  setHoveredSection({ code: course.code, sectionId: sec.id })
+                }
                 onMouseLeave={() => setHoveredSection(null)}
                 draggable={!isFull}
                 onDragStart={(e) => handleDragStart(e, sec.id)}
-                onDragEnd={() => setDraggingSection(null)}>
+                onDragEnd={() => setDraggingSection(null)}
+              >
                 <div className="section-head">
                   <div className="section-id">
-                    <span className="section-num" style={{ background: colors.bg }}>{sec.id}</span>
+                    <span className="section-num" style={{ background: colors.bg }}>
+                      {sec.id}
+                    </span>
                     <span className="section-crn">CRN {sec.crn}</span>
                   </div>
+
                   <div className="section-quota"></div>
                 </div>
+
                 <div className="section-instructor">{sec.instructor}</div>
+
                 <div className="section-meetings">
                   {sec.meetings.map((m, i) => (
                     <div key={i} className="meeting-line">
                       <span className="meeting-day">{tr.daysShort[m.d]}</span>
-                      <span className="meeting-time">{m.s}–{m.e}</span>
+                      <span className="meeting-time">
+                        {m.s}–{m.e}
+                      </span>
                       <span className="meeting-room">{m.room}</span>
                     </div>
                   ))}
                 </div>
-                {hasConflict && (() => {
-                  const key = `${course.code}-${sec.id}`;
-                  const detail = conflictDetails?.[key];
-                  const alt = suggestAlternative(course.code);
-                  const hasAlt = alt && alt.id !== sec.id;
-                  const altMeeting = hasAlt ? alt.meetings?.[0] : null;
-                  const DAY_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
-                  const DAY_EN = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-                  const dayLabel = altMeeting
-                    ? (lang === "tr" ? DAY_TR : DAY_EN)[altMeeting.d] ?? ""
-                    : "";
-                  return (
-                    <div className="conflict-banner" style={{ flexDirection: "column", alignItems: "flex-start", gap: 4 }}>
-                      <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-                        <span style={{ fontWeight: 600 }}>
-                          {lang === "tr" ? "Zaman çakışması" : "Time conflict"}
-                        </span>
-                      </div>
-                      {detail && (
-                        <div style={{ fontSize: 11, opacity: 0.85, paddingLeft: 2 }}>
-                          {lang === "tr"
-                            ? <>
+
+                {hasConflict &&
+                  (() => {
+                    const key = `${course.code}-${sec.id}`;
+                    const detail = conflictDetails?.[key];
+                    const alt = suggestAlternative(course.code);
+                    const hasAlt = alt && alt.id !== sec.id;
+                    const altMeeting = hasAlt ? alt.meetings?.[0] : null;
+                    const DAY_TR = ["Pzt", "Sal", "Çar", "Per", "Cum"];
+                    const DAY_EN = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+
+                    const dayLabel = altMeeting
+                      ? (lang === "tr" ? DAY_TR : DAY_EN)[altMeeting.d] ?? ""
+                      : "";
+
+                    return (
+                      <div
+                        className="conflict-banner"
+                        style={{
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          gap: 4,
+                        }}
+                      >
+                        <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                          <span style={{ fontWeight: 600 }}>
+                            {lang === "tr" ? "Zaman çakışması" : "Time conflict"}
+                          </span>
+                        </div>
+
+                        {detail && (
+                          <div style={{ fontSize: 11, opacity: 0.85, paddingLeft: 2 }}>
+                            {lang === "tr" ? (
+                              <>
                                 <strong>{detail.withCode}</strong>
                                 {detail.withName ? ` (${detail.withName})` : ""}
                                 {" "}ile{" "}
-                                <strong>{detail.day} {detail.time}</strong>
+                                <strong>
+                                  {detail.day} {detail.time}
+                                </strong>
                                 {" "}saatinde çakışıyor
                               </>
-                            : <>
+                            ) : (
+                              <>
                                 Conflicts with <strong>{detail.withCode}</strong>
                                 {detail.withName ? ` (${detail.withName})` : ""}
-                                {" "}on <strong>{detail.day}</strong> at <strong>{detail.time}</strong>
+                                {" "}on <strong>{detail.day}</strong> at{" "}
+                                <strong>{detail.time}</strong>
                               </>
-                          }
-                        </div>
-                      )}
-                      {hasAlt ? (
-                        <button className="suggest-btn" style={{ marginTop: 2 }}
-                          onClick={(e) => { e.stopPropagation(); toggleSelect(course.code, alt.id); }}>
-                          {lang === "tr"
-                            ? `§${alt.id} önerilir${altMeeting ? ` — ${dayLabel} ${altMeeting.s}–${altMeeting.e}` : ""}`
-                            : `Try §${alt.id}${altMeeting ? ` — ${dayLabel} ${altMeeting.s}–${altMeeting.e}` : ""}`
-                          }
-                        </button>
-                      ) : (
-                        <div style={{ fontSize: 11, color: "#c0392b", paddingLeft: 2, marginTop: 2 }}>
-                          {lang === "tr"
-                            ? "Bu ders için uygun başka şube yok"
-                            : "No available alternative section"
-                          }
-                        </div>
-                      )}
-                    </div>
-                  );
-                })()}
+                            )}
+                          </div>
+                        )}
+
+                        {hasAlt ? (
+                          <button
+                            className="suggest-btn"
+                            style={{ marginTop: 2 }}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleSelect(course.code, alt.id);
+                            }}
+                          >
+                            {lang === "tr"
+                              ? `§${alt.id} önerilir${
+                                  altMeeting
+                                    ? ` — ${dayLabel} ${altMeeting.s}–${altMeeting.e}`
+                                    : ""
+                                }`
+                              : `Try §${alt.id}${
+                                  altMeeting
+                                    ? ` — ${dayLabel} ${altMeeting.s}–${altMeeting.e}`
+                                    : ""
+                                }`}
+                          </button>
+                        ) : (
+                          <div
+                            style={{
+                              fontSize: 11,
+                              color: "#c0392b",
+                              paddingLeft: 2,
+                              marginTop: 2,
+                            }}
+                          >
+                            {lang === "tr"
+                              ? "Bu ders için uygun başka şube yok"
+                              : "No available alternative section"}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()}
+
                 <div className="section-actions">
-                  <button className={`add-btn ${isSelected ? "added" : ""}`}
-                    onClick={(e) => { e.stopPropagation(); toggleSelect(course.code, sec.id); }}
-                    disabled={isFull && !isSelected}>
+                  <button
+                    className={`add-btn ${isSelected ? "added" : ""}`}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleSelect(course.code, sec.id);
+                    }}
+                    disabled={isFull && !isSelected}
+                  >
                     {isSelected ? tr.added : tr.add}
                   </button>
+
                   <span className="drag-hint">{tr.drag}</span>
                 </div>
               </div>
