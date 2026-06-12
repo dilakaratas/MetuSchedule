@@ -1189,25 +1189,25 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
       {open && (
         <div style={{
           position: "absolute",
-          top: "calc(100% + 4px)",
+          top: "calc(100% + 6px)",
           left: 0, right: 0,
           background: "#fff",
           border: "2px solid #7a1f2b",
-          borderRadius: 10,
-          boxShadow: "0 8px 32px rgba(0,0,0,0.13)",
+          borderRadius: 12,
+          boxShadow: "0 12px 40px rgba(0,0,0,0.16)",
           zIndex: 2000,
           display: "flex",
           flexDirection: "column",
-          maxHeight: 320,
+          maxHeight: 420,
           overflow: "hidden",
         }}>
           {/* Arama kutusu */}
-          <div style={{ padding: "8px 10px", borderBottom: "1px solid #f0ece8" }}>
+          <div style={{ padding: "12px 12px 10px", borderBottom: "1px solid #f0ece8" }}>
             <div style={{ position: "relative" }}>
-              <svg style={{ position:"absolute", left:8, top:"50%", transform:"translateY(-50%)", color:"#aaa" }}
-                width="13" height="13" viewBox="0 0 16 16" fill="none">
-                <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.6"/>
-                <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+              <svg style={{ position:"absolute", left:11, top:"50%", transform:"translateY(-50%)", color:"#999" }}
+                width="15" height="15" viewBox="0 0 16 16" fill="none">
+                <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.8"/>
+                <path d="M11 11L14.5 14.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
               </svg>
               <input
                 ref={inputRef}
@@ -1217,17 +1217,21 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
                 placeholder={tr ? "Bölüm ara..." : "Search department..."}
                 style={{
                   width: "100%",
-                  padding: "6px 8px 6px 28px",
+                  padding: "10px 32px 10px 34px",
                   border: "1.5px solid #e5e0da",
-                  borderRadius: 6,
-                  fontSize: "0.82rem",
+                  borderRadius: 8,
+                  fontSize: "0.88rem",
                   outline: "none",
                   boxSizing: "border-box",
+                  background: "#fafafa",
+                  transition: "border-color .15s",
                 }}
+                onFocus={(e) => { e.target.style.borderColor = "#7a1f2b"; e.target.style.background = "#fff"; }}
+                onBlur={(e) => { e.target.style.borderColor = "#e5e0da"; e.target.style.background = "#fafafa"; }}
               />
               {query && (
                 <button onClick={() => setQuery("")}
-                  style={{ position:"absolute", right:6, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", cursor:"pointer", color:"#aaa", fontSize:14, lineHeight:1, padding:"0 2px" }}>
+                  style={{ position:"absolute", right:8, top:"50%", transform:"translateY(-50%)", background:"none", border:"none", cursor:"pointer", color:"#aaa", fontSize:16, lineHeight:1, padding:"0 2px" }}>
                   ×
                 </button>
               )}
@@ -1237,7 +1241,7 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
           {/* Liste */}
           <div style={{ overflowY: "auto", flex: 1 }}>
             {filtered.length === 0 ? (
-              <div style={{ padding: "12px 14px", fontSize: "0.82rem", color: "#aaa", textAlign: "center" }}>
+              <div style={{ padding: "16px 14px", fontSize: "0.85rem", color: "#aaa", textAlign: "center" }}>
                 {tr ? "Sonuç bulunamadı" : "No results"}
               </div>
             ) : filtered.map((d) => {
@@ -1248,19 +1252,20 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
                   onClick={() => { onSelect(d); setOpen(false); setQuery(""); }}
                   style={{
                     width: "100%",
-                    padding: "8px 14px",
+                    padding: "11px 16px",
                     textAlign: "left",
                     border: "none",
                     background: isSelected ? "#fdf0f2" : "transparent",
                     color: isSelected ? "#7a1f2b" : "#333",
-                    fontSize: "0.82rem",
+                    fontSize: "0.85rem",
                     fontWeight: isSelected ? 700 : 400,
                     cursor: "pointer",
-                    borderBottom: "1px solid #f9f5f3",
+                    borderBottom: "1px solid #f5f1ef",
                     display: "block",
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis",
+                    lineHeight: 1.4,
                   }}
                   onMouseEnter={(e) => { if (!isSelected) e.currentTarget.style.background = "#fdf8f5"; }}
                   onMouseLeave={(e) => { if (!isSelected) e.currentTarget.style.background = "transparent"; }}
@@ -1272,8 +1277,8 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
           </div>
 
           {/* Kaç sonuç */}
-          {query && (
-            <div style={{ padding: "5px 12px", borderTop: "1px solid #f0ece8", fontSize: "0.7rem", color: "#bbb" }}>
+          {query && filtered.length > 0 && (
+            <div style={{ padding: "6px 14px", borderTop: "1px solid #f0ece8", fontSize: "0.72rem", color: "#bbb" }}>
               {filtered.length} {tr ? "sonuç" : "results"}
             </div>
           )}
