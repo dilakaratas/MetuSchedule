@@ -210,28 +210,9 @@ export default function Header({
       <div className="header-actions">
         {/* Müfredattan Oluştur */}
         <button
-          className="btn btn-ghost hide-mobile"
+          className="btn ai-btn hide-mobile"
           onClick={onOpenCurriculum}
-          style={{ gap: 5 }}
         >
-          <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-            <rect
-              x="2"
-              y="2"
-              width="12"
-              height="12"
-              rx="2"
-              stroke="currentColor"
-              strokeWidth="1.4"
-            />
-            <path
-              d="M5 6h6M5 9h4"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-            />
-          </svg>
-
           <span className="btn-label">
             {lang === "tr" ? "Müfredat" : "Curriculum"}
           </span>

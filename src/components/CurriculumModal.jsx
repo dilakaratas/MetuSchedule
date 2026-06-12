@@ -863,80 +863,130 @@ function sectionsOverlap(a, b) {
   return false;
 }
 
-function buildConflictFree(picks) {
-  // picks: [{code, sections:[...], preferred}]
-  // Greedy: her ders için mevcut seçilenlerle çakışmayan ilk section'ı seç
-  const chosen = [];
+// buildConflictFree artık buildConflictFreeAdvanced tarafından ele alınıyor
+
+const DAY_LABELS_TR = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'];
+const DAY_LABELS_EN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+
+// Saat string'ini dakikaya çevirir: "08:40" → 520
+function timeToMin(t) {
+  if (!t) return null;
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + (m || 0);
+}
+
+// Section'ın tüm meeting'lerini kapsayan başlangıç/bitiş dakikaları
+function secTimeRange(sec) {
+  const mins = (sec.meetings || []).flatMap(m => [timeToMin(m.s), timeToMin(m.e)]).filter(v => v !== null);
+  if (!mins.length) return null;
+  return { start: Math.min(...mins), end: Math.max(...mins) };
+}
+
+// Saat tercih skorlaması: earliestStart=en erken başlasın (düşük start iyi), latestEnd=en geç bitsin (yüksek end iyi)
+function timeScore(sec, pref) {
+  const range = secTimeRange(sec);
+  if (!range) return 0;
+  let score = 0;
+  if (pref.earliestStart !== '') {
+    const limit = Number(pref.earliestStart);
+    // limit saatten önce başlayanlar tercih edilir
+    score -= Math.abs(range.start - limit * 60);
+  }
+  if (pref.latestEnd !== '') {
+    const limit = Number(pref.latestEnd);
+    // limit saatten sonra bitmeyenler tercih edilir
+    score -= Math.abs(range.end - limit * 60);
+  }
+  return score;
+}
+
+// Gelişmiş buildConflictFree: çakışırsa alternatif section önerir, yoksa detaylı neden bildirir
+function buildConflictFreeAdvanced(picks) {
+  const chosen = []; // { sec, code, sectionId }
   const result = [];
+
   for (const pick of picks) {
-    const candidates = [...pick.sections].sort((a, b) => {
-      // preferred hoca varsa önce ona bak
+    const sorted = [...pick.sections].sort((a, b) => {
+      // hoca tercihi
       if (pick.preferred?.instructor) {
         const pa = a.instructor?.toLowerCase().includes(pick.preferred.instructor.toLowerCase()) ? 0 : 1;
         const pb = b.instructor?.toLowerCase().includes(pick.preferred.instructor.toLowerCase()) ? 0 : 1;
         if (pa !== pb) return pa - pb;
       }
-      // preferred gün varsa önce ona bak
+      // gün tercihi
       if (pick.preferred?.day !== undefined) {
         const da = a.meetings?.some(m => m.d === pick.preferred.day) ? 0 : 1;
         const db = b.meetings?.some(m => m.d === pick.preferred.day) ? 0 : 1;
         if (da !== db) return da - db;
       }
-      // preferred saat aralığı
-      if (pick.preferred?.timeSlot) {
-        const score = (sec) => {
-          const m = sec.meetings?.[0];
-          if (!m) return 99;
-          const h = parseInt(m.s?.split(':')?.[0] ?? '99');
-          if (pick.preferred.timeSlot === 'morning' && h < 12) return 0;
-          if (pick.preferred.timeSlot === 'afternoon' && h >= 12 && h < 17) return 0;
-          if (pick.preferred.timeSlot === 'evening' && h >= 17) return 0;
-          return 1;
-        };
-        if (score(a) !== score(b)) return score(a) - score(b);
-      }
-      return 0;
+      // saat tercihi skoru (yüksek = daha iyi)
+      const sa = timeScore(a, pick.preferred || {});
+      const sb = timeScore(b, pick.preferred || {});
+      return sb - sa;
     });
 
     let placed = false;
-    for (const sec of candidates) {
-      const conflict = chosen.some(cs => sectionsOverlap(sec, cs));
-      if (!conflict) {
-        chosen.push(sec);
-        result.push({ code: pick.code, sectionId: sec.id, section: sec });
+    let conflictingWith = [];
+
+    for (const sec of sorted) {
+      const conflicts = chosen.filter(cs => sectionsOverlap(sec, cs.sec));
+      if (conflicts.length === 0) {
+        chosen.push({ sec, code: pick.code, sectionId: sec.id });
+        result.push({ code: pick.code, sectionId: sec.id, section: sec, hasConflict: false });
         placed = true;
         break;
+      } else {
+        if (!conflictingWith.length) conflictingWith = conflicts;
       }
     }
+
     if (!placed) {
-      // Çakışmadan yerleştirilemedi, yine de ekle (çakışma uyarısı gösterilecek)
-      const sec = candidates[0];
-      if (sec) {
-        result.push({ code: pick.code, sectionId: sec.id, section: sec, hasConflict: true });
-      }
+      // Hiçbir section çakışmasız yerleştirilemedi
+      // En iyi adayı ve çakışan dersleri raporla
+      const bestSec = sorted[0];
+      const conflictDetails = conflictingWith.map(cs => ({
+        code: cs.code,
+        sectionId: cs.sectionId,
+        meetings: cs.sec.meetings,
+      }));
+
+      // Kritere uyan section var mı? (tercih dışında çakışmasız olan)
+      const anyFit = sorted.find(sec => chosen.every(cs => !sectionsOverlap(sec, cs.sec)));
+
+      result.push({
+        code: pick.code,
+        sectionId: bestSec?.id,
+        section: bestSec,
+        hasConflict: true,
+        noAlternative: !anyFit,
+        conflictDetails,
+        // Tercih kriterini karşılayan ama çakışan section sayısı
+        preferredCount: sorted.filter(sec => {
+          if (pick.preferred?.instructor && !sec.instructor?.toLowerCase().includes(pick.preferred.instructor.toLowerCase())) return false;
+          return true;
+        }).length,
+        totalSections: sorted.length,
+      });
     }
   }
   return result;
 }
 
-const DAY_LABELS_TR = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum'];
-const DAY_LABELS_EN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+const HOUR_OPTIONS = Array.from({ length: 15 }, (_, i) => i + 7); // 07:00 – 21:00
 
 function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
-  const lang = isTr ? 'tr' : 'en';
   const DAY_LABELS = isTr ? DAY_LABELS_TR : DAY_LABELS_EN;
 
-  // Her ders için tercih state'i: { instructor:'', day:undefined, timeSlot:'' }
+  // Tercih state: { instructor, day, earliestStart, latestEnd }
   const [prefs, setPrefs] = useState(() => {
     const init = {};
-    dersler.forEach(d => { init[normCode(d.kod)] = { instructor: '', day: undefined, timeSlot: '' }; });
+    dersler.forEach(d => { init[normCode(d.kod)] = { instructor: '', day: undefined, earliestStart: '', latestEnd: '' }; });
     return init;
   });
 
-  const [step, setStep] = useState('prefs'); // 'prefs' | 'result'
+  const [step, setStep] = useState('prefs');
   const [result, setResult] = useState(null);
 
-  // Katalogdaki ders + section bilgisi
   const catalogDers = useMemo(() => {
     return dersler.map(d => {
       const entry = findInCatalog(d, courses);
@@ -954,7 +1004,7 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
       sections: entry.sections,
       preferred: prefs[normCode(ders.kod)] || {},
     }));
-    const res = buildConflictFree(picks);
+    const res = buildConflictFreeAdvanced(picks);
     setResult(res);
     setStep('result');
   };
@@ -967,6 +1017,7 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
 
   if (step === 'result') {
     const conflicts = result.filter(r => r.hasConflict);
+    const ok = result.filter(r => !r.hasConflict);
     return (
       <div style={{ display:'flex', flexDirection:'column', flex:1, minHeight:0 }}>
         <div style={{ padding:'14px 20px', borderBottom:'1px solid #f0ece8', display:'flex', alignItems:'center', gap:10, flexShrink:0 }}>
@@ -977,12 +1028,52 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
         </div>
 
         <div style={{ flex:1, overflowY:'auto', padding:'14px 20px' }}>
-          {conflicts.length > 0 && (
-            <div style={{ marginBottom:12, padding:'8px 12px', background:'#fff7ed', border:'1px solid #fed7aa', borderRadius:8, fontSize:'0.78rem', color:'#92400e' }}>
-              ⚠ {conflicts.length} {isTr ? 'ders çakışmasız yerleştirilemedi, en uygun section seçildi.' : 'course(s) could not be placed without conflict.'}
+          {conflicts.length === 0 ? (
+            <div style={{ marginBottom:12, padding:'8px 12px', background:'#f0fdf4', border:'1px solid #86efac', borderRadius:8, fontSize:'0.78rem', color:'#166534', fontWeight:600 }}>
+              ✓ {isTr ? 'Tüm dersler çakışmasız yerleştirildi.' : 'All courses placed without conflicts.'}
             </div>
+          ) : (
+            <>
+              {ok.length > 0 && (
+                <div style={{ marginBottom:8, padding:'8px 12px', background:'#f0fdf4', border:'1px solid #86efac', borderRadius:8, fontSize:'0.78rem', color:'#166534' }}>
+                  ✓ {ok.length} {isTr ? 'ders çakışmasız yerleştirildi.' : 'course(s) placed without conflict.'}
+                </div>
+              )}
+              {conflicts.map((r, ci) => {
+                const dayNames = isTr ? DAY_LABELS_TR : DAY_LABELS_EN;
+                const conflictList = (r.conflictDetails || []).map(cd => {
+                  const mStr = (cd.meetings || []).map(m => `${dayNames[m.d]??m.d} ${m.s}–${m.e}`).join(', ');
+                  return `${cd.code} §${cd.sectionId}${mStr ? ` (${mStr})` : ''}`;
+                }).join('; ');
+                return (
+                  <div key={ci} style={{ marginBottom:10, padding:'10px 12px', background:'#fff7ed', border:'1.5px solid #fed7aa', borderRadius:10, fontSize:'0.78rem', color:'#92400e' }}>
+                    <div style={{ fontWeight:700, marginBottom:4 }}>⚠ {r.code}</div>
+                    {r.noAlternative ? (
+                      <div>
+                        {isTr
+                          ? `Bu derse ait tüm ${r.totalSections} şube mevcut programla çakışıyor. Seçtiğin derslere göre en uygun program bu şekilde oluşturuldu; §${r.sectionId} eklendi.`
+                          : `All ${r.totalSections} sections conflict with the current schedule. Best possible schedule was built; §${r.sectionId} was added.`}
+                        {conflictList && <div style={{ marginTop:4, color:'#b45309' }}>
+                          {isTr ? 'Çakışan dersler: ' : 'Conflicts with: '}{conflictList}
+                        </div>}
+                      </div>
+                    ) : (
+                      <div>
+                        {isTr
+                          ? `Tercihlerine uyan ${r.preferredCount} şubeden hiçbiri çakışmasız yerleştirilemedi. En uygun şube §${r.sectionId} seçildi.`
+                          : `None of the ${r.preferredCount} section(s) matching your preferences could be placed without conflict. Best fit §${r.sectionId} was selected.`}
+                        {conflictList && <div style={{ marginTop:4, color:'#b45309' }}>
+                          {isTr ? 'Çakışan dersler: ' : 'Conflicts with: '}{conflictList}
+                        </div>}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </>
           )}
-          <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+
+          <div style={{ display:'flex', flexDirection:'column', gap:8, marginTop:4 }}>
             {result.map((r, i) => {
               const sec = r.section;
               const schedule = (sec?.meetings || [])
@@ -1023,6 +1114,13 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
   }
 
   // step === 'prefs'
+  const selectStyle = {
+    padding: '3px 8px', borderRadius: 6, fontSize: '0.76rem',
+    border: '1.5px solid #e5e0da', background: '#fff', color: '#333',
+    cursor: 'pointer', outline: 'none', appearance: 'none',
+    WebkitAppearance: 'none', minWidth: 80,
+  };
+
   return (
     <div style={{ display:'flex', flexDirection:'column', flex:1, minHeight:0 }}>
       <div style={{ padding:'14px 20px', borderBottom:'1px solid #f0ece8', display:'flex', alignItems:'center', gap:10, flexShrink:0 }}>
@@ -1043,24 +1141,17 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
         ) : catalogDers.map(({ ders, entry }) => {
           const kod = normCode(ders.kod);
           const pref = prefs[kod] || {};
-          // Unique hocalar
-          const instructors = [...new Set(
-            (entry.sections || []).map(s => s.instructor).filter(Boolean)
-          )];
-          // Unique günler
-          const days = [...new Set(
-            (entry.sections || []).flatMap(s => (s.meetings || []).map(m => m.d))
-          )].filter(d => d !== undefined).sort();
+          const instructors = [...new Set((entry.sections || []).map(s => s.instructor).filter(Boolean))];
+          const days = [...new Set((entry.sections || []).flatMap(s => (s.meetings || []).map(m => m.d)))].filter(d => d !== undefined).sort();
 
           return (
             <div key={kod} style={{ marginBottom:12, padding:'10px 12px', borderRadius:10, border:'1.5px solid #f0ece8', background:'#fff' }}>
-              {/* Ders başlığı */}
               <div style={{ display:'flex', justifyContent:'space-between', marginBottom:8 }}>
                 <div>
                   <span style={{ fontWeight:700, fontSize:'0.82rem', color:'#7a1f2b' }}>{ders.kod}</span>
                   <span style={{ marginLeft:6, fontSize:'0.75rem', color:'#555' }}>{safeText(ders.ad)}</span>
                 </div>
-                <span style={{ fontSize:'0.7rem', color:'#aaa' }}>{entry.sections?.length} şube</span>
+                <span style={{ fontSize:'0.7rem', color:'#aaa' }}>{entry.sections?.length} {isTr ? 'şube' : 'sec'}</span>
               </div>
 
               {/* Hoca tercihi */}
@@ -1105,23 +1196,50 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
                 </div>
               )}
 
-              {/* Saat tercihi */}
+              {/* Saat tercihi: en erken başlangıç + en geç bitiş */}
               <div>
-                <div style={{ fontSize:'0.68rem', fontWeight:600, color:'#888', marginBottom:4, textTransform:'uppercase', letterSpacing:'0.04em' }}>
+                <div style={{ fontSize:'0.68rem', fontWeight:600, color:'#888', marginBottom:6, textTransform:'uppercase', letterSpacing:'0.04em' }}>
                   {isTr ? 'Saat tercihi' : 'Time preference'}
                 </div>
-                <div style={{ display:'flex', gap:4 }}>
-                  {[
-                    { key:'', label: isTr ? 'Fark etmez' : 'Any' },
-                    { key:'morning', label: isTr ? 'Sabah' : 'Morning' },
-                    { key:'afternoon', label: isTr ? 'Öğleden sonra' : 'Afternoon' },
-                    { key:'evening', label: isTr ? 'Akşam' : 'Evening' },
-                  ].map(opt => (
-                    <button key={opt.key} onClick={() => setPref(kod, 'timeSlot', opt.key)}
-                      style={{ padding:'3px 9px', borderRadius:6, fontSize:'0.72rem', border: pref.timeSlot === opt.key ? '1.5px solid #7a1f2b' : '1.5px solid #e5e0da', background: pref.timeSlot === opt.key ? '#7a1f2b' : '#fff', color: pref.timeSlot === opt.key ? '#fff' : '#555', cursor:'pointer', fontWeight:600 }}>
-                      {opt.label}
-                    </button>
-                  ))}
+                <div style={{ display:'flex', gap:12, flexWrap:'wrap' }}>
+                  {/* En erken başlangıç */}
+                  <div style={{ display:'flex', flexDirection:'column', gap:3 }}>
+                    <label style={{ fontSize:'0.67rem', color:'#aaa', fontWeight:600 }}>
+                      {isTr ? 'En erken başlangıç' : 'Earliest start'}
+                    </label>
+                    <div style={{ position:'relative' }}>
+                      <select
+                        value={pref.earliestStart}
+                        onChange={e => setPref(kod, 'earliestStart', e.target.value)}
+                        style={{ ...selectStyle, paddingRight:24 }}
+                      >
+                        <option value="">{isTr ? 'Fark etmez' : 'Any'}</option>
+                        {HOUR_OPTIONS.map(h => (
+                          <option key={h} value={h}>{String(h).padStart(2,'0')}:00</option>
+                        ))}
+                      </select>
+                      <span style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', fontSize:'0.6rem', color:'#aaa', pointerEvents:'none' }}>▼</span>
+                    </div>
+                  </div>
+                  {/* En geç bitiş */}
+                  <div style={{ display:'flex', flexDirection:'column', gap:3 }}>
+                    <label style={{ fontSize:'0.67rem', color:'#aaa', fontWeight:600 }}>
+                      {isTr ? 'En geç bitiş' : 'Latest end'}
+                    </label>
+                    <div style={{ position:'relative' }}>
+                      <select
+                        value={pref.latestEnd}
+                        onChange={e => setPref(kod, 'latestEnd', e.target.value)}
+                        style={{ ...selectStyle, paddingRight:24 }}
+                      >
+                        <option value="">{isTr ? 'Fark etmez' : 'Any'}</option>
+                        {HOUR_OPTIONS.map(h => (
+                          <option key={h} value={h}>{String(h).padStart(2,'0')}:00</option>
+                        ))}
+                      </select>
+                      <span style={{ position:'absolute', right:6, top:'50%', transform:'translateY(-50%)', fontSize:'0.6rem', color:'#aaa', pointerEvents:'none' }}>▼</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1840,7 +1958,7 @@ const renderOptions = () => (
                 textAlign: "center",
               }}
             >
-              {tr ? "Akıllı Planla — Tercihlerime Göre Section Seç" : "Smart Plan — Pick Sections by Preference"}
+              {tr ? "Akıllı Planlama" : "Smart Schedule"}
             </button>
           )}
 
