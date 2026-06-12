@@ -218,17 +218,7 @@ export default function Header({
           </span>
         </button>
 
-        {/* Otomatik Program */}
-        <button className="btn ai-btn" onClick={onOpenAutoSchedule || onOpenAI}>
-          <span className="btn-label ai-btn-label-full">
-            {lang === "tr" ? "Akıllı Planlama" : "Smart Planner"}
-          </span>
-
-          <span className="btn-label ai-btn-label-short">
-            {lang === "tr" ? "Planlama" : "Planner"}
-          </span>
-        </button>
-
+        
         {/* Dil seçici */}
         <div className="lang-switch" role="tablist">
           <button
