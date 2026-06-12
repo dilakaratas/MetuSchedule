@@ -1118,6 +1118,7 @@ function SmartPlanWizard({ dersler, courses, tr: isTr, onApply, onClose }) {
 function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [rect, setRect] = useState(null);
   const containerRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -1133,9 +1134,14 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
     return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  // Açılınca input'a odaklan
+  // Açılınca input'a odaklan + buton pozisyonunu ölç
   useEffect(() => {
-    if (open && inputRef.current) inputRef.current.focus();
+    if (open) {
+      if (containerRef.current) {
+        setRect(containerRef.current.getBoundingClientRect());
+      }
+      if (inputRef.current) inputRef.current.focus();
+    }
   }, [open]);
 
   const filtered = useMemo(() => {
@@ -1185,20 +1191,21 @@ function SearchableDeptSelect({ allCurricula, selectedDept, onSelect, tr }) {
         }}>▼</span>
       </button>
 
-      {/* Dropdown panel */}
-      {open && (
+      {/* Dropdown panel — position:fixed so overflow:hidden parents don't clip it */}
+      {open && rect && (
         <div style={{
-          position: "absolute",
-          top: "calc(100% + 6px)",
-          left: 0, right: 0,
+          position: "fixed",
+          top: rect.bottom + 6,
+          left: rect.left,
+          width: rect.width,
           background: "#fff",
           border: "2px solid #7a1f2b",
           borderRadius: 12,
           boxShadow: "0 12px 40px rgba(0,0,0,0.16)",
-          zIndex: 2000,
+          zIndex: 9999,
           display: "flex",
           flexDirection: "column",
-          maxHeight: 420,
+          maxHeight: `min(520px, ${window.innerHeight - rect.bottom - 24}px)`,
           overflow: "hidden",
         }}>
           {/* Arama kutusu */}
