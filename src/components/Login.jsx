@@ -66,7 +66,7 @@ export default function Login({ onLogin, casError = "" }) {
             <img src="/metu-logo.svg" width="22" height="22" alt="ODTÜ" />
           </div>
           <div>
-            <div className="login-brand-main">METU <span>Schedule</span></div>
+            <div className="login-brand-main">METU <span>PlANIFY</span></div>
             <div className="login-brand-sub">Dijital Ders Programı Asistanı</div>
           </div>
         </div>

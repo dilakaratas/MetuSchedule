@@ -126,6 +126,30 @@ function CourseAccordion({
 
       {expanded && (
         <div className="course-body">
+          {course.prerequisite && course.prerequisite.length > 0 && (
+            <div className="prereq-block">
+              <span className="prereq-label">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" style={{verticalAlign:-1,marginRight:4}}>
+                  <path d="M8 2v6l4 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                  <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.6"/>
+                </svg>
+                {lang === "tr" ? "Ön Koşul" : "Prerequisite"}
+              </span>
+              <div className="prereq-sets">
+                {course.prerequisite.map((set, si) => (
+                  <span key={si} className="prereq-set">
+                    {si > 0 && <span className="prereq-or">{lang === "tr" ? "veya" : "or"}</span>}
+                    {set.map((code, ci) => (
+                      <span key={ci} className="prereq-code">
+                        {ci > 0 && <span className="prereq-and">+</span>}
+                        {code}
+                      </span>
+                    ))}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
           {course.sections.map((sec) => {
             const isSelected = selectedSection?.sectionId === sec.id;
             const key = `${course.code}-${sec.id}`;

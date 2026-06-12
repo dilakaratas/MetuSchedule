@@ -13,9 +13,7 @@ import { saveToken, validateCasTicket } from "./api/auth.js";
 
 const normCode = (s) => String(s || "").replace(/\s+/g, "").toUpperCase();
 
-// Türkçe karakterleri normalize ederek arama yapılabilir hale getirir.
-// İ→i, ı→i, Ş→s, ş→s, Ğ→g, ğ→g, Ü→u, ü→u, Ö→o, ö→o, Ç→c, ç→c
-// Böylece "TOKDEMIR" yazınca "TOKDEMİR" olan hocayı bulur.
+
 const normSearch = (s) =>
   String(s || "")
     .toLowerCase()
@@ -27,10 +25,6 @@ const normSearch = (s) =>
     .replace(/ö/g, "o").replace(/Ö/g, "o")
     .replace(/ç/g, "c").replace(/Ç/g, "c");
 
-// ─────────────────────────────────────────────
-// program_id → bu bölüme özgü ders kod prefix'leri
-// metu_all_programsv3.json'daki müfredat analiz edilerek üretilmiştir.
-// ─────────────────────────────────────────────
 const PROGRAM_ID_TO_PREFIXES = {
   "120": ["ARCH"],
   "121": ["CRP"],
@@ -75,7 +69,7 @@ const PROGRAM_ID_TO_PREFIXES = {
   "575": ["CNGB"],
 };
 
-// Servis dersler — her bölümden görünür
+
 const SERVICE_PREFIXES = [
   "PHYS", "MATH", "CHEM", "ENG", "TURK", "HIST", "PE", "ATA",
   "GE", "IS", "NE", "PHED", "GREE", "FREN", "GER", "SPAN",
@@ -157,7 +151,7 @@ function getUserDeptPrefixes(user) {
     return PROGRAM_ID_TO_PREFIXES[deptCode];
   }
 
-  // 3. Metin eşleştirme (CAS'tan isim gelirse)
+
   const combined = [
     user?.programName, user?.programNameEng, user?.programNameTr,
     user?.department, user?.departmentName,
@@ -165,7 +159,7 @@ function getUserDeptPrefixes(user) {
     .map((v) => safeText(v, "").toUpperCase())
     .join(" ");
 
-  if (!combined.trim()) return []; // bölüm bilgisi yok → personel/misafir → tümünü göster
+  if (!combined.trim()) return []; 
 
   const nameMap = [
     [["COMPUTER ENGINEERING", "BİLGİSAYAR MÜHENDİS"], ["CENG"]],
@@ -209,10 +203,10 @@ function getUserDeptPrefixes(user) {
     }
   }
 
-  return []; // tanınamadı → tüm katalog göster
+  return []; 
 }
 
-// Bir ders bu kullanıcıya görünmeli mi?
+
 function courseMatchesUser(course, deptPrefixes) {
   if (!deptPrefixes || deptPrefixes.length === 0) return true; // personel/misafir
   const code = normCode(course?.code);
@@ -309,12 +303,12 @@ function MainApp({ user, onLogout }) {
 
   const calendarRef = useRef(null);
 
-  // Kullanıcının bölüm prefix'leri — boş dizi = personel/misafir = tümünü gör
+
   const userDeptPrefixes = useMemo(() => getUserDeptPrefixes(user), [user]);
 
   // Bölüme göre filtrelenmiş ders listesi
   const deptFilteredCourses = useMemo(() => {
-    if (!userDeptPrefixes || userDeptPrefixes.length === 0) return courses; // tümünü göster
+    if (!userDeptPrefixes || userDeptPrefixes.length === 0) return courses; 
     return courses.filter((c) => courseMatchesUser(c, userDeptPrefixes));
   }, [courses, userDeptPrefixes]);
 
@@ -415,8 +409,7 @@ function MainApp({ user, onLogout }) {
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return deptFilteredCourses.filter((c) => {
-      // Kullanıcı arama yaparken müfredat yılı filtresini bypass et —
-      // aksi halde sadece o yılın dersleri aranır ve search "çalışmıyor" gibi görünür.
+    
       if (curriculumYearCodes && !q) {
         if (!curriculumYearCodes.has(normCode(c.code))) return false;
       }

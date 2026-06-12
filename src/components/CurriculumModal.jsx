@@ -326,6 +326,7 @@ function CourseRow({ ders, catalogEntry, isLast, tr, selected, onSelect }) {
   const hasSections = sections.length > 0;
   const url = catalogUrl(ders) || catalogEntry?.catalogUrl || null;
   const isSelected = selected && catalogEntry ? selected.has(normCode(ders.kod)) : false;
+  const prereq = catalogEntry?.prerequisite || null;
 
   return (
     <div style={{ borderBottom: isLast ? "none" : "1px solid #f5f0ec" }}>
@@ -438,11 +439,60 @@ function CourseRow({ ders, catalogEntry, isLast, tr, selected, onSelect }) {
               );
             })}
           </div>
+          {prereq && prereq.length > 0 && (
+            <div style={{ marginTop: 8, paddingTop: 7, borderTop: "1px solid #f0ece8" }}>
+              <span style={{ fontSize: "0.69rem", fontWeight: 700, color: "#7a5c1f", marginRight: 6 }}>
+                {tr ? "Ön Koşul:" : "Prerequisite:"}
+              </span>
+              {prereq.map((set, si) => (
+                <span key={si} style={{ display: "inline-flex", alignItems: "center", flexWrap: "wrap", gap: 3 }}>
+                  {si > 0 && (
+                    <span style={{ fontSize: "0.65rem", color: "#b58a00", fontWeight: 700, margin: "0 4px" }}>
+                      {tr ? "VEYA" : "OR"}
+                    </span>
+                  )}
+                  {set.map((code, ci) => (
+                    <span key={ci} style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
+                      {ci > 0 && <span style={{ fontSize: "0.65rem", color: "#7a5c1f" }}>+</span>}
+                      <span style={{ fontSize: "0.68rem", fontWeight: 700, color: "#7a1f2b", background: "#fdf0f2", border: "1px solid #f5c6cc", borderRadius: 4, padding: "1px 5px" }}>
+                        {code}
+                      </span>
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </div>
+          )}
           {url && (
             <a href={url} target="_blank" rel="noreferrer" style={{ fontSize: "0.71rem", color: "#7a1f2b", marginTop: 6, display: "inline-block" }}>
               ↗ {tr ? "Katalog sayfasını aç" : "Open catalog page"}
             </a>
           )}
+        </div>
+      )}
+
+      {!open && prereq && prereq.length > 0 && (
+        <div style={{ padding: "4px 12px 6px 40px", background: "#fffbf5", borderTop: "1px solid #f8f3ee", display: "flex", alignItems: "center", flexWrap: "wrap", gap: 4 }}>
+          <span style={{ fontSize: "0.67rem", fontWeight: 700, color: "#7a5c1f", marginRight: 4, flexShrink: 0 }}>
+            {tr ? "Ön Koşul:" : "Prereq:"}
+          </span>
+          {prereq.map((set, si) => (
+            <span key={si} style={{ display: "inline-flex", alignItems: "center", flexWrap: "wrap", gap: 2 }}>
+              {si > 0 && (
+                <span style={{ fontSize: "0.63rem", color: "#b58a00", fontWeight: 700, margin: "0 3px" }}>
+                  {tr ? "VEYA" : "OR"}
+                </span>
+              )}
+              {set.map((code, ci) => (
+                <span key={ci} style={{ display: "inline-flex", alignItems: "center", gap: 2 }}>
+                  {ci > 0 && <span style={{ fontSize: "0.63rem", color: "#7a5c1f" }}>+</span>}
+                  <span style={{ fontSize: "0.66rem", fontWeight: 700, color: "#7a1f2b", background: "#fdf0f2", border: "1px solid #f5c6cc", borderRadius: 4, padding: "1px 4px" }}>
+                    {code}
+                  </span>
+                </span>
+              ))}
+            </span>
+          ))}
         </div>
       )}
     </div>

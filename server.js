@@ -19,7 +19,7 @@ const OIBS_PATH = "/~webservice/OIBSStudentCardInfo/OIBSStudentCardInfo.php";
 const OIBS_NS   = `https://${OIBS_HOST}${OIBS_PATH}`;
 
 async function fetchOibsStudentInfo(idNumber, userCode) {
-  // SOAP XML paketi hazırla
+
   const soap = `<?xml version="1.0" encoding="UTF-8"?>
 <soapenv:Envelope
     xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
@@ -37,7 +37,7 @@ async function fetchOibsStudentInfo(idNumber, userCode) {
 
   const postData = Buffer.from(soap, "utf-8");
 
-  // HTTPS ile OIBS'e gönder (self-signed cert kabul et)
+
   const xmlText = await new Promise((resolve, reject) => {
     const req = https.request(
       {

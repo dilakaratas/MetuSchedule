@@ -185,7 +185,7 @@ export default function Header({
 
         <div className="brand-text">
           <div className="brand-name">
-            Metu<span>Schedule</span>
+            Metu<span>Planify</span>
           </div>
           <div className="brand-tag">{safeText(tr?.tagline, "")}</div>
         </div>

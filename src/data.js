@@ -327,14 +327,98 @@ function convertCourse(course, department) {
     sections: Array.isArray(course?.sections)
       ? course.sections.map((section) => convertSection(section, code))
       : [],
+    prerequisite: null, // metu_courses_new.json merge sonrası doldurulur
   };
 }
 
-export async function loadMetuCourses() {
-  const res = await fetch("/metu_courses_clean.json");
-  if (!res.ok) throw new Error(`Veri yüklenemedi: ${res.status}`);
+/*
+  parsePrerequisiteString
+  ─────────────────────────────────────────────────────────────────
+  "Set 1: 1200101 Set 2: 3590101" formatını parse eder.
+  Her "Set N:" bir alternatif koşul grubudur (OR ilişkisi).
+  Grup içindeki kodlar ise AND ilişkisindedir.
+  Sayısal kodlar DEPT_CODE_TO_PREFIX ile human-readable'a çevrilir.
+*/
+function decodeNumericPrereqCode(raw) {
+  const s = String(raw).trim();
+  if (!s || !/^\d+$/.test(s)) return s;
+  if (s.length === 6 || s.length === 7) {
+    const prefix = DEPT_CODE_TO_PREFIX[s.slice(0, 3)];
+    if (prefix) {
+      const num = parseInt(s.slice(3), 10);
+      return `${prefix}${num}`;
+    }
+  }
+  return s;
+}
 
-  const rawMetuData = await res.json();
+export function parsePrerequisiteString(raw) {
+  if (!raw || !raw.trim()) return null;
+  // "Set 1: 1200101 , 1200102 Set 2: 6390101" → [{codes:[...]}, ...]
+  const setRegex = /Set\s+\d+\s*:\s*([^S]*)/gi;
+  const sets = [];
+  let match;
+  while ((match = setRegex.exec(raw)) !== null) {
+    const codes = match[1]
+      .split(/[\s,]+/)
+      .map((c) => c.trim())
+      .filter(Boolean)
+      .map(decodeNumericPrereqCode)
+      .filter(Boolean);
+    if (codes.length) sets.push(codes);
+  }
+  // "Set N:" formatı yoksa düz kod listesi olarak dene
+  if (!sets.length) {
+    const codes = raw
+      .split(/[\s,]+/)
+      .map((c) => c.trim())
+      .filter(Boolean)
+      .map(decodeNumericPrereqCode)
+      .filter(Boolean);
+    if (codes.length) sets.push(codes);
+  }
+  return sets.length ? sets : null;
+}
+
+/*
+  loadPrerequisiteMap
+  ─────────────────────────────────────────────────────────────────
+  metu_courses_new.json'ı yükler ve { courseCode → parsedPrereqs } map'i döner.
+*/
+async function loadPrerequisiteMap() {
+  try {
+    const res = await fetch("/metu_courses_new.json");
+    if (!res.ok) return {};
+    const faculties = await res.json();
+    const map = {};
+    for (const fac of faculties) {
+      for (const dept of fac.departments || []) {
+        for (const course of dept.courses || []) {
+          const code = String(course.code || "").trim();
+          const prereqRaw = course?.detail?.prerequisite || "";
+          if (code && prereqRaw.trim()) {
+            const parsed = parsePrerequisiteString(prereqRaw);
+            if (parsed) map[code] = parsed;
+          }
+        }
+      }
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}
+
+export async function loadMetuCourses() {
+  // İki fetch'i paralel çalıştır
+  const [coursesRes, prereqMap] = await Promise.all([
+    fetch("/metu_courses_clean.json"),
+    loadPrerequisiteMap(),
+  ]);
+
+  if (!coursesRes.ok) throw new Error(`Veri yüklenemedi: ${coursesRes.status}`);
+
+  const rawMetuData = await coursesRes.json();
   const departments = Array.isArray(rawMetuData?.departments) ? rawMetuData.departments : [];
 
   const allCourses = departments
@@ -356,5 +440,13 @@ export async function loadMetuCourses() {
       seen.set(course.code, course);
     }
   }
+
+  // Prerequisite merge: metu_courses_new.json'dan gelen prereq'ları ekle
+  for (const course of seen.values()) {
+    if (prereqMap[course.code]) {
+      course.prerequisite = prereqMap[course.code];
+    }
+  }
+
   return Array.from(seen.values());
 }
