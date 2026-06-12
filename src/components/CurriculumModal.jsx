@@ -290,11 +290,7 @@ function getAutoDetectedYariyil(user) {
   return null;
 }
 
-const VIEW_FILTERS = [
-  { key: "all", tr: "Tümü", en: "All" },
-  { key: "done", tr: "Alınanlar", en: "Completed" },
-  { key: "todo", tr: "Kalanlar", en: "Remaining" },
-];
+
 
 function catalogUrl(ders) {
   if (ders.catalog_kodu) {
@@ -322,43 +318,21 @@ function findInCatalog(ders, courses) {
   }) || null;
 }
 
-function storageKey(id) {
-  return `metu_done_${String(id).replace(/\W/g, "_")}`;
-}
 
-function loadDone(id) {
-  try {
-    const r = localStorage.getItem(storageKey(id));
-    return r ? new Set(JSON.parse(r)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-function saveDone(id, set) {
-  try {
-    localStorage.setItem(storageKey(id), JSON.stringify([...set]));
-  } catch {}
-}
-
-function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter }) {
+function CourseRow({ ders, catalogEntry, isLast, tr, selected, onSelect }) {
   const [open, setOpen] = useState(false);
 
   const sections = catalogEntry?.sections || [];
   const hasSections = sections.length > 0;
   const url = catalogUrl(ders) || catalogEntry?.catalogUrl || null;
-  const isDone = done.has(normCode(ders.kod));
-
-  if (viewFilter === "done" && !isDone) return null;
-  if (viewFilter === "todo" && isDone) return null;
+  const isSelected = selected && catalogEntry ? selected.has(normCode(ders.kod)) : false;
 
   return (
     <div style={{ borderBottom: isLast ? "none" : "1px solid #f5f0ec" }}>
       <div
         onClick={(e) => {
-          if (e.target.dataset.toggle) return;
+          if (e.target.dataset.select) return;
           if (!catalogEntry) return;
-
           if (hasSections) {
             setOpen((v) => !v);
           } else if (url) {
@@ -370,54 +344,46 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
           display: "flex",
           alignItems: "center",
           gap: 9,
-          background: isDone
-            ? "#f0fdf4"
-            : open
-            ? "#fdf8f5"
-            : catalogEntry
-            ? "#fff"
-            : "#fafafa",
+          background: open ? "#fdf8f5" : catalogEntry ? "#fff" : "#fafafa",
           opacity: catalogEntry ? 1 : 0.55,
           cursor: catalogEntry ? "pointer" : "default",
           transition: "background .12s",
         }}
       >
-        <button
-          data-toggle="1"
-          onClick={(e) => {
-            e.stopPropagation();
-            onToggle(normCode(ders.kod));
-          }}
-          title={
-            isDone
-              ? tr
-                ? "Alındı — kaldır"
-                : "Marked done — undo"
-              : tr
-              ? "Alındı işaretle"
-              : "Mark as done"
-          }
-          style={{
-            width: 18,
-            height: 18,
-            borderRadius: 5,
-            flexShrink: 0,
-            border: isDone ? "none" : "2px solid #d1d5db",
-            background: isDone ? "#22c55e" : "transparent",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: "0.65rem",
-            color: "#fff",
-            transition: "all .15s",
-            padding: 0,
-            outline: "none",
-          }}
-        >
-          {isDone ? "✓" : ""}
-        </button>
+        {/* Seçim checkbox'ı — sadece katalogda olan dersler için */}
+        {catalogEntry ? (
+          <button
+            data-select="1"
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(normCode(ders.kod));
+            }}
+            title={isSelected ? (tr ? "Seçimi kaldır" : "Deselect") : (tr ? "Seç" : "Select")}
+            style={{
+              width: 18,
+              height: 18,
+              borderRadius: 5,
+              flexShrink: 0,
+              border: isSelected ? "none" : "2px solid #d1d5db",
+              background: isSelected ? "#7a1f2b" : "transparent",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              fontSize: "0.65rem",
+              color: "#fff",
+              transition: "all .15s",
+              padding: 0,
+              outline: "none",
+            }}
+          >
+            {isSelected ? "✓" : ""}
+          </button>
+        ) : (
+          <div style={{ width: 18, height: 18, flexShrink: 0 }} />
+        )}
 
+        {/* Katalogda var/yok göstergesi (statik dot) */}
         <div
           style={{
             width: 7,
@@ -428,29 +394,11 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
           }}
         />
 
-        <span
-          style={{
-            fontSize: "0.77rem",
-            fontWeight: 700,
-            color: isDone ? "#15803d" : "#7a1f2b",
-            minWidth: 68,
-            flexShrink: 0,
-            textDecoration: isDone ? "line-through" : "none",
-            opacity: isDone ? 0.7 : 1,
-          }}
-        >
+        <span style={{ fontSize: "0.77rem", fontWeight: 700, color: "#7a1f2b", minWidth: 68, flexShrink: 0 }}>
           {safeText(ders.kod, "")}
         </span>
 
-        <span
-          style={{
-            fontSize: "0.77rem",
-            color: isDone ? "#888" : "#333",
-            flex: 1,
-            lineHeight: 1.4,
-            textDecoration: isDone ? "line-through" : "none",
-          }}
-        >
+        <span style={{ fontSize: "0.77rem", color: "#333", flex: 1, lineHeight: 1.4 }}>
           {safeText(ders.ad)}
         </span>
 
@@ -462,20 +410,9 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
           </span>
         )}
 
-        {catalogEntry && !isDone ? (
+        {catalogEntry ? (
           hasSections ? (
-            <span
-              style={{
-                fontSize: "0.7rem",
-                color: "#aaa",
-                flexShrink: 0,
-                display: "inline-block",
-                transition: "transform .15s",
-                transform: open ? "rotate(180deg)" : "none",
-              }}
-            >
-              ▼
-            </span>
+            <span style={{ fontSize: "0.7rem", color: "#aaa", flexShrink: 0, display: "inline-block", transition: "transform .15s", transform: open ? "rotate(180deg)" : "none" }}>▼</span>
           ) : url ? (
             <span style={{ fontSize: "0.7rem", color: "#aaa", flexShrink: 0 }}>↗</span>
           ) : null
@@ -483,73 +420,26 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
       </div>
 
       {open && hasSections && (
-        <div
-          style={{
-            background: "#fdf8f5",
-            borderTop: "1px solid #f0ece8",
-            padding: "8px 12px 10px 40px",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "0.72rem",
-              fontWeight: 600,
-              color: "#7a5c1f",
-              marginBottom: 6,
-            }}
-          >
+        <div style={{ background: "#fdf8f5", borderTop: "1px solid #f0ece8", padding: "8px 12px 10px 40px" }}>
+          <div style={{ fontSize: "0.72rem", fontWeight: 600, color: "#7a5c1f", marginBottom: 6 }}>
             {tr ? `${sections.length} şube:` : `${sections.length} section(s):`}
           </div>
-
           <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
             {sections.map((sec, i) => {
               const dayNames = ["Pzt", "Sal", "Çar", "Per", "Cum"];
-              const schedule = (sec.meetings || [])
-                .map((m) => `${dayNames[m.d] ?? m.d} ${m.s}–${m.e}`)
-                .join(", ");
-
+              const schedule = (sec.meetings || []).map((m) => `${dayNames[m.d] ?? m.d} ${m.s}–${m.e}`).join(", ");
               return (
-                <div
-                  key={i}
-                  style={{
-                    fontSize: "0.73rem",
-                    padding: "5px 8px",
-                    borderRadius: 6,
-                    background: "#fff",
-                    border: "1px solid #e5e0da",
-                    display: "flex",
-                    gap: 10,
-                    alignItems: "flex-start",
-                    flexWrap: "wrap",
-                  }}
-                >
+                <div key={i} style={{ fontSize: "0.73rem", padding: "5px 8px", borderRadius: 6, background: "#fff", border: "1px solid #e5e0da", display: "flex", gap: 10, alignItems: "flex-start", flexWrap: "wrap" }}>
                   <span style={{ fontWeight: 700, color: "#7a1f2b" }}>§{safeText(sec.id, "")}</span>
                   <span style={{ color: "#555" }}>{safeText(sec.instructor)}</span>
-                  <span style={{ color: "#374151", flex: 1 }}>
-                    {schedule || (tr ? "Zaman yok" : "No schedule")}
-                  </span>
-                  {sec.crn && (
-                    <span style={{ fontSize: "0.69rem", color: "#888" }}>
-                      CRN: {safeText(sec.crn, "")}
-                    </span>
-                  )}
+                  <span style={{ color: "#374151", flex: 1 }}>{schedule || (tr ? "Zaman yok" : "No schedule")}</span>
+                  {sec.crn && <span style={{ fontSize: "0.69rem", color: "#888" }}>CRN: {safeText(sec.crn, "")}</span>}
                 </div>
               );
             })}
           </div>
-
           {url && (
-            <a
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              style={{
-                fontSize: "0.71rem",
-                color: "#7a1f2b",
-                marginTop: 6,
-                display: "inline-block",
-              }}
-            >
+            <a href={url} target="_blank" rel="noreferrer" style={{ fontSize: "0.71rem", color: "#7a1f2b", marginTop: 6, display: "inline-block" }}>
               ↗ {tr ? "Katalog sayfasını aç" : "Open catalog page"}
             </a>
           )}
@@ -559,9 +449,7 @@ function CourseRow({ ders, catalogEntry, isLast, tr, done, onToggle, viewFilter 
   );
 }
 
-function SlotRow({ slot, isLast, viewFilter }) {
-  if (viewFilter === "done") return null;
-
+function SlotRow({ slot, isLast }) {
   return (
     <div
       style={{
@@ -577,8 +465,8 @@ function SlotRow({ slot, isLast, viewFilter }) {
       <div style={{ width: 18, height: 18, flexShrink: 0 }} />
       <div
         style={{
-          width: 7,
-          height: 7,
+          width: 10,
+          height: 10,
           borderRadius: "50%",
           background: "#d1d5db",
           flexShrink: 0,
@@ -613,15 +501,12 @@ export default function CurriculumModal({
   const [selectedYil, setSelectedYil] = useState(autoDetectedYear);
   const [selectedYariyil, setSelectedYariyil] = useState(null);
 
-  const [viewFilter, setViewFilter] = useState("all");
-  const [confirmClear, setConfirmClear] = useState(null);
+  const [viewFilter, setViewFilter] = useState("all"); // kept for internal logic compat
 
-  const doneKey = selectedDept ? `program_${selectedDept.prog_id}` : "program_none";
-  const [done, setDone] = useState(() => loadDone(doneKey));
+  // Seçili dersler (planlayıcıya/akıllı planlamaya gidecek) — default: tüm katalog dersleri
+  const [selectedCodes, setSelectedCodes] = useState(new Set());
 
-  useEffect(() => {
-    setDone(loadDone(doneKey));
-  }, [doneKey]);
+
 
   useEffect(() => {
     let alive = true;
@@ -723,68 +608,10 @@ export default function CurriculumModal({
     }
   }, [curriculum, selectedYil, autoDetectedYariyil]);
 
-  const toggleDone = useCallback(
-    (kod) => {
-      setDone((prev) => {
-        const next = new Set(prev);
 
-        if (next.has(kod)) {
-          next.delete(kod);
-        } else {
-          next.add(kod);
-        }
-
-        saveDone(doneKey, next);
-
-        return next;
-      });
-    },
-    [doneKey]
-  );
 
   const mufredat = curriculum?.mufredat || [];
 
-  const allDersCodes = useMemo(() => {
-    const codes = [];
-
-    mufredat.forEach((yil) =>
-      yil.yariyillar?.forEach((y) =>
-        y.dersler?.forEach((d) => {
-          if (d.kod) {
-            codes.push(normCode(d.kod));
-          }
-        })
-      )
-    );
-
-    return codes;
-  }, [mufredat]);
-
-  const yilStats = useMemo(
-    () =>
-      mufredat.map((yil) => {
-        const codes = [];
-
-        yil.yariyillar?.forEach((y) =>
-          y.dersler?.forEach((d) => {
-            if (d.kod) {
-              codes.push(normCode(d.kod));
-            }
-          })
-        );
-
-        return {
-          yil: yil.yil,
-          yil_adi: yil.yil_adi,
-          total: codes.length,
-          done: codes.filter((c) => done.has(c)).length,
-        };
-      }),
-    [mufredat, done]
-  );
-
-  const totalDone = done.size;
-  const totalCodes = allDersCodes.length;
   const yilData = mufredat.find((y) => y.yil === selectedYil);
 
   const yilDersleri = useMemo(() => {
@@ -808,27 +635,58 @@ export default function CurriculumModal({
   }, [yilData, selectedYariyil]);
 
   const matchedYilDersleri = useMemo(() => {
-    let list = yilDersleri.filter((d) => findInCatalog(d, courses));
+    return yilDersleri.filter((d) => findInCatalog(d, courses));
+  }, [yilDersleri, courses]);
 
-    if (viewFilter === "todo") {
-      list = list.filter((d) => !done.has(normCode(d.kod)));
-    }
+  // Seçili dersler (katalogda olanlardan checkbox ile seçilenler)
+  const selectedDersleri = useMemo(() => {
+    return matchedYilDersleri.filter((d) => selectedCodes.has(normCode(d.kod)));
+  }, [matchedYilDersleri, selectedCodes]);
 
-    if (viewFilter === "done") {
-      list = list.filter((d) => done.has(normCode(d.kod)));
-    }
+  // Dönem/yıl değişince selectedCodes'u tüm katalog derslerine sıfırla
+  useEffect(() => {
+    if (!matchedYilDersleri.length) return;
+    setSelectedCodes(new Set(matchedYilDersleri.map((d) => normCode(d.kod))));
+  }, [yilDersleri]); // yilDersleri değişince (dönem/yıl seçimi) tetiklenir
 
-    return list;
-  }, [yilDersleri, courses, viewFilter, done]);
+  // Tek bir dersi seç/kaldır
+  const toggleSelected = useCallback((kod) => {
+    setSelectedCodes((prev) => {
+      const next = new Set(prev);
+      if (next.has(kod)) {
+        next.delete(kod);
+      } else {
+        next.add(kod);
+      }
+      return next;
+    });
+  }, []);
+
+  // Tümünü seç / kaldır
+  const toggleSelectAll = useCallback(() => {
+    setSelectedCodes((prev) => {
+      const allCodes = matchedYilDersleri.map((d) => normCode(d.kod));
+      const allSelected = allCodes.every((c) => prev.has(c));
+      if (allSelected) {
+        const next = new Set(prev);
+        allCodes.forEach((c) => next.delete(c));
+        return next;
+      } else {
+        const next = new Set(prev);
+        allCodes.forEach((c) => next.add(c));
+        return next;
+      }
+    });
+  }, [matchedYilDersleri]);
 
   const [smartPlanOpen, setSmartPlanOpen] = useState(false);
 
   const handleApply = () => {
-    if (!matchedYilDersleri.length) return;
+    if (!selectedDersleri.length) return;
 
     onApplyToScheduler(
       new Set(
-        matchedYilDersleri.map((d) =>
+        selectedDersleri.map((d) =>
           d.catalog_kodu ? String(d.catalog_kodu) : normCode(d.kod)
         )
       )
@@ -837,13 +695,7 @@ export default function CurriculumModal({
     onClose();
   };
 
-  const clearDone = () => {
-    const empty = new Set();
 
-    setDone(empty);
-    saveDone(doneKey, empty);
-    setConfirmClear(null);
-  };
 
   
 
@@ -1553,118 +1405,6 @@ const renderOptions = () => (
 
           {mufredat.length > 0 && (
             <>
-              <div
-                style={{
-                  background: "linear-gradient(135deg, #7a1f2b 0%, #a33040 100%)",
-                  borderRadius: 10,
-                  padding: "10px 14px",
-                  marginBottom: 14,
-                  color: "#fff",
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginBottom: 6,
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "0.68rem",
-                      opacity: 0.75,
-                      fontWeight: 600,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.05em",
-                    }}
-                  >
-                    {tr ? "GENEL İLERLEME" : "OVERALL PROGRESS"}
-                  </span>
-
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
-                    <span style={{ fontSize: "1.1rem", fontWeight: 800 }}>{totalDone}</span>
-                    <span style={{ fontSize: "0.8rem", fontWeight: 400, opacity: 0.7 }}>
-                      /{totalCodes}
-                    </span>
-                    <span
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 900,
-                        opacity: 0.3,
-                        marginLeft: 6,
-                      }}
-                    >
-                      {totalCodes ? Math.round((totalDone / totalCodes) * 100) : 0}%
-                    </span>
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    height: 5,
-                    borderRadius: 99,
-                    background: "rgba(255,255,255,0.2)",
-                    overflow: "hidden",
-                    marginBottom: 8,
-                  }}
-                >
-                  <div
-                    style={{
-                      height: "100%",
-                      borderRadius: 99,
-                      background: "rgba(255,255,255,0.9)",
-                      width: totalCodes ? `${(totalDone / totalCodes) * 100}%` : "0%",
-                      transition: "width .5s cubic-bezier(.4,0,.2,1)",
-                    }}
-                  />
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-                  {yilStats.map((ys) => (
-                    <div key={ys.yil} style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{ fontSize: "0.65rem", opacity: 0.8, minWidth: 72 }}>
-                        {safeText(ys.yil_adi || `${ys.yil}. Yıl`)}
-                      </span>
-
-                      <div
-                        style={{
-                          flex: 1,
-                          height: 3,
-                          borderRadius: 99,
-                          background: "rgba(255,255,255,0.2)",
-                          overflow: "hidden",
-                        }}
-                      >
-                        <div
-                          style={{
-                            height: "100%",
-                            borderRadius: 99,
-                            background:
-                              ys.done === ys.total && ys.total > 0
-                                ? "#86efac"
-                                : "rgba(255,255,255,0.7)",
-                            width: ys.total ? `${(ys.done / ys.total) * 100}%` : "0%",
-                            transition: "width .5s",
-                          }}
-                        />
-                      </div>
-
-                      <span
-                        style={{
-                          fontSize: "0.63rem",
-                          opacity: 0.75,
-                          minWidth: 30,
-                          textAlign: "right",
-                        }}
-                      >
-                        {ys.done}/{ys.total}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
               <div style={{ marginBottom: 14 }}>
                 <div
                   style={{
@@ -1780,61 +1520,6 @@ const renderOptions = () => (
 
               {selectedYil && yilData && (
                 <>
-                  <div
-                    style={{
-                      marginBottom: 10,
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "inline-flex",
-                        borderRadius: 8,
-                        overflow: "hidden",
-                        border: "1px solid #e5e0da",
-                      }}
-                    >
-                      {VIEW_FILTERS.map((f) => (
-                        <button
-                          key={f.key}
-                          onClick={() => setViewFilter(f.key)}
-                          style={{
-                            padding: "5px 12px",
-                            fontSize: "0.77rem",
-                            fontWeight: 600,
-                            border: "none",
-                            cursor: "pointer",
-                            background: viewFilter === f.key ? "#7a1f2b" : "#fff",
-                            color: viewFilter === f.key ? "#fff" : "#555",
-                            borderRight: f.key !== "todo" ? "1px solid #e5e0da" : "none",
-                          }}
-                        >
-                          {tr ? f.tr : f.en}
-                        </button>
-                      ))}
-                    </div>
-
-                    {done.size > 0 && (
-                      <button
-                        onClick={() => setConfirmClear("year")}
-                        style={{
-                          fontSize: "0.75rem",
-                          padding: "5px 12px",
-                          borderRadius: 8,
-                          border: "1px solid #fca5a5",
-                          background: "#fff5f5",
-                          color: "#dc2626",
-                          cursor: "pointer",
-                          fontWeight: 600,
-                        }}
-                      >
-                        {tr ? "Temizle" : "Clear all"}
-                      </button>
-                    )}
-                  </div>
-
                   <div style={{ marginBottom: 20 }}>
                     <div
                       style={{
@@ -1850,11 +1535,44 @@ const renderOptions = () => (
                       }}
                     >
                       <span>{tr ? "Dersler" : "Courses"}</span>
-                      <span style={{ fontWeight: 400, fontSize: "0.73rem" }}>
-                        {matchedYilDersleri.length}/{yilDersleri.length}{" "}
-                        {tr ? "katalogda" : "in catalog"}
-                      </span>
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span style={{ fontWeight: 400, fontSize: "0.73rem", color: "#aaa" }}>
+                          {matchedYilDersleri.length}/{yilDersleri.length}{" "}
+                          {tr ? "katalogda" : "in catalog"}
+                        </span>
+                        {matchedYilDersleri.length > 0 && (
+                          <button
+                            onClick={toggleSelectAll}
+                            style={{
+                              fontSize: "0.72rem",
+                              padding: "3px 10px",
+                              borderRadius: 6,
+                              border: "1.5px solid #e5e0da",
+                              background: "#fff",
+                              color: "#555",
+                              cursor: "pointer",
+                              fontWeight: 600,
+                            }}
+                          >
+                            {selectedDersleri.length === matchedYilDersleri.length
+                              ? (tr ? "Tümünü kaldır" : "Deselect all")
+                              : (tr ? "Tümünü seç" : "Select all")}
+                          </button>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Seçili ders sayısı */}
+                    {matchedYilDersleri.length > 0 && (
+                      <div style={{ marginBottom: 8, fontSize: "0.74rem", color: "#7a1f2b", fontWeight: 600 }}>
+                        {selectedDersleri.length} {tr ? "ders seçili" : "selected"}
+                        {selectedDersleri.length !== matchedYilDersleri.length && (
+                          <span style={{ color: "#aaa", fontWeight: 400, marginLeft: 4 }}>
+                            ({tr ? "toplam" : "of"} {matchedYilDersleri.length})
+                          </span>
+                        )}
+                      </div>
+                    )}
 
                     <div
                       style={{
@@ -1895,7 +1613,6 @@ const renderOptions = () => (
                                     key={di}
                                     slot={d}
                                     isLast={isLast}
-                                    viewFilter={viewFilter}
                                   />
                                 );
                               }
@@ -1907,9 +1624,8 @@ const renderOptions = () => (
                                   catalogEntry={findInCatalog(d, courses)}
                                   isLast={isLast}
                                   tr={tr}
-                                  done={done}
-                                  onToggle={toggleDone}
-                                  viewFilter={viewFilter}
+                                  selected={selectedCodes}
+                                  onSelect={toggleSelected}
                                 />
                               );
                             })}
@@ -1919,8 +1635,8 @@ const renderOptions = () => (
 
                     <div style={{ fontSize: "0.71rem", color: "#aaa", marginTop: 6 }}>
                       {tr
-                        ? "☑ tıkla → alındı işaretle · ● yeşil = katalogda var"
-                        : "☑ click → mark done · ● green = in catalog"}
+                        ? "☑ = planlayıcıya ekle · ● yeşil = katalogda var"
+                        : "☑ = add to scheduler · ● green = in catalog"}
                     </div>
                   </div>
                 </>
@@ -1943,17 +1659,17 @@ const renderOptions = () => (
           {/* Akıllı Planla — tam genişlik, üstte */}
           {selectedYil && (
             <button
-              onClick={() => { if (matchedYilDersleri.length) setSmartPlanOpen(true); }}
-              disabled={!matchedYilDersleri.length}
+              onClick={() => { if (selectedDersleri.length) setSmartPlanOpen(true); }}
+              disabled={!selectedDersleri.length}
               style={{
                 width: "100%",
                 padding: "9px 16px",
                 borderRadius: 8,
-                border: matchedYilDersleri.length ? "2px solid #7a1f2b" : "2px solid #e5e0da",
+                border: selectedDersleri.length ? "2px solid #7a1f2b" : "2px solid #e5e0da",
                 background: "#fff",
-                color: matchedYilDersleri.length ? "#7a1f2b" : "#aaa",
+                color: selectedDersleri.length ? "#7a1f2b" : "#aaa",
                 fontSize: "0.85rem",
-                cursor: matchedYilDersleri.length ? "pointer" : "not-allowed",
+                cursor: selectedDersleri.length ? "pointer" : "not-allowed",
                 fontWeight: 700,
                 textAlign: "center",
               }}
@@ -1982,22 +1698,22 @@ const renderOptions = () => (
 
             <button
               onClick={handleApply}
-              disabled={!matchedYilDersleri.length}
+              disabled={!selectedDersleri.length}
               style={{
                 padding: "9px 20px",
                 borderRadius: 8,
                 border: "none",
-                background: matchedYilDersleri.length ? "#7a1f2b" : "#e5e0da",
-                color: matchedYilDersleri.length ? "#fff" : "#aaa",
+                background: selectedDersleri.length ? "#7a1f2b" : "#e5e0da",
+                color: selectedDersleri.length ? "#fff" : "#aaa",
                 fontSize: "0.85rem",
-                cursor: matchedYilDersleri.length ? "pointer" : "not-allowed",
+                cursor: selectedDersleri.length ? "pointer" : "not-allowed",
                 fontWeight: 700,
               }}
             >
               {selectedYil
                 ? tr
-                  ? `${matchedYilDersleri.length} dersi Planlayıcıya Yükle`
-                  : `Load ${matchedYilDersleri.length} courses to Scheduler`
+                  ? `${selectedDersleri.length} dersi Planlayıcıya Yükle`
+                  : `Load ${selectedDersleri.length} courses to Scheduler`
                 : tr
                 ? "Yıl seç"
                 : "Select a year"}
@@ -2006,7 +1722,7 @@ const renderOptions = () => (
         </div>
       </div>
 
-      {smartPlanOpen && matchedYilDersleri.length > 0 && (
+      {smartPlanOpen && selectedDersleri.length > 0 && (
         <div
           onClick={() => setSmartPlanOpen(false)}
           style={{ position:"fixed", inset:0, zIndex:1050, background:"rgba(0,0,0,0.45)", display:"flex", alignItems:"center", justifyContent:"center", padding:16 }}
@@ -2016,7 +1732,7 @@ const renderOptions = () => (
             style={{ background:"#fff", borderRadius:16, width:"100%", maxWidth:540, height:"92vh", display:"flex", flexDirection:"column", overflow:"hidden", boxShadow:"0 8px 40px rgba(0,0,0,0.18)" }}
           >
             <SmartPlanWizard
-              dersler={matchedYilDersleri}
+              dersler={selectedDersleri}
               courses={courses}
               tr={tr}
               onApply={(suggestions) => {
@@ -2038,79 +1754,6 @@ const renderOptions = () => (
         </div>
       )}
 
-      {confirmClear && (
-        <div
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 1100,
-            background: "rgba(0,0,0,0.35)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            padding: 20,
-          }}
-          onClick={() => setConfirmClear(null)}
-        >
-          <div
-            style={{
-              background: "#fff",
-              borderRadius: 14,
-              padding: "28px 32px",
-              maxWidth: 340,
-              width: "100%",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.18)",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div
-              style={{
-                fontSize: "0.95rem",
-                color: "#222",
-                lineHeight: 1.6,
-                marginBottom: 20,
-              }}
-            >
-              {tr
-                ? "Tamamlanan ders işaretlemeleri sıfırlanacak. Emin misin?"
-                : "All progress marks will be cleared. Are you sure?"}
-            </div>
-
-            <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
-              <button
-                onClick={() => setConfirmClear(null)}
-                style={{
-                  padding: "8px 20px",
-                  borderRadius: 8,
-                  border: "1px solid #ddd",
-                  background: "#f5f5f5",
-                  color: "#444",
-                  cursor: "pointer",
-                  fontSize: "0.88rem",
-                }}
-              >
-                {tr ? "Vazgeç" : "Cancel"}
-              </button>
-
-              <button
-                onClick={clearDone}
-                style={{
-                  padding: "8px 20px",
-                  borderRadius: 8,
-                  border: "none",
-                  background: "#dc2626",
-                  color: "#fff",
-                  cursor: "pointer",
-                  fontSize: "0.88rem",
-                  fontWeight: 600,
-                }}
-              >
-                {tr ? "Evet, sıfırla" : "Yes, clear"}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
